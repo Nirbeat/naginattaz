@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { UserDao } from "../database/DAO/UserDao.js";
 
 const router = Router();
 
@@ -33,7 +34,24 @@ router.get('/policies', async(req, res) => {
     });
 });
 
+router.get('/team', async (req, res) => {
+
+    let [teamMembers] = await new UserDao().getTeamMembers();
+
+    // PASAR LUEGO A UN DTO
+    teamMembers = teamMembers.map(({name, skills, instagramURL, tiktokURL, profile_image})=>{
+        return {
+            name, skills, instagramURL, tiktokURL, profile_image
+        }
+    })
+    res.render('TEAM.handlebars', {
+        style: '/styles/naginattaz.min.css',
+        teamMembers,
+        teamStyles: '/styles/team.css'
+    });
+});
+
 router.get('/login', async (req, res) => {
-    res.render()
+    res.render('login.handlebars');
 });
 export default router;
