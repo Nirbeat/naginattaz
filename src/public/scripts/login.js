@@ -1,12 +1,11 @@
-document.getElementById('slash-button').addEventListener('click', slashImage);
-
+const loginButton = document.getElementById('slash-button');
+loginButton.addEventListener('click', slashImage);
 
 function slashImage() {
     const image = document.querySelector('.image');
     const container = document.querySelector('.container');
     const body = document.body;
     const gifBackground = document.getElementById('gifBackground');
-    const googleButton = document.getElementById('g-signin-button');
 
     // Change the clip-path for a diagonal reveal
     image.style.clipPath = 'polygon(0 0, 100% 0, 0 100%)';
@@ -38,12 +37,5 @@ function slashImage() {
     // Remove animation class after it finishes to allow re-triggering
     setTimeout(() => {
         container.style.animation = 'none'; // Reset the animation
-        // Reset clip-path after a slight delay to allow for visibility
-        setTimeout(() => {
-            // container.style.background = 'var(--nagiobispo)';
-            // googleButton.style.display = 'none';
-            // body.style.background = 'linear-gradient(0.25turn, #111111, #26152e, #430e53, #382142, #0f0f0f)';
-            // image.style.clipPath = 'none'; // Reset clip-path to original
-        }, 2500); // Small delay before resetting clip-path
     }, 500); // Match duration of shake animation
 };

@@ -9,5 +9,9 @@ export const environment = {
         name: process.env.DB_NAME || 'naginattaz',
         password: process.env.DB_PASS || '',
         user: process.env.DB_USER || 'root'
+    },
+    googleAuth:{
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        secret: process.env.GOOGLE_SECRET
     }
 }
