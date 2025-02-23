@@ -52,6 +52,9 @@ router.get('/team', async (req, res) => {
 });
 
 router.get('/login', async (req, res) => {
-    res.render('login.handlebars');
+    res.render('login.handlebars',{
+        style: '/styles/naginattaz.min.css',
+        loginStyles: '/styles/login.css'
+    });
 });
 export default router;

@@ -1,71 +1,85 @@
-:root{
-    --black:#222;
-    --white-smoke:#ebefef;
-    --steel-blue:#0b79fb;
-    --steel-blue-2:#2683ab;
-    --deep-sky-blue:#2e9dcc;
-    --sweat-purple:#c191e7;
-    --green-yellow:#ccff7d;
-    --dark-cyan:#2e8e83;
-  
+:root {
+    --black: #222;
+    --white-smoke: #ebefef;
+    --steel-blue: #0b79fb;
+    --steel-blue-2: #2683ab;
+    --deep-sky-blue: #2e9dcc;
+    --sweat-purple: #c191e7;
+    --green-yellow: #ccff7d;
+    --dark-cyan: #2e8e83;
+
     --nagivioleta: #4b59ed;
     --nagiobispo: #b18cfe;
     --nagimagenta: #af14af;
     --nagirosa: #fac8f8;
-  
-  }
 
-body, html {
+}
+
+.main-div {
     height: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-}        
-body{            
-    background: linear-gradient(0.25turn, #111111, #26152e, #430e53, #382142, #0f0f0f); /* Initial background color */
-    transition: background-color 0.5s ease; /* Smooth transition for background color */
 }
+
+body {
+    background: linear-gradient(0.25turn, #111111, #26152e, #430e53, #382142, #0f0f0f);
+    /* Initial background color */
+    transition: background-color 0.5s ease;
+    /* Smooth transition for background color */
+}
+
 .logo-index img {
     z-index: 100000;
-position: absolute;
-top: 50px;
-left: 50%;
-transform: translate(-50%, -50%);
-max-width: 200px;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 200px;
 }
+
 .container {
-    margin:0 30px;
-    background-color: var(--nagiobispo) ;
+    margin: 0 30px;
+    background-color: var(--nagiobispo);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    max-width: 450px; /* Adjust as needed */
-    max-height: 400px; /* Adjust as needed */
-    border: 2px solid #ccc; /* Optional styling */
-    border-radius: 8px; /* Optional rounding */
-    padding: 20px; /* Optional padding */
+    max-width: 450px;
+    /* Adjust as needed */
+    max-height: 400px;
+    /* Adjust as needed */
+    border: 2px solid #ccc;
+    /* Optional styling */
+    border-radius: 8px;
+    /* Optional rounding */
+    padding: 20px;
+    /* Optional padding */
     z-index: 1000;
 }
+
 #custom-login-button {
-padding: 10px 20px;
-background-color: var(--nagivioleta); /* Google blue */
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-font-size: 16px;
+    padding: 10px 20px;
+    background-color: var(--nagivioleta);
+    /* Google blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 #custom-login-button:hover {
-background-color: var(--nagimagenta); /* Darker blue on hover */
+    background-color: var(--nagimagenta);
+    /* Darker blue on hover */
 }
 
 .gif-background {
     position: absolute;
-    width: 100vw; /* Responsive logo */
-    height: 100vh; 
+    width: 100vw;
+    /* Responsive logo */
+    height: 100vh;
     opacity: 0;
     transition: opacity 0.5s ease;
     background: url('https://i.gifer.com/J8up.webp') no-repeat center center;
@@ -77,14 +91,30 @@ background-color: var(--nagimagenta); /* Darker blue on hover */
     border-radius: 20px;
     width: 100%;
     height: 100%;
-    transition: clip-path 0.5s ease; /* Smooth transition */
-    clip-path: inset(0 0 0 0); /* Initial state with full image */
+    transition: clip-path 0.5s ease;
+    /* Smooth transition */
+    clip-path: inset(0 0 0 0);
+    /* Initial state with full image */
 }
 
 @keyframes shake {
-    0% { transform: translate(0); }
-    25% { transform: translate(-5px, 0); }
-    50% { transform: translate(5px, 0); }
-    75% { transform: translate(-5px, 0); }
-    100% { transform: translate(0); }
+    0% {
+        transform: translate(0);
+    }
+
+    25% {
+        transform: translate(-5px, 0);
+    }
+
+    50% {
+        transform: translate(5px, 0);
+    }
+
+    75% {
+        transform: translate(-5px, 0);
+    }
+
+    100% {
+        transform: translate(0);
+    }
 }
