@@ -13,5 +13,6 @@ export const environment = {
     googleAuth:{
         clientID: process.env.GOOGLE_CLIENT_ID,
         secret: process.env.GOOGLE_SECRET
-    }
+    },
+    JWTSecret: process.env.JWT_SECRET
 }

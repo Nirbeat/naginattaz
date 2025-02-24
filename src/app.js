@@ -7,6 +7,8 @@ import handlebars from 'express-handlebars';
 import viewsRouter from './routes/views.routes.js';
 import authRouter from './routes/api/auth.routes.js' 
 import initializePassport from './config/passport.js';
+import cookieParser from 'cookie-parser';
+
 const app = express();
 
 app.engine('handlebars', handlebars.engine());
@@ -14,6 +16,7 @@ app.set('view engine', 'handlebars');
 app.set('views',serverRoot + '/views');
 
 app.use(passport.initialize());
+app.use(cookieParser());
 initializePassport();
 
 app.use(express.static(serverRoot + '/public'));

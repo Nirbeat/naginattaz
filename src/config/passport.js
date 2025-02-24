@@ -14,19 +14,18 @@ function initializePassport(){
 
         const userManager = new UserDao();
 
-        const [userExist] = await userManager.getUserByEmail(profile._json.email);
-
-        console.log(userExist)
-        if(userExist== ''){
-            const newUser = await userManager.addUser({
+        let [[user]] = await userManager.getUserByEmail(profile._json.email);
+        console.log(user)
+        if(user== ''){
+            user = await userManager.addUser({
                 email: profile._json.email,
                 name: profile._json.name,
                 profileImageURL: profile._json.picture
             });
-            done(null, newUser);
+            done(null, user);
         }
         else{
-            done (null, userExist);
+            done (null, user);
         }
       }
     ));
