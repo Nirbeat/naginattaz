@@ -79,4 +79,3 @@ function showSlidesM() {
     dots[slideIndexM - 1].className += " active";
     setTimeout(showSlidesM, 3000); // Change image every 3 seconds
 }
-console.log('aber')

@@ -1,10 +1,12 @@
 import { Router } from "express";
-import { UserDao } from "../database/DAO/UserDao.js";
+import { UserDao } from "../database/DAO/UserDAO.js";
+import { customVerification } from "../middlewares/authToken.js";
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.use(customVerification);
 
+router.get('/', async (req, res) => {
     res.render('index.handlebars', {
         style: '/styles/naginattaz.min.css',
         indexStyle: '/styles/index.css',
@@ -15,7 +17,8 @@ router.get('/', async (req, res) => {
                 mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
                 web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png' }
             }
-        }
+        },
+        user: req.user
     });
 });
 
@@ -52,6 +55,7 @@ router.get('/team', async (req, res) => {
 });
 
 router.get('/login', async (req, res) => {
+
     res.render('login.handlebars',{
         style: '/styles/naginattaz.min.css',
         loginStyles: '/styles/login.css'
