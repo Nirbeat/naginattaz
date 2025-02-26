@@ -66,6 +66,15 @@ router.get('/team', async (req, res) => {
 
 router.use(ensureAuthenticated)
 
-router.get('/clases', async (req, res) => {
+router.get('/entrenamiento', async (req, res) => {
+
+    res.render('training.handlebars',{
+        style: '/styles/naginattaz.min.css',
+        trainingStyle: '/styles/training.css'
+    })
+})
+
+router.get('/entrenamiento/:course_id', async (req, res) => {
+    
 })
 export default router;

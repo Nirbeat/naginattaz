@@ -22,8 +22,6 @@ export const customVerification = (req, res, next) => {
         } else req.user = null
 
         next();
-
-        console.log(req.user)
     })(req, res, next);
 };
 
