@@ -21,8 +21,8 @@ initializePassport();
 
 app.use(express.static(serverRoot + '/public'));
 
-app.use(viewsRouter);
 app.use('/api/auth', authRouter);
+app.use(viewsRouter);
 
 
 app.listen(environment.serverPort, async ()=>{

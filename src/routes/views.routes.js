@@ -1,12 +1,22 @@
 import { Router } from "express";
 import { UserDao } from "../database/DAO/UserDAO.js";
-import { customVerification } from "../middlewares/authToken.js";
+import passport from 'passport';
+import { customVerification, ensureAuthenticated } from "../middlewares/authToken.js";
 
 const router = Router();
+
+router.get('/login', async (req, res) => {
+
+    res.render('login.handlebars',{
+        style: '/styles/naginattaz.min.css',
+        loginStyles: '/styles/login.css'
+    });
+});
 
 router.use(customVerification);
 
 router.get('/', async (req, res) => {
+
     res.render('index.handlebars', {
         style: '/styles/naginattaz.min.css',
         indexStyle: '/styles/index.css',
@@ -54,11 +64,8 @@ router.get('/team', async (req, res) => {
     });
 });
 
-router.get('/login', async (req, res) => {
+router.use(ensureAuthenticated)
 
-    res.render('login.handlebars',{
-        style: '/styles/naginattaz.min.css',
-        loginStyles: '/styles/login.css'
-    });
-});
+router.get('/clases', async (req, res) => {
+})
 export default router;
