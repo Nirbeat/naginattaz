@@ -13,7 +13,7 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 
-app.engine('handlebars', handlebars.engine());
+app.engine('handlebars', handlebars.engine({partialsDir: serverRoot + '/views/partials'}));
 app.set('view engine', 'handlebars');
 app.set('views',serverRoot + '/views');
 

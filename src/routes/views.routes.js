@@ -2,6 +2,7 @@ import { Router } from "express";
 import { UserDao } from "../database/DAO/UserDAO.js";
 import passport from 'passport';
 import { customVerification, ensureAuthenticated } from "../middlewares/authToken.js";
+import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
 
 const router = Router();
 
@@ -68,9 +69,14 @@ router.use(ensureAuthenticated)
 
 router.get('/entrenamiento', async (req, res) => {
 
+    const {user} = req;
     res.render('training.handlebars',{
         style: '/styles/naginattaz.min.css',
-        trainingStyle: '/styles/training.css'
+        trainingStyle: '/styles/training.css',
+        userData:{
+            name: user.name,
+            profileImg: user.profile_image
+        }
     })
 })
 

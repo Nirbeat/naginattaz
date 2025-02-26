@@ -1,0 +1,63 @@
+<div id="main-content" class="main-content wating">
+<div id="main-container" class="main-container">
+<div id="panel" class="panel">
+    <!-- Clases Section -->
+    <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); showAllItems()">
+        Todas las Clases <span class="arrow">&#x2192;</span>
+    </button>
+
+    <!-- Clases Individuales Section -->
+    <button class="panel-button"
+        onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('clases'); filterItems('class')">
+        Clases Individuales <span class="arrow">&#x2193;</span>
+    </button>
+    <div id="clases" class="dropdown-content">
+        <button class="dropdown-item">Clases Individuales</button>
+        <button class="dropdown-item">Próximas Clases</button>
+    </div>
+
+    <!-- Programas Section -->
+    <button class="panel-button" onclick="getAllCourses(); coursesCard() ;hideInstagramFeed(); filterItems('program')">
+        Programas <span class="arrow">&#x2192;</span>
+    </button>
+
+    <!-- Estilos Section -->
+    <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('categories')">
+        Estilos <span class="arrow">&#x2193;</span>
+    </button>
+    <div id="categories" class="dropdown-content">
+        <button class="dropdown-item" onclick="filterByCategory('hiphop')">Hip-Hop</button>
+        <button class="dropdown-item" onclick="filterByCategory('dancehall')">Dancehall</button>
+        <button class="dropdown-item" onclick="filterByCategory('house')">House Dance</button>
+        <button class="dropdown-item" onclick="filterByCategory('waacking')">Waacking</button>
+        <button class="dropdown-item" onclick="filterByCategory('heels')">Heels</button>
+        <button class="dropdown-item" onclick="filterByCategory('floowork')">Floorwork</button>
+        <button class="dropdown-item" onclick="filterByCategory('contemporary')">Danza Contemporánea</button>
+    </div>
+
+
+
+
+    <!-- Playlists Section -->
+    <button class="panel-button" onclick="toggleDropdown('playlists');hideInstagramFeed()">
+        Playlists <span class="arrow">&#x2193;</span>
+    </button>
+    <div id="playlists" class="dropdown-content">
+        <button class="dropdown-item" onclick="showContent('section4a')">Playlist 1</button>
+        <button class="dropdown-item" onclick="showContent('section4b')">Playlist 2</button>
+        <button class="dropdown-item" onclick="showContent('section4c')">Playlist 3</button>
+    </div>
+
+    <!-- Calendario Section -->
+    <button class="panel-button" onclick="showContent('section5');hideInstagramFeed()">
+        Calendario <span class="arrow">&#x2193;</span>
+    </button>
+
+    <!-- Comunidad Section -->
+    <button class="panel-button" onclick="showContent('section6'); showInstagramFeed()">
+        Comunidad <span class="arrow">&#x2193;</span>
+    </button>
+
+</div>
+</div>
+</div>
