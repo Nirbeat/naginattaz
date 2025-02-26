@@ -1,6 +1,6 @@
 <link rel="stylesheet" href={{trainingStyle}}>
 <script src="https://player.vimeo.com/api/player.js" defer></script>
-
+<script src="/scripts/training.js"></script>
 {{!-- <div class="loading">
     <video autoplay muted playsinline preload="auto" onended="this.style.display='none'">
         <source src="./Logo-Animado_3D.mp4" type="video/mp4">
@@ -156,27 +156,27 @@
         <!-- Left Panel (30%) -->
         <div id="panel" class="panel">
             <!-- Clases Section -->
-            <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); showAllItems()">
+            {{!-- <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); showAllItems()">
                 Todas las Clases <span class="arrow">&#x2192;</span>
-            </button>
+            </button> --}}
 
             <!-- Clases Individuales Section -->
-            <button class="panel-button"
+            {{!-- <button class="panel-button"
                 onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('clases'); filterItems('class')">
                 Clases Individuales <span class="arrow">&#x2193;</span>
             </button>
             <div id="clases" class="dropdown-content">
                 <button class="dropdown-item">Clases Individuales</button>
                 <button class="dropdown-item">Próximas Clases</button>
-            </div>
+            </div> --}}
 
             <!-- Programas Section -->
-            <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); filterItems('program')">
+            <button class="panel-button" onclick="getAllCourses() ;hideInstagramFeed(); filterItems('program')">
                 Programas <span class="arrow">&#x2192;</span>
             </button>
 
             <!-- Estilos Section -->
-            <button class="panel-button"
+            {{!-- <button class="panel-button"
                 onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('categories')">
                 Estilos <span class="arrow">&#x2193;</span>
             </button>
@@ -188,10 +188,10 @@
                 <button class="dropdown-item" onclick="filterByCategory('heels')">Heels</button>
                 <button class="dropdown-item" onclick="filterByCategory('floowork')">Floorwork</button>
                 <button class="dropdown-item" onclick="filterByCategory('contemporary')">Danza Contemporánea</button>
-            </div>
+            </div> --}}
 
             <!-- Instructores Section -->
-            <button class="panel-button"
+            {{!-- <button class="panel-button"
                 onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('instructors')">
                 Instructores <span class="arrow">&#x2193;</span>
             </button>
@@ -217,28 +217,28 @@
                 <button class="dropdown-item" onclick="filterByInstructor('zai-forte')">Zai Forte</button>
                 <button class="dropdown-item" onclick="filterByInstructor('vicky-branda')">Vicky Branda</button>
             </div>
-
+ --}}
 
 
             <!-- Playlists Section -->
-            <button class="panel-button" onclick="toggleDropdown('playlists');hideInstagramFeed()">
+            {{!-- <button class="panel-button" onclick="toggleDropdown('playlists');hideInstagramFeed()">
                 Playlists <span class="arrow">&#x2193;</span>
             </button>
             <div id="playlists" class="dropdown-content">
                 <button class="dropdown-item" onclick="showContent('section4a')">Playlist 1</button>
                 <button class="dropdown-item" onclick="showContent('section4b')">Playlist 2</button>
                 <button class="dropdown-item" onclick="showContent('section4c')">Playlist 3</button>
-            </div>
+            </div> --}}
 
             <!-- Calendario Section -->
-            <button class="panel-button" onclick="showContent('section5');hideInstagramFeed()">
+            {{!-- <button class="panel-button" onclick="showContent('section5');hideInstagramFeed()">
                 Calendario <span class="arrow">&#x2193;</span>
-            </button>
+            </button> --}}
 
             <!-- Comunidad Section -->
-            <button class="panel-button" onclick="showContent('section6'); showInstagramFeed()">
+            {{!-- <button class="panel-button" onclick="showContent('section6'); showInstagramFeed()">
                 Comunidad <span class="arrow">&#x2193;</span>
-            </button>
+            </button> --}}
 
         </div>
 

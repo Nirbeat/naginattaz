@@ -5,6 +5,8 @@ import { DBConnection } from './database/database.js';
 import passport from 'passport';
 import handlebars from 'express-handlebars';
 import viewsRouter from './routes/views.routes.js';
+import coursesRouter from './routes/api/courses.routes.js';
+
 import authRouter from './routes/api/auth.routes.js' 
 import initializePassport from './config/passport.js';
 import cookieParser from 'cookie-parser';
@@ -22,6 +24,7 @@ initializePassport();
 app.use(express.static(serverRoot + '/public'));
 
 app.use('/api/auth', authRouter);
+app.use('/api/courses', coursesRouter);
 app.use(viewsRouter);
 
 
