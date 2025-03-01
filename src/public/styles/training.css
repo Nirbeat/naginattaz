@@ -230,7 +230,7 @@ header {
 }
 
 .dropdown-item:hover {
-    background-color: #ddd;
+    /* background-color: #ddd; */
 }
 
 .dropdown-item+.dropdown-item {
@@ -254,10 +254,43 @@ header {
 }
 
 .content-section {
+    margin-bottom: 3rem;
+
     display: none;
 }
 
+.spotify-container {
+    position: relative;
+    margin-top: 4vw;
+    height: 700px;
+    /* Same height for all */
+}
 
+.spotify-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.overlay {
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(206 0 225 / 19%);
+    pointer-events: none;
+    /* Ensures interaction with the iframe */
+}
+
+/* Optional: Add responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .spotify-container {
+        height: 400px;
+        /* Adjust height for smaller screens */
+    }
+}
 
 
 
@@ -317,11 +350,12 @@ a #unite-button:hover {
     background-color: var(--nagivioleta);
 }
 
-#logout-button {
+/* #logout-button {
     margin-left: 20px;
-}
+} */
 
 .image-grid {
+
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -506,6 +540,7 @@ a #unite-button:hover {
   }
 
 body {
+    background: linear-gradient(0.25turn, #111111, #26152e, #524257, #382142, #0f0f0f);
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: var(--nagirosa); 
@@ -534,7 +569,7 @@ body {
     z-index: 1000;
     border-bottom: solid;
 }
-#logout-button{
+/* #logout-button{
     margin-left: 20px;
     padding: .8rem 1.25rem;
     background-color: var(--nagiobispo);
@@ -543,7 +578,7 @@ body {
     border-radius: .25rem;
     cursor: pointer;
     transition: background-color 0.3s;
-}
+} */
 .header .logo img {
     width: 20vw;
     max-width:200px;
@@ -600,7 +635,7 @@ body {
     transition: background-color 0.3s;
 }
 .header-right button:hover {
-    background-color: #ddd;
+    /* background-color: #ddd; */
 }
 
 .main-section {
@@ -741,3 +776,273 @@ body {
     display: flex;
 }
 
+.profile-img{
+    width: 60px;
+    border-radius: 50%;
+}
+
+.logout-button{
+    margin-left: 20px;
+
+    margin: 0 20px;
+    padding: .8rem 1.25rem;
+    background-color: var(--nagiobispo);
+    color: var(--white-smoke);
+    border: 1px solid #000;
+    border-radius: .25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: var(--nagimagenta);
+}
+
+.user-container{
+    display: flex;
+    align-items: center;
+}
+
+.content-section {
+    margin-bottom: 3rem;
+    /* Space between sections */
+}
+
+.spotify-container {
+    position: relative;
+    margin-top: 4vw;
+    height: 700px;
+    /* Same height for all */
+}
+
+.spotify-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.overlay {
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(206 0 225 / 19%);
+    pointer-events: none;
+    /* Ensures interaction with the iframe */
+}
+
+/* Optional: Add responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .spotify-container {
+        height: 400px;
+        /* Adjust height for smaller screens */
+    }
+}
+
+ /* Add your custom styles for the calendar container */
+ #calendar-container {
+    display: flex;
+    width: 100%;
+    min-height: 400px;
+    margin-top: 30px;
+}
+
+.iframe-container {
+    width: 50%;
+    padding: 0 20px;
+}
+
+/* Glassy container styling */
+.form-container {
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent white */
+    border-radius: 15px;
+    padding: 20px 25px;
+    backdrop-filter: blur(10px);
+    /* Frosted glass effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 200px;
+    /* Reduced width for a more compact look */
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    /* Slightly smaller font size */
+    font-weight: 500;
+}
+
+label {
+    font-size: 0.9rem;
+    /* Smaller label text */
+    color: #fff;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input,
+textarea,
+button {
+    width: 85%;
+    padding: 10px;
+    /* Reduced padding */
+    margin: 6px 0;
+    /* Reduced margin between elements */
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    /* Slightly smaller font size */
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Form inputs and textarea */
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 70px;
+    /* Reduced height for textarea */
+}
+
+/* Button styling */
+button {
+    background-color: #f0a1f1;
+    /* Soft pink */
+    color: #fff;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #6a2e8e;
+    /* Dark violet */
+    transform: scale(1.05);
+}
+
+/* Input hover effect */
+input:hover,
+textarea:hover {
+    background-color: #f0a1f1;
+    /* Soft pink on hover */
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    background-color: #6a2e8e;
+    /* Dark violet focus */
+}
+
+  /* Add your custom styles for the calendar container */
+  #calendar-container {
+    display: flex;
+    width: 100%;
+    min-height: 400px;
+    margin-top: 30px;
+}
+
+.iframe-container {
+    width: 50%;
+    padding: 0 20px;
+}
+
+/* Glassy container styling */
+.form-container {
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent white */
+    border-radius: 15px;
+    padding: 20px 25px;
+    backdrop-filter: blur(10px);
+    /* Frosted glass effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 200px;
+    /* Reduced width for a more compact look */
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    /* Slightly smaller font size */
+    font-weight: 500;
+}
+
+label {
+    font-size: 0.9rem;
+    /* Smaller label text */
+    color: #fff;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input,
+textarea,
+button {
+    width: 85%;
+    padding: 10px;
+    /* Reduced padding */
+    margin: 6px 0;
+    /* Reduced margin between elements */
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    /* Slightly smaller font size */
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Form inputs and textarea */
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 70px;
+    /* Reduced height for textarea */
+}
+
+/* Button styling */
+button {
+    background-color: #f0a1f1;
+    /* Soft pink */
+    color: #fff;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #6a2e8e;
+    /* Dark violet */
+    transform: scale(1.05);
+}
+
+/* Input hover effect */
+input:hover,
+textarea:hover {
+    background-color: #f0a1f1;
+    /* Soft pink on hover */
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    background-color: #6a2e8e;
+    /* Dark violet focus */
+}

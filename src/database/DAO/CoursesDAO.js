@@ -4,10 +4,17 @@ export class CoursesDAO{
 
     async getAllCourses(){
 
-        const courses = (await DBConnection).query(
+        const courses = await DBConnection.query(
             'SELECT * FROM courses'
         );
 
         return courses;
+    }
+
+    async getCourseLessonsById(id){
+        const lessons = await DBConnection.query(
+            'SELECT * FROM LESSONS WHERE course_id = ?',[id]
+        );
+        return lessons;
     }
 }
