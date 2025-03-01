@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { UserDao } from "../database/DAO/UserDAO.js";
-import passport from 'passport';
 import { customVerification, ensureAuthenticated } from "../middlewares/authToken.js";
 import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
 
@@ -18,6 +17,7 @@ router.use(customVerification);
 
 router.get('/', async (req, res) => {
 
+    const {user} = req;
     res.render('index.handlebars', {
         style: '/styles/naginattaz.min.css',
         indexStyle: '/styles/index.css',
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
                 web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png' }
             }
         },
-        user: req.user
+        user
     });
 });
 
