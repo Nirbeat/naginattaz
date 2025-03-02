@@ -17,4 +17,11 @@ export class CoursesDAO{
         );
         return lessons;
     }
+
+    async getCourseById(id){
+        const course = await DBConnection.query(
+            'SELECT * FROM courses WHERE id = ?', [id]
+        )
+        return course;
+    }
 }

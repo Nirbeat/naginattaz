@@ -121,4 +121,8 @@ router.get('/store', async (req, res) => {
     })
 });
 
+router.get('/payment/:preferenceID', async (req, res) => {
+
+    res.render('payment.handlebars');
+})
 export default router;

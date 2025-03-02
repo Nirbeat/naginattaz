@@ -14,5 +14,8 @@ export const environment = {
         clientID: process.env.GOOGLE_CLIENT_ID,
         secret: process.env.GOOGLE_SECRET
     },
-    JWTSecret: process.env.JWT_SECRET
+    JWTSecret: process.env.JWT_SECRET,
+    mercadopago: {
+        token: process.env.MERCADOPAGO_TOKEN
+    }
 }

@@ -7,6 +7,7 @@ import handlebars from 'express-handlebars';
 import viewsRouter from './routes/views.routes.js';
 import coursesRouter from './routes/api/courses.routes.js';
 import sessionsRouter from './routes/api/sessions.routes.js'
+import paymentsRouter from './routes/api/payment.routes.js'
 
 import authRouter from './routes/api/auth.routes.js' 
 import initializePassport from './config/passport.js';
@@ -27,6 +28,7 @@ app.use(express.static(serverRoot + '/public'));
 app.use('/api/auth', authRouter);
 app.use('/api/courses', coursesRouter);
 app.use('/api/sessions', sessionsRouter);
+app.use('/api/payment', paymentsRouter);
 app.use(viewsRouter);
 
 
