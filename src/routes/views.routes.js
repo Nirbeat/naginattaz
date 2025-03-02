@@ -82,7 +82,7 @@ router.get('/entrenamiento', async (req, res) => {
         },
         courses
     })
-})
+});
 
 router.get('/clases/:courseID/:lessonID?', async (req, res) => {
     // console.log('Request received for courseID:', req.params.courseID);
@@ -108,6 +108,17 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
             }
         })
     };
+});
+
+router.get('/store', async (req, res) => {
+
+    const [courses] = await new CoursesDAO().getAllCourses();
+
+    res.render('store.handlebars', {
+        style: '/styles/naginattaz.min.css',
+        storeStyle: '/styles/store.css',
+        courses
+    })
 });
 
 export default router;

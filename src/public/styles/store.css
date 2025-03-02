@@ -1,0 +1,434 @@
+/* Root Variables for Day Mode (6am - 2pm) */
+:root {
+    --main-color: #067993;
+    --secondary-color: #3c104e;
+    --cta-color: #936693;
+    --hover-color: #804fe1;
+    --special-color:#424844;
+
+}
+
+
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color:white;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Internet Explorer, Edge, and Firefox */
+html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Sticky Header */
+
+.top-section {
+    position: sticky;
+    top: 0; /* Sticks to the top */
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 10px 20px;
+    height:14vh;
+}
+
+.logo {
+    flex: 1;
+}
+
+.logo img {
+    width: 150px;
+    margin-top: 20px;
+}
+.drawer {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 120px;
+    width: 500px;
+    height: 500px;
+    background: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+    z-index: 1;
+}
+.drawer-content {
+    padding: 20px;
+}
+.drawer.show {
+    transform: translateX(0);
+    display: block;
+}
+
+/* Close Button */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: black;
+    text-decoration: none;
+}
+
+/* Checkout Button */
+#checkout-button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+#checkout-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.cart-button {
+    flex: 1;
+    text-align: right;
+}
+
+.cart-button button {
+    background-color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart-button button:hover {
+    background-color: var(--hover-color);
+}
+.cart-button-image:hover{
+    transform: scale(1.3);
+}
+.cart-item {
+    margin-top: 5px;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item-info {
+    display: flex;
+    align-items: center;
+}
+#total-price{
+    position: absolute;
+    right: 120px;
+    bottom: 30px;
+    color: black;
+}
+.cart-item-info img {
+    margin-right: 10px;
+}
+
+.cart-item-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.cart-item-actions button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.cart-item-actions button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
+/* Bottom Section (Navigation) */
+.bot-section {
+    position: sticky;
+    top: 14vh; /* Adjust this value based on the height of .top-section */
+    z-index: 9; /* Lower z-index to ensure it stays below .top-section */
+    background-color: var(--main-color);
+    text-align: center;
+    padding: 10px 0;
+}
+
+.bot-section ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.bot-section ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.bot-section ul li a:hover {
+    background-color: var(--hover-color);
+    border-radius: 5px;
+}
+
+/* Sticky effect */
+.top-section, .bot-section {
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+}
+/* Ensure the section takes up 30% of the viewport height */
+.featured-products {
+    margin-top:4px;
+    margin-bottom:4px;
+    background: var(--secondary-color);
+    height: 35vh;
+    overflow: hidden; /* Hide overflow to only show part of the carousel-container */
+    display: flex;
+    align-items: center; /* Center the carousel vertically if needed */
+    justify-content: center; /* Center the carousel horizontally if needed */
+}
+.featured-vertical-text{    
+    color: white;
+    border: solid;
+    background: var(--special-color);
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+}
+
+.carousel-container {
+    height: 95%;
+    width: 100%;
+    overflow: hidden; /* Hide the overflow of items */
+    position: relative; /* Ensure children are positioned correctly */
+    white-space: nowrap; /* Prevent wrapping of items */
+}
+
+/* Carousel items should be in a row */
+.carousel-items {
+    display: flex;
+    width: 100%; /* Adjusted to fit the container width */
+    height: 100%;
+    transition: transform 0.5s ease; /* Smooth scroll effect */
+    will-change: transform; /* Improve performance */
+}
+
+/* Each product should take 20% of the carousel container width */
+.product {
+    flex: 0 0 20%; /* width */
+    background-color: var(--cta-color);
+    margin: 0 10px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 18.5vw; /* Ensure a minimum width for each product */
+}
+.product img{
+    width:100%;
+    margin-bottom:5px;
+}
+
+/* Hover effect for the product */
+.product:hover {
+    background-color: var(--main-color);
+}
+.product img:hover {
+    transform: scale(1.06);
+}
+.main-section{
+    background-color: var(--main-color);
+}
+#inicio-content-img{
+    margin-top: 2rem;
+    width:95vw;
+}
+.main-section {
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    margin: 1vh .5vh; /* Add margin */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+/* Centered content styling */
+.main-section .content {
+    max-width: 100%; /* Ensure content does not exceed the container */
+    text-align: center; /* Center text inside content divs */
+}
+
+.main-section .content p {
+    font-size: 1.2rem; /* Adjust font size as needed */
+}
+
+
+/* Galeria section*/
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#galeria-content{    
+    display:block;
+}
+
+.gallery {
+    background-color: #3c104e;
+    width: 90vw; /* Set the width of the gallery to 90% of the viewport width */
+    max-width: 100%; /* Ensure the gallery doesn’t exceed viewport width */
+    margin: 0 auto; /* Center the gallery horizontally */
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    gap: 12vh; /* Space between rows */
+    box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
+}
+
+.row {
+    display: flex;
+    justify-content: center; /* Center items horizontally in each row */
+    gap: 9.3%; /* Space between diamonds in a row, adjust as needed */
+    flex-wrap: wrap; /* Allow rows to wrap if there are too many diamonds */
+}
+
+.diamond {
+    width: 20vw; /* Use viewport width to maintain responsive sizing */
+    height: 20vw; /* Use viewport width to maintain aspect ratio */
+    background-color: green; /* Background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(45deg); /* Rotate to diamond shape */
+    overflow: hidden;
+    position: relative; /* Required for absolute positioning of the image */
+}
+
+.diamond img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%; /* Scale up image to cover the entire diamond */
+    height: 200%; /* Scale up image to cover the entire diamond */
+    object-fit: cover; /* Ensure image covers the container */
+    transform: translate(-50%, -50%) rotate(-45deg); /* Center and rotate the image back */
+}
+
+/* Independent margins for each row */
+#first {
+    margin-top: 6em;
+}
+
+#second {
+    margin-top: -6em;
+}
+
+#third {
+    margin-top: -6em;
+    margin-bottom: 6em;
+}
+
+
+/* FONTS */
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
