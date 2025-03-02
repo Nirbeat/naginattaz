@@ -1,0 +1,220 @@
+:root {
+    --black: #000;
+    --white: #fff;
+    --off-white: #f8f9fa;
+    --light-gray: #d9d9d9;
+    --soft-purple: #b18cfe;
+    --medium-gray: #d3d3d3;
+    --peach: #ffb9b9;
+    --gradient-body: linear-gradient(0.25turn, #111111, #26152e, #524257, #382142, #0f0f0f);
+}
+
+@font-face {
+    font-family: 'GothamMedium';
+    src: url('/fonts/Gotham-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MonumentExtended';
+    src: url('/fonts/MonumentExtended-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--gradient-body);
+    font-family: 'GothamMedium', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* NAVBAR */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4rem;
+    background-color: transparent;
+    min-height: 4.5rem;
+    font-family: 'MonumentExtended', sans-serif;
+    position: relative; /* Added to make position absolute relative to navbar */
+}
+
+.nav__left {
+    display: flex;
+    align-items: center;
+}
+
+.nav__logo {
+    display: flex;
+    margin-right: 2rem;
+    padding: 0.75rem;
+
+    img {
+        height: auto;
+    }
+}
+
+
+.nav__links ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.nav__links li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-right: 1.5rem;
+    font-size: clamp(0.75rem, 0.75vw, 1rem);
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+}
+
+.nav__links li a {
+    color: var(--light-gray);
+    display: flex;
+    align-items: center;
+}
+
+.nav__links li:last-child a {
+    color: var(--peach);
+}
+
+.nav__buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+    font-weight: 800;
+    font-size: clamp(0.75rem, 0.75vw, 1rem);
+    letter-spacing: 0.15rem;
+}
+
+.btn_primary {
+    background-color: var(--soft-purple);
+}
+
+.btn_primary a {
+    color: var(--white);
+}
+
+.btn_secondary {
+    background-color: var(--medium-gray);
+}
+
+.btn_secondary a {
+    color: var(--black);
+}
+
+.carrito {
+    margin-left: 0.5rem;
+    height: 20px;
+    width: 20px;
+}
+
+.nav__hamburger {
+    display: none;
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 24px;
+    width: 30px;
+    padding: 0;
+}
+
+.hamburger__line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--black);
+}
+
+
+@media (max-width: 768px) {
+    .nav__hamburger {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block;
+    }
+
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        z-index: 10; /* Added z-index */
+    }
+
+    .nav__links ul{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--gradient-body);
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        display: none; /* Ensures it starts hidden */
+        padding: 1rem 0;
+        
+        li {
+            width: 100%;
+            padding: 1rem 0;
+        }
+    }
+
+    .nav__buttons {
+        position: absolute;
+        top: calc(100% + 200px); /* Adjusted to be below nav__links */
+        left: 0;
+        width: 100%;
+        background-color: var(--gradient-body);
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        display: none; /* Ensures it starts hidden */
+        padding: 1rem 0;
+        margin: 20px 0;
+    }
+
+    .nav__links ul.show {
+        display: flex;
+        background-color: var(--off-white); /* Added background color */
+    }
+
+    .nav__buttons.show {
+        display: flex;
+        background-color: var(--off-white); /* Added background color */
+    }
+}
