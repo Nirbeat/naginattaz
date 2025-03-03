@@ -10,6 +10,7 @@
     --pink: #FA68F8;
     --gradient-body: linear-gradient(0.25turn, #111111, #26152e, #524257, #382142, #0f0f0f);
     --pastel-pink: #FAC8F8;
+    --magenta: #AF14AF;
 }
 
 @font-face {
@@ -51,7 +52,22 @@ nav {
     background-color: transparent;
     min-height: 4.5rem;
     font-family: 'MonumentExtended', sans-serif;
-    position: relative; /* Added to make position absolute relative to navbar */
+    position: relative;
+    .btn_primary {
+        background-color: var(--soft-purple);
+    }
+    
+    .btn_primary a {
+        color: var(--white);
+    }
+    
+    .btn_secondary {
+        background-color: var(--medium-gray);
+    }
+    
+    .btn_secondary a {
+        color: var(--black);
+    }
 }
 
 .nav__left {
@@ -117,21 +133,6 @@ button {
     letter-spacing: 0.15rem;
 }
 
-.btn_primary {
-    background-color: var(--soft-purple);
-}
-
-.btn_primary a {
-    color: var(--white);
-}
-
-.btn_secondary {
-    background-color: var(--medium-gray);
-}
-
-.btn_secondary a {
-    color: var(--black);
-}
 
 .carrito {
     margin-left: 0.5rem;

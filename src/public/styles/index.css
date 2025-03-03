@@ -107,6 +107,7 @@
         justify-content: center;
         margin-bottom: 1vw;
         width: 100%;
+
         p {
             color: var(--soft-purple);
             text-align: left;
@@ -131,7 +132,7 @@
         color: var(--white);
     }
 
-    button {
+    .btn_primary {
         background-color: var(--soft-purple);
         color: var(--white);
         border: none;
@@ -145,10 +146,6 @@
         margin-top: 1rem;
     }
 
-    button a {
-        color: var(--white);
-        text-decoration: none;
-    }
 }
 
 /* Aprende Section */
@@ -340,7 +337,7 @@ h4 {
             padding: 1rem;
             background-color: var(--pastel-pink);
             border-radius: 5px;
-            
+
             p {
                 font-size: clamp(0.75rem, 1.5vw, 1.25rem);
                 color: var(--black);
@@ -377,5 +374,79 @@ h4 {
 
     100% {
         translate: 0px;
+    }
+}
+
+/* Premium */
+
+.premium-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    width: 85vw;
+    margin: 0 auto;
+    border-radius: 16px;
+    background-color: var(--blue);
+    overflow: hidden;
+
+    .subtitle {
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: clamp(1rem, 1.5vw, 2rem);
+        font-weight: 700;
+        color: var(--magenta);
+        background-color: var(--pastel-pink);
+        text-transform: uppercase;
+    }
+
+    h6 {
+        font-family: 'MonumentExtended', sans-serif;
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+        color: var(--white);
+        text-align: left;
+        margin: 1rem 1rem 0rem;
+        color: var(--black);
+    }
+
+    .content {
+        padding: 1rem 2rem;
+        color: var(--white);
+
+        ul li {
+            font-family: 'MonumentExtended', sans-serif;
+            font-size: clamp(0.75rem, 1.5vw, 1.25rem);
+            letter-spacing: 0.15rem;
+            text-transform: uppercase;
+        }
+
+        + p {
+            font-family: 'MonumentExtended', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            padding: 0 1rem 1rem;
+            color: var(--black);
+            margin-top: 1rem;
+            text-transform: uppercase;
+
+            span {
+                font-size: clamp(0.75rem, 1.5vw, 1.25rem);
+            }
+        }
+    }
+
+    .btn_primary {
+        background-color: var(--pastel-pink);
+        color: var(--magenta);
+        border: none;
+        padding: 2rem 4rem;
+        cursor: pointer;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 0.25rem;
+        font-weight: 800;
+        font-size: clamp(1rem, 1.5vw, 2rem);
+        letter-spacing: 0.15rem;
+        margin-top: 1rem;
     }
 }
