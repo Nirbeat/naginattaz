@@ -9,6 +9,7 @@
     --blue: #4B59ED;
     --pink: #FA68F8;
     --gradient-body: linear-gradient(0.25turn, #111111, #26152e, #524257, #382142, #0f0f0f);
+    --pastel-pink: #FAC8F8;
 }
 
 @font-face {
