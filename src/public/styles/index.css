@@ -155,6 +155,65 @@
     }
 }
 
+/* Aprende Section */
+.aprende-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: transparent;
+    border-radius: 60px;
+    margin: 20px auto;
+    width: 95%;
+}
+
+.aprende-content {
+    text-align: center;
+    max-width: 800px;
+}
+
+.aprende-content h3 {
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.words {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: clamp(1rem, 2.5vw, 2rem);
+}
+
+.words span {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.words span:nth-child(1) {
+    color: #4ac97d;
+}
+
+.words span:nth-child(2) {
+    color: #b18cfe;
+}
+
+.words span:nth-child(3) {
+    color: #ffaf2e;
+}
+
+.words span:nth-child(4) {
+    color: #2e9dcc;
+}
+
+.words span:nth-child(5) {
+    color: #ff00ff;
+}
+
+.words span:hover {
+    color: var(--blue);
+}
+
 @media (max-width: 768px) {
 
     .video-section {
