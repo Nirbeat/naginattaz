@@ -46,30 +46,46 @@
 
 <main>
     {{!-- Slideshow --}}
-    <div class="slideshow-container">
-        <div class="mySlides fade">
-            <img src={{images.banners.web.first}}>
+    <section>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src={{images.banners.web.first}}>
+            </div>
+            <div class="mySlides fade">
+                <img src={{images.banners.web.second}}>
+            </div>
+            <div class="dot-container">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
         </div>
-        <div class="mySlides fade">
-            <img src={{images.banners.web.second}}>
-        </div>
-        <div class="dot-container">
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </div>
+    </section>
 
     {{!-- VIMEO --}}
 
-            <div>
-            <h1>METAVERSO</h1>
-            <h2>STREET DANCE</h2>
-            <div>Nuevas clases y desafíos cada mes.
-                Profesores de primer nivel listos para inspirarte SIEMPRE.
-                ¡Descubrí nuestras clases y unite a nuestra comunidad!</div>
-            <a id="hero-cta" href="./pages/subscription.html" >VER
-                MAS</a>
-            <link rel="prerender" href="./pages/subscription.html" />
+    <section>
+        <div class="video-section">
+            <div class="video-container">
+                <iframe src="https://player.vimeo.com/video/1019631883?&player_&controls=1&autoplay=1&muted=1&loop=1"
+                    frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                    title="nagi video">
+                </iframe>
+            </div>
+            <div class="video-text">
+                <div class="titles-container">
+                    <h2>METAVERSO</h2>
+                    <h1>STREET DANCE</h1>
+                </div>
+                <div class="text-container">
+                    <p>Nuevas clases y desafíos cada mes</p>
+                    <p>Profesores de primer nivel listos para inspirarte SIEMPRE</p>
+                    <p>¡Descubrí nuestras clases y unite a nuestra comunidad!</p>
+                </div>
+                <button type="button">
+                    <a href="./pages/subscription.html">VER MAS</a>
+                </button>
+            </div>
         </div>
+    </section>
 
 </main>
