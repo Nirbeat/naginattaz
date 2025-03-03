@@ -5,18 +5,16 @@
     margin: 0 auto 2vw;
 }
 
-/* Hide the slides by default */
 .mySlides {
     display: none;
     img {
         width: 100%;
         height: auto;
-        border-radius: 60px; /* Added border radius */
+        border-radius: 60px;
     }
 }
 
 
-/* The dots/bullets/indicators */
 .dot {
     height: 8px;
     aspect-ratio: 1/1;
@@ -31,7 +29,6 @@
     background-color: #4b59ed;
 }
 
-/* Fading animation */
 .fade {
     animation-name: fade;
     animation-duration: 1.5s;
@@ -46,7 +43,6 @@
     }
 }
 
-/* Position the dots inside the slides */
 .slideshow-container .dot-container {
     position: absolute;
     bottom: 15px;
@@ -55,7 +51,6 @@
     padding: 10px 0;
 }
 
-/* Responsive text size using clamp */
 .text {
     font-size: clamp(11px, 2vw, 16px);
 }
@@ -69,7 +64,7 @@
     margin: 0 auto;
     padding: 2vw;
     max-width: 95%;
-    height: clamp(300px, 60vh, 540px); /* Responsive height using clamp */
+    height: clamp(300px, 60vh, 540px);
     background-color: var(--blue);
     border-radius: 60px;
 }
@@ -88,7 +83,7 @@
     font-family: MonumentExtended, sans-serif;
     width: 35%;
     height: 100%;
-    font-size: clamp(8px, 1.5vw, 16px); /* Adjusted clamp for smaller text on smaller viewports */
+    font-size: clamp(8px, 1.5vw, 16px);
     text-align: center;
     margin-top: 1vw;
     display: flex;
