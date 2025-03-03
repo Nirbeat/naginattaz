@@ -74,7 +74,9 @@ router.get('/entrenamiento', async (req, res) => {
     const [courses] = await new CoursesDAO().getAllCourses();
     const user = req.user || defaultUser;
     res.render('training.handlebars', {
-        style: '/styles/naginattaz.min.css',
+        // style: '/styles/naginattaz.min.css',
+        // trainingStyle: '/styles/training.css',
+        style: '/styles/main.css',
         trainingStyle: '/styles/training.css',
         userData: {
             name: user.name,
