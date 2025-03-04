@@ -17,7 +17,8 @@ router.use(customVerification);
 
 router.get('/', async (req, res) => {
 
-    const {user} = req;
+    const { user } = req;
+    console.log(user)
     res.render('index.handlebars', {
         style: '/styles/naginattaz.min.css',
         indexStyle: '/styles/index.css',
@@ -87,27 +88,31 @@ router.get('/entrenamiento', async (req, res) => {
 router.get('/clases/:courseID/:lessonID?', async (req, res) => {
     // console.log('Request received for courseID:', req.params.courseID);
 
-    const {user}= req;
+    const { user } = req;
     let { courseID, lessonID } = req.params;
     const [lessons] = await new CoursesDAO().getCourseLessonsById(courseID);
 
-    // console.log(lessons.find(lesson=> lesson.id== lessonID))
-    if (!lessonID) {
-        lessonID = lessons[0].id;
-        res.status().redirect(`/clases/${courseID}/${lessonID}`)
-    }
+    const courseOwned = user.ownedCoursesAndLessons.includes(courseID)
+    if (!courseOwned) res.redirect('/store')
     else {
-        res.render('lessons.handlebars', {
-            style: '/styles/naginattaz.min.css',
-            lessonsStyle: '/styles/lessons.css',
-            lessons,
-            profileImg: user.profile_image,
-            currentLesson :function (){
-                const current = lessons.find(lesson=>lesson.id == lessonID);
-                return current.lesson_url;
-            }
-        })
-    };
+        // ESTO REDIRECCIONA AL PRIMER VIDEO DEL CURSO
+        if (!lessonID) {
+            lessonID = lessons[0].id;
+            res.status().redirect(`/clases/${courseID}/${lessonID}`)
+        }
+        else {
+            res.render('lessons.handlebars', {
+                style: '/styles/naginattaz.min.css',
+                lessonsStyle: '/styles/lessons.css',
+                lessons,
+                profileImg: user.profile_image,
+                currentLesson: function () {
+                    const current = lessons.find(lesson => lesson.id == lessonID);
+                    return current.lesson_url;
+                }
+            })
+        };
+    }
 });
 
 router.get('/store', async (req, res) => {

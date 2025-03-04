@@ -20,7 +20,7 @@ app.set('view engine', 'handlebars');
 app.set('views',serverRoot + '/views');
 
 app.use(passport.initialize());
-app.use(cookieParser());
+app.use(cookieParser(environment.cookieParser));
 initializePassport();
 
 app.use(express.static(serverRoot + '/public'));

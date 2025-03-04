@@ -10,6 +10,7 @@ export const environment = {
         password: process.env.DB_PASS || '',
         user: process.env.DB_USER || 'root'
     },
+    cookieParser: process.env.COOKIE_PARSER_SECRET,
     googleAuth:{
         clientID: process.env.GOOGLE_CLIENT_ID,
         secret: process.env.GOOGLE_SECRET

@@ -9,6 +9,7 @@ export async function paymentProcessing(course){
         body:{
             items: [
                 {
+                    id: course.id,
                     title: course.course_name,
                     quantity: 1,
                     currency_id: 'ARS',
@@ -16,9 +17,9 @@ export async function paymentProcessing(course){
                 }
             ],
             back_urls:{
-                failure:'http://localhost:8080/payment/failure',
-                pending:'http://localhost:8080/payment/pending',
-                success:'http://localhost:8080/'
+                failure:'http://localhost:8080/api/payment/failure',
+                pending:'http://localhost:8080/api/payment/pending',
+                success:'http://localhost:8080/api/payment/success'
             },
             auto_return: 'approved'
         }
