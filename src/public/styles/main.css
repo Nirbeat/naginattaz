@@ -8,6 +8,8 @@
     --peach: #ffb9b9;
     --blue: #4B59ED;
     --pink: #FA68F8;
+    --pastel-lilac: #C299C0;
+    
     --gradient-body: linear-gradient(0.25turn, #111111, #26152e, #524257, #382142, #0f0f0f);
     --pastel-pink: #FAC8F8;
     --magenta: #AF14AF;
@@ -45,7 +47,7 @@ a {
 
 /* NAVBAR */
 
-nav {
+.nav_index {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -226,6 +228,7 @@ button {
 
 /* Footer */
 footer {
+    overflow: hidden;
     background-color: var(--footer-purple);
     color: var(--light-gray);
     padding: 2rem 0;

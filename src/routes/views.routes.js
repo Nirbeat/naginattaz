@@ -73,9 +73,10 @@ router.get('/team', async (req, res) => {
 router.get('/entrenamiento', async (req, res) => {
     const [courses] = await new CoursesDAO().getAllCourses();
     const user = req.user || defaultUser;
+    // res.render('originales/training.handlebars', {
     res.render('training.handlebars', {
-        // style: '/styles/naginattaz.min.css',
-        // trainingStyle: '/styles/training.css',
+        // style: '/styles/originales/naginattaz.min.css',
+        // trainingStyle: '/styles/originales/training.css',
         style: '/styles/main.css',
         trainingStyle: '/styles/training.css',
         userData: {
