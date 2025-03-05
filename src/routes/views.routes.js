@@ -8,7 +8,7 @@ const router = Router();
 router.get('/login', async (req, res) => {
 
     res.render('login.handlebars', {
-        style: '/styles/naginattaz.min.css',
+        style: '/styles/main.css',
         loginStyles: '/styles/login.css'
     });
 });
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
     const { user } = req;
     console.log(user)
     res.render('index.handlebars', {
-        style: '/styles/naginattaz.min.css',
+        style: '/styles/main.css',
         indexStyle: '/styles/index.css',
         images: {
             cart: '/images/cart.png',
@@ -37,14 +37,14 @@ router.get('/', async (req, res) => {
 router.get('/terms', async (req, res) => {
 
     res.render('condition-terms.handlebars', {
-        style: '/styles/naginattaz.min.css',
+        style: '/styles/main.css',
         legalStyle: '/styles/legals.css'
     });
 });
 
 router.get('/policies', async (req, res) => {
     res.render('policy.handlebars', {
-        style: '/styles/naginattaz.min.css',
+        style: '/styles/main.css',
         legalStyle: '/styles/legals.css'
     });
 });
@@ -60,7 +60,7 @@ router.get('/team', async (req, res) => {
         }
     })
     res.render('TEAM.handlebars', {
-        style: '/styles/naginattaz.min.css',
+        style: '/styles/main.css',
         teamMembers,
         teamStyles: '/styles/team.css'
     });
@@ -75,7 +75,7 @@ router.get('/entrenamiento', async (req, res) => {
     // console.log(courses)
     const { user } = req;
     res.render('training.handlebars', {
-        style: '/styles/naginattaz.min.css',
+        style: '/styles/main.css',
         trainingStyle: '/styles/training.css',
         userData: {
             name: user.name,
@@ -102,7 +102,7 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
         }
         else {
             res.render('lessons.handlebars', {
-                style: '/styles/naginattaz.min.css',
+                style: '/styles/main.css',
                 lessonsStyle: '/styles/lessons.css',
                 lessons,
                 profileImg: user.profile_image,
@@ -120,7 +120,7 @@ router.get('/store', async (req, res) => {
     const [courses] = await new CoursesDAO().getAllCourses();
 
     res.render('store.handlebars', {
-        style: '/styles/naginattaz.min.css',
+        style: '/styles/main.css',
         storeStyle: '/styles/store.css',
         courses
     })
