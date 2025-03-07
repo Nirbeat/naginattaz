@@ -3,8 +3,8 @@
 
 <div class="wrapper">
 
-<div class="nav-container">
-    <nav>
+    <div class="nav-container">
+        <nav>
             {{!-- Logo --}}
             <div class="logo_container">
                 <a href="/">
@@ -25,79 +25,102 @@
                 </div>
                 <button type="button">Logout</button>
             </div>
+            <div class="nav__hamburger">
+                <button type="button" class="hamburger">
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                </button>
+            </div>
         </nav>
-</div>   
+    </div>
 
     <aside>
         <ul>
-            <li onclick="toggleSection()">Todas las clases <span class="arrow"></span></li>
-            <li>Clases individuales <span class="arrow"></span></li>
-            <li>Programas <span class="arrow"></span></li>
-            <li>Estilos <span class="arrow"></span></li>
-            <li>Playlist <span class="arrow"></span></li>
-            <li>Calendario <span class="arrow"></span></li>
-            <li>Comunidad <span class="arrow"></span></li>
+            <li onclick="toggleSection(this)">Todas las clases <span class="arrow"></span></li>
+            <li onclick="toggleSection(this)">Clases individuales <span class="arrow"></span></li>
+            <li onclick="toggleSection(this)">Programas <span class="arrow"></span></li>
+            <li onclick="toggleSection(this)">Estilos <span class="arrow"></span></li>
+            <li onclick="toggleSection(this)">Playlist <span class="arrow"></span></li>
+            <li onclick="toggleSection(this)">Calendario <span class="arrow"></span></li>
+            <li onclick="toggleSection(this)">Comunidad <span class="arrow"></span></li>
         </ul>
     </aside>
 
     <section>
-        <div class="section_wrapper">
-            <h1>Bienvenido {{userData.name}}</h1>
-            <section>
-                <div class="grid-auto-fill">
-                    {{#each courses}}
-                    <div class="course-container">
-                        <div class="course-card">
-                            <p>{{this.course_name}}</p>
-                            <p>{{this.course_level}}</p>
-                            <p>${{this.course_price}}</p>
-                            <img src={{this.course_image}} alt="">
-                        </div>
+        <h1>Bienvenido {{userData.name}}</h1>
+        <article>
+            <div class="grid-auto-fill">
+                {{#each courses}}
+                <div class="course-container">
+                    <div class="course-card">
+                        <h3>{{this.course_name}}</h3>
+                        <p>{{this.course_level}}</p>
+                        <p>${{this.course_price}}</p>
+                        <img src={{this.course_image}} alt="">
                     </div>
-                    {{/each}}
-                    {{#each courses}}
-                    <div class="course-container">
-                        <div class="course-card">
-                            <p>{{this.course_name}}</p>
-                            <p>{{this.course_level}}</p>
-                            <p>{{this.course_price}}</p>
-                            <img src={{this.course_image}} alt="">
-                        </div>
-                    </div>
-                    {{/each}}
-                    {{#each courses}}
-                    <div class="course-container">
-                        <div class="course-card">
-                            <p>{{this.course_name}}</p>
-                            <p>{{this.course_level}}</p>
-                            <p>{{this.course_price}}</p>
-                            <img src={{this.course_image}} alt="">
-                        </div>
-                    </div>
-                    {{/each}}
-                    {{#each courses}}
-                    <div class="course-container">
-                        <div class="course-card">
-                            <p>{{this.course_name}}</p>
-                            <p>{{this.course_level}}</p>
-                            <p>{{this.course_price}}</p>
-                            <img src={{this.course_image}} alt="">
-                        </div>
-                    </div>
-                    {{/each}}
                 </div>
-            </section>
-        </div>
+                {{/each}}
+                {{#each courses}}
+                <div class="course-container">
+                    <div class="course-card">
+                        <h3>{{this.course_name}}</h3>
+                        <p>{{this.course_level}}</p>
+                        <p>${{this.course_price}}</p>
+                        <img src={{this.course_image}} alt="">
+                    </div>
+                </div>
+                {{/each}}
+                {{#each courses}}
+                <div class="course-container">
+                    <div class="course-card">
+                        <h3>{{this.course_name}}</h3>
+                        <p>{{this.course_level}}</p>
+                        <p>${{this.course_price}}</p>
+                        <img src={{this.course_image}} alt="">
+                    </div>
+                </div>
+                {{/each}}
+                {{#each courses}}
+                <div class="course-container">
+                    <div class="course-card">
+                        <h3>{{this.course_name}}</h3>
+                        <p>{{this.course_level}}</p>
+                        <p>${{this.course_price}}</p>
+                        <img src={{this.course_image}} alt="">
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </article>
     </section>
 </div>
 
 <script>
-function toggleSection() {
-    const section = document.querySelector('section');
-    if (section.style.display === 'none' || section.style.display === '') {
-        section.style.display = 'block';
-    } else {
-        section.style.display = 'none';
+    function toggleSection(element) {
+        const section = document.querySelector('section');
+        if (section.style.display === 'none' || section.style.display === '') {
+            section.style.display = 'block';
+        } else {
+            section.style.display = 'none';
+        }
+
+        // Toggle the active class on the clicked li
+        element.classList.toggle('active');
     }
-}
+
+    function toggleHamburgerMenu() {
+        const navLinks = document.querySelector('.nav_links');
+        const botonera = document.querySelector('.botonera');
+
+        if (navLinks.style.display === 'none' || navLinks.style.display === '') {
+            navLinks.style.display = 'flex';
+            botonera.style.display = 'flex';
+        } else {
+            navLinks.style.display = 'none';
+            botonera.style.display = 'none';
+        }
+    }
+
+    document.querySelector('.hamburger').addEventListener('click', toggleHamburgerMenu);
 </script>
