@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UserDAO } from "../database/DAO/UserDAO.js";
+import { UsersDAO } from "../database/DAO/UsersDAO.js";
 import { customVerification, ensureAuthenticated } from "../middlewares/authToken.js";
 import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
 
@@ -50,7 +50,7 @@ router.get('/policies', async (req, res) => {
 
 router.get('/team', async (req, res) => {
 
-    let [teamMembers] = await new UserDAO().getTeamMembers();
+    let [teamMembers] = await new UsersDAO().getTeamMembers();
 
     // PASAR LUEGO A UN DTO
     teamMembers = teamMembers.map(({ name, skills, instagramURL, tiktokURL, profile_image }) => {

@@ -1,6 +1,6 @@
 import { DBConnection } from "../database.js"
 
-export class UserDAO{
+export class UsersDAO{
 
     async getTeamMembers(){
 

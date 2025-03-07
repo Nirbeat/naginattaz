@@ -2,7 +2,7 @@ import passport from "passport";
 import { environment } from "./env.js";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
-import { UserDAO } from "../database/DAO/UserDAO.js";
+import { UsersDAO } from "../database/DAO/UsersDAO.js";
 import { extractJWTFromCookies } from "./jwt.js";
 import { UserDTO } from "../database/DTO/UserDTO.js";
 
@@ -15,7 +15,7 @@ function initializePassport() {
     },
         async (accessToken, refreshToken, profile, done) => {
 
-            const userManager = new UserDAO();
+            const userManager = new UsersDAO();
 
             let [[user]] = await userManager.getUserByEmail(profile._json.email);
 
@@ -52,7 +52,7 @@ function initializePassport() {
         done(null, user.id);
     });
     passport.deserializeUser(async (email, done) => {
-        let user = await new UserDAO().getUserByEmail(email);
+        let user = await new UsersDAO().getUserByEmail(email);
         done(null, user);
     })
 }
