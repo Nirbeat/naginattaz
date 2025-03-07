@@ -1,4 +1,4 @@
-import { MercadoPagoConfig, Preference, PreApprovalPlan } from 'mercadopago';
+import { MercadoPagoConfig, Preference} from 'mercadopago';
 import { environment } from './env.js';
 
 const client = new MercadoPagoConfig({ accessToken: environment.mercadopago.token});
@@ -26,17 +26,6 @@ export async function paymentProcessing(course){
     });
 
 }
-
-
-
-new PreApprovalPlan().create({body:{
-payment_methods_allowed:{
-    payment_methods:{
-    
-    }
-}
-}})
-
 // curl -X POST \
 
 //   "reason": "Yoga classes",
