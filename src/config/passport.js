@@ -2,7 +2,7 @@ import passport from "passport";
 import { environment } from "./env.js";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
-import { UserDao } from "../database/DAO/UserDAO.js";
+import { UserDAO } from "../database/DAO/UserDAO.js";
 import { extractJWTFromCookies } from "./jwt.js";
 import { UserDTO } from "../database/DTO/UserDTO.js";
 
@@ -15,19 +15,22 @@ function initializePassport() {
     },
         async (accessToken, refreshToken, profile, done) => {
 
-            const userManager = new UserDao();
+            const userManager = new UserDAO();
 
             let [[user]] = await userManager.getUserByEmail(profile._json.email);
-            if (user == '') {
-                user = await userManager.addUser({
+
+            if (user == undefined) {
+
+                [[user]] = await userManager.addUser({
                     email: profile._json.email,
                     name: profile._json.name,
                     profileImageURL: profile._json.picture
                 });
-                done(null, user);
+
+                done(null, new UserDTO().userJWT(user));
             }
             else {
-                const [ownedCoursesAndLessons] = await new UserDao().getOwnedCourses(user.email)
+                const [ownedCoursesAndLessons] = await userManager.getOwnedCourses(user.email)
                 user.ownedCoursesAndLessons = ownedCoursesAndLessons;
                 done(null, user);
             }
@@ -40,7 +43,7 @@ function initializePassport() {
     },
         async (jwt_payload, done) => {
 
-            const user = await new UserDTO().userJWT(jwt_payload)
+            const user = new UserDTO().userJWT(jwt_payload)
             return done(null, user)
         }))
 
@@ -49,7 +52,7 @@ function initializePassport() {
         done(null, user.id);
     });
     passport.deserializeUser(async (email, done) => {
-        let user = await new UserDao().getUserByEmail(email);
+        let user = await new UserDAO().getUserByEmail(email);
         done(null, user);
     })
 }

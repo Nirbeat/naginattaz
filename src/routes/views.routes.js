@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UserDao } from "../database/DAO/UserDAO.js";
+import { UserDAO } from "../database/DAO/UserDAO.js";
 import { customVerification, ensureAuthenticated } from "../middlewares/authToken.js";
 import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
 
@@ -18,7 +18,6 @@ router.use(customVerification);
 router.get('/', async (req, res) => {
 
     const { user } = req;
-    console.log(user)
     res.render('index.handlebars', {
         style: '/styles/main.css',
         indexStyle: '/styles/index.css',
@@ -51,7 +50,7 @@ router.get('/policies', async (req, res) => {
 
 router.get('/team', async (req, res) => {
 
-    let [teamMembers] = await new UserDao().getTeamMembers();
+    let [teamMembers] = await new UserDAO().getTeamMembers();
 
     // PASAR LUEGO A UN DTO
     teamMembers = teamMembers.map(({ name, skills, instagramURL, tiktokURL, profile_image }) => {
@@ -89,6 +88,7 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
     // console.log('Request received for courseID:', req.params.courseID);
 
     const { user } = req;
+    console.log(user)
     let { courseID, lessonID } = req.params;
     const [lessons] = await new CoursesDAO().getCourseLessonsById(courseID);
 

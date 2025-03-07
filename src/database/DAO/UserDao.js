@@ -1,6 +1,6 @@
 import { DBConnection } from "../database.js"
 
-export class UserDao{
+export class UserDAO{
 
     async getTeamMembers(){
 
@@ -14,10 +14,14 @@ export class UserDao{
         )
     }
     async addUser({name, email, skills, password, instagramURL, tiktokURL, profileImageURL}){
-        return await DBConnection.query(
+        const [newUser] = await DBConnection.query(
             'INSERT INTO users (name, email, profile_image) VALUES (?,?,?)',
             [name, email, profileImageURL]
         )
+
+        return await DBConnection.query(
+            'SELECT * FROM users WHERE id = ?',[newUser.insertId]
+        );
     }
 
     async getOwnedCourses(email){

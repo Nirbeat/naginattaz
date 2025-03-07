@@ -2,8 +2,10 @@ import { createToken } from "../config/jwt.js";
 import passport from "passport";
 
 export const authToken = (req, res, next) => {
+
     const {user} = req;
     if (user) {
+        console.log(user)
         const token = createToken(user);
         res.cookie('jwt', token, {httpOnly: true, secure: true})
         next();

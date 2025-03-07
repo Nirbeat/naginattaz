@@ -4,6 +4,7 @@ import { paymentProcessing } from "../../config/mercadopago.js";
 import { PurchasesDAO } from "../../database/DAO/PurchasesDAO.js";
 import { customVerification } from "../../middlewares/authToken.js";
 import { createToken } from "../../config/jwt.js";
+import { UserDAO } from "../../database/DAO/UserDAO.js";
 
 const router = Router();
 
@@ -14,7 +15,10 @@ router.get('/success', async (req, res) => {
     const {courseId} = req.cookies.purchaseData;
     const {user} = req;
     user.ownedCoursesAndLessons.push(courseId);
-    await new PurchasesDAO().saveCoursePurchase(user.id, parseInt(courseId));
+
+    const [[findUser]] = await new UserDAO().getUserByEmail(user.email);
+    console.log()
+    await new PurchasesDAO().saveCoursePurchase(findUser.id, parseInt(courseId));
 
     res.cookie('jwt',createToken(user)).redirect(`/clases/${courseId}`);
 })
