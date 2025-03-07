@@ -3,44 +3,101 @@
 
 <div class="wrapper">
 
+<div class="nav-container">
     <nav>
-        {{!-- Logo --}}
-        <div class="logo_container">
-            <a href="/">
-                <img src="/images/main-logo.png" alt="NAGINATTAZ logo in black."
-                    class="navbar10_logo icon-height-xlarge" />
-            </a>
-        </div>
-        {{!-- Menu --}}
-        <div class="nav_links">
-            <a href="/">Inicio</a>
-            <a href="/entrenamiento">Clases</a>
-            <a href="/nagidatta">Nagidatta</a>
-        </div>
-        {{!-- Botonera --}}
-        <div class="botonera">
-            <div class="profile_pic">
-                <img src={{userData.profileImg}} alt="Profile picture">
+            {{!-- Logo --}}
+            <div class="logo_container">
+                <a href="/">
+                    <img src="/images/main-logo.png" alt="NAGINATTAZ logo in black."
+                        class="navbar10_logo icon-height-xlarge" />
+                </a>
             </div>
-            <button type="button">Logout</button>
-        </div>
-    </nav>
+            {{!-- Menu --}}
+            <div class="nav_links">
+                <a href="/">Inicio</a>
+                <a href="/entrenamiento">Clases</a>
+                <a href="/nagidatta">Nagidatta</a>
+            </div>
+            {{!-- Botonera --}}
+            <div class="botonera">
+                <div class="profile_pic">
+                    <img src={{userData.profileImg}} alt="Profile picture">
+                </div>
+                <button type="button">Logout</button>
+            </div>
+        </nav>
+</div>   
 
     <aside>
         <ul>
-            <li><button type="button">Todas las clases</button></li>
-            <li><button type="button">Clases individuales</button></li>
-            <li><button type="button">Programas</button></li>
-            <li><button type="button">Estilos</button></li>
-            <li><button type="button">Playlist</button></li>
-            <li><button type="button">Calendario</button></li>
-            <li><button type="button">Comunidad</button></li>
+            <li onclick="toggleSection()">Todas las clases <span class="arrow"></span></li>
+            <li>Clases individuales <span class="arrow"></span></li>
+            <li>Programas <span class="arrow"></span></li>
+            <li>Estilos <span class="arrow"></span></li>
+            <li>Playlist <span class="arrow"></span></li>
+            <li>Calendario <span class="arrow"></span></li>
+            <li>Comunidad <span class="arrow"></span></li>
         </ul>
     </aside>
 
     <section>
         <div class="section_wrapper">
             <h1>Bienvenido {{userData.name}}</h1>
+            <section>
+                <div class="grid-auto-fill">
+                    {{#each courses}}
+                    <div class="course-container">
+                        <div class="course-card">
+                            <p>{{this.course_name}}</p>
+                            <p>{{this.course_level}}</p>
+                            <p>${{this.course_price}}</p>
+                            <img src={{this.course_image}} alt="">
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{#each courses}}
+                    <div class="course-container">
+                        <div class="course-card">
+                            <p>{{this.course_name}}</p>
+                            <p>{{this.course_level}}</p>
+                            <p>{{this.course_price}}</p>
+                            <img src={{this.course_image}} alt="">
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{#each courses}}
+                    <div class="course-container">
+                        <div class="course-card">
+                            <p>{{this.course_name}}</p>
+                            <p>{{this.course_level}}</p>
+                            <p>{{this.course_price}}</p>
+                            <img src={{this.course_image}} alt="">
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{#each courses}}
+                    <div class="course-container">
+                        <div class="course-card">
+                            <p>{{this.course_name}}</p>
+                            <p>{{this.course_level}}</p>
+                            <p>{{this.course_price}}</p>
+                            <img src={{this.course_image}} alt="">
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
         </div>
     </section>
 </div>
+
+<script>
+function toggleSection() {
+    const section = document.querySelector('section');
+    if (section.style.display === 'none' || section.style.display === '') {
+        section.style.display = 'block';
+    } else {
+        section.style.display = 'none';
+    }
+}
+</script>

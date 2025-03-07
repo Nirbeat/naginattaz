@@ -8,7 +8,7 @@ const router = Router();
 // Default user object for testing purposes
 const defaultUser = {
     name: "Test User",
-    profile_image: "/images/default-profile.png"
+    profile_image: "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairFrizzle&accessoriesType=Prescription02&hairColor=Black&facialHairType=BeardMajestic&facialHairColor=Auburn&clotheType=GraphicShirt&clotheColor=Blue02&graphicType=Skull&eyeType=Squint&eyebrowType=RaisedExcitedNatural&mouthType=Sad&skinColor=Light"
 };
 
 router.get('/login', async (req, res) => {
