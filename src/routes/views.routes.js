@@ -43,7 +43,10 @@ router.get('/', async (req, res) => {
 
 router.get('/terms', async (req, res) => {
     res.render('condition-terms.handlebars', {
-        style: '/styles/naginattaz.min.css',
+    // res.render('originales/condition-terms.handlebars', {
+        // style: '/styles/originales/styles/naginattaz.min.css',
+        // legalStyle: '/styles/originales/styles/legals.css'
+        style: '/styles/main.css',
         legalStyle: '/styles/legals.css'
     });
 });
