@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="{{teamStyles}}">
+
+<div class="team-page-container">
+  <div class="team-container">
+    {{#each teamMembers}}
+      <div class="team-card">
+        <div class="image-container">
+          <img src="{{#if profile_image}}{{profile_image}}{{else}}https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Blue01&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Hearts&eyebrowType=SadConcernedNatural&mouthType=Disbelief&skinColor=Pale{{/if}}" alt="{{name}}">
+        </div>
+        <div class="card-content">
+          <h3>{{name}}</h3>
+          <p>{{skills}}</p>
+          <div class="social-links">
+            {{#if instagramURL}}
+              <a href="{{instagramURL}}" target="_blank">Instagram</a>
+            {{/if}}
+            {{#if tiktokURL}}
+              <a href="{{tiktokURL}}" target="_blank">TikTok</a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

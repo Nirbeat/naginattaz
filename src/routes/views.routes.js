@@ -62,7 +62,8 @@ router.get('/team', async (req, res) => {
         }
     });
     res.render('TEAM.handlebars', {
-        style: '/styles/naginattaz.min.css',
+        // style: '/styles/naginattaz.min.css',
+        style: '/styles/main.css',
         teamMembers,
         teamStyles: '/styles/team.css'
     });
