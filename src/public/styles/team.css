@@ -60,3 +60,8 @@
 .team-card .card-content .social-links a:hover {
     text-decoration: underline;
 }
+
+h1 {
+    color: var(--white);
+    text-align: center;
+}

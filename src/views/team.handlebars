@@ -1,25 +1,73 @@
 <link rel="stylesheet" href="{{teamStyles}}">
+{{!-- Navbar --}}
 
+<nav class="nav_index">
+    <div class="nav__left">
+        <div class="nav__logo">
+            <a href="/">
+                <img src={{images.mainLogo}} alt="NAGINATTAZ" height="150px" width="300px" />
+            </a>
+        </div>
+        <div class="nav__links">
+            <ul>
+                <li>
+                    <a href="/team">Team</a>
+                </li>
+                <li>
+                    <a href="/entrenamiento">Entrenamiento</a>
+                </li>
+                <li>
+                    <a href="/blog">Nagiblog</a>
+                </li>
+                <li>
+                    <a href="/store">Store
+                        <img class="carrito" src={{images.cart}} alt="Carrito" height="20px" width="20px" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav__buttons">
+        <button type="button" class="btn_secondary">
+            <a href="/login">Inicia</a>
+        </button>
+        <button type="button" class="btn_primary">
+            <a href="/subscribe">Sumate</a>
+        </button>
+    </div>
+    <div class="nav__hamburger">
+        <button type="button" class="hamburger">
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+        </button>
+    </div>
+</nav>
+
+
+{{!-- Grid --}}
+<h1>Conoce a nuestro equipo</h1>
 <div class="team-page-container">
-  <div class="team-container">
-    {{#each teamMembers}}
-      <div class="team-card">
-        <div class="image-container">
-          <img src="{{#if profile_image}}{{profile_image}}{{else}}https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Blue01&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Hearts&eyebrowType=SadConcernedNatural&mouthType=Disbelief&skinColor=Pale{{/if}}" alt="{{name}}">
+    <div class="team-container">
+        {{#each teamMembers}}
+        <div class="team-card">
+            <div class="image-container">
+                <img src="{{#if profile_image}}{{profile_image}}{{else}}https://avataaars.io/?avatarStyle=Circle&topType=WinterHat2&accessoriesType=Prescription01&hatColor=Blue01&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Hearts&eyebrowType=SadConcernedNatural&mouthType=Disbelief&skinColor=Pale{{/if}}"
+                    alt="{{name}}">
+            </div>
+            <div class="card-content">
+                <h3>{{name}}</h3>
+                <p>{{skills}}</p>
+                <div class="social-links">
+                    {{#if instagramURL}}
+                    <a href="{{instagramURL}}" target="_blank">Instagram</a>
+                    {{/if}}
+                    {{#if tiktokURL}}
+                    <a href="{{tiktokURL}}" target="_blank">TikTok</a>
+                    {{/if}}
+                </div>
+            </div>
         </div>
-        <div class="card-content">
-          <h3>{{name}}</h3>
-          <p>{{skills}}</p>
-          <div class="social-links">
-            {{#if instagramURL}}
-              <a href="{{instagramURL}}" target="_blank">Instagram</a>
-            {{/if}}
-            {{#if tiktokURL}}
-              <a href="{{tiktokURL}}" target="_blank">TikTok</a>
-            {{/if}}
-          </div>
-        </div>
-      </div>
-    {{/each}}
-  </div>
+        {{/each}}
+    </div>
 </div>

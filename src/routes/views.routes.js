@@ -11,6 +11,15 @@ const defaultUser = {
     profile_image: "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairFrizzle&accessoriesType=Prescription02&hairColor=Black&facialHairType=BeardMajestic&facialHairColor=Auburn&clotheType=GraphicShirt&clotheColor=Blue02&graphicType=Skull&eyeType=Squint&eyebrowType=RaisedExcitedNatural&mouthType=Sad&skinColor=Light"
 };
 
+const images = {
+    cart: '/images/cart.png',
+    mainLogo: '/images/main-logo.png',
+    banners: {
+        mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
+        web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png' }
+    }
+}
+
 router.get('/login', async (req, res) => {
     res.render('login.handlebars', {
         style: '/styles/naginattaz.min.css',
@@ -27,14 +36,7 @@ router.get('/', async (req, res) => {
         // indexStyle: '/styles/originales/index.css',
         style: '/styles/main.css',
         indexStyle: '/styles/index.css',
-        images: {
-            cart: '/images/cart.png',
-            mainLogo: '/images/main-logo.png',
-            banners: {
-                mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
-                web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png' }
-            }
-        },
+        images: images,
         user
     });
 });
@@ -65,7 +67,8 @@ router.get('/team', async (req, res) => {
         // style: '/styles/naginattaz.min.css',
         style: '/styles/main.css',
         teamMembers,
-        teamStyles: '/styles/team.css'
+        teamStyles: '/styles/team.css',
+        images: images
     });
 });
 
