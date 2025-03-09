@@ -4,7 +4,7 @@ nav {
     align-items: center;
     padding: 2rem 1rem;
     height: var(--navbar-height);
-    background-color: var(--pastel-lilac);
+    background-color: var(--pastel-pink);
     color: white;
     position: relative;
     z-index: 999;
@@ -91,4 +91,116 @@ nav {
     .nav__hamburger {
         display: none;
     }
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+
+        .logo_container {
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .nav_links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+
+            a {
+                padding: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .botonera {
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 1rem;
+
+            .profile_pic {
+                margin-right: 1rem;
+            }
+
+            button {
+                flex-grow: 1;
+            }
+        }
+
+        .nav__hamburger {
+            display: block;
+            align-self: flex-end;
+        }
+    }
+
+    .nav_links.active {
+        display: flex;
+    }
+}
+
+.nav-container {
+    width: 100%;
+    background-color: var(--pastel-pink);
+}
+
+.main-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.main-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.main-video {
+    width: 100%;
+    height: 500px;
+}
+
+.info-carousel-section {
+    padding: 2rem;
+    background-color: var(--light-gray);
+}
+
+.video-info {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.video-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.descripcion {
+    text-align: left;
+}
+
+.descripcion h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.descripcion a {
+    color: var(--dark-gray);
+    text-decoration: none;
+}
+
+.descripcion a li {
+    list-style: none;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.descripcion a li:hover {
+    background-color: var(--light-pink);
 }
