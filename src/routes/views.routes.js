@@ -47,14 +47,19 @@ router.get('/terms', async (req, res) => {
         // style: '/styles/originales/styles/naginattaz.min.css',
         // legalStyle: '/styles/originales/styles/legals.css'
         style: '/styles/main.css',
-        legalStyle: '/styles/legals.css'
+        legalStyle: '/styles/legals.css',
+        images: images
     });
 });
 
 router.get('/policies', async (req, res) => {
     res.render('policy.handlebars', {
-        style: '/styles/naginattaz.min.css',
-        legalStyle: '/styles/legals.css'
+    // res.render('originales/policy.handlebars', {
+        // style: '/styles/naginattaz.min.css',
+        // legalStyle: '/styles/legals.css'
+        style: '/styles/main.css',
+        legalStyle: '/styles/policy.css',
+        images: images
     });
 });
 
