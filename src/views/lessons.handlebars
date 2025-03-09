@@ -1,4 +1,5 @@
-{{!-- <!DOCTYPE html> --}}
+{{!--
+<!DOCTYPE html> --}}
 {{!-- <html lang="ES"> --}}
 
 <head>
@@ -6,40 +7,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clases</title>
     <link rel="stylesheet" href={{lessonsStyle}}>
-    {{!-- <script src="userPic.js" defer></script> --}}
-    {{!-- <script src="https://player.vimeo.com/api/player.js"></script> --}}
+    {{!--
+    <script src="userPic.js" defer></script> --}}
+    {{!--
+    <script src="https://player.vimeo.com/api/player.js"></script> --}}
 </head>
 
-{{!-- <body class="no-scrollbar"> --}}
-    <div class="header">
-        <div class="logo">
-            <a src="/">
-                <img src="/images/main-logo.png">
-            </a>
-        </div>
-        <div>
-            <H1 class="titlefont">
-                HIP-HOP
-            </H1>
-        </div>
-        <nav class="menu titlefont">
-            <a href="/">INICIO</a>
-            <a href="/entrenamiento">CLASES</a>
-            <a href="/nagidatta">NAGIDATTA</a>
-        </nav>
-        <div class="header-right">
-            <div id="user-info">
-                <img id="user-pic" src={{profileImg}} alt="User Picture" style="border-radius: 50%; width: 60px; height: 60px;">
+{{!--
+
+<body class="no-scrollbar"> --}}
+    <div class="nav-container">
+        <nav>
+            {{!-- Logo --}}
+            <div class="logo_container">
+                <a href="/">
+                    <img src="/images/main-logo.png" alt="NAGINATTAZ logo in black."
+                        class="navbar10_logo icon-height-xlarge" />
+                </a>
             </div>
-            <button class="titlefont" id="logout-button">Atrás</button>
-        </div>
+            {{!-- Menu --}}
+            <div class="nav_links">
+                <a href="/">Inicio</a>
+                <a href="/entrenamiento">Clases</a>
+                <a href="/nagidatta">Nagidatta</a>
+            </div>
+            {{!-- Botonera --}}
+            <div class="botonera">
+                <div class="profile_pic">
+                    <img src={{profileImg}} alt="Profile picture">
+                </div>
+                <button type="button">Logout</button>
+            </div>
+            <div class="nav__hamburger">
+                <button type="button" class="hamburger">
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                </button>
+            </div>
+        </nav>
     </div>
 
     <div class="main-section">
 
         <img class="main-img" id="mainImage" src="" alt="Main Image" style="display: none;">
         <iframe id="mainVideo" style="display: block;" frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write" src={{currentLesson}} title="Main Vimeo Video"></iframe>
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write" src={{currentLesson}}
+            title="Main Vimeo Video"></iframe>
 
     </div>
 
@@ -51,10 +65,11 @@
             <div class="descripcion">
                 <h3>Programa:</h3>
                 {{#each lessons}}
-                <a href="/clases/{{this.course_id}}/{{this.id}}"><li>
-                    {{this.name}}
-                    <br>
-                </li>
+                <a href="/clases/{{this.course_id}}/{{this.id}}">
+                    <li>
+                        {{this.name}}
+                        <br>
+                    </li>
                 </a>
                 {{/each}}
 
@@ -207,6 +222,9 @@
             }
         });
     </script>
-{{!-- </body> --}}
+    {{!--
+</body> --}}
 
-{{!-- </html> --}}
+{{!--
+
+</html> --}}

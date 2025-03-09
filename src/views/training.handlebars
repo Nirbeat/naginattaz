@@ -1,1034 +1,126 @@
+<link rel="stylesheet" href={{trainingStyle}}>
+<script src="https://player.vimeo.com/api/player.js" defer></script>
 
-    <link rel="stylesheet" href={{trainingStyle}}>
-    {{!-- <script src="./calendar.js" defer></script> --}}
-    <script src="https://player.vimeo.com/api/player.js" defer></script>
+<div class="wrapper">
 
-<body class="no-scrollbar">
-    <div class="loading">
-        {{!-- <video autoplay muted playsinline preload="auto" onended="this.style.display='none'">
-            <source src="./Logo-Animado_3D.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video> --}}
-    </div>
-    {{!-- <style>
-        .loading video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style> --}}
-    {{!-- <div id="notification"
-        style="display: none; z-index: 100000; position: inherit; border-bottom: white 2px solid; width: 100%; height: 35px;background-color: rgb(163, 9, 104); color: white;align-items: center; justify-content: center; line-height: 20px;">
-        <span id="notification-text" style="text-align: center;"></span>
-
-        <a id="unite-button" href="./subscription.html"
-            style="padding:5px; border-radius: 5px; color: white; background-color: rgb(190, 115, 190); text-decoration: none; margin-left: 10px;">Unite</a>
-        <style>
-            #unite-button:hover {
-                background-color: var(--nagimagenta);
-            }
-        </style>
-    </div> --}}
-
-    <header class="wating" id="header">
-        <div class="header-logo">
-            <a href="/" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
-                <img src="/images/main-logo.png" alt="NAGINATTAZ logo in black."
-                    class="navbar10_logo icon-height-xlarge" />
-            </a>
-            <!--
-            <div class="header-right mobile">
-                <div id="image-preview-container" class="image-preview-container"></div>
-                <input type="text" id="search-input" placeholder=" Buscar clases...">
-                <button id="search" class="desktop">🔍</button>
-                
-            </div>-->
-        </div>
-        <div class="left-panel desktop">
-            <a href="/"><button>INICIO</button></a>
-            <a href="/entrenamiento"><button>CLASES</button></a>
-            <a href="/nagidatta"><button>NAGIDATTA</button></a>
-        </div>
-
-        <!--
-        <div class="header-right desktop">
-            <div id="image-preview-container" class="image-preview-container"></div>
-            <input type="text" id="search-input" placeholder=" Buscar clases...">
-            <button id="search" class="desktop">🔍</button>            
-        </div>-->
-
-        {{!-- <div class="left-panel mobile">
-            <button onclick="showContent('section1')">INICIO</button>
-            <button onclick="showContent('section2')">CLASES</button>
-            <div id="image-preview-container" class="image-preview-container"></div>
-            <input type="text" id="search-input2" class="desktop" placeholder=" Buscar clases...">
-            <button id="search2">🔍</button>
-        </div> --}}
-        <div class="user-container">
-            <img src={{userData.profileImg}} class="profile-image">
-            <button class="logout-button">Logout</button>
-        </div>
-    </header>
-
-    <div id="main-content" class="main-content wating">
-        <script>
-            // Toggle the dropdown content
-            function toggleDropdown(id) {
-                var dropdown = document.getElementById(id);
-                // If the dropdown is visible, hide it
-                if (dropdown.style.display === "block") {
-                    dropdown.style.display = "none";
-                } else {
-                    // Hide all dropdowns
-                    var allDropdowns = document.querySelectorAll('.dropdown-content');
-                    allDropdowns.forEach(function (content) {
-                        content.style.display = "none";
-                    });
-                    // Show the clicked dropdown
-                    dropdown.style.display = "block";
-                }
-            }
-
-        </script>
-
-
-
-        <div id="main-container" class="main-container">
-            <!-- Left Panel (30%) -->
-            <div id="panel" class="panel">
-                <!-- Clases Section -->
-                <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); showAllItems()">
-                    Todas las Clases <span class="arrow">&#x2192;</span>
-                </button>
-
-                <!-- Clases Individuales Section -->
-                <button class="panel-button"
-                    onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('clases'); filterItems('class')">
-                    Clases Individuales <span class="arrow">&#x2193;</span>
-                </button>
-                <div id="clases" class="dropdown-content">
-                    <button class="dropdown-item">Clases Individuales</button>
-                    <button class="dropdown-item">Próximas Clases</button>
-                </div>
-
-                <!-- Programas Section -->
-                <button class="panel-button"
-                    onclick="showContent('section2');hideInstagramFeed(); filterItems('program')">
-                    Programas <span class="arrow">&#x2192;</span>
-                </button>
-
-                <!-- Estilos Section -->
-                <button class="panel-button"
-                    onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('categories')">
-                    Estilos <span class="arrow">&#x2193;</span>
-                </button>
-                <div id="categories" class="dropdown-content">
-                    <button class="dropdown-item" onclick="filterByCategory('hiphop')">Hip-Hop</button>
-                    <button class="dropdown-item" onclick="filterByCategory('dancehall')">Dancehall</button>
-                    <button class="dropdown-item" onclick="filterByCategory('house')">House Dance</button>
-                    <button class="dropdown-item" onclick="filterByCategory('waacking')">Waacking</button>
-                    <button class="dropdown-item" onclick="filterByCategory('heels')">Heels</button>
-                    <button class="dropdown-item" onclick="filterByCategory('floowork')">Floorwork</button>
-                    <button class="dropdown-item" onclick="filterByCategory('contemporary')">Danza
-                        Contemporánea</button>
-                </div>
-
-                <!-- Instructores Section -->
-                {{!-- <button class="panel-button"
-                    onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('instructors')">
-                    Instructores <span class="arrow">&#x2193;</span>
-                </button>
-                <div id="instructors" class="dropdown-content">
-                    <button class="dropdown-item" onclick="filterByInstructor('cami-lucca')">Cami Lucca</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('cami-moroni')">Cami Moroni</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('cami-poledo')">Cami Poledo</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('cande-gonzalez')">Cande Gonzalez</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('dami-espinola')">Dami Espinola</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('ferna-brewer')">Ferna Brewer</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('fede-diaz')">Fede Díaz</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('flor-nena')">Flor Nena</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('hera-sanchez')">Hera Sanchez</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('ignacio-avello')">Ignacio Avello</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('jose-galli')">Jose Galli</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('lil-french')">Lil French</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('mel-gabino')">Mel Gabino</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('mica-sepiurka')">Mica Sepiurka</button>
-
-                    <button class="dropdown-item" onclick="filterByInstructor('priscila-bertolo')">Priscila
-                        Bértolo</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('valen-ferrari')">Valen Ferrari</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('valen-mendillo')">Valen Mendillo</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('zai-forte')">Zai Forte</button>
-                    <button class="dropdown-item" onclick="filterByInstructor('vicky-branda')">Vicky Branda</button>
-                </div> --}}
-
-
-
-                <!-- Playlists Section -->
-                <button class="panel-button" onclick="toggleDropdown('playlists');hideInstagramFeed()">
-                    Playlists <span class="arrow">&#x2193;</span>
-                </button>
-                <div id="playlists" class="dropdown-content">
-                    <button class="dropdown-item" onclick="showContent('section4a')">Playlist 1</button>
-                    <button class="dropdown-item" onclick="showContent('section4b')">Playlist 2</button>
-                    <button class="dropdown-item" onclick="showContent('section4c')">Playlist 3</button>
-                </div>
-
-                <!-- Calendario Section -->
-                <button class="panel-button" onclick="showContent('section5');hideInstagramFeed()">
-                    Calendario <span class="arrow">&#x2193;</span>
-                </button>
-
-                <!-- Comunidad Section -->
-                <button class="panel-button" onclick="showContent('section6'); showInstagramFeed()">
-                    Comunidad <span class="arrow">&#x2193;</span>
-                </button>
-
+    <div class="nav-container">
+        <nav>
+            {{!-- Logo --}}
+            <div class="logo_container">
+                <a href="/">
+                    <img src="/images/main-logo.png" alt="NAGINATTAZ logo in black."
+                        class="navbar10_logo icon-height-xlarge" />
+                </a>
             </div>
-
-
-            <script>
-                // Function to reset and show all items
-                function showAllItems() {
-                    var items = document.querySelectorAll('.image-grid > div');
-                    items.forEach(function (item) {
-                        item.style.display = "block"; // Show all items
-                    });
-
-                    // Reset the instructor filter by removing any "active" class
-                    var instructorButtons = document.querySelectorAll('.dropdown-item');
-                    instructorButtons.forEach(function (button) {
-                        button.classList.remove('active'); // Reset any "active" class (if used)
-                    });
-
-                    // Optionally, reset category filter (if any)
-                    var categoryButtons = document.querySelectorAll('.dropdown-content button');
-                    categoryButtons.forEach(function (button) {
-                        button.classList.remove('active'); // Reset any "active" category
-                    });
-
-                    // Reset the dropdown visibility
-                    var dropdowns = document.querySelectorAll('.dropdown-content');
-                    dropdowns.forEach(function (dropdown) {
-                        dropdown.style.display = 'none'; // Hide dropdowns again if needed
-                    });
-                }
-                // Function to filter items by type (program or class)
-                function filterItems(type, instructorId = '') {
-                    var items = document.querySelectorAll('.image-grid > div');
-                    items.forEach(function (item) {
-                        let shouldDisplay = true;
-
-                        // Check if the item matches the type (program or class)
-                        if (type && !item.id.toLowerCase().includes(type)) {
-                            shouldDisplay = false;
-                        }
-
-                        // Check if the item matches the instructor filter (if provided)
-                        if (instructorId && !item.id.toLowerCase().includes(instructorId)) {
-                            shouldDisplay = false;
-                        }
-
-                        // Show or hide based on filters
-                        if (shouldDisplay) {
-                            item.style.display = "block";
-                        } else {
-                            item.style.display = "none";
-                        }
-                    });
-                }
-                // Function to filter items by category (hiphop, contemporary, workout)
-                function filterByCategory(category) {
-                    var items = document.querySelectorAll('.image-grid > div');
-                    items.forEach(function (item) {
-                        // Check if the ID starts with the category name (e.g., 'hiphop', 'workout', etc.)
-                        if (item.id.toLowerCase().startsWith(category)) {
-                            item.style.display = "block"; // Show matching item
-                        } else {
-                            item.style.display = "none"; // Hide non-matching item
-                        }
-                    });
-                }
-                // Function to filter items by instructor name
-                function filterByInstructor(instructorId) {
-                    var items = document.querySelectorAll('.image-grid > div');
-                    items.forEach(function (item) {
-                        // Check if the ID contains the instructor's ID (e.g., 'vicky-branda')
-                        if (item.id.toLowerCase().includes(instructorId)) {
-                            item.style.display = "block"; // Show matching item
-                        } else {
-                            item.style.display = "none"; // Hide non-matching item
-                        }
-                    });
-                }
-                // Reset the "active" class on all instructor buttons when "Todas las Clases" is clicked
-                {{!-- document.getElementById('show-all').addEventListener('click', function () {
-                    showAllItems(); // Reset and show all items again
-                }); --}}
-
-
-
-            </script>
-
-            <!-- Main Content (70%) -->
-            <div id="contenido" class="contenido">
-                <div id="welcome" class="welcome-section">
-                    <h2 id="welcome-message">Te damos la bienvenida {{userData.name}}<span id="user-name"
-                            style="color: rgb(189, 140, 189);"></span>!</h2>
-                    <h3 id="plan-info" style="color: #af14af;background-color: #f5f5f56b;"></h3>
+            {{!-- Menu --}}
+            <div class="nav_links">
+                <a href="/">Inicio</a>
+                <a href="/entrenamiento">Clases</a>
+                <a href="/nagidatta">Nagidatta</a>
+            </div>
+            {{!-- Botonera --}}
+            <div class="botonera">
+                <div class="profile_pic">
+                    <img src={{userData.profileImg}} alt="Profile picture">
                 </div>
+                <button type="button">Logout</button>
+            </div>
+            <div class="nav__hamburger">
+                <button type="button" class="hamburger">
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                </button>
+            </div>
+        </nav>
+    </div>
 
-                <div id="section1" class="content-section active">
-                    <div class="image-container">
-                        <img src="../src/BANNERPRINCIPAL_1.webp" style="width:100%; margin-bottom: 2vh;">
-                    </div>
-                    <!-- <iframe src="https://player.vimeo.com/video/1019631883?&player_&controls=0&autoplay=1&muted=1&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position: inherit; width:1200px;height:100%;" title="nagi video"></iframe> -->
-                </div>
-                <div id="section2" class="content-section">
+    <aside>
+        <ul>
+            <li onclick="toggleSection(this)">Todas las clases <span class="arrow"></span></li>
+            <li>Clases individuales <span class="arrow"></span></li>
+            <li>Programas <span class="arrow"></span></li>
+            <li>Estilos <span class="arrow"></span></li>
+            <li>Playlist <span class="arrow"></span></li>
+            <li>Calendario <span class="arrow"></span></li>
+            <li>Comunidad <span class="arrow"></span></li>
+        </ul>
+    </aside>
 
-
-                    <div class="image-grid">
-                        {{#each courses}}
-                        <div>
-                            <a href="/clases/{{this.id}}">
-                                <img class="img-clases" src={{this.course_image}} loading="lazy"
-                                    alt="{{this.course_name}} dance"></a>
-                            <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">{{this.course_name}}
-                            </h3>
-                        </div>
-                        {{/each}}
-                        {{!-- <div id="contemporary class cami-lucca">
-                            <img class="img-clases" src="../src/contemporary.webp" loading="lazy"
-                                alt="Contemporary Dance Style">
-                            <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary</h3>
-                        </div>
-                        <div id="dancehall class cami-lucca cami-moroni">
-                            <a href="./clases/index.html">
-                                <img class="img-clases" src="../src/workout.webp" loading="lazy"
-                                    alt="Dancehall Dance Style">
-                            </a>
-                            <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Dancehall</h3>
-                        </div>
-                        <div id="heels class vicky-branda" style="position: relative;">
-                            <a href="./clases/index.html">
-                                <img class="img-clases" src="../src/hiphop.webp" loading="lazy" alt="Heels Dance Style">
-                            </a>
-                            <h3 style="width: 100%; position: absolute; bottom: -75px; z-index: 1000;">Heels</h3>
-                            <!-- Add the lock icon on top of the image and center it -->
-                            <img id="lock-icon" src="./padlock.png" alt="Locked"
-                                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1100; width: 50px; height: 50px;">
-                            --}}
-                        </div>
-                        <script>
-                            // Function to check if the lock is visible and disable interaction if it is
-                            function disableInteractionsIfLocked() {
-                                // Select all lock icons
-                                const lockIcons = document.querySelectorAll('#lock-icon');
-
-                                // Iterate over each lock icon
-                                lockIcons.forEach(lockIcon => {
-                                    // Use getComputedStyle to check visibility
-                                    const lockVisible = window.getComputedStyle(lockIcon).display !== 'none';
-
-                                    // Find the parent container of the lock icon
-                                    const parentContainer = lockIcon.closest('div');
-
-                                    if (parentContainer) {
-                                        // Get the image inside this container
-                                        const img = parentContainer.querySelector('.img-clases');
-
-                                        if (lockVisible) {
-                                            // If the lock icon is visible, blur the image and disable interaction
-                                            if (img) {
-                                                img.style.filter = 'blur(1px)';
-                                                img.style.pointerEvents = 'none';
-                                            }
-                                        } else {
-                                            // If the lock icon is not visible, remove blur and re-enable interaction
-                                            if (img) {
-                                                img.style.filter = 'none';
-                                                img.style.pointerEvents = 'auto';
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-
-                            // Ensure the script runs after the DOM content is fully loaded
-                            document.addEventListener('DOMContentLoaded', () => {
-                                disableInteractionsIfLocked();
-                            });
-
-                            // Add a MutationObserver to dynamically detect changes to the lock icon's visibility
-                            const lockIcons = document.querySelectorAll('#lock-icon');
-                            lockIcons.forEach(lockIcon => {
-                                const observer = new MutationObserver(disableInteractionsIfLocked);
-                                observer.observe(lockIcon, { attributes: true, attributeFilter: ['style', 'class'] });
-                            });
-                        </script>
-
-
-
-
+    <section id="js-allClasses">
+        <h1>Bienvenido {{userData.name}}</h1>
+        <article>
+            <div class="grid-auto-fill">
+                {{#each courses}}
+                <div class="course-container">
+                    <div class="course-card">
+                        <h3>{{this.course_name}}</h3>
+                        <p>{{this.course_level}}</p>
+                        <p>${{this.course_price}}</p>
+                        <img src={{this.course_image}} alt="">
                     </div>
                 </div>
-                <div id="section3" class="content-section">
-                    <h2>ESTILOS</h2>
-                    <p>Selecciona tu estilo preferido!</p>
-                </div>
-                <div id="section4a" class="content-section">
-                    <h2>PLAYLIST 1</h2>
-                    <p>Explorá las playlists diseñadas especialmente por nuestro equipo para acompañarte en cada
-                        entrenamiento.</p>
-                    <div class="spotify-container">
-                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="600"
-                            height="700" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                        <div class="overlay"></div>
+                {{/each}}
+                {{#each courses}}
+                <div class="course-container">
+                    <div class="course-card">
+                        <h3>{{this.course_name}}</h3>
+                        <p>{{this.course_level}}</p>
+                        <p>${{this.course_price}}</p>
+                        <img src={{this.course_image}} alt="">
                     </div>
                 </div>
-
-                <div id="section4b" class="content-section">
-                    <h2>PLAYLIST 2</h2>
-                    <p>Explorá las playlists diseñadas especialmente por nuestro equipo para acompañarte en cada
-                        entrenamiento. </p>
-                    <div class="spotify-container">
-                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="600"
-                            height="700" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                        <div class="overlay"></div>
+                {{/each}}
+                {{#each courses}}
+                <div class="course-container">
+                    <div class="course-card">
+                        <h3>{{this.course_name}}</h3>
+                        <p>{{this.course_level}}</p>
+                        <p>${{this.course_price}}</p>
+                        <img src={{this.course_image}} alt="">
                     </div>
                 </div>
-
-                <div id="section4c" class="content-section">
-                    <h2>PLAYLIST 3</h2>
-                    <p>Explorá las playlists diseñadas especialmente por nuestro equipo para acompañarte en cada
-                        entrenamiento.</p>
-                    <div class="spotify-container">
-                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="600"
-                            height="700" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                        <div class="overlay"></div>
+                {{/each}}
+                {{#each courses}}
+                <div class="course-container">
+                    <div class="course-card">
+                        <h3>{{this.course_name}}</h3>
+                        <p>{{this.course_level}}</p>
+                        <p>${{this.course_price}}</p>
+                        <img src={{this.course_image}} alt="">
                     </div>
                 </div>
-
-            
-
-
-                <div id="section5" class="content-section">
-                    <h2>Calendario Naginattaz</h2>
-                    <div id="calendar-container">
-                        <div class="iframe-container">
-                            <p>Copia los eventos agendados a tu propio calendario.</p>
-                            <iframe
-                                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FArgentina%2FBuenos_Aires&showPrint=0&showTz=0&mode=AGENDA&title=Naginattaz&src=cHJhbWlldGVzdEBnbWFpbC5jb20&color=%23039BE5"
-                                style="border-width:0" width="400" height="600" frameborder="0" scrolling="no"></iframe>
-                            <br>
-                        </div>
-                        <div style="padding-right: 20px;">
-
-                            <p> También podes agregar tus propios eventos y tareas:</p>
-                            <form id="eventForm">
-                                <label for="eventTitle">Título del Evento:</label>
-                                <input type="text" id="eventTitle" name="eventTitle" required><br><br>
-
-                                <label for="eventDate">Fecha:</label>
-                                <input type="date" id="eventDate" name="eventDate" required><br><br>
-
-                                <label for="eventStartTime">Hora de comienzo (HH:MM):</label>
-                                <input type="time" id="eventStartTime" name="eventStartTime" required><br><br>
-
-                                <label for="eventEndTime">Hora de finalización (HH:MM):</label>
-                                <input type="time" id="eventEndTime" name="eventEndTime" required><br><br>
-
-                                <label for="eventDetails">Detalles:</label>
-                                <textarea id="eventDetails" name="eventDetails" required></textarea><br><br>
-
-                                <label for="eventLocation">Ubicación:</label>
-                                <input type="text" id="eventLocation" name="eventLocation" required><br><br>
-
-                                <button type="submit">Agregar a mi Calendario</button>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <script>
-                    document.getElementById('eventForm').addEventListener('submit', function (event) {
-                        event.preventDefault(); // Prevent the form from submitting normally
-
-                        // Get form values
-                        const eventTitle = document.getElementById('eventTitle').value;
-                        const eventDate = document.getElementById('eventDate').value;
-                        const eventStartTime = document.getElementById('eventStartTime').value;
-                        const eventEndTime = document.getElementById('eventEndTime').value;
-                        const eventDetails = document.getElementById('eventDetails').value;
-                        const eventLocation = document.getElementById('eventLocation').value;
-
-                        // Combine date and time to create the full datetime in UTC format
-                        const startDateTime = new Date(`${eventDate}T${eventStartTime}:00Z`).toISOString();
-                        const endDateTime = new Date(`${eventDate}T${eventEndTime}:00Z`).toISOString();
-
-                        // Format the datetime in Google Calendar format: YYYYMMDDTHHMMSSZ
-                        const startFormatted = startDateTime.replace(/[-:]/g, '').slice(0, 15) + 'Z';
-                        const endFormatted = endDateTime.replace(/[-:]/g, '').slice(0, 15) + 'Z';
-
-                        // Create the Google Calendar event URL
-                        const calendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startFormatted}/${endFormatted}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}&sf=true&output=xml`;
-
-                        // Open the Google Calendar with pre-filled details
-                        window.open(calendarUrl, '_blank');
-                    });
-                </script>
-
-
-                <div id="section6" class="content-section">
-                    <!-- Container to display the Instagram feed -->
-                    <div id="instagram-feed">
-                        <blockquote class="instagram-media" data-instgrm-captioned
-                            data-instgrm-permalink="https://www.instagram.com/reel/DBxBUJZMeRi/?utm_source=ig_embed&amp;utm_campaign=loading"
-                            data-instgrm-version="14"
-                            style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                            <div style="padding:16px;"> <a
-                                    href="https://www.instagram.com/reel/DBxBUJZMeRi/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                    style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                    target="_blank">
-                                    <div style=" display: flex; flex-direction: row; align-items: center;">
-                                        <div
-                                            style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="padding: 19% 0;"></div>
-                                    <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg
-                                            width="50px" height="50px" viewBox="0 0 60 60" version="1.1"
-                                            xmlns="https://www.w3.org/2000/svg"
-                                            xmlns:xlink="https://www.w3.org/1999/xlink">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <g transform="translate(-511.000000, -20.000000)" fill="#000000">
-                                                    <g>
-                                                        <path
-                                                            d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631">
-                                                        </path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </svg></div>
-                                    <div style="padding-top: 8px;">
-                                        <div
-                                            style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                            View this post on Instagram</div>
-                                    </div>
-                                    <div style="padding: 12.5% 0;"></div>
-                                    <div
-                                        style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                        <div>
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                            </div>
-                                            <div
-                                                style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                            </div>
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                            </div>
-                                        </div>
-                                        <div style="margin-left: 8px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                            </div>
-                                            <div
-                                                style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                            </div>
-                                        </div>
-                                        <div style="margin-left: auto;">
-                                            <div
-                                                style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                            </div>
-                                            <div
-                                                style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                        <div
-                                            style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                        </div>
-                                        <div
-                                            style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                        </div>
-                                    </div>
-                                </a>
-                                <p
-                                    style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                    <a href="https://www.instagram.com/reel/DBxBUJZMeRi/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                        target="_blank">A post shared by Naginattaz | Street Dance ⚔️ (@naginattaz)</a>
-                                </p>
-                            </div>
-                        </blockquote>
-                        <script async src="//www.instagram.com/embed.js"></script>
-                    </div>
-                    <div id="instagram-feed">
-                        <blockquote class="instagram-media" data-instgrm-captioned
-                            data-instgrm-permalink="https://www.instagram.com/p/DBZ5kbQtxnb/?utm_source=ig_embed&amp;utm_campaign=loading"
-                            data-instgrm-version="14"
-                            style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                            <div style="padding:16px;"> <a
-                                    href="https://www.instagram.com/p/DBZ5kbQtxnb/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                    style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                    target="_blank">
-                                    <div style=" display: flex; flex-direction: row; align-items: center;">
-                                        <div
-                                            style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="padding: 19% 0;"></div>
-                                    <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg
-                                            width="50px" height="50px" viewBox="0 0 60 60" version="1.1"
-                                            xmlns="https://www.w3.org/2000/svg"
-                                            xmlns:xlink="https://www.w3.org/1999/xlink">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <g transform="translate(-511.000000, -20.000000)" fill="#000000">
-                                                    <g>
-                                                        <path
-                                                            d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631">
-                                                        </path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </svg></div>
-                                    <div style="padding-top: 8px;">
-                                        <div
-                                            style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                            View this post on Instagram</div>
-                                    </div>
-                                    <div style="padding: 12.5% 0;"></div>
-                                    <div
-                                        style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                        <div>
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                            </div>
-                                            <div
-                                                style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                            </div>
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                            </div>
-                                        </div>
-                                        <div style="margin-left: 8px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                            </div>
-                                            <div
-                                                style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                            </div>
-                                        </div>
-                                        <div style="margin-left: auto;">
-                                            <div
-                                                style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                            </div>
-                                            <div
-                                                style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                        <div
-                                            style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                        </div>
-                                        <div
-                                            style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                        </div>
-                                    </div>
-                                </a>
-                                <p
-                                    style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                    <a href="https://www.instagram.com/p/DBZ5kbQtxnb/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                        target="_blank">A post shared by Naginattaz | Street Dance ⚔️ (@naginattaz)</a>
-                                </p>
-                            </div>
-                        </blockquote>
-                        <script async src="//www.instagram.com/embed.js"></script>
-                    </div>
-                    <div id="instagram-feed">
-                        <blockquote class="instagram-media" data-instgrm-captioned
-                            data-instgrm-permalink="https://www.instagram.com/p/DArHzaiKKTt/?utm_source=ig_embed&amp;utm_campaign=loading"
-                            data-instgrm-version="14"
-                            style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                            <div style="padding:16px;"> <a
-                                    href="https://www.instagram.com/p/DArHzaiKKTt/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                    style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
-                                    target="_blank">
-                                    <div style=" display: flex; flex-direction: row; align-items: center;">
-                                        <div
-                                            style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
-                                        </div>
-                                        <div
-                                            style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="padding: 19% 0;"></div>
-                                    <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg
-                                            width="50px" height="50px" viewBox="0 0 60 60" version="1.1"
-                                            xmlns="https://www.w3.org/2000/svg"
-                                            xmlns:xlink="https://www.w3.org/1999/xlink">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <g transform="translate(-511.000000, -20.000000)" fill="#000000">
-                                                    <g>
-                                                        <path
-                                                            d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631">
-                                                        </path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </svg></div>
-                                    <div style="padding-top: 8px;">
-                                        <div
-                                            style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
-                                            View this post on Instagram</div>
-                                    </div>
-                                    <div style="padding: 12.5% 0;"></div>
-                                    <div
-                                        style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-                                        <div>
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
-                                            </div>
-                                            <div
-                                                style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
-                                            </div>
-                                            <div
-                                                style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
-                                            </div>
-                                        </div>
-                                        <div style="margin-left: 8px;">
-                                            <div
-                                                style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
-                                            </div>
-                                            <div
-                                                style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
-                                            </div>
-                                        </div>
-                                        <div style="margin-left: auto;">
-                                            <div
-                                                style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
-                                            </div>
-                                            <div
-                                                style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
-                                            </div>
-                                            <div
-                                                style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-                                        <div
-                                            style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
-                                        </div>
-                                        <div
-                                            style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
-                                        </div>
-                                    </div>
-                                </a>
-                                <p
-                                    style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                                    <a href="https://www.instagram.com/p/DArHzaiKKTt/?utm_source=ig_embed&amp;utm_campaign=loading"
-                                        style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
-                                        target="_blank">A post shared by Naginattaz | Street Dance ⚔️ (@naginattaz)</a>
-                                </p>
-                            </div>
-                        </blockquote>
-                        <script async src="//www.instagram.com/embed.js"></script>
-                    </div>
-                </div>
-                <script>
-                    // Function to show the Instagram feed when the Instagram button is clicked
-                    function showInstagramFeed() {
-                        const instagramFeedContainer = document.getElementById('instagram-feed');
-                        const section6 = document.getElementById('section6');
-                        // Add class to section6 to trigger flex display
-                        section6.classList.add('active-flex');
-                    }
-                    function hideInstagramFeed() {
-                        const instagramFeedContainer = document.getElementById('instagram-feed');
-                        const section6 = document.getElementById('section6');
-                        // Add class to section6 to trigger flex display
-                        section6.classList.remove('active-flex');
-                    }
-                </script>
-
-
-                <script>
-
-                    /*
-                    // Toggle the search input and set up event listeners
-                    document.getElementById('search').addEventListener('click', function() {
-                        var searchInput = document.getElementById('search-input');
-                        var imagePreview = document.getElementById('image-preview');
-            
-                        if (searchInput.classList.contains('visible')) {
-                            searchInput.classList.remove('visible');
-                            //imagePreview.style.display = 'none';
-                            resetSection2();
-                        } else {
-                            searchInput.classList.add('visible');
-                            searchInput.focus();
-                        }
-                    });
-                    
-                    // Toggle the search input and set up event listeners
-                    document.getElementById('search2').addEventListener('click', function() {
-                        var searchInput = document.getElementById('search-input2');
-                        var imagePreview = document.getElementById('image-preview');
-            
-                        if (searchInput.classList.contains('visible')) {
-                            searchInput.classList.remove('visible');
-                            searchInput.classList.remove('desktop');
-                            //imagePreview.style.display = 'none';
-                            resetSection2();
-                        } else {
-                            searchInput.classList.add('visible');
-                            searchInput.classList.add('desktop');
-                            searchInput.focus();
-                        }
-                    });*/
-
-                    function showContent(sectionId) {
-                        var sections = document.querySelectorAll('.content-section');
-
-                        sections.forEach(function (section) {
-                            section.classList.remove('active');
-                        });
-                        document.getElementById(sectionId).classList.add('active');
-                    }
-                    /*
-                    // Handle the search input
-                    document.getElementById('search-input').addEventListener('input', function() {
-                        var query = this.value.toLowerCase();
-                        var imagePreviewContainer = document.getElementById('image-preview-container');
-                        var imageGridItems = document.querySelectorAll('#section2 .image-grid div');
-                    
-                        // Clear the previous preview images
-                        imagePreviewContainer.innerHTML = '';
-                    
-                        if (query) {
-                            var found = false;
-                            imageGridItems.forEach(function(item) {
-                                if (item.id.includes(query)) {
-                                    item.style.display = 'block';
-                                    var img = item.querySelector('img').src;
-                    
-                                    // Create a new preview image for each match
-                                    var previewImg = document.createElement('img');
-                                    previewImg.src = img;
-                                    previewImg.classList.add('image-preview');
-                                    previewImg.style.display = 'inline-block';
-                                    previewImg.addEventListener('click', function() {
-                                        // Simulate clicking the "CLASES" button to show section2
-                                        document.querySelector('button[onclick="showContent(\'section2\')"]').click();
-                                        
-                                    });
-                    
-                                    // Add the preview image to the container
-                                    imagePreviewContainer.appendChild(previewImg);
-                                    found = true;
-                                } else {
-                                    item.style.display = 'none';
-                                }
-                            });
-                    
-                            if (!found) {
-                                imagePreviewContainer.innerHTML = ''; // Clear if no matches
-                            }
-                        } else {
-                            imagePreviewContainer.innerHTML = ''; // Clear previews if search input is cleared
-                    
-                            // Check if section2 is currently active
-                            if (document.getElementById('section2').classList.contains('active')) {
-                                resetSection2(); // Reset only if in section2
-                            }
-                        }
-                    });
-                    
-                    // Handle the search input
-                    document.getElementById('search-input2').addEventListener('input', function() {
-                        var query = this.value.toLowerCase();
-                        var imagePreviewContainer = document.getElementById('image-preview-container');
-                        var imageGridItems = document.querySelectorAll('#section2 .image-grid div');
-                    
-                        // Clear the previous preview images
-                        imagePreviewContainer.innerHTML = '';
-                    
-                        if (query) {
-                            var found = false;
-                            imageGridItems.forEach(function(item) {
-                                if (item.id.includes(query)) {
-                                    item.style.display = 'block';
-                                    var img = item.querySelector('img').src;
-                    
-                                    // Create a new preview image for each match
-                                    var previewImg = document.createElement('img');
-                                    previewImg.src = img;
-                                    previewImg.classList.add('image-preview');
-                                    previewImg.style.display = 'inline-block';
-                                    previewImg.addEventListener('click', function() {
-                                        // Simulate clicking the "CLASES" button to show section2
-                                        document.querySelector('button[onclick="showContent(\'section2\')"]').click();
-                                        
-                                    });
-                    
-                                    // Add the preview image to the container
-                                    imagePreviewContainer.appendChild(previewImg);
-                                    found = true;
-                                } else {
-                                    item.style.display = 'none';
-                                }
-                            });
-                    
-                            if (!found) {
-                                imagePreviewContainer.innerHTML = ''; // Clear if no matches
-                            }
-                        } else {
-                            imagePreviewContainer.innerHTML = ''; // Clear previews if search input is cleared
-                    
-                            // Check if section2 is currently active
-                            if (document.getElementById('section2').classList.contains('active')) {
-                                resetSection2(); // Reset only if in section2
-                            }
-                        }
-                    });
-                    */
-                    // Reset section2 to show all items
-                    function resetSection2() {
-                        var imageGridItems = document.querySelectorAll('#section2 .image-grid div');
-                        imageGridItems.forEach(function (item) {
-                            item.style.display = 'block';
-                        });
-                    }
-
-                    const plans = {
-                        "joaconavarro.untref@gmail.com": "",
-                        "paurocker993@gmail.com": "BAMBÚ",
-                        "nagitest@gmail.com": "ACERO",
-                        "pramietest@gmail.com": "OBSIDIAN",
-                        "brandavictoria@gmail.com": "OBSIDIAN",
-                        "durquiza311@gmail.com": "OBSIDIAN"
-                    };
-                    function updatePlan(userEmail) {
-                        const planInfoElement = document.getElementById("plan-info");
-                        const userNameElement = document.getElementById("user-name");
-                        const bodyElement = document.body;
-                        const notificationElement = document.getElementById("notification");
-                        const notificationText = document.getElementById("notification-text");
-
-                        userNameElement.textContent = userEmail.split('@')[0]; // Extract the username
-
-                        let plan = plans[userEmail] || "BAMBÚ"; // Assign BAMBÚ as default if no plan is found
-                        planInfoElement.textContent = `TU PLAN ACTUAL ES ${plan}`;
-
-                        // Handle class visibility based on plan
-                        manageClassVisibility(plan);
-
-                        switch (plan) {
-                            case "BAMBÚ":
-                                bodyElement.style.backgroundColor = "yellowgreen";
-                                notificationElement.style.display = "flex";
-                                notificationText.textContent = "Todavía no sos Obsidian? Unite al plan y desbloqueá todo el contenido!";
-                                break;
-                            case "ACERO":
-                                bodyElement.style.backgroundColor = "grey";
-                                notificationElement.style.display = "flex";
-                                notificationText.textContent = "Todavía no sos Obsidian? Unite al plan y desbloqueá todo el contenido!";
-                                break;
-                            case "OBSIDIAN":
-                                bodyElement.style.backgroundColor = "violet";
-                                notificationElement.style.display = "none";
-                                return;
-                            default:
-                                bodyElement.style.backgroundColor = "red";
-                                notificationElement.style.display = "flex";
-                                notificationText.textContent = "Todavía no sos Obsidian? Unite al plan y desbloqueá todo el contenido!";
-                                break;
-                        }
-                    }
-
-                    function manageClassVisibility(plan) {
-                        // Select the .image-grid container
-                        const imageGrid = document.querySelector('.image-grid');
-
-                        // Select all items inside the .image-grid container
-                        const allItems = imageGrid.querySelectorAll('div');
-
-                        // Hide all items by default
-                        allItems.forEach(item => {
-                            item.style.display = 'none';
-                        });
-
-                        // Show the appropriate items based on the plan
-                        if (plan === "BAMBÚ") {
-                            // Only show the item with the 'free' class
-                            const freeItem = imageGrid.querySelector('.free');
-                            if (freeItem) {
-                                freeItem.style.display = 'block';
-                            }
-                        } else if (plan === "ACERO" || plan === "OBSIDIAN") {
-                            // Show all items for ACERO or OBSIDIAN plans
-                            allItems.forEach(item => {
-                                item.style.display = 'block';
-                            });
-                        }
-                    }
-
-                    function updatePlanFromStorage() {
-                        const userEmail = sessionStorage.getItem('userEmail'); // Retrieve the email
-                        if (userEmail) {
-                            updatePlan(userEmail);
-                        }
-                    }
-                    document.addEventListener('DOMContentLoaded', () => {
-                        updatePlanFromStorage();
-                    });
-
-
-                </script>
-                <script src="https://accounts.google.com/gsi/client" async></script>
+                {{/each}}
+            </div>
+        </article>
+    </section>
 </div>
 
-</html>
+<script>
+    function toggleSection(element) {
+        const section = document.getElementById('js-allClasses');
+        if (section.style.display === 'none' || section.style.display === '') {
+            section.style.display = 'block';
+        } else {
+            section.style.display = 'none';
+        }
+
+        // Toggle the active class on the clicked li
+        element.classList.toggle('active');
+    }
+
+    function toggleHamburgerMenu() {
+        const navLinks = document.querySelector('.nav_links');
+        const botonera = document.querySelector('.botonera');
+
+        if (navLinks.style.display === 'none' || navLinks.style.display === '') {
+            navLinks.style.display = 'flex';
+            botonera.style.display = 'flex';
+        } else {
+            navLinks.style.display = 'none';
+            botonera.style.display = 'none';
+        }
+    }
+
+    document.querySelector('.hamburger').addEventListener('click', toggleHamburgerMenu);
+</script>
