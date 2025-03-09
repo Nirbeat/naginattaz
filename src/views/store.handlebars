@@ -58,3 +58,20 @@
         </div>
     </div>
 </section>
+<section>
+    <h2>Clases destacadas</h2>
+    <div class="grid-auto-fill">
+        {{#each courses}}
+        <a href="/api/payment/{{this.id}}">
+            <div class="course-container">
+                <div class="course-card">
+                    <h3>{{this.course_name}}</h3>
+                    <p>{{this.course_level}}</p>
+                    <p>${{this.course_price}}</p>
+                    <img src={{this.course_image}} alt="">
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+</section>
