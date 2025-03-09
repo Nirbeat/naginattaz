@@ -16,6 +16,9 @@
     --footer-purple: #250F55;
 }
 
+/* Custom Scrollbar */
+
+
 @font-face {
     font-family: 'GothamMedium';
     src: url('/fonts/Gotham-Medium.otf') format('opentype');
@@ -34,6 +37,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--soft-purple) #333;
 }
 
 body {

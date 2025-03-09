@@ -108,10 +108,12 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
         res.status().redirect(`/clases/${courseID}/${lessonID}`);
     } else {
         res.render('lessons.handlebars', {
-            style: '/styles/naginattaz.min.css',
+            // style: '/styles/naginattaz.min.css',
+            // lessonsStyle: '/styles/lessons.css',
+            style: '/styles/main.css',
             lessonsStyle: '/styles/lessons.css',
             lessons,
-            profileImg: user.profile_image,
+            profileImg: user.profile_image || defaultUser.profile_image,
             currentLesson: function () {
                 const current = lessons.find(lesson => lesson.id == lessonID);
                 return current.lesson_url;
