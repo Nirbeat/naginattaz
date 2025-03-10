@@ -53,42 +53,14 @@
             <div class="grid-auto-fill">
                 {{#each courses}}
                 <div class="course-container">
-                    <div class="course-card">
-                        <h3>{{this.course_name}}</h3>
-                        <p>{{this.course_level}}</p>
-                        <p>${{this.course_price}}</p>
-                        <img src={{this.course_image}} alt="">
-                    </div>
-                </div>
-                {{/each}}
-                {{#each courses}}
-                <div class="course-container">
-                    <div class="course-card">
-                        <h3>{{this.course_name}}</h3>
-                        <p>{{this.course_level}}</p>
-                        <p>${{this.course_price}}</p>
-                        <img src={{this.course_image}} alt="">
-                    </div>
-                </div>
-                {{/each}}
-                {{#each courses}}
-                <div class="course-container">
-                    <div class="course-card">
-                        <h3>{{this.course_name}}</h3>
-                        <p>{{this.course_level}}</p>
-                        <p>${{this.course_price}}</p>
-                        <img src={{this.course_image}} alt="">
-                    </div>
-                </div>
-                {{/each}}
-                {{#each courses}}
-                <div class="course-container">
-                    <div class="course-card">
-                        <h3>{{this.course_name}}</h3>
-                        <p>{{this.course_level}}</p>
-                        <p>${{this.course_price}}</p>
-                        <img src={{this.course_image}} alt="">
-                    </div>
+                    <a href="/clases/{{this.id}}">
+                        <div class="course-card">
+                            <h3>{{this.course_name}}</h3>
+                            <p>{{this.course_level}}</p>
+                            <p>${{this.course_price}}</p>
+                            <img src={{this.course_image}} alt="">
+                        </div>
+                    </a>
                 </div>
                 {{/each}}
             </div>
