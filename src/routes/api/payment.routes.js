@@ -25,12 +25,19 @@ router.get('/success', async (req, res) => {
 
 router.get('/:courseID', async (req, res) => {
 
+    const {user} = req;
     const {courseID} = req.params
-    const [[courses]] = await new CoursesDAO().getCourseById(courseID);
     
     try {
-        const {items:course, id} = await paymentProcessing(courses);
-        res.cookie('purchaseData', {courseId : course[0].id}, {httpOnly: true, maxAge: 30*60*1000}).redirect(`/payment/${id}`)
+        if(user.ownedCoursesAndLessons.includes(courseID)){
+            res.redirect(`/clases/${courseID}`)
+        }else{
+            const [[courses]] = await new CoursesDAO().getCourseById(courseID);
+
+            const {items:course, id} = await paymentProcessing(courses);
+            res.cookie('purchaseData', {courseId : course[0].id}, {httpOnly: true, maxAge: 30*60*1000}).redirect(`/payment/${id}`)
+        }
+        
     } catch (error) {
         console.log(error.message)
     }

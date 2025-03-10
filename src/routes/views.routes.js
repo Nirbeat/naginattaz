@@ -88,7 +88,6 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
     // console.log('Request received for courseID:', req.params.courseID);
 
     const { user } = req;
-    console.log(user)
     let { courseID, lessonID } = req.params;
     const [lessons] = await new CoursesDAO().getCourseLessonsById(courseID);
 
