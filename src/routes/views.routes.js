@@ -44,7 +44,7 @@ router.get('/terms', async (req, res) => {
 router.get('/policies', async (req, res) => {
     res.render('policy.handlebars', {
         style: '/styles/main.css',
-        legalStyle: '/styles/legals.css'
+        legalStyle: '/styles/policy.css'
     });
 });
 
