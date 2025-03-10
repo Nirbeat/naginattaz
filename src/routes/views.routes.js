@@ -58,7 +58,7 @@ router.get('/team', async (req, res) => {
             name, skills, instagramURL, tiktokURL, profile_image
         }
     })
-    res.render('TEAM.handlebars', {
+    res.render('team.handlebars', {
         style: '/styles/main.css',
         teamMembers,
         teamStyles: '/styles/team.css'
