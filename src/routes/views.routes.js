@@ -128,6 +128,9 @@ router.get('/store', async (req, res) => {
 
 router.get('/payment/:preferenceID', async (req, res) => {
 
-    res.render('payment.handlebars');
+    res.render('payment.handlebars', {
+        style: "/styles/main.css"
+
+    });
 })
 export default router;
