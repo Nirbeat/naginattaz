@@ -1,382 +1,77 @@
-<!DOCTYPE html>
-<html lang="es">
 <head>
     <link rel="stylesheet" href={{storeStyle}}>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naginattaz Store</title>
-    <link rel="icon" href="./src/logos/ISOLOGO_1.png" sizes="any">
-    <link rel="icon" href="./src/logos/ISOLOGO_1.png" sizes="32x32" type="image/png">
-
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="content1.css" defer>
-
-    <script src="featured.js" defer></script>
-    <script src="nav.js" defer></script>
-    <script src="accordion.js" defer></script>
-    <script src="cart.js" defer></script>
-    
-    <script src="main.js" defer></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">    
+    <script src="/scripts/index.temporary.js" defer></script>
 </head>
-<body class="roboto-regular">
-
-    <!-- Top Section (Logo, Search, Cart) -->
-    <header class="top-section">
-        <div class="logo">
-            <img src="/src/logos/ISOLOGO_1.png" alt="Logo de la Naginattaz Store">
+<nav class="nav_index">
+    <div class="nav__left">
+        <div class="nav__logo">
+            <a href="/">
+                <img src="/images/main-logo.png" alt="NAGINATTAZ" height="150px" width="300px" />
+            </a>
         </div>
-        <a href="/index.html" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
-            <img src="/src/logos/LOGOS_1.png" style="width: 200px;" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
-          </a>
-
-        <div class="cart-button" id="cart-button-div">
-            <button id="cart-button" class="cart-button">
-                <img class="cart-button-image" src="./jpegs/carros.png" alt="Carrito" style="width:30px">
-            </button>
-        </div>
-        
-        <!-- Drawer structure -->
-        <div id="cart-drawer" class="drawer">
-            <div class="drawer-content">
-                <span class="close-button" id="close-drawer">&times;</span>
-                <h2 style="color: black;">Mi carrito:</h2>
-                <!-- Cart items will be dynamically added here -->
-                <div id="cart-items"></div>
-                <div id="total-price">Total: $0.00</div>
-                <button id="checkout-button">Pagar</button>
-            </div>
-        </div>
-        
-    </header>
-
-
-    <!-- Bottom Section (Navigation) -->
-    <nav class="bot-section">
-        <ul>
-            <li><a href="/" id="inicio">Inicio</a></li>
-            <li><a href="#" id="individuales">Clases Individuales</a></li>
-            {{!-- <li><a href="#" id="internacionales">Clases Internacionales</a></li> --}}
-            <li><a href="#" id="programas">Programas</a></li>
-            {{!-- <li><a href="#" id="merch">Merch</a></li> --}}
-            {{!-- <li><a href="#" id="galeria">Galería</a></li> --}}
-        </ul>
-    </nav>
-    <section class="featured-products" id="featured-products">
-        <div class="featured-vertical-text roboto-bold">
-        <span>P</span>
-        <span>R</span>
-        <span>O</span>
-        <span>D</span>
-        <span>U</span>
-        <span>C</span>
-        <span>T</span>
-        <span>O</span>
-        <span>S</span>
-        </div>
-        <div class="carousel-container">
-            {{#each courses}}
-            <div class="carousel-items">
-                <!-- Each product will be inside a div like this one -->
-                <a href="/api/payment/{{this.id}}"><div class="product">                                  
-                    <img src="/images/cursos/{{this.course_name}}" alt="foto producto 1">
-                    <p>CLASE {{this.course_name}}</p>
-                    <br>
-                    <p>$$$ {{this.course_price}}</p>      
-      
-                </div>
-                </a>
-                
-                <!-- Add more products dynamically -->
-            </div>
-            {{/each}}
-        </div>
-        <div class="featured-vertical-text roboto-bold">
-        <span>D</span>
-        <span>E</span>
-        <span>S</span>
-        <span>T</span>
-        <span>A</span>
-        <span>C</span>
-        <span>A</span>
-        <span>D</span>
-        <span>O</span>
-        <span>S</span>
-        </div>
-    </section>
-
-    <section class="main-section" id="main-section">
-    <div id="inicio-content">
-        <img id="inicio-content-img" src="/src/BANNERPRINCIPAL_2.webp">
-    </div>
-   
-    <div id="individuales-content" class="content" style="display:none;">
-        <div class="search-bar">
-            <input type="text" id="search-bar" placeholder="Buscar productos de pintura...">
-            <button>
-                <img src="./jpegs/busqueda.png" alt="Lupa" style="width:20px">
-            </button>
-        </div>
-        <div class="content-wrapper">
-            <div class="filters-panel">
-                <div class="accordion">
-                    <button class="accordion-button">Categoría</button>
-                    <div class="accordion-content">
-                        <ul>
-                            <li><a href="#">Categoría 1</a></li>
-                            <li><a href="#">Categoría 2</a></li>
-                            <li><a href="#">Categoría 3</a></li>
-                        </ul>
-                    </div>
-                    <button class="accordion-button">Precio</button>
-                    <div class="accordion-content">
-                        <input type="range" id="price-range" min="0" max="500000" step="5000" value="10000">
-                        <label for="price-range">Precio: $<span id="price-value">5000</span></label>
-                    </div>
-                    <button class="accordion-button">Categoría</button>
-                    <div class="accordion-content">
-                        <ul>
-                            <li><a href="#">Categoría 1</a></li>
-                            <li><a href="#">Categoría 2</a></li>
-                            <li><a href="#">Categoría 3</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="content1" id="content1">
-                <div class="grid-container">
-                    <!-- Flip Cards loaded from json -->
-                       
-                </div>             
-            </div>
-        </div>
-        <button id="load-more" class="load-more">Load More</button>            
-    </div>
-    
-    
-
-
-    <div id="internacionales-content" class="content" style="display:none;">
-        <p>Clases Internacionales Content</p>
-    </div>
-
-    <div id="internacionales-content" class="content" style="display:none;">
-        
-        <div class="filters-panel">
-            <div class="accordion">
-                <button class="accordion-button">Categoría</button>
-                <div class="accordion-content">
-                    <ul>
-                        <li><a href="#">Categoría 1</a></li>
-                        <li><a href="#">Categoría 2</a></li>
-                        <li><a href="#">Categoría 3</a></li>
-                    </ul>
-                </div>
-                <button class="accordion-button">Precio</button>
-                <div class="accordion-content">
-                    <input type="range" id="price-range" min="0" max="500000" step="5000" value="10000">
-                    <label for="price-range">Precio: $<span id="price-value">5000</span></label>
-                </div>
-                <button class="accordion-button">Categoría</button>
-                <div class="accordion-content">
-                    <ul>
-                        <li><a href="#">Categoría 1</a></li>
-                        <li><a href="#">Categoría 2</a></li>
-                        <li><a href="#">Categoría 3</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="content1">
-            <div class="grid-container">
-                <!-- Flip Cards -->
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 1">
-                            <div style="color: black;">
-                                <h3>Item 1</h3>
-                                <p>$50</p>
-                            </div>
-                            
-                        </div>
-                        <div class="flip-card-back">                            
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Consequatur illo dolorem tenetur pariatur reprehenderit.
-                            </p>
-                            <h3>Item 1</h3>
-                            <p>$50</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 2">
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>Item 2</h3>
-                            <p>$60</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 3">
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>Item 3</h3>
-                            <p>$70</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 4">
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>Item 4</h3>
-                            <p>$80</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 5">
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>Item 5</h3>
-                            <p>$90</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 6">
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>Item 6</h3>
-                            <p>$100</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 7">
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>Item 7</h3>
-                            <p>$110</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 8">
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>Item 8</h3>
-                            <p>$120</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 9">
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>Item 9</h3>
-                            <p>$130</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="https://via.placeholder.com/200" alt="Item 10">
-                        </div>
-                        <div class="flip-card-back">
-                            <h3>Item 10</h3>
-                            <p>$140</p>
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="load-more">Load More</button>
+        <div class="nav__links">
+            <ul>
+                <li>
+                    <a href="/team">Team</a>
+                </li>
+                <li>
+                    <a href="/entrenamiento">Entrenamiento</a>
+                </li>
+                <li>
+                    <a href="/blog">Nagiblog</a>
+                </li>
+                <li>
+                    <a href="/store">Store
+                        {{> cartIcon }}
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
-
-    <div id="programas-content" class="content" style="display:none;">
-        <p>Programas Content</p>
+    <div class="nav__buttons">
+        <button type="button" class="btn_secondary">
+            <a href="/login">Inicia</a>
+        </button>
+        <button type="button" class="btn_primary">
+            <a href="/subscribe">Sumate</a>
+        </button>
     </div>
-    <div id="galeria-content" class="content" style="display:none;">
-        <p>Galería Content</p>
-
-        <div class="gallery">
-            <div class="row" id="first">
-                <div class="diamond"><img src="https://via.placeholder.com/150" alt="Placeholder 1"></div>
-                <div class="diamond"><img src="https://via.placeholder.com/150" alt="Placeholder 2"></div>
-                <div class="diamond"><img src="https://via.placeholder.com/150" alt="Placeholder 3"></div>
-            </div>     
-            <div class="row" id="second">
-                <div class="diamond"><img src="https://via.placeholder.com/150" alt="Placeholder 1"></div>
-                <div class="diamond"><img src="https://via.placeholder.com/150" alt="Placeholder 2"></div>
-            </div>
-            <div class="row" id="third">
-                <div class="diamond"><img src="https://via.placeholder.com/250" alt="Placeholder 1"></div>
-                <div class="diamond"><img src="https://via.placeholder.com/250" alt="Placeholder 2"></div>
-                <div class="diamond"><img src="https://via.placeholder.com/250" alt="Placeholder 3"></div>
-            </div>
+    <div class="nav__hamburger">
+        <button type="button" class="hamburger">
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+        </button>
+    </div>
+</nav>
+<section>
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src={{images.banners.web.first}}>
         </div>
-        
+        <div class="mySlides fade">
+            <img src={{images.banners.web.second}}>
+        </div>
+        <div class="dot-container">
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
     </div>
 </section>
-
-    
-
-<footer>
-        <div>
-            <a href="https://www.flaticon.es/iconos-gratis/carrito-de-compras" title="carrito-de-compras iconos">Carrito-de-compras iconos creados por Pixel perfect - Flaticon</a>
-        </div>
-
-        <button id="admin-panel-button">Admin Panel</button>
-        <style>
-            #admin-panel-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 20px;
-}
-
-#admin-panel-button:hover {
-    background-color: #0056b3;
-}
-        </style>
-</footer>
-<script src="searchbar1.js" defer></script>
-</body>
-</html>
+<section>
+    <h2>Clases destacadas</h2>
+    <div class="grid-auto-fill">
+        {{#each courses}}
+        <a href="/api/payment/{{this.id}}">
+            <div class="course-container">
+                <div class="course-card">
+                    <h3>{{this.course_name}}</h3>
+                    <p>{{this.course_level}}</p>
+                    <p>${{this.course_price}}</p>
+                    <img src={{this.course_image}} alt="">
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+</section>
