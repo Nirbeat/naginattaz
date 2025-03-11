@@ -123,6 +123,18 @@ a {
     color: var(--peach);
 }
 
+/* Active Link */
+.nav__links li.active {
+    background-color: var(--light-gray);
+    border-radius: 0.25rem;
+    padding: 0.4rem;
+}
+
+.nav__links li.active a {
+    color: var(--black);
+    font-weight: bold;
+}
+
 .nav__buttons {
     display: flex;
     align-items: center;
