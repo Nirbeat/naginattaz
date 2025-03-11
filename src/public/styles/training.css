@@ -56,6 +56,10 @@
             }
         }
 
+        .nav_links a.active {
+            background-color: #555;
+        }
+
 
         .botonera {
             display: flex;
