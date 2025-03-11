@@ -121,7 +121,13 @@ router.get('/store', async (req, res) => {
     res.render('store.handlebars', {
         style: '/styles/main.css',
         storeStyle: '/styles/store.css',
-        courses
+        courses,
+        images:{
+            banners: {
+                mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
+                web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png' }
+            }
+        }
     })
 });
 
