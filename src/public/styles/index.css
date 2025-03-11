@@ -450,3 +450,19 @@ h4 {
         margin-top: 1rem;
     }
 }
+
+.premium-section {
+    h5 {
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        color: var(--white);
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    p {
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+        color: var(--white);
+        text-align: center;
+        margin: 2rem 0;
+    }
+}
