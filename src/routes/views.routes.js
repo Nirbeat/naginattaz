@@ -5,6 +5,11 @@ import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
 
 const router = Router();
 
+const customUser = {
+    name: 'Juan',
+    profile_image: '/images/profile.jpg'
+}
+
 router.get('/login', async (req, res) => {
 
     res.render('login.handlebars', {
@@ -13,7 +18,7 @@ router.get('/login', async (req, res) => {
     });
 });
 
-router.use(customVerification);
+// router.use(customVerification);
 
 router.get('/', async (req, res) => {
 
@@ -65,14 +70,15 @@ router.get('/team', async (req, res) => {
     });
 });
 
-router.use(ensureAuthenticated)
+// router.use(ensureAuthenticated)
 
 router.get('/entrenamiento', async (req, res) => {
 
     const [courses] = await new CoursesDAO().getAllCourses();
 
     // console.log(courses)
-    const { user } = req;
+    // const { user } = req;
+    const user = customUser;
     res.render('training.handlebars', {
         style: '/styles/main.css',
         trainingStyle: '/styles/training.css',
