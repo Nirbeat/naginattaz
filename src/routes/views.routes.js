@@ -93,9 +93,10 @@ router.get('/entrenamiento', async (req, res) => {
 router.get('/clases/:courseID/:lessonID?', async (req, res) => {
     // console.log('Request received for courseID:', req.params.courseID);
 
+    const coursesDao = new CoursesDAO();
     const { user } = req;
     let { courseID, lessonID } = req.params;
-    const [lessons] = await new CoursesDAO().getCourseLessonsById(courseID);
+    const [lessons] = await coursesDao.getCourseLessonsById(courseID);
 
     const courseOwned = user.ownedCoursesAndLessons.includes(courseID)
     if (!courseOwned) res.redirect('/store')
@@ -106,10 +107,12 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
             res.status().redirect(`/clases/${courseID}/${lessonID}`)
         }
         else {
+            const [[course]] = await coursesDao.getCourseById(courseID);
             res.render('lessons.handlebars', {
                 style: '/styles/main.css',
                 lessonsStyle: '/styles/lessons.css',
                 lessons,
+                courseName: course.course_name,
                 profileImg: user.profile_image,
                 currentLesson: function () {
                     const current = lessons.find(lesson => lesson.id == lessonID);
@@ -145,3 +148,5 @@ router.get('/payment/:preferenceID', async (req, res) => {
     });
 })
 export default router;
+
+new CoursesDAO().getCourseById(1).then(([[data]])=> console.log(data.course_name))
