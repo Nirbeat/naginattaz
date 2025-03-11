@@ -286,6 +286,11 @@ footer .footer-social-links {
     margin: 1rem 0;
 }
 
+footer .social-logo {
+    width: 30px;
+    height: auto;
+}
+
 @media (min-width: 768px) {
     footer .footer-container {
         flex-direction: row;
