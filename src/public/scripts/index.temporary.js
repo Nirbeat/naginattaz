@@ -21,11 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
         }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
+        if (dots.length > 0) {
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            dots[slideIndex-1].className += " active";
         }
         slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " active";
     }
 
     function plusSlides(n) {
