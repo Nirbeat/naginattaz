@@ -3,7 +3,7 @@ import { config } from "dotenv";
 config();
 
 export const environment = {
-    serverPort : process.env.PORT || 8080,
+    serverPort : process.env.PORT || 3000,
     database:{
         host : process.env.host || 'localhost',
         name: process.env.DB_NAME || 'naginattaz',
