@@ -106,7 +106,7 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
                 style: '/styles/main.css',
                 lessonsStyle: '/styles/lessons.css',
                 lessons,
-                courseName: course.course_name,
+                courseName: course.class_name,
                 profileImg: user.profile_image,
                 currentLesson: function () {
                     const current = lessons.find(lesson => lesson.id == lessonID);
@@ -143,4 +143,4 @@ router.get('/payment/:preferenceID', async (req, res) => {
 })
 export default router;
 
-new CoursesDAO().getCourseById(1).then(([[data]])=> console.log(data.course_name))
+new CoursesDAO().getCourseById(1).then(([[data]])=> console.log(data.class_name))

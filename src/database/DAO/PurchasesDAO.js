@@ -13,7 +13,7 @@ export class PurchasesDAO{
     async saveCoursePurchase(userId, courseId, specialLessonId, purchaseType){
 
         const newPurchase = await DBConnection.query(
-            'INSERT INTO purchases(user_id, course_id, special_lesson_id, purchase_type) VALUES (?,?, ?, ?)',
+            'INSERT INTO purchases(user_id, class_id, special_lesson_id, purchase_type) VALUES (?,?, ?, ?)',
             [userId, courseId,specialLessonId || null, purchaseType || 'course']
         );
 

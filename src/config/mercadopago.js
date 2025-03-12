@@ -10,10 +10,10 @@ export async function paymentProcessing(course){
             items: [
                 {
                     id: course.id,
-                    title: course.course_name,
+                    title: course.class_name,
                     quantity: 1,
                     currency_id: 'ARS',
-                    unit_price: course.course_price
+                    unit_price: course.class_price
                 }
             ],
             back_urls:{
