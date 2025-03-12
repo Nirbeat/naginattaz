@@ -272,6 +272,10 @@
     .video-text button {
         padding: 0.5rem 2rem;
     }
+
+    .text-container p {
+        text-align: center !important;
+    }
 }
 
 /* Grid */
