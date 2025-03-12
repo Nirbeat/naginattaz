@@ -5,7 +5,7 @@ export class CoursesDAO{
     async getAllCourses(){
 
         const courses = await DBConnection.query(
-            'SELECT * FROM courses'
+            'SELECT * FROM classes'
         );
 
         return courses;
@@ -13,14 +13,14 @@ export class CoursesDAO{
 
     async getCourseLessonsById(id){
         const lessons = await DBConnection.query(
-            'SELECT * FROM LESSONS WHERE course_id = ?',[id]
+            'SELECT * FROM LESSONS WHERE class_id = ?',[id]
         );
         return lessons;
     }
 
     async getCourseById(id){
         const course = await DBConnection.query(
-            'SELECT * FROM courses WHERE id = ?', [id]
+            'SELECT * FROM classes WHERE id = ?', [id]
         )
         return course;
     }
