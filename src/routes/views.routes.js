@@ -80,7 +80,7 @@ router.get('/entrenamiento/:section?', async (req, res) => {
     }
 
     if (['programas', 'estilos', 'playlists', 'calendario', 'comunidad'].includes(section)) {
-        res.redirect('/:subruta')
+        res.redirect('/construccion')
     }
 
     res.render('training.handlebars', {
@@ -153,15 +153,13 @@ router.get('/payment/:preferenceID', async (req, res) => {
     });
 })
 
-router.get('/:subruta', (req, res) => {
+router.get('/construccion', (req, res) => {
 
-    if (req.params.subruta) {
         res.render('construction.handlebars', {
             style: '/styles/main.css',
             constructionStyle: '/styles/construction.css',
             workerSvg: '/images/worker.svg'
-
         })
-    }
+    
 })
 export default router;
