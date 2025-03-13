@@ -13,7 +13,7 @@ export class CoursesDAO{
 
     async getCourseLessonsById(id){
         const lessons = await DBConnection.query(
-            'SELECT * FROM LESSONS WHERE class_id = ?',[id]
+            'SELECT * FROM lessons WHERE class_id = ?',[id]
         );
         return lessons;
     }

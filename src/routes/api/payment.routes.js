@@ -18,7 +18,6 @@ router.get('/success', async (req, res) => {
 
     const [[findUser]] = await new UsersDAO().getUserByEmail(user.email);
 
-    console.log(findUser)
     await new PurchasesDAO().saveClassPurchase(findUser.id, parseInt(courseId));
 
     res.cookie('jwt',createToken(user)).redirect(`/clases/${courseId}`);

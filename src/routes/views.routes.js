@@ -71,7 +71,6 @@ router.get('/entrenamiento', async (req, res) => {
 
     const [courses] = await new CoursesDAO().getAllCourses();
 
-    // console.log(courses)
     const { user } = req;
     res.render('training.handlebars', {
         style: '/styles/main.css',
@@ -92,7 +91,7 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
     let { courseID, lessonID } = req.params;
     const [lessons] = await coursesDao.getCourseLessonsById(courseID);
 
-    const courseOwned = user.ownedCoursesAndLessons.includes(courseID)
+    const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID))
     if (!courseOwned) res.redirect('/store')
     else {
         // ESTO REDIRECCIONA AL PRIMER VIDEO DEL CURSO
@@ -142,5 +141,3 @@ router.get('/payment/:preferenceID', async (req, res) => {
     });
 })
 export default router;
-
-new CoursesDAO().getClassById(1).then(([[data]])=> console.log(data.class_name))

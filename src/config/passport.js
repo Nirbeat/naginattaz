@@ -11,7 +11,7 @@ function initializePassport() {
     passport.use(new GoogleStrategy({
         clientID: environment.googleAuth.clientID,
         clientSecret: environment.googleAuth.secret,
-        callbackURL: "http://localhost:3000/api/auth/google-authentication"
+        callbackURL: `${environment.googleAuth.redirectURL}/api/auth/google-authentication`
     },
         async (accessToken, refreshToken, profile, done) => {
 
@@ -30,8 +30,8 @@ function initializePassport() {
                 done(null, new UserDTO().userJWT(user));
             }
             else {
-                const [ownedCoursesAndLessons] = await userManager.getOwnedCourses(user.email)
-                user.ownedCoursesAndLessons = ownedCoursesAndLessons;
+                const [ownedCoursesAndLessons] = await userManager.getOwnedCourses(user.email);
+                user.ownedCoursesAndLessons = ownedCoursesAndLessons.map(course=> course.id);
                 done(null, user);
             }
         }
