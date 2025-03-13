@@ -143,4 +143,4 @@ router.get('/payment/:preferenceID', async (req, res) => {
 })
 export default router;
 
-new CoursesDAO().getCourseById(1).then(([[data]])=> console.log(data.class_name))
+new CoursesDAO().getClassById(1).then(([[data]])=> console.log(data.class_name))

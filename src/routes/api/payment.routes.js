@@ -18,7 +18,7 @@ router.get('/success', async (req, res) => {
 
     const [[findUser]] = await new UsersDAO().getUserByEmail(user.email);
     console.log()
-    await new PurchasesDAO().saveCoursePurchase(findUser.id, parseInt(courseId));
+    await new PurchasesDAO().saveClassPurchase(findUser.id, parseInt(courseId));
 
     res.cookie('jwt',createToken(user)).redirect(`/clases/${courseId}`);
 })
@@ -32,7 +32,7 @@ router.get('/:courseID', async (req, res) => {
         if(user.ownedCoursesAndLessons.includes(courseID)){
             res.redirect(`/clases/${courseID}`)
         }else{
-            const [[courses]] = await new CoursesDAO().getCourseById(courseID);
+            const [[courses]] = await new CoursesDAO().getClassById(courseID);
 
             const {items:course, id} = await paymentProcessing(courses);
             res.cookie('purchaseData', {courseId : course[0].id}, {httpOnly: true, maxAge: 30*60*1000}).redirect(`/payment/${id}`)

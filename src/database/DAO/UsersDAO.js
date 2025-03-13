@@ -26,8 +26,8 @@ export class UsersDAO{
 
     async getOwnedCourses(email){
         return await DBConnection.query(
-            `SELECT class_id FROM classes 
-            JOIN purchases ON classes.id = purchases.class_id 
+            `SELECT courses.id FROM courses 
+            JOIN purchases ON courses.id = purchases.course_id 
             JOIN users ON purchases.user_id = users.id WHERE users.email = ?`,
             [email]
         )

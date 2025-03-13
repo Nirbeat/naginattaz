@@ -18,7 +18,7 @@ export class CoursesDAO{
         return lessons;
     }
 
-    async getCourseById(id){
+    async getClassById(id){
         const course = await DBConnection.query(
             'SELECT * FROM classes WHERE id = ?', [id]
         )
