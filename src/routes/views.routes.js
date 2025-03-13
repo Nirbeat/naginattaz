@@ -162,4 +162,12 @@ router.get('/construccion', (req, res) => {
         })
     
 })
+
+router.get('*', (req, res) => {
+    res.render('construction.handlebars', {
+        style: '/styles/main.css',
+        constructionStyle: '/styles/construction.css',
+        workerSvg: '/images/worker.svg'
+    })
+})
 export default router;
