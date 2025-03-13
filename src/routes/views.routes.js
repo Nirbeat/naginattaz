@@ -67,11 +67,22 @@ router.get('/team', async (req, res) => {
 
 router.use(ensureAuthenticated)
 
-router.get('/entrenamiento', async (req, res) => {
+router.get('/entrenamiento/:section?', async (req, res) => {
 
-    const [courses] = await new CoursesDAO().getAllCourses();
-
+    let [courses] = await new CoursesDAO().getAllCourses();
+    const { section } = req.params;
     const { user } = req;
+
+    if (!section) { res.redirect('/entrenamiento/todas-las-clases') }
+
+    if (section == 'clases-individuales') {
+        courses = courses.filter(course => course.program == null)
+    }
+
+    if (['programas', 'estilos', 'playlists', 'calendario', 'comunidad'].includes(section)) {
+        res.redirect('/:subruta')
+    }
+
     res.render('training.handlebars', {
         style: '/styles/main.css',
         trainingStyle: '/styles/training.css',
@@ -93,7 +104,7 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
 
     const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID))
     console.log(user.role == "premium")
-    if (user.role!="premium" && !courseOwned) res.redirect('/store')
+    if (user.role != "premium" && !courseOwned) res.redirect('/store')
     else {
         // ESTO REDIRECCIONA AL PRIMER VIDEO DEL CURSO
         if (!lessonID) {
@@ -125,7 +136,7 @@ router.get('/store', async (req, res) => {
         style: '/styles/main.css',
         storeStyle: '/styles/store.css',
         courses,
-        images:{
+        images: {
             banners: {
                 mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
                 web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png', store: 'images/banners/BannerNag2.jpg' },
@@ -140,5 +151,17 @@ router.get('/payment/:preferenceID', async (req, res) => {
         style: "/styles/main.css"
 
     });
+})
+
+router.get('/:subruta', (req, res) => {
+
+    if (req.params.subruta) {
+        res.render('construction.handlebars', {
+            style: '/styles/main.css',
+            constructionStyle: '/styles/construction.css',
+            workerSvg: '/images/worker.svg'
+
+        })
+    }
 })
 export default router;
