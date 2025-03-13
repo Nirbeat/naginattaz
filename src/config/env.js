@@ -13,7 +13,8 @@ export const environment = {
     cookieParser: process.env.COOKIE_PARSER_SECRET,
     googleAuth:{
         clientID: process.env.GOOGLE_CLIENT_ID,
-        secret: process.env.GOOGLE_SECRET
+        secret: process.env.GOOGLE_SECRET,
+        redirectURL: process.env.GOOGLE_REDIRECT_URL
     },
     JWTSecret: process.env.JWT_SECRET,
     mercadopago: {

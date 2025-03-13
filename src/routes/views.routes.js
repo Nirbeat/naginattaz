@@ -101,7 +101,7 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
             res.status().redirect(`/clases/${courseID}/${lessonID}`)
         }
         else {
-            const [[course]] = await coursesDao.getCourseById(courseID);
+            const [[course]] = await coursesDao.getClassById(courseID);
             res.render('lessons.handlebars', {
                 style: '/styles/main.css',
                 lessonsStyle: '/styles/lessons.css',

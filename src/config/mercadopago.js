@@ -17,9 +17,9 @@ export async function paymentProcessing(course){
                 }
             ],
             back_urls:{
-                failure:'http://localhost:8080/api/payment/failure',
-                pending:'http://localhost:8080/api/payment/pending',
-                success:'http://localhost:8080/api/payment/success'
+                failure:'http://localhost:3000/api/payment/failure',
+                pending:'http://localhost:3000/api/payment/pending',
+                success:'http://localhost:3000/api/payment/success'
             },
             auto_return: 'approved'
         }
