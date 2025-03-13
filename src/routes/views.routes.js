@@ -92,7 +92,8 @@ router.get('/clases/:courseID/:lessonID?', async (req, res) => {
     const [lessons] = await coursesDao.getCourseLessonsById(courseID);
 
     const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID))
-    if (!courseOwned) res.redirect('/store')
+    console.log(user.role == "premium")
+    if (user.role!="premium" && !courseOwned) res.redirect('/store')
     else {
         // ESTO REDIRECCIONA AL PRIMER VIDEO DEL CURSO
         if (!lessonID) {
