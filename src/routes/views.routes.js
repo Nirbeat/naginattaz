@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
     res.render('index.handlebars', {
         style: '/styles/main.css',
         indexStyle: '/styles/index.css',
-        profileStyle:'/styles/profile.css',
+        profileStyle: '/styles/profile.css',
         userData: user ? {
             name: user.name,
             profileImg: user.profile_image
@@ -54,6 +54,8 @@ router.get('/policies', async (req, res) => {
 
 router.get('/team', async (req, res) => {
 
+    const { user } = req;
+    console.log(user)
     let [teamMembers] = await new UsersDAO().getTeamMembers();
 
     // PASAR LUEGO A UN DTO
@@ -64,12 +66,17 @@ router.get('/team', async (req, res) => {
     })
     res.render('team.handlebars', {
         style: '/styles/main.css',
-        teamMembers,
-        teamStyles: '/styles/team.css'
+        teamStyles: '/styles/team.css',
+        profileStyle: '/styles/profile.css',
+        userData: user ? {
+            name: user.name,
+            profileImg: user.profile_image
+        } : null,
+        teamMembers
     });
 });
 
-router.use(ensureAuthenticated)
+router.use(ensureAuthenticated);
 
 router.get('/entrenamiento/:section?', async (req, res, next) => {
 
@@ -77,17 +84,17 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
         let [courses] = await new CoursesDAO().getAllCourses();
         const { section } = req.params;
         const { user } = req;
-    
+
         if (!section) { res.redirect('/entrenamiento/todas-las-clases') }
-    
+
         if (section == 'clases-individuales') {
             courses = courses.filter(course => course.program == null)
         }
-    
+
         if (['programas', 'estilos', 'playlists', 'calendario', 'comunidad'].includes(section)) {
             res.redirect('/construccion')
         }
-    
+
         res.render('training.handlebars', {
             style: '/styles/main.css',
             trainingStyle: '/styles/training.css',
@@ -97,7 +104,7 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
             },
             courses
         })
-        
+
     } catch (error) {
         next(error)
     }
@@ -107,14 +114,13 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
     // console.log('Request received for courseID:', req.params.courseID);
 
     try {
-        
+
         const coursesDao = new CoursesDAO();
         const { user } = req;
         let { courseID, lessonID } = req.params;
         const [lessons] = await coursesDao.getCourseLessonsById(courseID);
-    
+
         const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID))
-        console.log(user.role == "premium")
         if (user.role != "premium" && !courseOwned) res.redirect('/store')
         else {
             // ESTO REDIRECCIONA AL PRIMER VIDEO DEL CURSO
@@ -147,13 +153,17 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
 router.get('/store', async (req, res, next) => {
 
     try {
-        
+        const { user } = req;
         const [courses] = await new CoursesDAO().getAllCourses();
-    
         res.render('store.handlebars', {
             style: '/styles/main.css',
             storeStyle: '/styles/store.css',
+            profileStyle: '/styles/profile.css',
             courses,
+            userData: user ? {
+                name: user.name,
+                profileImg: user.profile_image
+            } : null,
             images: {
                 banners: {
                     mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
@@ -162,40 +172,38 @@ router.get('/store', async (req, res, next) => {
             }
         })
     } catch (error) {
-        next (error)
+        next(error)
     }
 });
 
 router.get('/payment/:preferenceID', async (req, res, next) => {
-try {
-    
-    res.render('payment.handlebars', {
-        style: "/styles/main.css"
+    try {
 
-    });
-} catch (error) {
-    next(error)
-}
-})
+        res.render('payment.handlebars', {
+            style: "/styles/main.css"
+
+        });
+    } catch (error) {
+        next(error)
+    }
+});
 
 router.get('/construccion', (req, res, next) => {
 
     try {
-        
         res.render('construction.handlebars', {
             style: '/styles/main.css',
             constructionStyle: '/styles/construction.css',
             workerSvg: '/images/worker.svg'
-        })
+        });
     } catch (error) {
-        next(error)
+        next(error);
     }
-    
-})
+});
 
 router.get('*', (req, res, next) => {
     try {
-        
+
         res.render('construction.handlebars', {
             style: '/styles/main.css',
             constructionStyle: '/styles/construction.css',
