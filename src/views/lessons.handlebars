@@ -22,12 +22,7 @@
             <a href="/nagidatta">Nagidatta</a>
         </div>
         {{!-- Botonera --}}
-        <div class="botonera">
-            <div class="profile_pic">
-                <img src={{profileImg}} alt="Profile picture">
-            </div>
-            <button type="button">Logout</button>
-        </div>
+        {{>profile}}
         <div class="nav__hamburger">
             <button type="button" class="hamburger" onclick="toggleNav()">
                 <span class="hamburger__line"></span>

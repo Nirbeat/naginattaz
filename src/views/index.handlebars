@@ -27,6 +27,9 @@
             </ul>
         </div>
     </div>
+    {{#if user}}
+    {{>profile}}
+    {{else}}
     <div class="nav__buttons">
         <button type="button" class="btn_secondary">
             <a href="/login">Inicia</a>
@@ -35,6 +38,7 @@
             <a href="/subscribe">Sumate</a>
         </button>
     </div>
+    {{/if}}
     <div class="nav__hamburger">
         <button type="button" class="hamburger">
             <span class="hamburger__line"></span>
@@ -256,13 +260,14 @@
                         <li>Feedback personal para ajustar y mejorar tu progreso</li>
                         <li>Se parte de la comunidad NGTZ y accedé a beneficios exclusivos!</li>
                         <li>Acceso a playlists personalizadas</li>
-                        <li>Acceso a los mejores amigos de NGTZ en Instagram para recibir información de música, noticias, educación y cultura de manera diaria</li>
+                        <li>Acceso a los mejores amigos de NGTZ en Instagram para recibir información de música,
+                            noticias, educación y cultura de manera diaria</li>
                         <li>Acceso a toda la base de datos teórica y audiovisual (incluyendo recursos avanzados)</li>
                     </ul>
                 </div>
                 <p>Valor en pesos ARG a definir <span>/mes</span></p>
-               <a href="" class="btn_primary">
-                    Mejora tus habilidades                    
+                <a href="" class="btn_primary">
+                    Mejora tus habilidades
                 </a>
             </div>
         </div>

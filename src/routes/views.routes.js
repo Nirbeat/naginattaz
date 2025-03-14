@@ -22,9 +22,12 @@ router.get('/', async (req, res) => {
     res.render('index.handlebars', {
         style: '/styles/main.css',
         indexStyle: '/styles/index.css',
+        profileStyle:'/styles/profile.css',
+        userData: user ? {
+            name: user.name,
+            profileImg: user.profile_image
+        } : null,
         images: {
-            cart: '/images/cart.png',
-            mainLogo: '/images/main-logo.png',
             banners: {
                 mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
                 web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png' }
@@ -126,7 +129,9 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
                     lessonsStyle: '/styles/lessons.css',
                     lessons,
                     courseName: course.class_name,
-                    profileImg: user.profile_image,
+                    userData: {
+                        profileImg: user.profile_image
+                    },
                     currentLesson: function () {
                         const current = lessons.find(lesson => lesson.id == lessonID);
                         return current.lesson_url;
