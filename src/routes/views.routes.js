@@ -88,7 +88,7 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
 
         if(section == 'todas-las-clases'){
             if(user.role == 'premium'){
-                courses = await new CoursesDAO().getAllClasses();
+                [courses] = await new CoursesDAO().getAllClasses();
             }
             else{
                 courses = await new CoursesDAO().getUserAvailableClasses(user.email);
@@ -97,7 +97,7 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
 
         if (section == 'clases-individuales') {
             if (user.role == 'premium') {
-                courses = await new CoursesDAO().getAllClasses();
+                [courses] = await new CoursesDAO().getAllClasses();
                 courses = courses.filter(course => course.program_module_id == null)
             }else {
                 courses = await new CoursesDAO().getUserAvailableClasses(user.email);

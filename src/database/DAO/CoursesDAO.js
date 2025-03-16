@@ -26,7 +26,7 @@ export class CoursesDAO{
             'SELECT * FROM classes'
         );
 
-        console.log(`Classes: ${JSON.stringify(classes)}`);
+        console.log(`Classes: ${classes}`);
 
         return classes;
     }
