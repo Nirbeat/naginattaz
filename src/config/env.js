@@ -5,10 +5,10 @@ config();
 export const environment = {
     serverPort : process.env.PORT || 3000,
     database:{
-        host : process.env.host,
-        name: process.env.DB_NAME,
-        password: process.env.DB_PASS,
-        user: process.env.DB_USER
+        host : process.env.host || 'localhost',
+        name: process.env.DB_NAME || 'naginattaz',
+        password: process.env.DB_PASS || '',
+        user: process.env.DB_USER || 'root'
     },
     cookieParser: process.env.COOKIE_PARSER_SECRET,
     googleAuth:{
