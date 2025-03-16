@@ -53,23 +53,32 @@
         <article>
             <div class="grid-auto-fill">
                 {{#if courses.length}}
-                    {{#each courses}}
-                    <div class="course-container">
-                        <a href="/clases/{{this.id}}">
-                            <div class="course-card">
-                                <h3>{{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}</h3>
-                                <p>{{this.class_level}}</p>
-                                <p>${{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}</p>
-                                <img src={{#if this.class_image}}{{this.class_image}}{{else}}{{this.program_image}}{{/if}} alt="">
+                {{#each courses}}
+                <div class="course-container">
+                    <a href="/clases/{{this.id}}" class="course-link">
+                        <div class="course-card">
+                            <div class="course-image">
+                                <img src="{{#if this.class_image}}{{this.class_image}}{{else}}{{this.program_image}}{{/if}}"
+                                    alt="Imagen del curso">
                             </div>
-                        </a>
-                    </div>
-                    {{/each}}
+                            <div class="course-info">
+                                <h3 class="course-title">
+                                    {{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}
+                                </h3>
+                                <p class="course-level">{{this.class_level}}</p>
+                                <p class="course-price">
+                                    ${{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {{/each}}
                 {{else}}
-                    <div class="no-courses">
-                        <p>No hay cursos disponibles en este momento.</p>
-                        <a href="/store">Visita nuestra tienda</a>
-                    </div>
+                <div class="no-courses">
+                    <p>No hay cursos disponibles en este momento.</p>
+                    <a href="/store" class="store-link">Visita nuestra tienda</a>
+                </div>
                 {{/if}}
             </div>
         </article>
@@ -91,5 +100,5 @@
 
     function toggleHamburgerMenu() {
         const navLinks = document.querySelector('.nav_links');
-    });
+    }
 </script>
