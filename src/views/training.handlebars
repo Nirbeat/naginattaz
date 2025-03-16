@@ -15,16 +15,29 @@
             {{!-- Menu --}}
             <div class="nav_links">
                 <a href="/">Inicio</a>
+<<<<<<< HEAD
                 <a href="/entrenamiento">Clases</a>
                 <a href="/nagidatta">Nagidatta</a>
             </div>
             {{!-- Botonera --}}
             <div class="botonera">
+=======
+                <a href="/entrenamiento" class="active">Clases</a>
+                <a href="/nagidatta">Nagidatta</a>
+            </div>
+            {{!-- Botonera --}}
+            {{>profile}}
+            {{!-- <div class="botonera">
+>>>>>>> production
                 <div class="profile_pic">
                     <img src={{userData.profileImg}} alt="Profile picture">
                 </div>
                 <button type="button">Logout</button>
+<<<<<<< HEAD
             </div>
+=======
+            </div> --}}
+>>>>>>> production
             <div class="nav__hamburger">
                 <button type="button" class="hamburger">
                     <span class="hamburger__line"></span>
@@ -37,6 +50,7 @@
 
     <aside>
         <ul>
+<<<<<<< HEAD
             <li onclick="toggleSection(this)">Todas las clases <span class="arrow"></span></li>
             <li>Clases individuales <span class="arrow"></span></li>
             <li>Programas <span class="arrow"></span></li>
@@ -48,11 +62,25 @@
     </aside>
 
     <section id="js-allClasses">
+=======
+            <a href="/entrenamiento/todas-las-clases"><li>Todas las clases <span class="arrow"></span></li></a>
+            <a href="/entrenamiento/clases-individuales"><li>Clases individuales <span class="arrow"></span></li></a>
+            <a href="/entrenamiento/programas"><li>Programas <span class="arrow"></span></li></a>
+            <a href="/entrenamiento/estilos"><li>Estilos <span class="arrow"></span></li></a>
+            <a href="/entrenamiento/playlists"><li>Playlist <span class="arrow"></span></li></a>
+            <a href="/entrenamiento/calendario"><li>Calendario <span class="arrow"></span></li></a>
+            <a href="/entrenamiento/comunidad"><li>Comunidad <span class="arrow"></span></li></a>
+        </ul>
+    </aside>
+
+    <section id="js-allClasses" style="display: block;">
+>>>>>>> production
         <h1>Bienvenido {{userData.name}}</h1>
         <article>
             <div class="grid-auto-fill">
                 {{#each courses}}
                 <div class="course-container">
+<<<<<<< HEAD
                     <div class="course-card">
                         <h3>{{this.course_name}}</h3>
                         <p>{{this.course_level}}</p>
@@ -91,6 +119,18 @@
                     </div>
                 </div>
                 {{/each}}
+=======
+                    <a href="/clases/{{this.id}}">
+                        <div class="course-card">
+                            <h3>{{this.class_name}}</h3>
+                            <p>{{this.class_level}}</p>
+                            <p>${{this.class_price}}</p>
+                            <img src={{this.class_image}} alt="">
+                        </div>
+                    </a>
+                </div>
+                {{/each}}
+>>>>>>> production
             </div>
         </article>
     </section>

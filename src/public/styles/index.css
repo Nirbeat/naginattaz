@@ -272,6 +272,13 @@
     .video-text button {
         padding: 0.5rem 2rem;
     }
+<<<<<<< HEAD
+=======
+
+    .text-container p {
+        text-align: center !important;
+    }
+>>>>>>> production
 }
 
 /* Grid */
@@ -288,7 +295,11 @@ h4 {
     --grid-min-col-size: 400px;
 
     display: grid;
+<<<<<<< HEAD
     grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min-col-size), 100%), 1fr));
+=======
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--grid-min-col-size), 100%), 1fr));
+>>>>>>> production
     gap: 1rem;
 }
 
@@ -449,4 +460,23 @@ h4 {
         letter-spacing: 0.15rem;
         margin-top: 1rem;
     }
+<<<<<<< HEAD
+=======
+}
+
+.premium-section {
+    h5 {
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        color: var(--white);
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    p {
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+        color: var(--white);
+        text-align: center;
+        margin: 2rem 0;
+    }
+>>>>>>> production
 }

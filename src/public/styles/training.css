@@ -21,7 +21,11 @@
         align-items: center;
         padding: 2rem 1rem;
         height: var(--navbar-height);
+<<<<<<< HEAD
         background-color: var(--pastel-lilac);
+=======
+        background-color: var(--pastel-pink);
+>>>>>>> production
         color: white;
         position: relative;
         z-index: 999;
@@ -56,6 +60,13 @@
             }
         }
 
+<<<<<<< HEAD
+=======
+        .nav_links a.active {
+            background-color: #555;
+        }
+
+>>>>>>> production
 
         .botonera {
             display: flex;
@@ -216,7 +227,11 @@ section {
     --grid-min-col-size: 300px;
 
     display: grid;
+<<<<<<< HEAD
     grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min-col-size), 100%), 1fr));
+=======
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--grid-min-col-size), 100%), 1fr));
+>>>>>>> production
     gap: 1rem;
 }
 

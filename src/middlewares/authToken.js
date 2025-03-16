@@ -2,6 +2,7 @@ import { createToken } from "../config/jwt.js";
 import passport from "passport";
 
 export const authToken = (req, res, next) => {
+
     const {user} = req;
     if (user) {
         const token = createToken(user);
