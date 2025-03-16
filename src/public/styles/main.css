@@ -47,15 +47,23 @@ a {
 
 /* NAVBAR */
 .nav {
+
+    ----blur-intensity: 20px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;    
-    position: relative;    
+    position: sticky;
+    top: 0;
     width: 100%;
     min-height: 4.5rem;
     padding: 1rem;    
-    background-color: transparent;    
+    backdrop-filter: blur(var(----blur-intensity));
+    -webkit-backdrop-filter: blur(var(----blur-intensity)); /* For Safari support */
+    border-bottom: none; /* Subtle border */
     font-family: 'MonumentExtended', sans-serif;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
 }
 
 .nav .btn-primary {
@@ -66,7 +74,6 @@ a {
     color: var(--white);
 }
 
-
 .nav .btn-secondary a {
     font-weight: 800;
     color: var(--white);
@@ -75,6 +82,7 @@ a {
 .nav-left {
     display: flex;
     align-items: center;
+    flex-grow: 1;
 }
 
 .nav-logo {
@@ -87,37 +95,18 @@ a {
     height: auto;
 }
 
-
 .nav-links ul {
     display: flex;
     align-items: center;
     list-style: none;
     padding: 1rem 0;
     margin: 0;
-
-    /* @media (hover) {
-        & > li, & > li > a {
-            transition: all 0.3s linear;
-        }
-
-        &:has(> li:hover) > li:not(:hover) {
-            opacity: 0.25;
-        }
-
-        & > li:hover a {
-            color: var(--purple-vib);
-        }
-    } */
 }
 
-
-
 .nav-links li {
-    /* For hamburger */
     display: flex;
     align-items: center;
     justify-content: center;
-    
     font-size: clamp(0.75rem, 0.75vw, 1rem);
     letter-spacing: 0.15rem;
     text-transform: uppercase;    
@@ -131,7 +120,13 @@ a {
     text-decoration: none;
     gap: 0.5rem;
     font-weight: 100;
+    text-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.3);
 }
+
+.nav-links li:hover a {
+    transform: scale(1.05);
+}
+
 
 .nav-links li:last-child a {
     color: var(--peach);
