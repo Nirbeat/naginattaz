@@ -148,8 +148,7 @@ nav {
 
 aside {
     grid-area: aside;
-    /* background-color: var(--white); */
-    color: var(--black);
+    color: var(--white);
     padding: 1rem;
     border-right: 1px solid var(--light-gray);
     display: flex;
@@ -171,16 +170,30 @@ aside ul {
 
         &:has(> li:hover)>li:not(:hover) {
             opacity: 0.25;
+            background-color: transparent;
         }
 
         &>li:hover a {
             color: var(--purple-vib);
             transform: scale(1.1);
+            font-size: 18px;
+            
+            &::after {
+                content: "";
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                border-left: 10px solid var(--purple-vib);
+                margin-left: 5px;
+            }
+            
         }
 
-        /* &>li:hover {
-            background-color: var(--black);
-        } */
+        &>li:hover {
+            background-color: var(--white);
+        }
     }
 }
 
@@ -193,6 +206,8 @@ aside li {
     border-radius: 5px;
     transition: background-color 0.3s;
     cursor: pointer;
+    background-color: hsla(0, 0%, 100%, 0.9);
+    color: var(--black);
 }
 
 aside li:hover {
