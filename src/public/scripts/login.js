@@ -10,17 +10,14 @@ function slashImage() {
     // Change the clip-path for a diagonal reveal
     image.style.clipPath = 'polygon(0 0, 100% 0, 0 100%)';
 
-    // Play sound effect
-    //const sound = new Audio('path-to-your-sound-effect.mp3'); // Replace with your sound file path
-    //sound.play();
-
     // Flash background color
     body.style.background = 'white';
     setTimeout(() => {
-        body.style.background = 'black';
-        body.style.background = 'var(--nagirosa)';
-        body.style.background = 'var(--nagimagenta)';
-        body.style.background = 'linear-gradient(0.25turn, #a81e96, #430e53,#26152e, #382142, #a81e96)';
+
+        body.style.backgroundColor = '#8EC5FC';
+        body.style.backgroundImage = 'linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)';
+
+        
     }, 300); // Flash duration
 
     // Show the GIF background
@@ -34,7 +31,6 @@ function slashImage() {
     container.style.animation = 'shake 0.5s ease';
     container.style.background = 'black';
 
-    // Remove animation class after it finishes to allow re-triggering
     setTimeout(() => {
         container.style.animation = 'none'; // Reset the animation
     }, 500); // Match duration of shake animation
