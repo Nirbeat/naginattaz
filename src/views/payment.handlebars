@@ -3,8 +3,10 @@
 
 <div id="wallet_container">
 </div>
-<script>
-    const mp = new MercadoPago("APP_USR-13b0dd3c-e7c3-4ff6-8000-2bff949c49ec", {
+<script type="module">
+    let publicKey= await fetch('http://localhost:3000/api/payment/public-key').then(data=> data.json())
+    console.log(publicKey.MPPublicKey)
+    const mp = new MercadoPago(publicKey.MPPublicKey, {
         locale: 'es-AR'
     });
 

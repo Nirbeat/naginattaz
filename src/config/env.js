@@ -18,6 +18,7 @@ export const environment = {
     },
     JWTSecret: process.env.JWT_SECRET,
     mercadopago: {
-        token: process.env.MERCADOPAGO_TOKEN
+        token: process.env.MERCADOPAGO_TOKEN,
+        publicKey: process.env.MERCADOPAGO_KEY
     }
 }
