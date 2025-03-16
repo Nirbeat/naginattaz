@@ -132,7 +132,7 @@
         color: var(--white);
     }
 
-    .btn_primary {
+    .btn-primary {
         background-color: var(--soft-purple);
         color: var(--white);
         border: none;
@@ -439,7 +439,7 @@ h4 {
         }
     }
 
-    .btn_primary {
+    .btn-primary {
         background-color: var(--pastel-pink);
         color: var(--magenta);
         border: none;

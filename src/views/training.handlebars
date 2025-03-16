@@ -26,11 +26,11 @@
                 </div>
                 <button type="button">Logout</button>
             </div> --}}
-            <div class="nav__hamburger">
+            <div class="nav-hamburger">
                 <button type="button" class="hamburger">
-                    <span class="hamburger__line"></span>
-                    <span class="hamburger__line"></span>
-                    <span class="hamburger__line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
                 </button>
             </div>
         </nav>
@@ -38,27 +38,13 @@
 
     <aside>
         <ul>
-            <a href="/entrenamiento/todas-las-clases">
-                <li>Todas las clases <span class="arrow"></span></li>
-            </a>
-            <a href="/entrenamiento/clases-individuales">
-                <li>Clases individuales <span class="arrow"></span></li>
-            </a>
-            <a href="/entrenamiento/programas">
-                <li>Programas <span class="arrow"></span></li>
-            </a>
-            <a href="/entrenamiento/estilos">
-                <li>Estilos <span class="arrow"></span></li>
-            </a>
-            <a href="/entrenamiento/playlists">
-                <li>Playlist <span class="arrow"></span></li>
-            </a>
-            <a href="/entrenamiento/calendario">
-                <li>Calendario <span class="arrow"></span></li>
-            </a>
-            <a href="/entrenamiento/comunidad">
-                <li>Comunidad <span class="arrow"></span></li>
-            </a>
+            <li><a href="/entrenamiento/todas-las-clases">Todas las clases <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/clases-individuales">Clases individuales <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/programas">Programas <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/estilos">Estilos <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/playlists">Playlist <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/calendario">Calendario <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/comunidad">Comunidad <span class="arrow"></span></a></li>
         </ul>
     </aside>
 
@@ -66,38 +52,25 @@
         <h1>Bienvenido {{userData.name}}</h1>
         <article>
             <div class="grid-auto-fill">
-
-
-                {{!-- HAY QUE AGREGAR UNA EVALUACIÓN PARA MOSTRAR UN BOTÓN QUE MANDE AL STORE
-                SI NO HAY CURSOS COMPRADOS--}}
-
-                {{#each courses}}
-                <div class="course-container">
-                    {{!-- EVALUA SI SON CLASES INDIVIDUALES --}}
-                    {{#if this.class_name}}
-                    <a href="/clases/{{this.id}}">
-                        <div class="course-card">
-                            <h3>{{this.class_name}}</h3>
-                            <p>{{this.class_level}}</p>
-                            <img src={{this.class_image}} alt="">
-                        </div>
-                    </a>
-                    {{!-- EVALUA SI SON PROGRAMAS --}}
-                    {{else}}
-                    {{!-- HAY QUE AGREGAR UNA EVALUACION, SI ES PREMIUM MUESTRA EL PROGRAMA CON EL LINK
-                    AL MISMO, SI NO MUESTRA LA IMAGEN CON DISTINTIVO DE PREMIUM 
-                    O UN BOTON Y EL LINK MANDA A SUSCRIPCION --}}
-                        <a href="/programas/clases/{{this.id}}">
+                {{#if courses.length}}
+                    {{#each courses}}
+                    <div class="course-container">
+                        <a href="/clases/{{this.id}}">
                             <div class="course-card">
-                                <h3>{{this.program_name}}</h3>
-                                <p>{{this.program_level}}</p>
-                                <img src={{this.program_image}} alt="">
+                                <h3>{{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}</h3>
+                                <p>{{this.class_level}}</p>
+                                <p>${{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}</p>
+                                <img src={{#if this.class_image}}{{this.class_image}}{{else}}{{this.program_image}}{{/if}} alt="">
                             </div>
                         </a>
-                       
-                    {{/if}}
-                </div>
-                {{/each}}
+                    </div>
+                    {{/each}}
+                {{else}}
+                    <div class="no-courses">
+                        <p>No hay cursos disponibles en este momento.</p>
+                        <a href="/store">Visita nuestra tienda</a>
+                    </div>
+                {{/if}}
             </div>
         </article>
     </section>
@@ -118,16 +91,5 @@
 
     function toggleHamburgerMenu() {
         const navLinks = document.querySelector('.nav_links');
-        const botonera = document.querySelector('.botonera');
-
-        if (navLinks.style.display === 'none' || navLinks.style.display === '') {
-            navLinks.style.display = 'flex';
-            botonera.style.display = 'flex';
-        } else {
-            navLinks.style.display = 'none';
-            botonera.style.display = 'none';
-        }
-    }
-
-    document.querySelector('.hamburger').addEventListener('click', toggleHamburgerMenu);
+    });
 </script>
