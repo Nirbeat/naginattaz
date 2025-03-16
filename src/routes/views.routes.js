@@ -83,10 +83,8 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
     try {
         let courses;
         let userPremium = null;
-        const { section } = req.params;
+        const { section = 'todas-las-clases' } = req.params;
         const { user } = req;
-
-        if (!section) { res.redirect('/entrenamiento/todas-las-clases') }
 
         if(section == 'todas-las-clases'){
             if(user.role == 'premium'){
