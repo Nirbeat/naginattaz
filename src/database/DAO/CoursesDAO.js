@@ -22,7 +22,7 @@ export class CoursesDAO{
 
     async getAllClasses(){
 
-        const [classes] = await DBConnection.query(
+        const classes = await DBConnection.query(
             'SELECT * FROM classes'
         );
 

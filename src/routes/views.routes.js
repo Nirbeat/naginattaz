@@ -191,7 +191,8 @@ router.get('/store', async (req, res, next) => {
 
     try {
         const { user } = req;
-        const [courses] = await new CoursesDAO().getAllCourses();
+        const [courses] = await new CoursesDAO().getAllClasses();
+        console.log(courses)
         res.render('store.handlebars', {
             style: '/styles/main.css',
             storeStyle: '/styles/store.css',
