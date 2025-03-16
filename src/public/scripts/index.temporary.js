@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
-    const navLinksUl = document.querySelector('.nav__links ul');
-    const navButtons = document.querySelector('.nav__buttons');
+    const navLinksUl = document.querySelector('.nav-links ul');
+    const navButtons = document.querySelector('.nav-buttons');
 
     hamburger.addEventListener('click', () => {
         console.log(`Hamburger clicked`);

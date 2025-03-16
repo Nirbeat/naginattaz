@@ -1,10 +1,14 @@
 import { Router } from "express";
 import { UsersDAO } from "../database/DAO/UsersDAO.js";
-import { customVerification, ensureAuthenticated } from "../middlewares/authToken.js";
+// import { customVerification, ensureAuthenticated } from "../middlewares/authToken.js";
 import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
 import { viewsRoutesErrorHandler } from "../middlewares/routes.js";
 
 const router = Router();
+const customUser = {
+    name: 'Naginattaz',
+    profile_image: 'https://avataaars.io/?avatarStyle=Circle&topType=LongHairBigHair&accessoriesType=Kurt&hairColor=Platinum&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=Hoodie&clotheColor=Gray01&eyeType=Close&eyebrowType=AngryNatural&mouthType=Sad&skinColor=Tanned'
+}
 
 router.get('/login', async (req, res) => {
 
@@ -14,7 +18,7 @@ router.get('/login', async (req, res) => {
     });
 });
 
-router.use(customVerification);
+// router.use(customVerification);
 
 router.get('/', async (req, res) => {
 
@@ -76,7 +80,7 @@ router.get('/team', async (req, res) => {
     });
 });
 
-router.use(ensureAuthenticated);
+// router.use(ensureAuthenticated);
 
 router.get('/entrenamiento/:section?', async (req, res, next) => {
 
