@@ -404,7 +404,7 @@ h4 {
     font-size: clamp(1rem, 1.5vw, 2rem);
     font-weight: 700;
     color: var(--magenta);
-    background-color: var(--lilac-soft);
+    background-color: var(--soft-purple);
     text-transform: uppercase;
     color: var(--white);
 }
@@ -445,7 +445,7 @@ h4 {
 }
 
 .premium-card .btn-primary {
-    background-color: var(--lilac-soft);
+    background-color: var(--soft-purple);
     color: var(--white);
     padding: 2rem 4rem;
     cursor: pointer;

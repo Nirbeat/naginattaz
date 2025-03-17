@@ -20,7 +20,7 @@ nav {
     align-items: center;
     padding: 2rem 1rem;
     height: var(--navbar-height);
-    background-color: var(--pastel-pink);
+    background-color: var(--blue);
     color: white;
     position: relative;
     z-index: 999;
@@ -169,8 +169,8 @@ aside ul {
         }
 
         &:has(> li:hover)>li:not(:hover) {
-            opacity: 0.25;
-            background-color: transparent;
+            opacity: 0.4;
+            background-color: var(--white);
         }
 
         &>li:hover a {
