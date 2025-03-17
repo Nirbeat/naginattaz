@@ -98,13 +98,13 @@ h2 {
     padding: 1.5rem;
     text-align: left;
     transition: transform 0.3s, box-shadow 0.3s;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1.5rem;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     border: 5px solid transparent;
     border-image: linear-gradient(135deg, var(--soft-purple), var(--peach)) 1;
-    width: fit-content;
 }
 
 .course-card img {
