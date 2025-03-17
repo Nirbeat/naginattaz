@@ -37,16 +37,14 @@
 }
 
 .team-card .card-content h3 {
-    margin: 10px 0;
-    font-size: 1.5em;
-    color: var(--white);
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  margin: 10px 0;
+  font-size: 1.5em;
+  color: var(--white);
 }
 
 .team-card .card-content p {
   margin: 5px 0;
   color: var(--white);
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .team-card .card-content .social-links {
@@ -67,11 +65,10 @@ h1 {
   color: var(--white);
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (max-width: 1169px) {
-    .nav-buttons {
+    .nav__buttons {
         top: calc(100% + 186px);
     }
 }

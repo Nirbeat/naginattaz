@@ -16,26 +16,16 @@
     <h2>Clases destacadas</h2>
     <div class="grid-auto-fill">
         {{#each courses}}
-        <div class="course-container">
-            <a href="/api/payment/{{this.id}}">
+        <a href="/api/payment/{{this.id}}">
+            <div class="course-container">
                 <div class="course-card">
-                    <div class="course-image">
-                        <img src="{{#if this.class_image}}{{this.class_image}}{{else}}{{this.program_image}}{{/if}}"
-                            alt="Imagen del curso">
-                    </div>
-                    <div class="course-info">
-                        <h3 class="course-title">
-                            {{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}
-                        </h3>
-                        <p class="course-level">{{this.class_level}}</p>
-                        <p class="course-price">
-                            ${{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}
-                        </p>
-                    </div>
+                    <h3>{{this.class_name}}</h3>
+                    <p>{{this.class_level}}</p>
+                    <p>${{this.class_price}}</p>
+                    <img src={{this.class_image}} alt="">
                 </div>
-            </a>
-
-        </div>
+            </div>
+        </a>
         {{/each}}
     </div>
 </section>
