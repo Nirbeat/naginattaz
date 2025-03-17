@@ -109,7 +109,7 @@
             }
         }
 
-        .nav-hamburger {
+        .nav__hamburger {
             display: none;
         }
     }
@@ -134,7 +134,7 @@
                 gap: 10px;
             }
 
-            .nav-hamburger {
+            .nav__hamburger {
                 display: block;
                 position: absolute;
                 right: 1rem;
@@ -142,8 +142,8 @@
             }
         }
 
-        nav:has(.nav-hamburger[style*="display: none"]) .nav_links,
-        nav:has(.nav-hamburger[style*="display: none"]) .botonera {
+        nav:has(.nav__hamburger[style*="display: none"]) .nav_links,
+        nav:has(.nav__hamburger[style*="display: none"]) .botonera {
             display: flex;
         }
     }

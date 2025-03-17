@@ -3,14 +3,4 @@
 
 <div id="wallet_container">
 </div>
-<script>
-    const mp = new MercadoPago("APP_USR-13b0dd3c-e7c3-4ff6-8000-2bff949c49ec", {
-        locale: 'es-AR'
-    });
-
-    mp.bricks().create("wallet", "wallet_container", {
-        initialization: {
-            preferenceId: window.location.toString().split('/')[4]
-        },
-    });
-</script>
+<script type="module" src="/scripts/payment.js"></script>

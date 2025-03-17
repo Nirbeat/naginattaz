@@ -26,11 +26,11 @@
                 </div>
                 <button type="button">Logout</button>
             </div> --}}
-            <div class="nav-hamburger">
+            <div class="nav__hamburger">
                 <button type="button" class="hamburger">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
                 </button>
             </div>
         </nav>
@@ -38,13 +38,27 @@
 
     <aside>
         <ul>
-            <a href="/entrenamiento/todas-las-clases"><li>Todas las clases <span class="arrow"></span></li></a>
-            <a href="/entrenamiento/clases-individuales"><li>Clases individuales <span class="arrow"></span></li></a>
-            <a href="/entrenamiento/programas"><li>Programas <span class="arrow"></span></li></a>
-            <a href="/entrenamiento/estilos"><li>Estilos <span class="arrow"></span></li></a>
-            <a href="/entrenamiento/playlists"><li>Playlist <span class="arrow"></span></li></a>
-            <a href="/entrenamiento/calendario"><li>Calendario <span class="arrow"></span></li></a>
-            <a href="/entrenamiento/comunidad"><li>Comunidad <span class="arrow"></span></li></a>
+            <a href="/entrenamiento/todas-las-clases">
+                <li>Todas las clases <span class="arrow"></span></li>
+            </a>
+            <a href="/entrenamiento/clases-individuales">
+                <li>Clases individuales <span class="arrow"></span></li>
+            </a>
+            <a href="/entrenamiento/programas">
+                <li>Programas <span class="arrow"></span></li>
+            </a>
+            <a href="/entrenamiento/estilos">
+                <li>Estilos <span class="arrow"></span></li>
+            </a>
+            <a href="/entrenamiento/playlists">
+                <li>Playlist <span class="arrow"></span></li>
+            </a>
+            <a href="/entrenamiento/calendario">
+                <li>Calendario <span class="arrow"></span></li>
+            </a>
+            <a href="/entrenamiento/comunidad">
+                <li>Comunidad <span class="arrow"></span></li>
+            </a>
         </ul>
     </aside>
 
@@ -52,16 +66,36 @@
         <h1>Bienvenido {{userData.name}}</h1>
         <article>
             <div class="grid-auto-fill">
+
+
+                {{!-- HAY QUE AGREGAR UNA EVALUACIÓN PARA MOSTRAR UN BOTÓN QUE MANDE AL STORE
+                SI NO HAY CURSOS COMPRADOS--}}
+
                 {{#each courses}}
                 <div class="course-container">
+                    {{!-- EVALUA SI SON CLASES INDIVIDUALES --}}
+                    {{#if this.class_name}}
                     <a href="/clases/{{this.id}}">
                         <div class="course-card">
                             <h3>{{this.class_name}}</h3>
                             <p>{{this.class_level}}</p>
-                            <p>${{this.class_price}}</p>
                             <img src={{this.class_image}} alt="">
                         </div>
                     </a>
+                    {{!-- EVALUA SI SON PROGRAMAS --}}
+                    {{else}}
+                    {{!-- HAY QUE AGREGAR UNA EVALUACION, SI ES PREMIUM MUESTRA EL PROGRAMA CON EL LINK
+                    AL MISMO, SI NO MUESTRA LA IMAGEN CON DISTINTIVO DE PREMIUM 
+                    O UN BOTON Y EL LINK MANDA A SUSCRIPCION --}}
+                        <a href="/programas/clases/{{this.id}}">
+                            <div class="course-card">
+                                <h3>{{this.program_name}}</h3>
+                                <p>{{this.program_level}}</p>
+                                <img src={{this.program_image}} alt="">
+                            </div>
+                        </a>
+                       
+                    {{/if}}
                 </div>
                 {{/each}}
             </div>
