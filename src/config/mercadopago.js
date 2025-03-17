@@ -1,4 +1,4 @@
-import { MercadoPagoConfig, Preference} from 'mercadopago';
+import { MercadoPagoConfig, Preference, PreApproval} from 'mercadopago';
 import { environment } from './env.js';
 
 const client = new MercadoPagoConfig({ accessToken: environment.mercadopago.token});
@@ -17,9 +17,9 @@ export async function paymentProcessing(course){
                 }
             ],
             back_urls:{
-                failure:'http://localhost:3000/api/payment/failure',
-                pending:'http://localhost:3000/api/payment/pending',
-                success:'http://localhost:3000/api/payment/success'
+                failure: environment.googleAuth.redirectURL + '/api/payment/failure',
+                pending: environment.googleAuth.redirectURL + '/api/payment/pending',
+                success: environment.googleAuth.redirectURL + '/api/payment/success'
             },
             auto_return: 'approved'
         }
