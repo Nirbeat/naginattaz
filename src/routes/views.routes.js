@@ -216,15 +216,12 @@ router.get('/store', async (req, res, next) => {
 router.get('/payment/:preferenceID', async (req, res, next) => {
     try {
 
+        throw new Error('protegiendo')
         // DESCOMENTAR LUEGO
-        // res.render('payment.handlebars', {
-        //     style: "/styles/main.css"
+        res.render('payment.handlebars', {
+            style: "/styles/main.css"
 
-        // });
-
-        // ELIMINAR LUEGO
-
-        res.render('construction.handlebars')
+        });
     } catch (error) {
         next(error)
     }
