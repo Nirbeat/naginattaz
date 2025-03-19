@@ -5,10 +5,16 @@ import { PurchasesDAO } from "../../database/DAO/PurchasesDAO.js";
 import { customVerification } from "../../middlewares/authToken.js";
 import { createToken } from "../../config/jwt.js";
 import { UsersDAO } from "../../database/DAO/UsersDAO.js";
+import { environment } from "../../config/env.js";
 
 const router = Router();
 
 router.use(customVerification)
+
+router.get('/public-key', async (req, res) => {
+
+    res.json({MPPublicKey: environment.mercadopago.publicKey})
+})
 
 router.get('/success', async (req, res) => {
 

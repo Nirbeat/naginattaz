@@ -85,17 +85,40 @@ router.get('/team', async (req, res) => {
 router.get('/entrenamiento/:section?', async (req, res, next) => {
 
     try {
-        let [courses] = await new CoursesDAO().getAllCourses();
-        const { section } = req.params;
+        let courses;
+        let userPremium = null;
+        const { section = 'todas-las-clases' } = req.params;
         const { user } = req;
 
-        if (!section) { res.redirect('/entrenamiento/todas-las-clases') }
-
-        if (section == 'clases-individuales') {
-            courses = courses.filter(course => course.program == null)
+        if(section == 'todas-las-clases'){
+            if(user.role == 'premium'){
+                [courses] = await new CoursesDAO().getAllClasses();
+            }
+            else{
+                courses = await new CoursesDAO().getUserAvailableClasses(user.email);
+            }
         }
 
-        if (['programas', 'estilos', 'playlists', 'calendario', 'comunidad'].includes(section)) {
+        if (section == 'clases-individuales') {
+            if (user.role == 'premium') {
+                [courses] = await new CoursesDAO().getAllClasses();
+                courses = courses.filter(course => course.program_module_id == null)
+            }else {
+                courses = await new CoursesDAO().getUserAvailableClasses(user.email);
+            }
+        }
+        
+
+        if (section == 'programas') {
+            if (user.role == 'premium') {
+                [courses] = await new CoursesDAO().getAllPrograms();
+                userPremium = true;
+            }else {
+                courses = null;
+            }
+        }
+
+        if (['estilos', 'playlists', 'calendario', 'comunidad'].includes(section)) {
             res.redirect('/construccion')
         }
 
@@ -104,8 +127,9 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
             trainingStyle: '/styles/training.css',
             userData: {
                 name: user.name,
-                profileImg: user.profile_image
+                profileImg: user.profile_image,
             },
+            userPremium,
             courses
         })
 
@@ -113,6 +137,19 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
         next(error)
     }
 });
+
+// NUEVA RUTA PARA VISUALIZAR PROGRAMAS
+router.get('/clases/programa/:programID/:courseID/:lessonID?', async (req, res, next) => {
+
+    const { courseID, programID, lessonID } = req.params;
+
+    try {
+        const programs = await new CoursesDAO().getProgramById(programID)
+
+    } catch (error) {
+        next(error)
+    }
+})
 
 router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
     // console.log('Request received for courseID:', req.params.courseID);
@@ -122,7 +159,7 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
         const coursesDao = new CoursesDAO();
         const { user } = req;
         let { courseID, lessonID } = req.params;
-        const [lessons] = await coursesDao.getCourseLessonsById(courseID);
+        const [lessons] = await coursesDao.getClassLessonsById(courseID);
 
         const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID))
         if (user.role != "premium" && !courseOwned) res.redirect('/store')
@@ -158,7 +195,7 @@ router.get('/store', async (req, res, next) => {
 
     try {
         const { user } = req;
-        const [courses] = await new CoursesDAO().getAllCourses();
+        const [courses] = await new CoursesDAO().getAllClasses();
         res.render('store.handlebars', {
             style: '/styles/main.css',
             storeStyle: '/styles/store.css',
