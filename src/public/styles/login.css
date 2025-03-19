@@ -16,7 +16,7 @@
 }
 
 .main-div {
-    height: 100%;
+    /* height: calc(100vh - 220px); */
     margin: 0;
     display: flex;
     justify-content: center;

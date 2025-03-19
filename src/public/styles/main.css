@@ -249,7 +249,15 @@ button {
 }
 
 /* Footer */
+
+.main-div + footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 footer {
+    width: 100%;
     overflow: hidden;
     background-color: var(--footer-purple);
     color: var(--light-gray);
