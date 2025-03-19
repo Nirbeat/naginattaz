@@ -52,7 +52,7 @@ a {
 
 /* NAVBAR */
 
-.nav_index {
+.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,48 +61,48 @@ a {
     min-height: 4.5rem;
     font-family: 'MonumentExtended', sans-serif;
     position: relative;
-
-    .btn_primary {
-        background-color: var(--soft-purple);
-    }
-
-    .btn_primary a {
-        color: var(--white);
-    }
-
-    .btn_secondary {
-        background-color: var(--light-gray);
-    }
-
-    .btn_secondary a {
-        color: var(--black);
-    }
 }
 
-.nav__left {
+.nav .btn-primary {
+    background-color: var(--soft-purple);
+}
+
+.nav .btn-primary a {
+    color: var(--white);
+}
+
+.nav .btn-secondary {
+    background-color: var(--light-gray);
+}
+
+.nav .btn-secondary a {
+    color: var(--black);
+}
+
+.nav-left {
     display: flex;
     align-items: center;
+    flex-grow: 1;
 }
 
-.nav__logo {
+.nav-logo {
     display: flex;
     margin-right: 2rem;
     padding: 0.75rem;
-
-    img {
-        height: auto;
-    }
 }
 
+.nav-logo img {
+    height: auto;
+}
 
-.nav__links ul {
+.nav-links ul {
     display: flex;
     list-style: none;
     align-items: center;
     padding: 1rem 0;
 }
 
-.nav__links li {
+.nav-links li {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,29 +113,29 @@ a {
     text-transform: uppercase;
 }
 
-.nav__links li a {
+.nav-links li a {
     color: var(--light-gray);
     display: flex;
     align-items: center;
 }
 
-.nav__links li:last-child a {
+.nav-links li:last-child a {
     color: var(--peach);
 }
 
 /* Active Link */
-.nav__links li.active {
+.nav-links li.active {
     background-color: var(--light-gray);
     border-radius: 0.25rem;
     padding: 0.4rem;
 }
 
-.nav__links li.active a {
+.nav-links li.active a {
     color: var(--black);
     font-weight: bold;
 }
 
-.nav__buttons {
+.nav-buttons {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -161,7 +161,7 @@ button {
     width: 20px;
 }
 
-.nav__hamburger {
+.nav-hamburger {
     display: none;
 }
 
@@ -177,7 +177,7 @@ button {
     padding: 0;
 }
 
-.hamburger__line {
+.line {
     width: 100%;
     height: 3px;
     background-color: var(--white);
@@ -185,7 +185,7 @@ button {
 
 
 @media (max-width: 1169px) {
-    .nav__hamburger {
+    .nav-hamburger {
         position: absolute;
         right: 1rem;
         top: 50%;
@@ -201,7 +201,7 @@ button {
         z-index: 10;
     }
 
-    .nav__links ul {
+    .nav-links ul {
         position: absolute;
         top: 100%;
         left: 0;
@@ -212,18 +212,18 @@ button {
         flex-wrap: wrap;
         display: none;
         padding: 1rem 0;
-
-        li {
-            width: 100%;
-            padding: 1rem 0;
-
-            a {
-                color: var(--black);
-            }
-        }
     }
 
-    .nav__buttons {
+    .nav-links ul li {
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .nav-links ul li a {
+        color: var(--black);
+    }
+
+    .nav-buttons {
         position: absolute;
         top: calc(100% + 200px);
         left: 0;
@@ -237,12 +237,12 @@ button {
         margin: 20px 0;
     }
 
-    .nav__links ul.show {
+    .nav-links ul.show {
         display: flex;
         background-color: var(--white);
     }
 
-    .nav__buttons.show {
+    .nav-buttons.show {
         display: flex;
         background-color: var(--white);
     }
