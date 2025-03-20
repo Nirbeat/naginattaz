@@ -33,4 +33,3 @@ export class UsersDAO{
         )
     }
 }
-// new UsersDAO().getOwnedCourses("maxinirbeat@gmail.com").then(data=> console.log(data[0].map(course=> course.id)))
