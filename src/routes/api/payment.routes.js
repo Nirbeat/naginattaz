@@ -20,9 +20,9 @@ router.get('/success', async (req, res) => {
 
     const { user } = req;
     const { purchaseData } = req.cookies;
-    
+
     const [[findUser]] = await new UsersDAO().getUserByEmail(user.email);
-    
+
     if (purchaseData) {
         user.ownedCoursesAndLessons.push(purchaseData.courseId);
         await new PurchasesDAO().saveClassPurchase(findUser.id, parseInt(purchaseData.courseId));
@@ -39,8 +39,12 @@ router.get('/suscription', async (req, res) => {
 
     try {
 
-        const { id } = await suscriptionPayment();
-        res.redirect('/suscribete/' + id)
+        const { user } = req;
+        if (user.role == 'premium') res.redirect('/entrenamiento')
+        else {
+            const { id } = await suscriptionPayment();
+            res.redirect('/suscribete/' + id)
+        }
     } catch (error) {
         console.log(error.message)
     }
