@@ -35,7 +35,7 @@ export async function suscriptionPayment() {
                     title: 'Naginatta de Diamante',
                     quantity: 1,
                     currency_id: 'ARS',
-                    unit_price: 1,
+                    unit_price: 39000,
                     description: 'membresia mensual'
                 }
             ],
