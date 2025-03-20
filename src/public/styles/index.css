@@ -36,11 +36,10 @@
 
 @keyframes fade {
     from {
-        opacity: .4
+        opacity: .4;
     }
-
     to {
-        opacity: 1
+        opacity: 1;
     }
 }
 
@@ -133,10 +132,10 @@
 }
 
 .video-text .btn-primary {
-    background-color: var(--lilac-soft);
+    background-color: var(--soft-purple);
     color: var(--white);
     border: none;
-    padding: 1rem 4rem;
+    padding: 0.5rem 4rem;
     cursor: pointer;
     text-transform: uppercase;
     border-radius: 0.25rem;
@@ -144,10 +143,6 @@
     font-size: clamp(0.5rem, 0.75vw, 1rem);
     letter-spacing: 0.15rem;
     margin-top: 1rem;
-}
-
-.video-text .btn-primary:hover {
-    transform: scale(1.1);
 }
 
 /* Aprende Section */
@@ -206,10 +201,6 @@
     color: #ff00ff;
 }
 
-/* .words span:hover {
-    color: var(--blue); 
-} */
-
 .words span:hover {
     text-shadow: 0 0 10px currentColor;
     transform: scale(1.1);
@@ -238,14 +229,12 @@
     0% {
         transform: translateX(0);
     }
-
     100% {
         transform: translateX(-100%);
     }
 }
 
 @media (max-width: 768px) {
-
     .video-section {
         flex-direction: column;
         height: auto;
@@ -366,19 +355,15 @@ h4 {
     0% {
         translate: 0px;
     }
-
     25% {
         translate: 5px;
     }
-
     50% {
         translate: 5px 5px;
     }
-
     75% {
         translate: 0px 5px;
     }
-
     100% {
         translate: 0px;
     }
@@ -405,9 +390,8 @@ h4 {
     font-size: clamp(1rem, 1.5vw, 2rem);
     font-weight: 700;
     color: var(--magenta);
-    background-color: var(--soft-purple);
+    background-color: var(--pastel-pink);
     text-transform: uppercase;
-    color: var(--white);
 }
 
 .premium-card h6 {
@@ -442,12 +426,12 @@ h4 {
 
 .premium-card .content + p span {
     font-size: clamp(0.75rem, 1.5vw, 1.25rem);
-    color: var(--pink-pale);
 }
 
 .premium-card .btn-primary {
-    background-color: var(--soft-purple);
-    color: var(--white);
+    background-color: var(--pastel-pink);
+    color: var(--magenta);
+    border: none;
     padding: 2rem 4rem;
     cursor: pointer;
     text-transform: uppercase;
@@ -461,14 +445,14 @@ h4 {
 
 .premium-section h5 {
     font-size: clamp(1.5rem, 2.5vw, 2rem);
-    color: var(--black);
+    color: var(--white);
     text-align: center;
     margin: 2rem 0;
 }
 
 .premium-section p {
     font-size: clamp(1rem, 2.5vw, 1.5rem);
-    color: var(--black);
+    color: var(--white);
     text-align: center;
     margin: 2rem 0;
 }

@@ -6,6 +6,31 @@ import { viewsRoutesErrorHandler } from "../middlewares/routes.js";
 
 const router = Router();
 
+const images = {
+    banners: {
+        first: '/images/banners/banner1.png',
+        second: '/images/banners/banner2.png',
+        store: '/images/banners/store.jpg'
+    },
+    tecnicas: {
+        afro: '/images/tecnicas/afro.png',
+        afro_soon: '/images/tecnicas/afro_soon.png',
+        dance_hall: '/images/tecnicas/dance_hall.png',
+        floorwork: '/images/tecnicas/floorwork.png',
+        heels: '/images/tecnicas/heels.png',
+        herramientas: '/images/tecnicas/herramientas.png',
+        hiphop: '/images/tecnicas/hiphop.png',
+        house_dance: '/images/tecnicas/house_dance.png',
+        lite_feet: '/images/tecnicas/lite_feet.png',
+        lite_feet_soon: '/images/tecnicas/lite_feet_soon.png',
+        popping_soon: '/images/tecnicas/popping_soon.png',
+        popping: '/images/tecnicas/popping.png',
+        vogue_soon: '/images/tecnicas/vogue_soon.png',
+        vogue: '/images/tecnicas/vogue.png',
+        waacking: '/images/tecnicas/waacking.png'
+    }
+};
+
 router.get('/login', async (req, res) => {
 
     res.render('login.handlebars', {
@@ -27,12 +52,7 @@ router.get('/', async (req, res) => {
             name: user.name,
             profileImg: user.profile_image
         } : null,
-        images: {
-            banners: {
-                mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
-                web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png' }
-            }
-        },
+        images: images,
         user
     });
 });
@@ -55,7 +75,6 @@ router.get('/policies', async (req, res) => {
 router.get('/team', async (req, res) => {
 
     const { user } = req;
-    console.log(user)
     let [teamMembers] = await new UsersDAO().getTeamMembers();
 
     // PASAR LUEGO A UN DTO
@@ -201,12 +220,7 @@ router.get('/store', async (req, res, next) => {
                 name: user.name,
                 profileImg: user.profile_image
             } : null,
-            images: {
-                banners: {
-                    mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
-                    web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png', store: 'images/banners/BannerNag2.jpg' },
-                }
-            }
+            images: images,
         })
     } catch (error) {
         next(error)
