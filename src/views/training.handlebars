@@ -49,7 +49,9 @@
     </aside>
 
     <section id="js-allClasses" style="display: block;">
-        <h1>Bienvenido {{userData.name}}</h1>
+        <header>
+            <h1>Bienvenido {{userData.name}}</h1>
+        </header>
         <article>
             <div class="grid-auto-fill">
                 {{#if courses.length}}
@@ -98,5 +100,12 @@
 
     function toggleHamburgerMenu() {
         const navLinks = document.querySelector('.nav_links');
+        const botonera = document.querySelector('.botonera');
+        navLinks.classList.toggle('show');
+        if (botonera) {
+            botonera.classList.toggle('show');
+        }
     }
+
+    document.querySelector('.hamburger').addEventListener('click', toggleHamburgerMenu);
 </script>
