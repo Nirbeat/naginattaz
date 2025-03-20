@@ -1,6 +1,7 @@
 import { DBConnection } from "../database.js";
 import { UsersDAO } from "./UsersDAO.js";
 
+
 export class CoursesDAO{
 
     async getAllPrograms(){
