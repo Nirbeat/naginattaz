@@ -55,7 +55,6 @@ router.get('/policies', async (req, res) => {
 router.get('/team', async (req, res) => {
 
     const { user } = req;
-    console.log(user)
     let [teamMembers] = await new UsersDAO().getTeamMembers();
 
     // PASAR LUEGO A UN DTO
@@ -148,44 +147,57 @@ router.get('/clases/programa/:programID/:courseID/:lessonID?', async (req, res, 
 })
 
 router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
-    // console.log('Request received for courseID:', req.params.courseID);
-
     try {
-
         const coursesDao = new CoursesDAO();
         const { user } = req;
         let { courseID, lessonID } = req.params;
+        // Obtener las clases
         const [lessons] = await coursesDao.getClassLessonsById(courseID);
+        const warmingLesson = await coursesDao.getWarmingClass();
+        warmingLesson.class_id = courseID;
 
-        const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID))
-        if (user.role != "premium" && !courseOwned) res.redirect('/store')
-        else {
-            // ESTO REDIRECCIONA AL PRIMER VIDEO DEL CURSO
-            if (!lessonID) {
-                lessonID = lessons[0].id;
-                res.status().redirect(`/clases/${courseID}/${lessonID}`)
-            }
-            else {
-                const [[course]] = await coursesDao.getClassById(courseID);
-                res.render('lessons.handlebars', {
-                    style: '/styles/main.css',
-                    lessonsStyle: '/styles/lessons.css',
-                    lessons,
-                    courseName: course.class_name,
-                    userData: {
-                        profileImg: user.profile_image
-                    },
-                    currentLesson: function () {
-                        const current = lessons.find(lesson => lesson.id == lessonID);
-                        return current.lesson_url;
-                    }
-                })
-            };
+        const fullLessons = [warmingLesson, ...lessons];
+
+        // Validar acceso del usuario
+        const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID));
+        if (user.role !== "premium" && !courseOwned) {
+            return res.redirect('/store');
         }
+
+        // Si no hay lessonID, asignar al primer video (sin redirigir)
+        if (!lessonID) {
+            lessonID = fullLessons[0]?.id; // Usar ID de la primera lección
+        }
+
+        // Buscar la lección actual
+        const currentLesson = fullLessons.find(lesson => lesson.id ==lessonID);
+
+        if(!currentLesson){
+            res.redirect(`/clases/${courseID}`)
+        }
+        // Obtener los datos del curso
+        const [[course]] = await coursesDao.getClassById(courseID);
+        console.log('Curso obtenido:', course);
+
+        // Renderizar la página
+        res.render('lessons.handlebars', {
+            style: '/styles/main.css',
+            lessonsStyle: '/styles/lessons.css',
+            fullLessons,
+            courseName: course.class_name,
+            userData: {
+                profileImg: user.profile_image
+            },
+            currentLesson
+        });
     } catch (error) {
-        next(error)
+        next(error);
     }
 });
+
+
+
+
 
 router.get('/store', async (req, res, next) => {
 
@@ -217,14 +229,12 @@ router.get('/payment/:preferenceID', async (req, res, next) => {
     try {
 
         // DESCOMENTAR LUEGO
-        // res.render('payment.handlebars', {
-        //     style: "/styles/main.css"
+        throw new Error('protegiendo')
+        res.render('payment.handlebars', {
+            style: "/styles/main.css"
 
-        // });
+        });
 
-        // ELIMINAR LUEGO
-
-        res.render('construction.handlebars')
     } catch (error) {
         next(error)
     }

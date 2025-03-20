@@ -20,6 +20,17 @@ export class CoursesDAO{
         return program
     }
 
+    async getWarmingClass(){
+        const [warmings] = await DBConnection.query(
+            'SELECT * FROM  lessons WHERE name = "Calentamiento"'
+            // 'SELECT * FROM lessons WHERE id = 71'
+        );
+        
+        const index = Math.floor(Math.random() * warmings.length);
+        return warmings[index];
+
+        return warmings
+    }
     async getAllClasses(){
 
         const classes = await DBConnection.query(
