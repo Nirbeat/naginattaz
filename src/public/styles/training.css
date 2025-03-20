@@ -156,6 +156,43 @@
 
 }
 
+/* Fallback for @container */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+
+        .logo_container {
+            margin-bottom: 20px;
+        }
+
+        .nav_links {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .botonera {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-hamburger {
+            display: block;
+            position: absolute;
+            right: 1rem;
+            top: 4rem;
+        }
+    }
+
+    /* Fallback for :has() */
+    .nav_links.show,
+    .botonera.show {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+}
+
 header {
     grid-area: nav;
     text-align: center;
