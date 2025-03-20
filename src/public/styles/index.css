@@ -202,7 +202,8 @@
 }
 
 .words span:hover {
-    color: var(--blue);
+    text-shadow: 0 0 10px currentColor;
+    transform: scale(1.1);
 }
 
 /* Scrolling Text Section */
