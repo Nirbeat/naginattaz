@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navButtons = document.querySelector('.nav-buttons');
 
     hamburger.addEventListener('click', () => {
-        console.log(`Hamburger clicked`);
         navLinksUl.classList.toggle('show');
         navButtons.classList.toggle('show');
     });

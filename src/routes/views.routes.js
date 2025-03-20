@@ -31,68 +31,93 @@ const images = {
     }
 };
 
-router.get('/login', async (req, res) => {
+router.get('/login', async (req, res, next) => {
 
-    res.render('login.handlebars', {
-        style: '/styles/main.css',
-        loginStyles: '/styles/login.css'
-    });
+    try {
+
+        res.render('login.handlebars', {
+            style: '/styles/main.css',
+            loginStyles: '/styles/login.css'
+        });
+    } catch (error) {
+        next(error)
+    }
 });
 
 router.use(customVerification);
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
 
-    const { user } = req;
-    res.render('index.handlebars', {
-        style: '/styles/main.css',
-        indexStyle: '/styles/index.css',
-        profileStyle: '/styles/profile.css',
-        userData: user ? {
-            name: user.name,
-            profileImg: user.profile_image
-        } : null,
-        images: images,
-        user
-    });
+    try {
+        const { user } = req;
+        res.render('index.handlebars', {
+            style: '/styles/main.css',
+            indexStyle: '/styles/index.css',
+            profileStyle: '/styles/profile.css',
+            userData: user ? {
+                name: user.name,
+                profileImg: user.profile_image
+            } : null,
+            images: images,
+            user
+        });
+    } catch (error) {
+        next(error)
+    }
+
 });
 
-router.get('/terms', async (req, res) => {
+router.get('/terms', async (req, res, next) => {
 
-    res.render('condition-terms.handlebars', {
-        style: '/styles/main.css',
-        legalStyle: '/styles/legals.css'
-    });
+    try {
+
+        res.render('condition-terms.handlebars', {
+            style: '/styles/main.css',
+            legalStyle: '/styles/legals.css'
+        });
+    } catch (error) {
+        next(error)
+    }
 });
 
-router.get('/policies', async (req, res) => {
-    res.render('policy.handlebars', {
-        style: '/styles/main.css',
-        legalStyle: '/styles/policy.css'
-    });
+router.get('/policies', async (req, res, next) => {
+    try {
+
+        res.render('policy.handlebars', {
+            style: '/styles/main.css',
+            legalStyle: '/styles/policy.css'
+        });
+    } catch (error) {
+        next(error)
+    }
 });
 
-router.get('/team', async (req, res) => {
+router.get('/team', async (req, res, next) => {
 
-    const { user } = req;
-    let [teamMembers] = await new UsersDAO().getTeamMembers();
+    try {
+        const { user } = req;
+        let [teamMembers] = await new UsersDAO().getTeamMembers();
 
-    // PASAR LUEGO A UN DTO
-    teamMembers = teamMembers.map(({ name, skills, instagramURL, tiktokURL, profile_image }) => {
-        return {
-            name, skills, instagramURL, tiktokURL, profile_image
-        }
-    })
-    res.render('team.handlebars', {
-        style: '/styles/main.css',
-        teamStyles: '/styles/team.css',
-        profileStyle: '/styles/profile.css',
-        userData: user ? {
-            name: user.name,
-            profileImg: user.profile_image
-        } : null,
-        teamMembers
-    });
+        // PASAR LUEGO A UN DTO
+        teamMembers = teamMembers.map(({ name, skills, instagramURL, tiktokURL, profile_image }) => {
+            return {
+                name, skills, instagramURL, tiktokURL, profile_image
+            }
+        })
+        res.render('team.handlebars', {
+            style: '/styles/main.css',
+            teamStyles: '/styles/team.css',
+            profileStyle: '/styles/profile.css',
+            userData: user ? {
+                name: user.name,
+                profileImg: user.profile_image
+            } : null,
+            teamMembers
+        });
+    } catch (error) {
+        next(error)
+    }
+
 });
 
 router.use(ensureAuthenticated);
@@ -105,11 +130,11 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
         const { section = 'todas-las-clases' } = req.params;
         const { user } = req;
 
-        if(section == 'todas-las-clases'){
-            if(user.role == 'premium'){
+        if (section == 'todas-las-clases') {
+            if (user.role == 'premium') {
                 [courses] = await new CoursesDAO().getAllClasses();
             }
-            else{
+            else {
                 courses = await new CoursesDAO().getUserAvailableClasses(user.email);
             }
         }
@@ -118,17 +143,17 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
             if (user.role == 'premium') {
                 [courses] = await new CoursesDAO().getAllClasses();
                 courses = courses.filter(course => course.program_module_id == null)
-            }else {
+            } else {
                 courses = await new CoursesDAO().getUserAvailableClasses(user.email);
             }
         }
-        
+
 
         if (section == 'programas') {
             if (user.role == 'premium') {
                 [courses] = await new CoursesDAO().getAllPrograms();
                 userPremium = true;
-            }else {
+            } else {
                 courses = null;
             }
         }
@@ -167,42 +192,50 @@ router.get('/clases/programa/:programID/:courseID/:lessonID?', async (req, res, 
 })
 
 router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
-    // console.log('Request received for courseID:', req.params.courseID);
-
     try {
-
         const coursesDao = new CoursesDAO();
         const { user } = req;
         let { courseID, lessonID } = req.params;
-        const [lessons] = await coursesDao.getClassLessonsById(courseID);
 
-        const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID))
-        if (user.role != "premium" && !courseOwned) res.redirect('/store')
-        else {
-            // ESTO REDIRECCIONA AL PRIMER VIDEO DEL CURSO
-            if (!lessonID) {
-                lessonID = lessons[0].id;
-                res.status().redirect(`/clases/${courseID}/${lessonID}`)
-            }
-            else {
-                const [[course]] = await coursesDao.getClassById(courseID);
-                res.render('lessons.handlebars', {
-                    style: '/styles/main.css',
-                    lessonsStyle: '/styles/lessons.css',
-                    lessons,
-                    courseName: course.class_name,
-                    userData: {
-                        profileImg: user.profile_image
-                    },
-                    currentLesson: function () {
-                        const current = lessons.find(lesson => lesson.id == lessonID);
-                        return current.lesson_url;
-                    }
-                })
-            };
+        const [lessons] = await coursesDao.getClassLessonsById(courseID);
+        const warmingLesson = await coursesDao.getWarmingClass();
+        const finalLesson = await coursesDao.getFinalLesson();
+
+        warmingLesson.class_id = courseID;
+        finalLesson.class_id = courseID;
+        console.log(finalLesson)
+
+        const fullLessons = [warmingLesson, ...lessons, finalLesson];
+
+        const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID));
+        if (user.role !== "premium" && !courseOwned) {
+            return res.redirect('/store');
         }
+
+        if (!lessonID) {
+            lessonID = fullLessons[0]?.id;
+        }
+
+        const currentLesson = fullLessons.find(lesson => lesson.id == lessonID);
+
+        if (!currentLesson) {
+            res.redirect(`/clases/${courseID}`)
+        }
+
+        const [[course]] = await coursesDao.getClassById(courseID);
+
+        res.render('lessons.handlebars', {
+            style: '/styles/main.css',
+            lessonsStyle: '/styles/lessons.css',
+            fullLessons,
+            courseName: course.class_name,
+            userData: {
+                profileImg: user.profile_image
+            },
+            currentLesson
+        });
     } catch (error) {
-        next(error)
+        next(error);
     }
 });
 
@@ -234,7 +267,6 @@ router.get('/payment/:preferenceID', async (req, res, next) => {
         // DESCOMENTAR LUEGO
         res.render('payment.handlebars', {
             style: "/styles/main.css"
-
         });
     } catch (error) {
         next(error)
@@ -267,5 +299,14 @@ router.get('*', (req, res, next) => {
     }
 });
 
+router.get('/server-error', async (err, req, res, next) => {
+    try {
+        res.render('server-error.handlebars', {
+            error: err.message
+        })
+    } catch (error) {
+        next(error)
+    }
+})
 router.use(viewsRoutesErrorHandler);
 export default router;

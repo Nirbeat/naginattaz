@@ -6,7 +6,6 @@ function slashImage() {
     const container = document.querySelector('.container');
     const body = document.body;
     const gifBackground = document.getElementById('gifBackground');
-    console.log(`gifBackground: ${gifBackground}`);
 
     // Change the clip-path for a diagonal reveal
     image.style.clipPath = 'polygon(0 0, 100% 0, 0 100%)';

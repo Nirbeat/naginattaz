@@ -1,6 +1,7 @@
 import { DBConnection } from "../database.js";
 import { UsersDAO } from "./UsersDAO.js";
 
+
 export class CoursesDAO{
 
     async getAllPrograms(){
@@ -20,6 +21,22 @@ export class CoursesDAO{
         return program
     }
 
+    async getWarmingClass(){
+        const [warmings] = await DBConnection.query(
+            'SELECT * FROM  lessons WHERE name = "Calentamiento"'
+        );
+        
+        const index = Math.floor(Math.random() * warmings.length);
+        return warmings[index];
+    }
+
+    async getFinalLesson(){
+        const [[final]] = await DBConnection.query(
+            'SELECT * FROM lessons WHERE name = "Final de clase"'
+        );
+
+        return final;
+    }
     async getAllClasses(){
 
         const classes = await DBConnection.query(
