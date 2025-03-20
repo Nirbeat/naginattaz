@@ -100,5 +100,12 @@
 
     function toggleHamburgerMenu() {
         const navLinks = document.querySelector('.nav_links');
+        const botonera = document.querySelector('.botonera');
+        navLinks.classList.toggle('show');
+        if (botonera) {
+            botonera.classList.toggle('show');
+        }
     }
+
+    document.querySelector('.hamburger').addEventListener('click', toggleHamburgerMenu);
 </script>

@@ -148,6 +148,11 @@
         }
     }
 
+    .nav_links.show,
+    .botonera.show {
+        display: flex !important;
+    }
+
 }
 
 header {
