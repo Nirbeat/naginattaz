@@ -32,4 +32,11 @@ export class UsersDAO{
             [email]
         )
     }
+
+    async setRoleByUserEmail(role, email){
+        await DBConnection.query(
+            'UPDATE users SET role = ? WHERE email = ?',
+            [role, email]
+        )
+    }
 }

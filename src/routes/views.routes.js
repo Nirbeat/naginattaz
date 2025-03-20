@@ -260,10 +260,24 @@ router.get('/store', async (req, res, next) => {
     }
 });
 
+router.get('/suscribete/:preferenceID', async (req, res, next) =>{
+    try {
+
+        // throw new Error('protegiendo')
+        // DESCOMENTAR LUEGO
+        res.render('payment.handlebars', {
+            style: "/styles/main.css"
+        });
+    } catch (error) {
+        // next(error)
+        console.log(error)
+    }
+})
+
 router.get('/payment/:preferenceID', async (req, res, next) => {
     try {
 
-        throw new Error('protegiendo')
+        // throw new Error('protegiendo')
         // DESCOMENTAR LUEGO
         res.render('payment.handlebars', {
             style: "/styles/main.css"
