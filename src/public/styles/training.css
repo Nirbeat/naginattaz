@@ -315,3 +315,8 @@ section {
         font-size: 0.875rem;
     }
 }
+
+a:visited {
+    color: inherit; /* Match the default link color */
+    text-decoration: none; /* Remove underline */
+}
