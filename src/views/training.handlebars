@@ -2,31 +2,7 @@
 <script src="https://player.vimeo.com/api/player.js" defer></script>
 
 <div class="wrapper">
-    <nav>
-        <div class="left">
-            <div class="logo_container">
-                <a href="/">
-                    <img src="/images/main-logo.png" />
-                </a>
-            </div>
-
-            <div class="nav_links">
-                <a href="/entrenamiento" class="active">Clases</a>
-                <a href="/nagidatta">Nagidatta</a>
-            </div>
-        </div>
-
-
-        {{>profile}}
-        <div class="nav-hamburger" id="hamburger">
-            <button type="button" class="hamburger">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-            </button>
-        </div>
-    </nav>
-
+    {{>trainingNav}}
     <aside>
         <ul>
             <li><a href="/entrenamiento/todas-las-clases">Todas las clases</a></li>
@@ -88,17 +64,4 @@
         // Toggle the active class on the clicked li
         element.classList.toggle('active');
     }
-
-    function toggleHamburgerMenu() {
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.querySelector('.nav_links');
-        const botonera = document.querySelector('.botonera');
-        const aside = document.getElementsByTagName('aside')[0];
-
-        console.log(`ham clicked`);
-        navLinks.classList.toggle('showing');
-        botonera.classList.toggle('showing');
-        aside.classList.toggle('showing');
-    }
-    hamburger.addEventListener('click', toggleHamburgerMenu);
 </script>

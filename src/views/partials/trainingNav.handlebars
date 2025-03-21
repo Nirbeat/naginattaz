@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="/styles/trainingNav.css">
+
+<nav>
+    <div class="left">
+        <div class="logo_container">
+            <a href="/">
+                <img src="/images/main-logo.png" />
+            </a>
+        </div>
+
+        <div class="nav_links">
+            <a href="/entrenamiento" class="active">Clases</a>
+            <a href="/nagidatta">Nagidatta</a>
+        </div>
+    </div>
+
+
+    {{>profile}}
+    <div class="nav-hamburger" id="hamburger">
+        <button type="button" class="hamburger">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+    </div>
+</nav>
+
+<script>
+
+    function toggleHamburgerMenu() {
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav_links');
+        const botonera = document.querySelector('.botonera');
+        const aside = document.getElementsByTagName('aside')[0];
+
+        console.log(`ham clicked`);
+        if (navLinks) {
+            navLinks.classList.toggle('showing');
+        }
+        if (botonera) {
+            botonera.classList.toggle('showing');
+        }
+        if (aside) {
+            aside.classList.toggle('showing');
+        }
+    }
+    hamburger.addEventListener('click', toggleHamburgerMenu);
+</script>

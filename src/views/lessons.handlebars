@@ -6,32 +6,8 @@
 
 </head>
 
-<div class="nav-container">
-    <nav>
-        {{!-- Logo --}}
-        <div class="logo_container">
-            <a href="/">
-                <img src="/images/main-logo.png" alt="NAGINATTAZ logo in black."
-                    class="navbar10_logo icon-height-xlarge" />
-            </a>
-        </div>
-        {{!-- Menu --}}
-        <div class="nav_links">
-            <a href="/">Inicio</a>
-            <a href="/entrenamiento">Clases</a>
-            <a href="/nagidatta">Nagidatta</a>
-        </div>
-        {{!-- Botonera --}}
-        {{>profile}}
-        <div class="nav-hamburger">
-            <button type="button" class="hamburger" onclick="toggleNav()">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-            </button>
-        </div>
-    </nav>
-</div>
+    {{>trainingNav}}
+
 
 <div class="main-section">
 
