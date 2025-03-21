@@ -266,6 +266,7 @@ router.get('/store', async (req, res, next) => {
         const { user } = req;
         let [courses] = await new CoursesDAO().getAllClasses();
         if (courses) {
+            courses = courses.filter(course=> course.program_module_id == null)
             courses = courses.map(course => {
                 let teacherIds = [];
                 try {
