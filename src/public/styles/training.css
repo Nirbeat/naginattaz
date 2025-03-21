@@ -147,6 +147,7 @@ nav .left {
 
     .showing {
         display: flex !important;
+        animation: fadeIn 0.5s;
     }
 
     .nav-hamburger {
@@ -371,6 +372,15 @@ header h1 {
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--blue);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }    
 }
 
 @supports not (selector(:has(*))) {
