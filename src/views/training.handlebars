@@ -34,7 +34,8 @@
                                 {{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}
                             </h3>
                             <p class="course-level">{{this.class_level}}</p>
-                            <p class="course-price">
+                            <p class="course-price"
+                                data-price="{{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}">
                                 ${{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}
                             </p>
                             <p>{{#each this.teacherNames}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
@@ -65,4 +66,17 @@
         // Toggle the active class on the clicked li
         element.classList.toggle('active');
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".course-price").forEach(el => {
+            let price = el.getAttribute("data-price");
+            if (price !== null && price !== "") {
+                let formattedPrice = Number(price).toLocaleString("es-ES", { minimumFractionDigits: 0 });
+                console.log(`Price: ${price}, formatted: ${formattedPrice}`);
+                el.textContent = `$${formattedPrice}`;
+            } else {
+                el.textContent = "$0";
+            }
+        });
+    });
 </script>
