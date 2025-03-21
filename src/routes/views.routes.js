@@ -31,6 +31,71 @@ const images = {
     }
 };
 
+router.get('/trainingTEST', async (req, res, next) => {
+    
+    try {
+        let courses;
+        const { section = 'todas-las-clases' } = req.params;
+        let user = {
+            role: 'premium',
+            name: 'Jorge',
+            email: 'jorge@gmail.com',
+            profile_image: '/images/profiles/profile1.jpg'
+        }
+        let userPremium = null;
+
+        // if (section == 'todas-las-clases') {
+        //     if (user.role == 'premium') {
+        //         [courses] = await new CoursesDAO().getAllClasses();
+        //     }
+        //     else {
+        //         courses = await new CoursesDAO().getUserAvailableClasses(user.email);
+        //     }
+        // }
+        [courses] = await new CoursesDAO().getAllClasses();
+
+        if (section == 'clases-individuales') {
+            // if (user.role == 'premium') {
+            //     [courses] = await new CoursesDAO().getAllClasses();
+            //     courses = courses.filter(course => course.program_module_id == null)
+            // } else {
+            //     courses = await new CoursesDAO().getUserAvailableClasses(user.email);
+            // }
+            [courses] = await new CoursesDAO().getAllClasses();
+            courses = courses.filter(course => course.program_module_id == null)
+        }
+
+
+        if (section == 'programas') {
+            // if (user.role == 'premium') {
+            //     [courses] = await new CoursesDAO().getAllPrograms();
+            //     userPremium = true;
+            // } else {
+            //     courses = null;
+            // }
+            [courses] = await new CoursesDAO().getAllPrograms();
+        }
+
+        if (['estilos', 'playlists', 'calendario', 'comunidad'].includes(section)) {
+            res.redirect('/construccion')
+        }
+
+        res.render('training2.handlebars', {
+            style: '/styles/main.css',
+            trainingStyle: '/styles/training2.css',
+            userData: {
+                name: user.name,
+                profileImg: user.profile_image,
+            },
+            userPremium,
+            courses
+        })
+
+    } catch (error) {
+        next(error)
+    }
+});
+
 router.get('/login', async (req, res, next) => {
 
     try {

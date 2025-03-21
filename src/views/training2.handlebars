@@ -1,0 +1,17 @@
+<div class="wrapper">
+    {{>training-nav}}
+
+</div>
+
+<style>
+    .wrapper {
+        display: grid;
+        min-height: 100dvh;
+        grid-template-areas:
+            "nav nav nav"
+            "aside main main"
+            "aside main main";
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-rows: auto 1fr 1fr;
+    }
+</style>
