@@ -34,7 +34,7 @@ export class PurchasesDAO{
 
         const newPurchase = await DBConnection.query(
             'INSERT INTO purchases(user_id, purchase_type) VALUES (?,?)',
-            [userId, 'subscription']
+            [userId, 'suscription']
         );
 
         return newPurchase;

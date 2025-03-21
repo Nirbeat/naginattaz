@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { CoursesDAO } from "../../database/DAO/CoursesDAO.js";
-import { paymentProcessing } from "../../config/mercadopago.js";
+import { paymentProcessing, suscriptionPayment } from "../../config/mercadopago.js";
 import { PurchasesDAO } from "../../database/DAO/PurchasesDAO.js";
 import { customVerification } from "../../middlewares/authToken.js";
 import { createToken } from "../../config/jwt.js";
@@ -13,37 +13,59 @@ router.use(customVerification)
 
 router.get('/public-key', async (req, res) => {
 
-    res.json({MPPublicKey: environment.mercadopago.publicKey})
+    res.json({ MPPublicKey: environment.mercadopago.publicKey })
 })
 
 router.get('/success', async (req, res) => {
 
-    const {courseId} = req.cookies.purchaseData;
-    const {user} = req;
-    user.ownedCoursesAndLessons.push(courseId);
+    const { user } = req;
+    const { purchaseData } = req.cookies;
 
     const [[findUser]] = await new UsersDAO().getUserByEmail(user.email);
 
-    await new PurchasesDAO().saveClassPurchase(findUser.id, parseInt(courseId));
+    if (purchaseData) {
+        user.ownedCoursesAndLessons.push(purchaseData.courseId);
+        await new PurchasesDAO().saveClassPurchase(findUser.id, parseInt(purchaseData.courseId));
+        res.cookie('jwt', createToken(user)).redirect(`/clases/${courseId}`);
+    } else {
+        await new PurchasesDAO().saveSubscription();
+        await new UsersDAO().setRoleByUserEmail('premium', user.email)
+        res.cookie('jwt', createToken(user)).redirect(`/entrenamiento`);
+    }
 
-    res.cookie('jwt',createToken(user)).redirect(`/clases/${courseId}`);
+});
+
+router.get('/suscription', async (req, res) => {
+
+    try {
+
+        const { user } = req;
+        if (user.role == 'premium') res.redirect('/entrenamiento')
+        else {
+            const { id } = await suscriptionPayment();
+            res.redirect('/suscribete/' + id)
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+
 })
 
 router.get('/:courseID', async (req, res) => {
 
-    const {user} = req;
-    const {courseID} = req.params
-    
+    const { user } = req;
+    const { courseID } = req.params
+
     try {
-        if(user.ownedCoursesAndLessons.includes(courseID)){
+        if (user.ownedCoursesAndLessons.includes(courseID)) {
             res.redirect(`/clases/${courseID}`)
-        }else{
+        } else {
             const [[courses]] = await new CoursesDAO().getClassById(courseID);
 
-            const {items:course, id} = await paymentProcessing(courses);
-            res.cookie('purchaseData', {courseId : course[0].id}, {httpOnly: true, maxAge: 30*60*1000}).redirect(`/payment/${id}`)
+            const { items: course, id } = await paymentProcessing(courses);
+            res.cookie('purchaseData', { courseId: course[0].id }, { httpOnly: true, maxAge: 30 * 60 * 1000 }).redirect(`/payment/${id}`)
         }
-        
+
     } catch (error) {
         console.log(error.message)
     }

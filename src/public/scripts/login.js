@@ -1,8 +1,8 @@
+
 const loginButton = document.getElementById('slash-button');
-loginButton.addEventListener('click', slashImage);
 
 function slashImage() {
-    const image = document.querySelector('.image');
+    const image = document.querySelector('.main-img');
     const container = document.querySelector('.container');
     const body = document.body;
     const gifBackground = document.getElementById('gifBackground');
@@ -14,8 +14,8 @@ function slashImage() {
     body.style.background = 'white';
     setTimeout(() => {
 
-        body.style.backgroundColor = '#8EC5FC';
-        body.style.backgroundImage = 'linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)';
+        body.style.backgroundColor = '#430e53';
+        body.style.backgroundImage = 'linear-gradient(0.25turn, #111111, #26152e, #430e53, #382142, #0f0f0f);';
 
         
     }, 300); // Flash duration
@@ -35,3 +35,5 @@ function slashImage() {
         container.style.animation = 'none'; // Reset the animation
     }, 500); // Match duration of shake animation
 };
+
+loginButton.addEventListener('click', slashImage);

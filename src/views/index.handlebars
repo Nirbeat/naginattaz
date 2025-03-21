@@ -7,11 +7,11 @@
     {{!-- Slideshow --}}
     <section>
         <div class="slideshow-container">
-            <div class="mySlides fade">
-                <img src={{images.banners.web.first}}>
+            <div class="fade mySlides">
+                <img src={{images.banners.first}}>
             </div>
-            <div class="mySlides fade">
-                <img src={{images.banners.web.second}}>
+            <div class="fade mySlides">
+                <img src={{images.banners.second}}>
             </div>
             <div class="dot-container">
                 <span class="dot"></span>
@@ -25,7 +25,7 @@
     <section>
         <div class="video-section">
             <div class="video-container">
-                <iframe src="https://player.vimeo.com/video/1019631883?&player_&controls=1&autoplay=1&muted=1&loop=1"
+                <iframe src="https://player.vimeo.com/video/1067852286?badge=0&amp;autoplay=1&amp;muted=1&amp;player_id=0&amp;app_id=58479"
                     frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                     title="nagi video">
                 </iframe>
@@ -42,7 +42,7 @@
                     <p>Profesores de primer nivel listos para inspirarte SIEMPRE</p>
                     <p>¡Descubrí nuestras clases y unite a nuestra comunidad!</p>
                 </div>
-                <a href="./pages/subscription.html" class="btn-primary">
+                <a class="btn-primary">
                     Ver mas
                 </a>
             </div>
@@ -82,114 +82,111 @@
             </header>
             {{!-- Grid --}}
             <div class="grid-auto-fill">
-                <a href="./pages/clases.html" title="Hip Hop" class="grid-item">
+                <a title="Hip Hop" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Hip Hop Dance Style">
+                            <img src="{{images.tecnicas.hiphop}}" loading="lazy" alt="Hip Hop">
                         </div>
                         <div class="grid-text">
                             <p>Hip Hop</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="Dancehall" class="grid-item">
+                <a title="Dancehall" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Dancehall Dance Style">
+                            <img src="{{images.tecnicas.dance_hall}}" loading="lazy" alt="Dancehall">
                         </div>
                         <div class="grid-text">
                             <p>Dancehall</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="House Dance" class="grid-item">
+                <a title="House Dance" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="House Dance Style">
+                            <img src="{{images.tecnicas.house_dance}}" loading="lazy" alt="House">
                         </div>
                         <div class="grid-text">
                             <p>House Dance</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="Waacking" class="grid-item">
+                <a title="Waacking" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Waacking Dance Style">
+                            <img src="{{images.tecnicas.waacking}}" loading="lazy" alt="Waacking">
                         </div>
                         <div class="grid-text">
                             <p>Waacking</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="Heels" class="grid-item">
+                <a title="Heels" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Heels Dance Style">
+                            <img src="{{images.tecnicas.heels}}" loading="lazy" alt="Heels">
                         </div>
                         <div class="grid-text">
                             <p>Heels</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="Floorwork" class="grid-item">
+                <a title="Floorwork" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Floorwork Dance Style">
+                            <img src="{{images.tecnicas.floorwork}}" loading="lazy" alt="Floorwork">
                         </div>
                         <div class="grid-text">
                             <p>Floorwork</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="Danza Contemporánea" class="grid-item">
+                <a title="Herramientas de la danza contemporánea" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Contemporary Dance Style">
+                            <img src="{{images.tecnicas.herramientas}}" loading="lazy"
+                                alt="Herramientas de la danza contemporánea">
                         </div>
                         <div class="grid-text">
                             <p>Herramientas de la danza contemporánea</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="Popping" class="grid-item">
+                <a title="Popping" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Popping Dance Style"
-                                class="img-blur">
+                            <img src="{{images.tecnicas.popping_soon}}" loading="lazy" alt="Popping">
                         </div>
                         <div class="grid-text">
                             <p>Popping (Coming Soon)</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="Afro" class="grid-item">
+                <a title="Afro" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Afro Dance Style"
-                                class="img-blur">
+                            <img src="{{images.tecnicas.afro_soon}}" loading="lazy" alt="Afro">
                         </div>
                         <div class="grid-text">
                             <p>Afro (Coming Soon)</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="Vogue" class="grid-item">
+                <a title="Vogue" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Vogue Dance Style"
-                                class="img-blur">
+                            <img src="{{images.tecnicas.vogue_soon}}" loading="lazy" alt="Vogue">
                         </div>
                         <div class="grid-text">
                             <p>Vogue (Coming Soon)</p>
                         </div>
                     </div>
                 </a>
-                <a href="./pages/clases.html" title="Lite Feet" class="grid-item">
+                <a title="Lite Feet" class="grid-item">
                     <div class="card">
                         <div class="grid-img-container">
-                            <img src="https://picsum.photos/400/200" loading="lazy" alt="Lite Feet Dance Style"
-                                class="img-blur">
+                            <img src="{{images.tecnicas.lite_feet}}" loading="lazy" alt="Lite Feet">
                         </div>
                         <div class="grid-text">
                             <p>Lite Feet (Coming Soon)</p>
@@ -202,26 +199,32 @@
     <section>
         <div class="premium-section">
             <header>
+<<<<<<< HEAD
                 <h5>Sumate a la membresía</h5>
                 <p>Naginata de diamante</p>
+=======
+                <h5>Sumate a la membresia</h5>
+                <p>Subscribete y consigue tu Naginatta de diamante</p>
+>>>>>>> prod_v1
             </header>
             <div class="premium-card">
                 <p class="subtitle">Full access</p>
                 <h6>NAGINATTA DE DIAMANTE</h6>
                 <div class="content">
                     <ul>
-                        <li>Acceso ilimitado a todos los contenidos "on demand" de la platadorma</li>
-                        <li>Clases en vivo mensuales en tiempo real</li>
+                        <li>Acceso ilimitado a todos los contenidos "on demand" de la plataforma</li>
+                        <li>Clases en vivo exclusivas</li>
                         <li>Feedback personal para ajustar y mejorar tu progreso</li>
-                        <li>Se parte de la comunidad NGTZ y accedé a beneficios exclusivos!</li>
                         <li>Acceso a playlists personalizadas</li>
                         <li>Acceso a los mejores amigos de NGTZ en Instagram para recibir información de música,
                             noticias, educación y cultura de manera diaria</li>
                         <li>Acceso a toda la base de datos teórica y audiovisual (incluyendo recursos avanzados)</li>
+                        <li>Envío del calendario de entrenamiento mensual</li>
+                        <li>Acceso al canal de Telegram exclusivo miembros #comunidadngtz</li>
                     </ul>
                 </div>
-                <p>Valor en pesos ARG a definir <span>/mes</span></p>
-                <a href="" class="btn-primary">
+                <p><s>$50,000</s> <br> $39,000 <span>/mes</span></p>
+                <a href="/api/payment/suscription" class="btn-primary">
                     Mejora tus habilidades
                 </a>
             </div>

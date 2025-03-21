@@ -32,5 +32,11 @@ export class UsersDAO{
             [email]
         )
     }
+
+    async setRoleByUserEmail(role, email){
+        await DBConnection.query(
+            'UPDATE users SET role = ? WHERE email = ?',
+            [role, email]
+        )
+    }
 }
-// new UsersDAO().getOwnedCourses("maxinirbeat@gmail.com").then(data=> console.log(data[0].map(course=> course.id)))

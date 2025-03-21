@@ -49,7 +49,9 @@
     </aside>
 
     <section id="js-allClasses" style="display: block;">
-        <h1>Bienvenido {{userData.name}}</h1>
+        <header>
+            <h1>Bienvenido {{userData.name}}</h1>
+        </header>
         <article>
             <div class="grid-auto-fill">
                 {{#if courses.length}}
@@ -65,10 +67,8 @@
                                 <h3 class="course-title">
                                     {{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}
                                 </h3>
-                                <p class="course-level">{{this.class_level}}</p>
-                                <p class="course-price">
-                                    ${{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}
-                                </p>
+                                <p class="course-level">
+                                    {{#if this.class_level}}{{this.class_level}}{{else}}{{this.program_level}}{{/if}}</p>
                             </div>
                         </div>
                     </a>
@@ -114,5 +114,12 @@
 
     function toggleHamburgerMenu() {
         const navLinks = document.querySelector('.nav_links');
+        const botonera = document.querySelector('.botonera');
+        navLinks.classList.toggle('show');
+        if (botonera) {
+            botonera.classList.toggle('show');
+        }
     }
+
+    document.querySelector('.hamburger').addEventListener('click', toggleHamburgerMenu);
 </script>

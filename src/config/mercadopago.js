@@ -1,12 +1,12 @@
-import { MercadoPagoConfig, Preference, PreApproval} from 'mercadopago';
+import { MercadoPagoConfig, Preference, PreApproval } from 'mercadopago';
 import { environment } from './env.js';
 
-const client = new MercadoPagoConfig({ accessToken: environment.mercadopago.token});
+const client = new MercadoPagoConfig({ accessToken: environment.mercadopago.token });
 const preference = new Preference(client);
 
-export async function paymentProcessing(course){
+export async function paymentProcessing(course) {
     return await preference.create({
-        body:{
+        body: {
             items: [
                 {
                     id: course.id,
@@ -16,7 +16,7 @@ export async function paymentProcessing(course){
                     unit_price: course.class_price
                 }
             ],
-            back_urls:{
+            back_urls: {
                 failure: environment.googleAuth.redirectURL + '/api/payment/failure',
                 pending: environment.googleAuth.redirectURL + '/api/payment/pending',
                 success: environment.googleAuth.redirectURL + '/api/payment/success'
@@ -24,7 +24,29 @@ export async function paymentProcessing(course){
             auto_return: 'approved'
         }
     });
+}
 
+export async function suscriptionPayment() {
+    return await preference.create({
+        body: {
+            items: [
+                {
+                    id:0,
+                    title: 'Naginatta de Diamante',
+                    quantity: 1,
+                    currency_id: 'ARS',
+                    unit_price: 39000,
+                    description: 'membresia mensual'
+                }
+            ],
+            back_urls:{
+                failure: environment.googleAuth.redirectURL + '/api/payment/failure',
+                pending: environment.googleAuth.redirectURL + '/api/payment/pending',
+                success: environment.googleAuth.redirectURL + '/api/payment/success'
+            },
+            auto_return: 'approved'
+        }
+    })
 }
 // curl -X POST \
 
