@@ -4,6 +4,17 @@ import { UsersDAO } from "./UsersDAO.js";
 
 export class CoursesDAO{
 
+    async getTeachersNameById(teachersId){
+
+        // const query = teachersId.toLocaleString()
+        const [[teacher]] = await DBConnection.query(
+            'SELECT name FROM users WHERE id IN (?)',
+            [teachersId]
+        );
+
+        return teacher;
+    }
+
     async getAllPrograms(){
         const programs = await DBConnection.query(
             'SELECT * FROM programs'

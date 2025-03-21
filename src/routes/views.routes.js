@@ -268,7 +268,6 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
 
         warmingLesson.class_id = courseID;
         finalLesson.class_id = courseID;
-        console.log(finalLesson)
 
         const fullLessons = [warmingLesson, ...lessons, finalLesson];
 
@@ -289,10 +288,15 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
 
         const [[course]] = await coursesDao.getClassById(courseID);
 
+        const teacher = JSON.parse(course.teachers_id)
+
+        const {name: teacherName}= await coursesDao.getTeachersNameById(teacher)
+        console.log(teacherName)
         res.render('lessons.handlebars', {
             style: '/styles/main.css',
             lessonsStyle: '/styles/lessons.css',
             fullLessons,
+            teacherName,
             courseName: course.class_name,
             userData: {
                 profileImg: user.profile_image
