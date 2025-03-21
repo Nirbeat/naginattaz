@@ -2,6 +2,7 @@ import { Router } from "express";
 import { UsersDAO } from "../database/DAO/UsersDAO.js";
 import { customVerification, ensureAuthenticated } from "../middlewares/authToken.js";
 import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
+import { ProgramDAO } from "../database/DAO/ProgramDAO.js";
 import { viewsRoutesErrorHandler } from "../middlewares/routes.js";
 
 const router = Router();
@@ -30,6 +31,22 @@ const images = {
         waacking: '/images/tecnicas/waacking.png'
     }
 };
+
+// test programdao getProgramWithPhasesAndModules(programId)
+
+router.get('/testProgramDao/:programId', async (req, res, next) => {
+
+    try {
+        const programDAO = new ProgramDAO();
+        const programId = req.params.programId;
+        const program = await programDAO.getProgramWithPhasesAndModules(programId);
+
+        res.json(program);
+    } catch (error) {
+        next(error);
+    }
+});
+
 
 router.get('/login', async (req, res, next) => {
 

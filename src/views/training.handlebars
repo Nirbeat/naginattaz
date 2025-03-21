@@ -4,6 +4,15 @@
 <div class="wrapper">
     {{>trainingNav}}
     <aside>
+        <div class="filter">
+            <label for="classLevelFilter">Filtrar por nivel:</label>
+            <select id="classLevelFilter">
+                <option value="all">Todos</option>
+                <option value="principiante">Principiante</option>
+                <option value="intermedio">Intermedio</option>
+                <option value="avanzado">Avanzado</option>
+            </select>
+        </div>
         <ul>
             <li><a href="/entrenamiento/todas-las-clases">Todas las clases</a></li>
             <li><a href="/entrenamiento/clases-individuales">Clases individuales</a></li>
@@ -62,6 +71,7 @@
         // Toggle the active class on the clicked li
         element.classList.toggle('active');
     }
+    
 
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".course-price").forEach(el => {
@@ -71,8 +81,29 @@
                 console.log(`Price: ${price}, formatted: ${formattedPrice}`);
                 el.textContent = `$${formattedPrice}`;
             } else {
-                el.textContent = "$0";
+                el.textContent = "";
             }
         });
+
+
+        /* Filtro por nivel
+
+        const classLevelFilter = document.getElementById("classLevelFilter");
+        const courses = document.querySelectorAll(".course-link");
+
+        classLevelFilter.addEventListener("change", function () {
+            const selectedLevel = this.value;
+
+            courses.forEach(course => {
+                const courseLevel = course.querySelector(".course-level").textContent.toLowerCase();
+                if (selectedLevel === "all" || courseLevel === selectedLevel) {
+                    course.style.display = "block";
+                } else {
+                    course.style.display = "none";
+                }
+            });
+        });
     });
+
+    */
 </script>
