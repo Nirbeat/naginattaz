@@ -2,49 +2,40 @@
 <script src="https://player.vimeo.com/api/player.js" defer></script>
 
 <div class="wrapper">
-
-    <div class="nav-container">
-        <nav>
-            {{!-- Logo --}}
+    <nav>
+        <div class="left">
             <div class="logo_container">
                 <a href="/">
-                    <img src="/images/main-logo.png" alt="NAGINATTAZ logo in black."
-                        class="navbar10_logo icon-height-xlarge" />
+                    <img src="/images/main-logo.png" />
                 </a>
             </div>
-            {{!-- Menu --}}
+
             <div class="nav_links">
-                <a href="/">Inicio</a>
                 <a href="/entrenamiento" class="active">Clases</a>
                 <a href="/nagidatta">Nagidatta</a>
             </div>
-            {{!-- Botonera --}}
-            {{>profile}}
-            {{!-- <div class="botonera">
-                <div class="profile_pic">
-                    <img src={{userData.profileImg}} alt="Profile picture">
-                </div>
-                <button type="button">Logout</button>
-            </div> --}}
-            <div class="nav-hamburger">
-                <button type="button" class="hamburger">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </button>
-            </div>
-        </nav>
-    </div>
+        </div>
+
+
+        {{>profile}}
+        <div class="nav-hamburger" id="hamburger">
+            <button type="button" class="hamburger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </button>
+        </div>
+    </nav>
 
     <aside>
         <ul>
-            <li><a href="/entrenamiento/todas-las-clases">Todas las clases <span class="arrow"></span></a></li>
-            <li><a href="/entrenamiento/clases-individuales">Clases individuales <span class="arrow"></span></a></li>
-            <li><a href="/entrenamiento/programas">Programas <span class="arrow"></span></a></li>
-            <li><a href="/entrenamiento/estilos">Estilos <span class="arrow"></span></a></li>
-            <li><a href="/entrenamiento/playlists">Playlist <span class="arrow"></span></a></li>
-            <li><a href="/entrenamiento/calendario">Calendario <span class="arrow"></span></a></li>
-            <li><a href="/entrenamiento/comunidad">Comunidad <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/todas-las-clases">Todas las clases</a></li>
+            <li><a href="/entrenamiento/clases-individuales">Clases individuales</a></li>
+            <li><a href="/entrenamiento/programas">Programas</a></li>
+            <li><a href="/entrenamiento/estilos">Estilos</a></li>
+            <li><a href="/entrenamiento/playlists">Playlist</a></li>
+            <li><a href="/entrenamiento/calendario">Calendario</a></li>
+            <li><a href="/entrenamiento/comunidad">Comunidad</a></li>
         </ul>
     </aside>
 
@@ -56,23 +47,23 @@
             <div class="grid-auto-fill">
                 {{#if courses.length}}
                 {{#each courses}}
-                <div class="course-container">
-                    <a href="/clases/{{this.id}}" class="course-link">
-                        <div class="course-card">
-                            <div class="course-image">
-                                <img src="{{#if this.class_image}}{{this.class_image}}{{else}}{{this.program_image}}{{/if}}"
-                                    alt="Imagen del curso">
-                            </div>
-                            <div class="course-info">
-                                <h3 class="course-title">
-                                    {{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}
-                                </h3>
-                                <p class="course-level">
-                                    {{#if this.class_level}}{{this.class_level}}{{else}}{{this.program_level}}{{/if}}</p>
-                            </div>
+                <a href="/clases/{{this.id}}" class="course-link">
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="{{#if this.class_image}}{{this.class_image}}{{else}}{{this.program_image}}{{/if}}"
+                                alt="Imagen del curso">
                         </div>
-                    </a>
-                </div>
+                        <div class="course-info">
+                            <h3 class="course-title">
+                                {{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}
+                            </h3>
+                            <p class="course-level">{{this.class_level}}</p>
+                            <p class="course-price">
+                                ${{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}
+                            </p>
+                        </div>
+                    </div>
+                </a>
                 {{/each}}
                 {{else}}
                 <div class="no-courses">
@@ -99,13 +90,15 @@
     }
 
     function toggleHamburgerMenu() {
+        const hamburger = document.getElementById('hamburger');
         const navLinks = document.querySelector('.nav_links');
         const botonera = document.querySelector('.botonera');
-        navLinks.classList.toggle('show');
-        if (botonera) {
-            botonera.classList.toggle('show');
-        }
-    }
+        const aside = document.getElementsByTagName('aside')[0];
 
-    document.querySelector('.hamburger').addEventListener('click', toggleHamburgerMenu);
+        console.log(`ham clicked`);
+        navLinks.classList.toggle('showing');
+        botonera.classList.toggle('showing');
+        aside.classList.toggle('showing');
+    }
+    hamburger.addEventListener('click', toggleHamburgerMenu);
 </script>

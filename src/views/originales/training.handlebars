@@ -1,0 +1,111 @@
+<link rel="stylesheet" href={{trainingStyle}}>
+<script src="https://player.vimeo.com/api/player.js" defer></script>
+
+<div class="wrapper">
+
+    <div class="nav-container">
+        <nav>
+            {{!-- Logo --}}
+            <div class="logo_container">
+                <a href="/">
+                    <img src="/images/main-logo.png" alt="NAGINATTAZ logo in black."
+                        class="navbar10_logo icon-height-xlarge" />
+                </a>
+            </div>
+            {{!-- Menu --}}
+            <div class="nav_links">
+                <a href="/">Inicio</a>
+                <a href="/entrenamiento" class="active">Clases</a>
+                <a href="/nagidatta">Nagidatta</a>
+            </div>
+            {{!-- Botonera --}}
+            {{>profile}}
+            {{!-- <div class="botonera">
+                <div class="profile_pic">
+                    <img src={{userData.profileImg}} alt="Profile picture">
+                </div>
+                <button type="button">Logout</button>
+            </div> --}}
+            <div class="nav-hamburger">
+                <button type="button" class="hamburger">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <aside>
+        <ul>
+            <li><a href="/entrenamiento/todas-las-clases">Todas las clases <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/clases-individuales">Clases individuales <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/programas">Programas <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/estilos">Estilos <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/playlists">Playlist <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/calendario">Calendario <span class="arrow"></span></a></li>
+            <li><a href="/entrenamiento/comunidad">Comunidad <span class="arrow"></span></a></li>
+        </ul>
+    </aside>
+
+    <section id="js-allClasses" style="display: block;">
+        <header>
+            <h1>Bienvenido {{userData.name}}</h1>
+        </header>
+        <article>
+            <div class="grid-auto-fill">
+                {{#if courses.length}}
+                {{#each courses}}
+                <div class="course-container">
+                    <a href="/clases/{{this.id}}" class="course-link">
+                        <div class="course-card">
+                            <div class="course-image">
+                                <img src="{{#if this.class_image}}{{this.class_image}}{{else}}{{this.program_image}}{{/if}}"
+                                    alt="Imagen del curso">
+                            </div>
+                            <div class="course-info">
+                                <h3 class="course-title">
+                                    {{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}
+                                </h3>
+                                <p class="course-level">
+                                    {{#if this.class_level}}{{this.class_level}}{{else}}{{this.program_level}}{{/if}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {{/each}}
+                {{else}}
+                <div class="no-courses">
+                    <p>No hay cursos disponibles en este momento.</p>
+                    <a href="/store" class="store-link">Visita nuestra tienda</a>
+                </div>
+                {{/if}}
+            </div>
+        </article>
+    </section>
+</div>
+
+<script>
+    function toggleSection(element) {
+        const section = document.getElementById('js-allClasses');
+        if (section.style.display === 'none' || section.style.display === '') {
+            section.style.display = 'block';
+        } else {
+            section.style.display = 'none';
+        }
+
+        // Toggle the active class on the clicked li
+        element.classList.toggle('active');
+    }
+
+    function toggleHamburgerMenu() {
+        const navLinks = document.querySelector('.nav_links');
+        const botonera = document.querySelector('.botonera');
+        navLinks.classList.toggle('show');
+        if (botonera) {
+            botonera.classList.toggle('show');
+        }
+    }
+
+    document.querySelector('.hamburger').addEventListener('click', toggleHamburgerMenu);
+</script>
