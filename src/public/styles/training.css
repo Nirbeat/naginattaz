@@ -7,190 +7,149 @@
         "aside main main";
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: auto 1fr 1fr;
-
-
-    .nav-container {
-        grid-area: nav;
-        container: nav-container / inline-size;
-
-    }
-
-    nav {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 2rem 1rem;
-        height: var(--navbar-height);
-        background-color: var(--pastel-pink);
-        color: white;
-        position: relative;
-        z-index: 999;
-
-        .logo_container {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-
-            img {
-                height: 50px;
-                margin-right: 10px;
-            }
-        }
-
-        .nav_links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 3;
-
-            a {
-                color: white;
-                text-decoration: none;
-                padding: 10px;
-                border-radius: 5px;
-                transition: background-color 0.3s;
-
-                &:hover {
-                    background-color: #555;
-                }
-            }
-        }
-
-        .nav_links a.active {
-            background-color: #555;
-        }
-
-
-        .botonera {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1;
-            gap: 1rem;
-
-            a {
-                color: white;
-                text-decoration: none;
-                padding: 10px;
-                border-radius: 5px;
-                transition: background-color 0.3s;
-
-                &:hover {
-                    background-color: #555;
-                }
-            }
-
-            .profile_pic {
-                aspect-ratio: 1/1;
-                overflow: hidden;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                img {
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                }
-            }
-
-            button {
-                background-color: #555;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-
-                &:hover {
-                    background-color: #777;
-                }
-            }
-        }
-
-        .nav-hamburger {
-            display: none;
-        }
-    }
-
-    @container nav-container (max-width: 768px) {
-        nav {
-            flex-direction: column;
-
-            .logo_container {
-                margin-bottom: 20px;
-            }
-
-            .nav_links {
-                display: none;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .botonera {
-                display: none;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .nav-hamburger {
-                display: block;
-                position: absolute;
-                right: 1rem;
-                top: 4rem; /* Keep the hamburger menu at the top */
-            }
-        }
-
-        nav:has(.nav-hamburger[style*="display: none"]) .nav_links,
-        nav:has(.nav-hamburger[style*="display: none"]) .botonera {
-            display: flex;
-        }
-    }
-
-    .nav_links.show,
-    .botonera.show {
-        display: flex !important;
-        flex-direction: row !important;
-    }
-
 }
 
-/* Fallback for @container */
-@media (max-width: 768px) {
+.nav-container {
+    grid-area: nav;
+    container: nav-container / inline-size;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2rem 1rem;
+    height: var(--navbar-height);
+    background-color: var(--pastel-pink);
+    color: white;
+    position: relative;
+    z-index: 999;
+}
+
+.logo_container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.logo_container img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.nav_links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 3;
+}
+
+.nav_links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav_links a:hover {
+    background-color: #555;
+}
+
+.nav_links a.active {
+    background-color: #555;
+}
+
+.botonera {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    gap: 1rem;
+}
+
+.botonera a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.botonera a:hover {
+    background-color: #555;
+}
+
+.profile_pic {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile_pic img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.botonera button {
+    background-color: #555;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botonera button:hover {
+    background-color: #777;
+}
+
+.nav-hamburger {
+    display: none;
+}
+
+@container nav-container (max-width: 768px) {
     nav {
         flex-direction: column;
-
-        .logo_container {
-            margin-bottom: 20px;
-        }
-
-        .nav_links {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .botonera {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .nav-hamburger {
-            display: block;
-            position: absolute;
-            right: 1rem;
-            top: 4rem;
-        }
     }
 
-    /* Fallback for :has() */
-    .nav_links.show,
-    .botonera.show {
-        display: flex !important;
-        flex-direction: row !important;
+    .logo_container {
+        margin-bottom: 20px;
     }
+
+    .nav_links {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .botonera {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-hamburger {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 4rem;
+    }
+}
+
+nav:has(.nav-hamburger[style*="display: none"]) .nav_links,
+nav:has(.nav-hamburger[style*="display: none"]) .botonera {
+    display: flex;
+}
+
+.nav_links.show,
+.botonera.show {
+    display: flex !important;
+    flex-direction: row !important;
 }
 
 header {
@@ -199,18 +158,30 @@ header {
     padding: 2rem 1rem;
     color: var(--white);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-    border-radius: 10px; /* Rounded corners */
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
     margin-bottom: 1rem;
 }
 
 header h1 {
     line-height: 100%;
-    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-size: 2.5rem; /* Default size */
     font-weight: bold;
     margin: 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1024px) {
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
 }
 
 header p {
@@ -228,47 +199,47 @@ aside {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
 
-    ul {
-        list-style: none;
-        padding: 0;
-        width: 100%;
-    }
+aside ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
 
-    li {
-        margin: 0.5rem 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-        cursor: pointer;
+aside li {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
 
-        &:hover {
-            background-color: var(--light-gray);
-        }
+aside li:hover {
+    background-color: var(--light-gray);
+}
 
-        .arrow {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            margin-left: 0.5rem;
-            vertical-align: middle;
-            border-top: 5px solid transparent;
-            border-bottom: 5px solid transparent;
-            border-left: 5px solid var(--soft-purple);
-            transition: border-left-color 0.3s;
+.arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid var(--soft-purple);
+    transition: border-left-color 0.3s;
+}
 
-            &:hover {
-                border-left-color: var(--peach);
-            }
-        }
+.arrow:hover {
+    border-left-color: var(--peach);
+}
 
-        &.active .arrow {
-            transform: rotate(90deg);
-        }
-    }
+aside li.active .arrow {
+    transform: rotate(90deg);
 }
 
 section {
@@ -281,7 +252,6 @@ section {
 
 .grid-auto-fill {
     --grid-min-col-size: 300px;
-
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(var(--grid-min-col-size), 100%), 1fr));
     gap: 1rem;
@@ -296,7 +266,7 @@ section {
         border-image-source: linear-gradient(135deg, var(--soft-purple), var(--peach));
     }
     50% {
-        border-image-source: linear-gradient(135deg, var(--peach), var(--soft-purple));
+        border-image-source: linear-gradient(135deg, var (--peach), var(--soft-purple));
     }
     100% {
         border-image-source: linear-gradient(135deg, var(--soft-purple), var(--peach));
@@ -349,7 +319,6 @@ section {
     .course-card {
         padding: 0.5rem;
         grid-template-columns: 1fr;
-        /* min-height: auto; */
         height: auto;
         justify-content: flex-start;
     }
