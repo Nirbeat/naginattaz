@@ -201,6 +201,24 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
     }
 });
 
+// RUTA PARA LOS PROGRAMAS, BÁSICAMENTE UN CLON DE LAS CLASES CON
+// PASOS EXTRA
+router.get('/programas/:programID/:courseID/:lessonID', async (req, res, next) => {
+
+    const coursesDao = new CoursesDAO();
+    const { user } = req;
+    let { courseID, lessonID, programID } = req.params;
+
+    // ESTE METODO RECUPERA TODA LA DATA DELK PROGRAMA, HAY QUE FILTRAR LA DATA Y CONSTRUIR EL OBJETO
+    // YA ALGO HICE
+
+    // NO SE SI CONVIENE RECARGAR LESSONS.HANDLEBARS O CLONAR LA VISTA Y RENDERIZAR DESDE ACÁ
+    const program = coursesDao.getProgramById(programID);
+    const [lessons] = await coursesDao.getClassLessonsById(courseID);
+    const warmingLesson = await coursesDao.getWarmingClass();
+    const finalLesson = await coursesDao.getFinalLesson();
+});
+
 router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
     try {
         const coursesDao = new CoursesDAO();
@@ -235,7 +253,7 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
 
         const teacher = JSON.parse(course.teachers_id)
 
-        const {name: teacherName}= await coursesDao.getTeachersNameById(teacher)
+        const { name: teacherName } = await coursesDao.getTeachersNameById(teacher)
         console.log(teacherName)
         res.render('lessons.handlebars', {
             style: '/styles/main.css',
@@ -266,7 +284,7 @@ router.get('/store', async (req, res, next) => {
         const { user } = req;
         let [courses] = await new CoursesDAO().getAllClasses();
         if (courses) {
-            courses = courses.filter(course=> course.program_module_id == null)
+            courses = courses.filter(course => course.program_module_id == null)
             courses = courses.map(course => {
                 let teacherIds = [];
                 try {
@@ -298,7 +316,7 @@ router.get('/store', async (req, res, next) => {
     }
 });
 
-router.get('/suscribete/:preferenceID', async (req, res, next) =>{
+router.get('/suscribete/:preferenceID', async (req, res, next) => {
     try {
 
         // throw new Error('protegiendo')
