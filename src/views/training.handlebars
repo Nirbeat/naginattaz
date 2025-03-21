@@ -34,9 +34,6 @@
                                 {{#if this.class_name}}{{this.class_name}}{{else}}{{this.program_name}}{{/if}}
                             </h3>
                             <p class="course-level">{{this.class_level}}</p>
-                            <p class="course-price">
-                                ${{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}
-                            </p>
                             <p>{{#each this.teacherNames}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
                         </div>
                     </div>
