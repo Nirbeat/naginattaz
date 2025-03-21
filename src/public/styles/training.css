@@ -2,7 +2,7 @@
     display: grid;
     min-height: 100dvh;
     grid-template-areas:
-        "nav nav nav"   
+        "nav nav nav"
         "aside main main"
         "aside main main";
     grid-template-columns: 1fr 3fr 1fr;
@@ -11,7 +11,6 @@
 
 .nav-container {
     grid-area: nav;
-    container: nav-container / inline-size;
 }
 
 nav {
@@ -19,7 +18,7 @@ nav {
     flex-direction: row;
     align-items: center;
     padding: 2rem 1rem;
-    height: var(--navbar-height);
+    height: 80px;
     background-color: var(--pastel-pink);
     color: white;
     position: relative;
@@ -60,6 +59,16 @@ nav {
     background-color: #555;
 }
 
+.nav_links.show {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--pastel-pink); /* Add background color */
+    padding: 1rem; /* Add padding for better spacing */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    width: 100%;
+}
+
 .botonera {
     display: flex;
     justify-content: center;
@@ -78,6 +87,16 @@ nav {
 
 .botonera a:hover {
     background-color: #555;
+}
+
+.botonera.show {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--pastel-pink); /* Add background color */
+    padding: 1rem; /* Add padding for better spacing */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    width: 100%;
 }
 
 .profile_pic {
@@ -112,46 +131,6 @@ nav {
     display: none;
 }
 
-@container nav-container (max-width: 768px) {
-    nav {
-        flex-direction: column;
-    }
-
-    .logo_container {
-        margin-bottom: 20px;
-    }
-
-    .nav_links {
-        display: none;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .botonera {
-        display: none;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .nav-hamburger {
-        display: block;
-        position: absolute;
-        right: 1rem;
-        top: 4rem;
-    }
-}
-
-nav:has(.nav-hamburger[style*="display: none"]) .nav_links,
-nav:has(.nav-hamburger[style*="display: none"]) .botonera {
-    display: flex;
-}
-
-.nav_links.show,
-.botonera.show {
-    display: flex !important;
-    flex-direction: row !important;
-}
-
 header {
     grid-area: nav;
     text-align: center;
@@ -166,22 +145,10 @@ header {
 
 header h1 {
     line-height: 100%;
-    font-size: 2.5rem; /* Default size */
+    font-size: 2.5rem;
     font-weight: bold;
     margin: 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-@media (max-width: 1024px) {
-    header h1 {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 1.5rem;
-    }
 }
 
 header p {
@@ -251,26 +218,13 @@ section {
 }
 
 .grid-auto-fill {
-    --grid-min-col-size: 300px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(var(--grid-min-col-size), 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
 }
 
 .course-container {
-    container-type: inline-size;
-}
-
-@keyframes gradient-border {
-    0% {
-        border-image-source: linear-gradient(135deg, var(--soft-purple), var(--peach));
-    }
-    50% {
-        border-image-source: linear-gradient(135deg, var (--peach), var(--soft-purple));
-    }
-    100% {
-        border-image-source: linear-gradient(135deg, var(--soft-purple), var(--peach));
-    }
+    display: block;
 }
 
 .course-card {
@@ -303,7 +257,6 @@ section {
 .course-card h3 {
     font-weight: bold;
     font-size: 1.25rem;
-    text-wrap: balance;
 }
 
 .course-card p:last-of-type {
@@ -315,10 +268,57 @@ section {
     animation: gradient-border 3s infinite;
 }
 
-@container (max-width: 400px) {
+a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .course-card {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    .logo_container {
+        margin-bottom: 20px;
+    }
+
+    .nav_links {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .botonera {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-hamburger {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 4rem;
+    }
+}
+
+@media (max-width: 400px) {
     .course-card {
         padding: 0.5rem;
-        grid-template-columns: 1fr;
         height: auto;
         justify-content: flex-start;
     }
@@ -329,16 +329,5 @@ section {
 
     .course-card p {
         font-size: 0.875rem;
-    }
-}
-
-a:visited {
-    color: inherit;
-    text-decoration: none;
-}
-
-@media (max-width: 800px) {
-    .course-card {
-        min-height: auto !important;
     }
 }
