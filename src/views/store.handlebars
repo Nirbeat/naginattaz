@@ -30,6 +30,7 @@
                         <p class="course-level">{{this.class_level}}</p>
                         <p class="course-price" data-price="{{#if this.class_price}}{{this.class_price}}{{else}}{{this.program_price}}{{/if}}">
                         </p>
+                        <p>{{#each this.teacherNames}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
                     </div>
                 </div>
             </a>

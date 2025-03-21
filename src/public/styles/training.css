@@ -222,6 +222,11 @@ header h1 {
     border-radius: 4px;
 }
 
+.course-card p:last-of-type {
+    color: var(--soft-purple);
+    font-weight: bold;
+}
+
 .course-info {
     flex-grow: 1;
     display: flex;

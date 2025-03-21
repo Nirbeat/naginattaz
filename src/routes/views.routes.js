@@ -126,6 +126,13 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
 
     try {
         let courses;
+        let [users] = await new UsersDAO().getTeamMembers();
+
+        const teacherMap = users.reduce((map, user) => {
+            map[user.id] = user.name;
+            return map;
+        }, {});
+
         let userPremium = null;
         const { section = 'todas-las-clases' } = req.params;
         const { user } = req;
@@ -148,7 +155,6 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
             }
         }
 
-
         if (section == 'programas') {
             if (user.role == 'premium') {
                 [courses] = await new CoursesDAO().getAllPrograms();
@@ -162,6 +168,22 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
             res.redirect('/construccion')
         }
 
+        if (courses) {
+            courses = courses.map(course => {
+                let teacherIds = [];
+                try {
+                    teacherIds = Array.isArray(course.teachers_id)
+                        ? course.teachers_id
+                        : JSON.parse(course.teachers_id || '[]');
+                } catch (error) {
+                    console.error(`Error parsing teachers_id for course ${course.id}:`, error);
+                }
+                teacherIds = Array.isArray(teacherIds) ? teacherIds : [];
+                course.teacherNames = teacherIds.map(id => teacherMap[id] || 'Desconocido');
+                return course;
+            });
+        }
+
         res.render('training.handlebars', {
             style: '/styles/main.css',
             trainingStyle: '/styles/training.css',
@@ -170,26 +192,14 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
                 profileImg: user.profile_image,
             },
             userPremium,
-            courses
+            courses,
+            users
         })
 
     } catch (error) {
         next(error)
     }
 });
-
-// NUEVA RUTA PARA VISUALIZAR PROGRAMAS
-router.get('/clases/programa/:programID/:courseID/:lessonID?', async (req, res, next) => {
-
-    const { courseID, programID, lessonID } = req.params;
-
-    try {
-        const programs = await new CoursesDAO().getProgramById(programID)
-
-    } catch (error) {
-        next(error)
-    }
-})
 
 router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
     try {
@@ -245,9 +255,32 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
 
 router.get('/store', async (req, res, next) => {
 
+    let [users] = await new UsersDAO().getTeamMembers();
+
+    const teacherMap = users.reduce((map, user) => {
+        map[user.id] = user.name;
+        return map;
+    }, {});
+
     try {
         const { user } = req;
-        const [courses] = await new CoursesDAO().getAllClasses();
+        let [courses] = await new CoursesDAO().getAllClasses();
+        if (courses) {
+            courses = courses.map(course => {
+                let teacherIds = [];
+                try {
+                    teacherIds = Array.isArray(course.teachers_id)
+                        ? course.teachers_id
+                        : JSON.parse(course.teachers_id || '[]');
+                } catch (error) {
+                    console.error(`Error parsing teachers_id for course ${course.id}:`, error);
+                }
+                teacherIds = Array.isArray(teacherIds) ? teacherIds : [];
+                course.teacherNames = teacherIds.map(id => teacherMap[id] || 'Desconocido');
+                return course;
+            });
+        }
+
         res.render('store.handlebars', {
             style: '/styles/main.css',
             storeStyle: '/styles/store.css',
