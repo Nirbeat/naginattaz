@@ -91,7 +91,7 @@ nav {
 
 .botonera.show {
     display: flex !important;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
     background-color: var(--pastel-pink); /* Add background color */
     padding: 1rem; /* Add padding for better spacing */
