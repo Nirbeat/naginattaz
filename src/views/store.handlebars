@@ -45,7 +45,6 @@
             let price = el.getAttribute("data-price");
             if (price !== null && price !== "") {
                 let formattedPrice = Number(price).toLocaleString("es-ES", { minimumFractionDigits: 0 });
-                console.log(`Price: ${price}, formatted: ${formattedPrice}`);
                 el.textContent = `$${formattedPrice}`;
             } else {
                 el.textContent = "$0";

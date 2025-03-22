@@ -1,0 +1,63 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases</title>
+    <link rel="stylesheet" href={{lessonsStyle}}>
+
+</head>
+
+{{>trainingNav}}
+
+<div class="main-section">
+
+    <img class="main-img" id="mainImage" src="" alt="Main Image" style="display: none;">
+    <iframe id="mainVideo" class="main-video" style="display: block;" frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+        src="https://player.vimeo.com/video/{{currentLesson.lesson_url}}" title="Main Vimeo Video"></iframe>
+
+</div>
+
+<div class="info-carousel-section">
+
+    <div class="video-info">
+        <div class="video-title">
+            <br>
+            {{teacherName}}
+        </div>
+        <br>
+        <div class="descripcion">
+    <h1>{{program.program_name}}</h1>
+
+    {{#each program.phases}}
+        <h2>{{this.phase_name}}</h2>
+        {{#each this.modules}}
+            <h3>{{this.module_name}}</h3>
+                {{#each this.classes}}
+                    <h4>{{this.class_name}}</h4>
+                    {{#each this.lessons}}
+                    <a href="/programas/
+                    {{../../../../this.program.program_id}}/
+                    {{../../../this.phase_id}}/
+                    {{../../this.module_id}}/
+                    {{../this.class_id}}/
+                    {{this.lesson_id}}">
+                <li>
+                    {{this.lesson_name}}
+                    <br>
+                </li>
+            </a>
+                    {{/each}}
+    {{/each}}
+    <h4></h4>
+    {{/each}}
+    {{/each}}
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleNav() {
+        const navLinks = document.querySelector('.nav_links');
+        navLinks.classList.toggle('active');
+    }
+</script>

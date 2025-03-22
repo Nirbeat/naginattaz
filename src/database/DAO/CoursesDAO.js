@@ -42,8 +42,6 @@ and lessons.class_id = classes.id;`, [programId]
             programName : program[0].program_name,
             programPhases: new Set(program.map(result=> result.phase_name))
         };
-
-        console.log(programObject)
         return program
     }
 
@@ -97,4 +95,4 @@ and lessons.class_id = classes.id;`, [programId]
     }
 }
 
-await new CoursesDAO().getProgramById(1)
+// await new CoursesDAO().getProgramById(1)

@@ -220,20 +220,62 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
 
 // RUTA PARA LOS PROGRAMAS, BÁSICAMENTE UN CLON DE LAS CLASES CON
 // PASOS EXTRA
-router.get('/programas/:programID/:courseID/:lessonID', async (req, res, next) => {
+router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', async (req, res, next) => {
 
-    const coursesDao = new CoursesDAO();
-    const { user } = req;
-    let { courseID, lessonID, programID } = req.params;
+    try {
+        
+        const { user } = req;
+        let { courseID, lessonID, programID, phaseID, moduleID } = req.params;
+        const coursesDao = new CoursesDAO()
 
-    // ESTE METODO RECUPERA TODA LA DATA DELK PROGRAMA, HAY QUE FILTRAR LA DATA Y CONSTRUIR EL OBJETO
-    // YA ALGO HICE
+        const program = await new ProgramDAO().getProgramWithPhasesAndModules(parseInt(programID))
+        const warmingLesson = await coursesDao.getWarmingClass();
+        const finalLesson = await coursesDao.getFinalLesson();
 
-    // NO SE SI CONVIENE RECARGAR LESSONS.HANDLEBARS O CLONAR LA VISTA Y RENDERIZAR DESDE ACÁ
-    const program = coursesDao.getProgramById(programID);
-    const [lessons] = await coursesDao.getClassLessonsById(courseID);
-    const warmingLesson = await coursesDao.getWarmingClass();
-    const finalLesson = await coursesDao.getFinalLesson();
+        // const currentLesson = fullLessons.find(lesson => lesson.id == lessonID);
+
+        // warmingLesson.class_id = courseID;
+        // finalLesson.class_id = courseID;
+        // const fullLessons = [warmingLesson, ...lessons, finalLesson];
+
+ 
+        if (!phaseID) {
+            phaseID = program.phases[0]?.phase_id;
+        }
+        if(!moduleID){
+            const currentPhase = program.phases.find(phase=> phase.phase_id == phaseID)
+            moduleID = currentPhase.modules[0]?.module_id
+        }
+        if(!courseID){
+            let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
+            currentCourse = currentCourse.modules.find(module=> module.module_id == moduleID)
+            courseID = currentCourse.classes[0]?.class_id
+        }
+        if(!lessonID){
+            let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
+            currentCourse = currentCourse.modules.find(module=> module.module_id == moduleID)
+            console.log(currentCourse)
+            currentCourse = currentCourse.classes.find(course => course.class_id == courseID)
+            courseID = currentCourse.lessons[0]?.lessons_id
+        }
+
+        const phaseIndex = program.phases.findIndex(phase=> phase.phase_id == phaseID);
+        const moduleIndex = program.phases[phaseIndex].modules.findIndex(module=> module.module_id == moduleID )
+        const classIndex = program.phases[phaseIndex].modules[moduleIndex].classes.findIndex(course=> course.class_id == courseID)
+        const currentLesson = program.phases[phaseIndex].modules[moduleIndex].classes[classIndex].lessons.find(lesson=> lesson.lesson_id == lessonID)
+
+        res.render('program.handlebars', {
+            style: '/styles/main.css',
+            lessonsStyle: '/styles/lessons.css',
+            program,
+            userData: {
+                profileImg: user.profile_image
+            },
+            currentLesson
+        });
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
@@ -271,7 +313,6 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
         const teacher = JSON.parse(course.teachers_id)
 
         const { name: teacherName } = await coursesDao.getTeachersNameById(teacher)
-        console.log(teacherName)
         res.render('lessons.handlebars', {
             style: '/styles/main.css',
             lessonsStyle: '/styles/lessons.css',
@@ -342,8 +383,7 @@ router.get('/suscribete/:preferenceID', async (req, res, next) => {
             style: "/styles/main.css"
         });
     } catch (error) {
-        // next(error)
-        console.log(error)
+        next(error)
     }
 })
 
