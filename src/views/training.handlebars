@@ -30,6 +30,26 @@
         </header>
         <article>
             <div class="grid-auto-fill">
+                {{#if programs}}
+                    {{#each programs}}
+                    <a href="/programas/{{this.id}}/1/1/15/80" class="course-link">
+                    <div class="course-card">
+                        <div class="course-image">
+                            <img src="{{this.program_image}}"
+                                alt="Imagen del curso">
+                        </div>
+                        <div class="course-info">
+                            <h3 class="course-title">
+                                {{this.program_name}}
+                            </h3>
+                            <p class="course-level">{{this.program_level}}</p>
+
+                        </div>
+                    </div>
+                </a>
+                    {{/each}}
+                {{/if}}
+
                 {{#if courses.length}}
                 {{#each courses}}
                 <a href="/clases/{{this.id}}" class="course-link">

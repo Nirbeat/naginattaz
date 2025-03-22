@@ -142,7 +142,7 @@ router.use(ensureAuthenticated);
 router.get('/entrenamiento/:section?', async (req, res, next) => {
 
     try {
-        let courses;
+        let courses, programs;
         let [users] = await new UsersDAO().getTeamMembers();
 
         const teacherMap = users.reduce((map, user) => {
@@ -174,7 +174,7 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
 
         if (section == 'programas') {
             if (user.role == 'premium') {
-                [courses] = await new CoursesDAO().getAllPrograms();
+                [programs] = await new CoursesDAO().getAllPrograms();
                 userPremium = true;
             } else {
                 courses = null;
@@ -210,6 +210,7 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
             },
             userPremium,
             courses,
+            programs,
             users
         })
 
@@ -231,13 +232,6 @@ router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', a
         const program = await new ProgramDAO().getProgramWithPhasesAndModules(parseInt(programID))
         const warmingLesson = await coursesDao.getWarmingClass();
         const finalLesson = await coursesDao.getFinalLesson();
-
-        // const currentLesson = fullLessons.find(lesson => lesson.id == lessonID);
-
-        // warmingLesson.class_id = courseID;
-        // finalLesson.class_id = courseID;
-        // const fullLessons = [warmingLesson, ...lessons, finalLesson];
-
  
         if (!phaseID) {
             phaseID = program.phases[0]?.phase_id;
@@ -254,7 +248,6 @@ router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', a
         if(!lessonID){
             let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
             currentCourse = currentCourse.modules.find(module=> module.module_id == moduleID)
-            console.log(currentCourse)
             currentCourse = currentCourse.classes.find(course => course.class_id == courseID)
             courseID = currentCourse.lessons[0]?.lessons_id
         }
@@ -263,7 +256,7 @@ router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', a
         const moduleIndex = program.phases[phaseIndex].modules.findIndex(module=> module.module_id == moduleID )
         const classIndex = program.phases[phaseIndex].modules[moduleIndex].classes.findIndex(course=> course.class_id == courseID)
         const currentLesson = program.phases[phaseIndex].modules[moduleIndex].classes[classIndex].lessons.find(lesson=> lesson.lesson_id == lessonID)
-
+        console.log(currentLesson)
         res.render('program.handlebars', {
             style: '/styles/main.css',
             lessonsStyle: '/styles/lessons.css',
