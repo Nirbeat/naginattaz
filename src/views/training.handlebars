@@ -31,12 +31,11 @@
         <article>
             <div class="grid-auto-fill">
                 {{#if programs}}
-                    {{#each programs}}
-                    <a href="/programas/{{this.id}}/1/1/15/80" class="course-link">
+                {{#each programs}}
+                <a href="/programas/{{this.id}}/1/1/15/80" class="course-link">
                     <div class="course-card">
                         <div class="course-image">
-                            <img src="{{this.program_image}}"
-                                alt="Imagen del curso">
+                            <img src="{{this.program_image}}" alt="Imagen del curso">
                         </div>
                         <div class="course-info">
                             <h3 class="course-title">
@@ -47,7 +46,7 @@
                         </div>
                     </div>
                 </a>
-                    {{/each}}
+                {{/each}}
                 {{/if}}
 
                 {{#if courses.length}}
@@ -69,10 +68,13 @@
                 </a>
                 {{/each}}
                 {{else}}
+                {{#if programs.length}}
+                {{else}}
                 <div class="no-courses">
-                    {{!-- <p style="color: white;">No hay cursos disponibles en este momento.</p> --}}
+                    <p style="color: white;">No hay cursos disponibles en este momento.</p>
                     <a href="/store" class="store-link">Visita nuestra tienda</a>
                 </div>
+                {{/if}}
                 {{/if}}
             </div>
         </article>
@@ -91,7 +93,7 @@
         // Toggle the active class on the clicked li
         element.classList.toggle('active');
     }
-    
+
 
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".course-price").forEach(el => {
@@ -105,24 +107,24 @@
         });
 
 
-        /* Filtro por nivel
+    /* Filtro por nivel
 
-        const classLevelFilter = document.getElementById("classLevelFilter");
-        const courses = document.querySelectorAll(".course-link");
+    const classLevelFilter = document.getElementById("classLevelFilter");
+    const courses = document.querySelectorAll(".course-link");
 
-        classLevelFilter.addEventListener("change", function () {
-            const selectedLevel = this.value;
+    classLevelFilter.addEventListener("change", function () {
+        const selectedLevel = this.value;
 
-            courses.forEach(course => {
-                const courseLevel = course.querySelector(".course-level").textContent.toLowerCase();
-                if (selectedLevel === "all" || courseLevel === selectedLevel) {
-                    course.style.display = "block";
-                } else {
-                    course.style.display = "none";
-                }
-            });
+        courses.forEach(course => {
+            const courseLevel = course.querySelector(".course-level").textContent.toLowerCase();
+            if (selectedLevel === "all" || courseLevel === selectedLevel) {
+                course.style.display = "block";
+            } else {
+                course.style.display = "none";
+            }
         });
     });
+});
 
-    */
+*/
 </script>
