@@ -56,7 +56,8 @@ export class ProgramDAO {
         const program = {
             program_id: null,
             program_name: null,
-            phases: {}
+            phases: {},
+            pdf: 'https://drive.google.com/file/d/1qzN656hyjlyYgoXDmw-iEQv4wWElgv9s/view'
         };
 
         rows.forEach(row => {
