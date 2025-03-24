@@ -23,6 +23,14 @@ app.use(cookieParser(environment.cookieParser));
 initializePassport();
 
 app.use(express.static(serverRoot + '/public'));
+app.use((req, res, next) => {
+    const userAgent = req.headers['user-agent'];
+    if (userAgent.includes('Instagram')) {
+        res.send('Estás usando el navegador de Instagram. Por favor, abre este enlace en un navegador externo para continuar.');
+    } else {
+        next(); // Continúa hacia los endpoints específicos
+    }
+});
 
 app.use('/api/auth', authRouter);
 app.use('/api/sessions', sessionsRouter);
