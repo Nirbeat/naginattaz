@@ -26,13 +26,15 @@ app.use(express.static(serverRoot + '/public'));
 app.use((req, res, next) => {
     const userAgent = req.headers['user-agent'];
     if (userAgent.includes('Instagram')) {
-        res.send(`Estás usando el navegador de Instagram. 
-            Para acceder correctamente al sitio, sigue estas instrucciones:\n
-            -Haz click en los tres puntos que aparecen arriba a la derecha de tu pantalla\n
-            -Elige la opción "Copiar enlace"\n
-            -Abre tu navegador de preferencia\n
-            -Pega el enlace\n
-            -Disfruta de Naginattaz :)`);
+        res.send(`<ul>
+            Estás usando el navegador de Instagram. <br>
+            Para acceder correctamente al sitio, sigue estas instrucciones: <br>
+            <li>Haz click en los tres puntos que aparecen arriba a la derecha de tu pantalla</li>
+            <li>Elige la opción "Copiar enlace"</li>
+            <li>Abre tu navegador de preferencia</li>
+            <li>Pega el enlace</li>
+            <li>Disfruta de Naginattaz :)</li>
+            </ul>`);
     } else {
         next(); // Continúa hacia los endpoints específicos
     }
