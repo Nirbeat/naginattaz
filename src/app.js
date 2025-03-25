@@ -36,7 +36,7 @@ app.use((req, res, next) => {
             <li>Disfruta de Naginattaz :)</li>
             </ul>`);
     } else {
-        next(); // Continúa hacia los endpoints específicos
+        next();
     }
 });
 

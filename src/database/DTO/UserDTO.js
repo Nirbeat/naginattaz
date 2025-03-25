@@ -1,3 +1,5 @@
+import { UsersDAO } from "../DAO/UsersDAO.js";
+
 export class UserDTO{
 
     userJWT(user){
@@ -7,5 +9,12 @@ export class UserDTO{
         return {
             name, email, role, profile_image, ownedCoursesAndLessons
         }
+    }
+
+    async extractUserId(user){
+
+        const {email} = user;
+        const [[{id : userID}]] = await new UsersDAO().getUserByEmail(email)
+        return userID
     }
 }

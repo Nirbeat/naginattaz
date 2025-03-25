@@ -5,6 +5,7 @@ import { PurchasesDAO } from "../../database/DAO/PurchasesDAO.js";
 import { customVerification } from "../../middlewares/authToken.js";
 import { createToken } from "../../config/jwt.js";
 import { UsersDAO } from "../../database/DAO/UsersDAO.js";
+import { UserDTO } from "../../database/DTO/UserDTO.js";
 import { environment } from "../../config/env.js";
 
 const router = Router();
@@ -28,7 +29,7 @@ router.get('/success', async (req, res) => {
         await new PurchasesDAO().saveClassPurchase(findUser.id, parseInt(purchaseData.courseId));
         res.cookie('jwt', createToken(user)).redirect(`/clases/${courseId}`);
     } else {
-        await new PurchasesDAO().saveSubscription();
+        await new PurchasesDAO().saveSubscription(await new UserDTO().extractUserId(user));
         await new UsersDAO().setRoleByUserEmail('premium', user.email)
         res.cookie('jwt', createToken(user)).redirect(`/entrenamiento`);
     }
