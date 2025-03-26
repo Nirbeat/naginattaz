@@ -27,7 +27,7 @@ router.get('/success', async (req, res) => {
     if (purchaseData) {
         user.ownedCoursesAndLessons.push(purchaseData.courseId);
         await new PurchasesDAO().saveClassPurchase(findUser.id, parseInt(purchaseData.courseId));
-        res.cookie('jwt', createToken(user)).redirect(`/clases/${courseId}`);
+        res.cookie('jwt', createToken(user), {maxAge: 1000*60*60*24}).redirect(`/clases/${courseId}`);
     } else {
         await new PurchasesDAO().saveSubscription(await new UserDTO().extractUserId(user));
         await new UsersDAO().setRoleByUserEmail('premium', user.email)
