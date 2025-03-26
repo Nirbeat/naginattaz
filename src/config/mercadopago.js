@@ -1,5 +1,6 @@
 import { MercadoPagoConfig, Preference, PreApproval } from 'mercadopago';
 import { environment } from './env.js';
+import { PurchasesDAO } from '../database/DAO/PurchasesDAO.js';
 
 const client = new MercadoPagoConfig({ accessToken: environment.mercadopago.token });
 const preference = new Preference(client);
@@ -27,6 +28,7 @@ export async function paymentProcessing(course) {
 }
 
 export async function suscriptionPayment() {
+    const [[{suscription}]] = await new PurchasesDAO().getSuscriptionPrice()
     return await preference.create({
         body: {
             items: [
@@ -35,7 +37,7 @@ export async function suscriptionPayment() {
                     title: 'Naginatta de Diamante',
                     quantity: 1,
                     currency_id: 'ARS',
-                    unit_price: 39000,
+                    unit_price: suscription,
                     description: 'membresia mensual'
                 }
             ],
