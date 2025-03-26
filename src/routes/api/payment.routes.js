@@ -41,6 +41,7 @@ router.get('/suscription', async (req, res) => {
     try {
 
         const { user } = req;
+        if (!user) res.redirect('/login')
         if (user.role == 'premium') res.redirect('/entrenamiento')
         else {
             const { id } = await suscriptionPayment();
