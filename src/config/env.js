@@ -20,5 +20,8 @@ export const environment = {
     mercadopago: {
         token: process.env.MERCADOPAGO_TOKEN,
         publicKey: process.env.MERCADOPAGO_KEY
+    },
+    mailing:{
+        nagimail: process.env.NAGIMAIL
     }
 }

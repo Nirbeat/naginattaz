@@ -1,7 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
 import { authToken } from "../../middlewares/authToken.js";
-import { unexpectedError } from "../../middlewares/routes.js";
 const router = Router()
 
 
@@ -31,5 +30,4 @@ router.get('/google-authentication',
         }
 });
 
-router.use(unexpectedError)
 export default router;

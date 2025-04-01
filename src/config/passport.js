@@ -5,6 +5,7 @@ import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
 import { UsersDAO } from "../database/DAO/UsersDAO.js";
 import { extractJWTFromCookies } from "./jwt.js";
 import { UserDTO } from "../database/DTO/UserDTO.js";
+import { welcomeMessage } from "./mailing/mailing.js";
 
 function initializePassport() {
 
@@ -26,7 +27,7 @@ function initializePassport() {
                     name: profile._json.name,
                     profileImageURL: profile._json.picture
                 });
-
+                await welcomeMessage(user.email)
                 done(null, new UserDTO().userJWT(user));
             }
             else {
