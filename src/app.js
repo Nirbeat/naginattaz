@@ -7,6 +7,7 @@ import handlebars from 'express-handlebars';
 import viewsRouter from './routes/views.routes.js';
 import sessionsRouter from './routes/api/sessions.routes.js'
 import paymentsRouter from './routes/api/payment.routes.js'
+import { ProgramDTO } from './database/DTO/ProgramDTO.js';
 
 import authRouter from './routes/api/auth.routes.js' 
 import initializePassport from './config/passport.js';
