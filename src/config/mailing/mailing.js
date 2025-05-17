@@ -3,22 +3,24 @@ import { environment } from '../env.js';
 
 
 export const transport = nodemailer.createTransport({
-    service: "gmail",
+    host: 'smtp.office365.com',
     port: 587,
+    secure: false, // Microsoft usa STARTTLS, no SSL directo
     auth: {
-        user: "maximilianomartindev@gmail.com",
-        pass: "hczx owcr xlyd vscx"
-    }
-});
+        user: 'soporte@naginattaz.com',
+        pass: 'TU_CONTRASEÑA',
+    },
+    tls: {
+        ciphers: 'SSLv3', // Configura el cifrado de la conexión
+    },
 
-// export function errorNotification(error){
-//     const mail = transport.sendMail({
-//         from: "maxinirbeat@gmail.com",
-//         to: "maximilianomartindev@gmail.com",
-//         subject: "error en el servidor",
-//         html: `<h1>abersianda</h1>` //aca iria el mensaje de error
-//     })
-// }
+    // service: "gmail",
+    // port: 587,
+    // auth: {
+    //     user: "maximilianomartindev@gmail.com",
+    //     pass: "hczx owcr xlyd vscx"
+    // }
+});
 
 export async function welcomeMessage(userMail){
 
