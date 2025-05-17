@@ -22,6 +22,7 @@ export const environment = {
         publicKey: process.env.MERCADOPAGO_KEY
     },
     mailing:{
-        nagimail: process.env.NAGIMAIL
+        nagimail: process.env.NAGIMAIL,
+        nagipass: process.env.NAGIPASS
     }
 }

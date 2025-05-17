@@ -5,14 +5,15 @@ import { environment } from '../env.js';
 export const transport = nodemailer.createTransport({
     host: 'smtp.office365.com',
     port: 587,
-    secure: false, // Microsoft usa STARTTLS, no SSL directo
+    secure: false,
     auth: {
-        user: 'soporte@naginattaz.com',
-        pass: 'TU_CONTRASEÑA',
+        user: environment.mailing.nagimail,
+        pass: environment.mailing.nagipass
     },
     tls: {
-        ciphers: 'SSLv3', // Configura el cifrado de la conexión
-    },
+        ciphers: 'SSLv3',
+    }
+});
 
     // service: "gmail",
     // port: 587,
@@ -20,7 +21,6 @@ export const transport = nodemailer.createTransport({
     //     user: "maximilianomartindev@gmail.com",
     //     pass: "hczx owcr xlyd vscx"
     // }
-});
 
 export async function welcomeMessage(userMail){
 
@@ -48,3 +48,12 @@ export async function suscriptionMessage(userMail, expireData) {
 //     subject: "abersianda",
 //     html: `<h1>abersianda</h1>`
 // }).then(data=> console.log(data))
+
+(async ()=>{
+    await transport.sendMail({
+        from: environment.mailing.nagimail,
+        to:"maximilianomartindev@gmail.com",
+        subject: "abersianda",
+        text: "abersianda"
+    })
+})()
