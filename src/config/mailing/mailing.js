@@ -32,9 +32,7 @@ export async function welcomeMessage(userMail){
         html: `<h1>GRACIAS POR SUMARTE A NAGINATTAZ</h1>
         <p>Te invitamos a que pases por nuestro store para conocer sobre nuestros productos <br>
         También puedes obtener tu Naginatta de Diamante para acceder a todo el contenido más beneficios premium</p>`,
-        
-
-    })
+    });
 }
 
 export async function suscriptionMessage(userMail, expireData) {
@@ -48,12 +46,3 @@ export async function suscriptionMessage(userMail, expireData) {
 //     subject: "abersianda",
 //     html: `<h1>abersianda</h1>`
 // }).then(data=> console.log(data))
-
-(async ()=>{
-    await transport.sendMail({
-        from: environment.mailing.nagimail,
-        to:"maximilianomartindev@gmail.com",
-        subject: "abersianda",
-        text: "abersianda"
-    })
-})()
