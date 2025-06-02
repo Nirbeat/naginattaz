@@ -1,0 +1,45 @@
+{{>admin-menu}}
+
+<form action="">
+    <label for="">Mes</label>
+    <select name="" id="">
+        <option value="1">Enero</option>
+        <option value="2">Febrero</option>
+        <option value="3">Marzo</option>
+        <option value="4">Abril</option>
+        <option value="5">Mayo</option>
+        <option value="6">Junio</option>
+        <option value="7">Julio</option>
+        <option value="8">Agosto</option>
+        <option value="9">Septiembre</option>
+        <option value="10">Octubre</option>
+        <option value="11">Noviembre</option>
+        <option value="12">Diciembre</option>
+    </select>
+    <label for="">Año</label>
+    <select name="" id="">
+        <option value="2025">2025</option>
+    </select>
+    <button>Consultar</button>
+</form>
+<table>
+    <tr>
+        <td>Clase</td>
+        <td>Vistas</td>
+        <td>Profesor</td>
+    </tr>
+    {{#each classesData}}
+    <tr>
+        <td>{{this.class_name}}</td>
+        <td>{{this.views}}</td>
+        <td>{{this.teachers}}</td>
+    </tr>
+    {{/each}}
+</table>
+
+{{!-- MANEJAR DINAMICAMENTE LA CONSULTA DE LOS MESES CON EL FORM --}}
+<script>
+
+    document.querySelector('form').addEventListener('submit', (e) => {
+    })
+</script>
