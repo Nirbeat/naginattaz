@@ -4,6 +4,7 @@ import { customVerification, ensureAuthenticated } from "../middlewares/authToke
 import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
 import { ProgramDAO } from "../database/DAO/ProgramDAO.js";
 import { viewsRoutesErrorHandler } from "../middlewares/routes.js";
+import { ProgramDTO } from "../database/DTO/ProgramDTO.js";
 
 const router = Router();
 
@@ -175,6 +176,12 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
         if (section == 'programas') {
             if (user.role == 'premium') {
                 [programs] = await new CoursesDAO().getAllPrograms();
+                const programDTO = new ProgramDTO();
+
+                await Promise.all(programs.map(async program=>{
+                    const programLink = await programDTO.setProgramCardLink(program.id)
+                    program.link = programLink
+                }));
                 userPremium = true;
             } else {
                 courses = null;
@@ -233,24 +240,24 @@ router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', a
         const warmingLesson = await coursesDao.getWarmingClass();
         const finalLesson = await coursesDao.getFinalLesson();
 
-        if (!phaseID) {
-            phaseID = program.phases[0]?.phase_id;
-        }
-        if (!moduleID) {
-            const currentPhase = program.phases.find(phase => phase.phase_id == phaseID)
-            moduleID = currentPhase.modules[0]?.module_id
-        }
-        if (!courseID) {
-            let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
-            currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
-            courseID = currentCourse.classes[0]?.class_id
-        }
-        if (!lessonID) {
-            let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
-            currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
-            currentCourse = currentCourse.classes.find(course => course.class_id == courseID)
-            courseID = currentCourse.lessons[0]?.lessons_id
-        }
+        // if (!phaseID) {
+        //     phaseID = program.phases[0]?.phase_id;
+        // }
+        // if (!moduleID) {
+        //     const currentPhase = program.phases.find(phase => phase.phase_id == phaseID)
+        //     moduleID = currentPhase.modules[0]?.module_id
+        // }
+        // if (!courseID) {
+        //     let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
+        //     currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
+        //     courseID = currentCourse.classes[0]?.class_id
+        // }
+        // if (!lessonID) {
+        //     let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
+        //     currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
+        //     currentCourse = currentCourse.classes.find(course => course.class_id == courseID)
+        //     courseID = currentCourse.lessons[0]?.lessons_id
+        // }
 
         const phaseIndex = program.phases.findIndex(phase => phase.phase_id == phaseID);
         const moduleIndex = program.phases[phaseIndex].modules.findIndex(module => module.module_id == moduleID)
