@@ -7,6 +7,7 @@ import { createToken } from "../../config/jwt.js";
 import { UsersDAO } from "../../database/DAO/UsersDAO.js";
 import { UserDTO } from "../../database/DTO/UserDTO.js";
 import { environment } from "../../config/env.js";
+import { suscriptionMessage } from "../../config/mailing/mailing.js";
 
 const router = Router();
 
@@ -21,7 +22,7 @@ router.get('/success', async (req, res) => {
 
     const { user } = req;
     const { purchaseData } = req.cookies;
-
+console.log(user)
     const [[findUser]] = await new UsersDAO().getUserByEmail(user.email);
 
     if (purchaseData) {
@@ -30,12 +31,12 @@ router.get('/success', async (req, res) => {
         res.cookie('jwt', createToken(user), {maxAge: 1000*60*60*24}).redirect(`/clases/${courseId}`);
     } else {
         await new PurchasesDAO().saveSubscription(await new UserDTO().extractUserId(user));
-        await new UsersDAO().setRoleByUserEmail('premium', user.email)
+        await new UsersDAO().setRoleByUserEmail('premium', user.email);
+        await suscriptionMessage(user);
         res.cookie('jwt', createToken(user)).redirect(`/entrenamiento`);
     }
 
 });
-
 router.get('/suscription', async (req, res) => {
 
     try {
@@ -69,7 +70,7 @@ router.get('/:courseID', async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
     }
 });
 

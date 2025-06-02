@@ -15,14 +15,14 @@ export const transport = nodemailer.createTransport({
     }
 });
 
-    // service: "gmail",
-    // port: 587,
-    // auth: {
-    //     user: "maximilianomartindev@gmail.com",
-    //     pass: "hczx owcr xlyd vscx"
-    // }
+// service: "gmail",
+// port: 587,
+// auth: {
+//     user: "maximilianomartindev@gmail.com",
+//     pass: "hczx owcr xlyd vscx"
+// }
 
-export async function welcomeMessage(userMail){
+export async function welcomeMessage(userMail) {
 
     const mail = await transport.sendMail({
         from: environment.mailing.nagimail,
@@ -35,14 +35,36 @@ export async function welcomeMessage(userMail){
     });
 }
 
-export async function suscriptionMessage(userMail, expireData) {
-    
+export async function suscriptionMessage(user) {
+
+    const date = {
+        day: new Date().getDate(),
+        month: new Date().getMonth() +2
+    }
+    transport.sendMail({
+        from: environment.mailing.nagimail,
+        to: user.email,
+        subject: "Suscripción a Naginattaz",
+        html: `🔁 No pierdas tu lugar en Naginattaz
+
+
+Hola ${user.name}, 
+
+Tu membresía en Naginattaz sigue activa y queremos asegurarnos de que no pierdas tu lugar en la comunidad💥
+
+Para mantener tu cupo, tu progreso y el acceso completo a nuestras clases, solo tenés que abonar tu suscripción mensual desde este link:
+
+👉 https://naginattaz.com/api/payment/suscription
+
+📅 Fecha límite de pago: ${new Date().getDate()}/${new Date().getMonth() +2}/${new Date().getFullYear()}
+
+Si ya realizaste el pago, podés ignorar este mensaje.
+Pero si todavía no lo hiciste, ¡no te duermas! Que queremos seguir bailando con vos.
+
+Gracias por ser parte de esta comunidad que crece con ritmo y pasión 💜
+
+Nos vemos en clase,
+Equipo Naginattaz
+`
+    })
 }
-// transport.sendMail({
-//     from: "maximilianomartindev@gmail.com",
-//     // from: "maxinirbeat@gmail.com",
-//     to: "maxinirbeat@gmail.com",
-//     // to: "maximilianomartindev@gmail.com",
-//     subject: "abersianda",
-//     html: `<h1>abersianda</h1>`
-// }).then(data=> console.log(data))
