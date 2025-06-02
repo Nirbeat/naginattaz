@@ -39,8 +39,8 @@ and lessons.class_id = classes.id;`, [programId]
         );
 
         const programObject = {
-            programName : program[0].program_name,
-            programPhases: new Set(program.map(result=> result.phase_name))
+            programName: program[0].program_name,
+            programPhases: new Set(program.map(result => result.phase_name))
         };
         return program
     }
@@ -93,6 +93,40 @@ and lessons.class_id = classes.id;`, [programId]
         }
         return result;
     }
+    async getClassViewsByPeriod(month, year) {
+        const [classesData] = await DBConnection.query(
+            `SELECT class_name, teachers_id, views FROM classes
+            JOIN class_views
+            WHERE classes.id = class_views.class_id
+            AND class_views.month = ?
+            AND class_views.year = ?`,
+            [month, year]
+        );
+    
+        await Promise.all(classesData.map(async (course) => {
+            course.teachers = [];
+            const teacherIds = JSON.parse(course.teachers_id);
+    
+            for (const teacherId of teacherIds) {
+                const teacherData = await this.getTeachersNameById(teacherId);
+                course.teachers.push(teacherData.name);
+            }
+        }));
+    
+        return classesData;
+    }
+
+    async setClassViews(classId) {
+
+        // console.log(month, year)
+        await DBConnection.query(
+            `INSERT INTO class_views (class_id, year, month, views) 
+            VALUES (?, YEAR(NOW()), MONTH(NOW()), 1)
+            ON DUPLICATE KEY UPDATE views = views + 1;`,
+            [classId]
+        )
+    }
 }
 
-// await new CoursesDAO().getProgramById(1)
+// await new CoursesDAO().getClassViewsByPeriod(5,2025).then(data => console.log(data))
+// await new CoursesDAO().getTeachersNameById(2).then(data => console.log(data))

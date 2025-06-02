@@ -256,6 +256,9 @@ router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', a
         const moduleIndex = program.phases[phaseIndex].modules.findIndex(module => module.module_id == moduleID)
         const classIndex = program.phases[phaseIndex].modules[moduleIndex].classes.findIndex(course => course.class_id == courseID)
         const currentLesson = program.phases[phaseIndex].modules[moduleIndex].classes[classIndex].lessons.find(lesson => lesson.lesson_id == lessonID)
+        
+        await coursesDao.setClassViews(courseID);
+
         res.render('program.handlebars', {
             style: '/styles/main.css',
             lessonsStyle: '/styles/lessons.css',
@@ -305,6 +308,9 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
         const teacher = JSON.parse(course.teachers_id)
 
         const { name: teacherName } = await coursesDao.getTeachersNameById(teacher)
+        // ANALIZAR PONER ESTO EN MIDDLEWARE
+        await coursesDao.setClassViews(courseID);
+
         res.render('lessons.handlebars', {
             style: '/styles/main.css',
             lessonsStyle: '/styles/lessons.css',

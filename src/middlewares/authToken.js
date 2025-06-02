@@ -48,3 +48,14 @@ export const ensureAuthenticated = (req, res, next) => {
         next(error)
     }
 };
+
+export const ensureAdmin = (req, res, next) => {
+    try {
+        if(req.user.role!='admin'){
+            res.redirect('/login');
+        }
+        next()
+    } catch (error) {
+        next(error);
+    }
+}
