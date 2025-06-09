@@ -1,5 +1,49 @@
-<nav>
-    <a href="/admin/users"><ul>Usuarios</ul></a>
-    <a href="/admin/class-views"><ul>Clases</ul></a>
-    <a href="/admin/blog"><ul>Blog</ul></a>
+<nav class="admin-navbar">
+    <ul>
+        <li><a href="/admin/users">Usuarios</a></li>
+        <li><a href="/admin/class-views" class="active">Clases</a></li>
+        <li><a href="/admin/blog">Blog</a></li>
+    </ul>
 </nav>
+
+<style>
+.admin-navbar {
+    background: #F3F3F3;
+    width: 100%;
+    z-index: 1000;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 20px;
+    display: flex;
+    height: 60px;
+    align-items: center;
+}
+
+.admin-navbar li {
+    margin-right: 30px;
+}
+
+.admin-navbar a {
+    color: #6B6B6B;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: background 0.2s, color 0.2s;
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.admin-navbar a.active,
+.admin-navbar a:focus,
+.admin-navbar a:hover {
+    color: #FFFFFF;
+    background: #BDBDBD;
+    border-radius: 10px;
+}
+</style>
