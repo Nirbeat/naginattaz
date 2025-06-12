@@ -74,7 +74,8 @@ router.get('/', async (req, res, next) => {
             profileStyle: '/styles/profile.css',
             userData: user ? {
                 name: user.name,
-                profileImg: user.profile_image
+                profileImg: user.profile_image,
+                role: user.role
             } : null,
             images: images,
             user
@@ -128,7 +129,8 @@ router.get('/team', async (req, res, next) => {
             profileStyle: '/styles/profile.css',
             userData: user ? {
                 name: user.name,
-                profileImg: user.profile_image
+                profileImg: user.profile_image,
+                role: user.role
             } : null,
             teamMembers
         });
@@ -213,7 +215,7 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
             trainingStyle: '/styles/training.css',
             userData: {
                 name: user.name,
-                profileImg: user.profile_image,
+                profileImg: user.profile_image
             },
             userPremium,
             courses,
@@ -370,7 +372,8 @@ router.get('/store', async (req, res, next) => {
             courses,
             userData: user ? {
                 name: user.name,
-                profileImg: user.profile_image
+                profileImg: user.profile_image,
+                role:user.role
             } : null,
             images: images,
         })

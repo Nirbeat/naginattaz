@@ -7,38 +7,47 @@ import { viewsRoutesErrorHandler } from "../middlewares/routes.js";
 
 const router = Router();
 router.use(customVerification)
-// router.use(ensureAuthenticated)
+router.use(ensureAuthenticated)
 router.use(ensureAdmin);
 
-router.get('/class-views', async(req, res, next)=> {
+router.get('/class-views', async (req, res, next) => {
     const date = new Date();
     try {
-        let {month, year} = req.query;
-        if (!month) month = date.getMonth()+1
+        const { user } = req;
+        let { month, year } = req.query;
+
+        if (!month) month = date.getMonth() + 1
         if (!year) year = date.getFullYear();
+        
         const classesData = await new CoursesDAO().getClassViewsByPeriod(month, year);
-        res.render('class-views.handlebars',{
+        res.render('class-views.handlebars', {
             style: '/styles/main.css',
+            profileStyle: '/styles/profile.css',
             classesData,
-            date:{
+            date: {
                 month: parseInt(month),
                 year: parseInt(year)
+            },
+            userData: {
+                name: user.name,
+                profileImg: user.profile_image,
+                role: user.role
             }
         });
     } catch (error) {
         console.log(error)
-        next();   
+        next();
     }
 });
 
 router.get('/users', async (req, res, next) => {
     try {
-        
+
         res.render('users.handlebars');
     } catch (error) {
         next();
     }
-    
+
 });
 
 router.use(viewsRoutesErrorHandler);
