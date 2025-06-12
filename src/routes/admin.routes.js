@@ -19,7 +19,11 @@ router.get('/class-views', async(req, res, next)=> {
         const classesData = await new CoursesDAO().getClassViewsByPeriod(month, year);
         res.render('class-views.handlebars',{
             style: '/styles/main.css',
-            classesData
+            classesData,
+            date:{
+                month: parseInt(month),
+                year: parseInt(year)
+            }
         });
     } catch (error) {
         console.log(error)
@@ -37,5 +41,5 @@ router.get('/users', async (req, res, next) => {
     
 });
 
-// router.use(viewsRoutesErrorHandler);
+router.use(viewsRoutesErrorHandler);
 export default router;

@@ -5,18 +5,23 @@ import { DBConnection } from './database/database.js';
 import passport from 'passport';
 import handlebars from 'express-handlebars';
 import viewsRouter from './routes/views.routes.js';
-import adminRouter from './routes/admin.routes.js'; 
+import adminRouter from './routes/admin.routes.js';
 import sessionsRouter from './routes/api/sessions.routes.js'
 import paymentsRouter from './routes/api/payment.routes.js';
-import authRouter from './routes/api/auth.routes.js' 
+import authRouter from './routes/api/auth.routes.js'
 import initializePassport from './config/passport.js';
 import cookieParser from 'cookie-parser';
 
 const app = express();
 
-app.engine('handlebars', handlebars.engine({partialsDir: serverRoot + '/views/partials'}));
+app.engine('handlebars', handlebars.engine({
+    partialsDir: serverRoot + '/views/partials',
+    helpers: {
+        eq: (a, b) => a === b
+    }
+}));
 app.set('view engine', 'handlebars');
-app.set('views',serverRoot + '/views');
+app.set('views', serverRoot + '/views');
 
 app.use(passport.initialize());
 app.use(cookieParser(environment.cookieParser));
@@ -46,8 +51,8 @@ app.use('/admin', adminRouter);
 app.use(viewsRouter);
 
 
-app.listen(environment.serverPort, async ()=>{
+app.listen(environment.serverPort, async () => {
     (await DBConnection).connect()
-    .then(()=> console.log("database connected"))
-    .catch((e)=> console.log(e.message) )
+        .then(() => console.log("database connected"))
+        .catch((e) => console.log(e.message))
 });
