@@ -39,4 +39,12 @@ export class UsersDAO{
             [role, email]
         )
     }
+
+    async getPremiumUsers(){
+        return await DBConnection.query(
+            'SELECT name, email, instagramURL, role FROM users WHERE role = "premium"'
+        )
+    }
 }
+
+// new UsersDAO().getUserByEmail("maxinirbeat@gmail.com").then(([data])=> console.log(data));

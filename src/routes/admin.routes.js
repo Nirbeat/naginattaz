@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { UsersDAO } from "../database/DAO/UsersDAO.js";
 import { customVerification, ensureAdmin, ensureAuthenticated } from "../middlewares/authToken.js";
 import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
-import { ProgramDAO } from "../database/DAO/ProgramDAO.js";
 import { viewsRoutesErrorHandler } from "../middlewares/routes.js";
+import { UsersDAO } from "../database/DAO/UsersDAO.js";
 
 const router = Router();
 router.use(customVerification)
@@ -40,10 +39,15 @@ router.get('/class-views', async (req, res, next) => {
     }
 });
 
-router.get('/users', async (req, res, next) => {
+router.get('/users/subs', async (req, res, next) => {
     try {
+        const [users] = await new UsersDAO().getPremiumUsers();
+        res.render('users-subs.handlebars',{
+            style: '/styles/main.css',
+            profileStyle: '/styles/profile.css',
+            users
 
-        res.render('users.handlebars');
+        });
     } catch (error) {
         next();
     }
