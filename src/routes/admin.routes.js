@@ -41,11 +41,17 @@ router.get('/class-views', async (req, res, next) => {
 
 router.get('/users/subs', async (req, res, next) => {
     try {
+        const {user} = req;
         const [users] = await new UsersDAO().getPremiumUsers();
         res.render('users-subs.handlebars',{
             style: '/styles/main.css',
             profileStyle: '/styles/profile.css',
-            users
+            users,
+             userData: {
+                name: user.name,
+                profileImg: user.profile_image,
+                role: user.role
+            }
 
         });
     } catch (error) {
