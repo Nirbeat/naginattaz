@@ -53,8 +53,13 @@ app.use('/admin', adminRouter);
 app.use(viewsRouter);
 
 
-app.listen(environment.serverPort, async () => {
-    (await DBConnection).connect()
-        .then(() => console.log("database connected"))
-        .catch((e) => console.log(e.message))
+app.listen(environment.serverPort, () => {
+    console.log(`🚀 Express escuchando en puerto ${environment.serverPort}`);
+
+    setTimeout(() => {
+        DBConnection()
+            .then(conn => conn.connect())
+            .then(() => console.log("✅ DB conectada"))
+            .catch(err => console.error("❌ Fallo al conectar:", err.message));
+    }, 15000);
 });
