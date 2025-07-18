@@ -52,6 +52,8 @@ Hola ${user.name},
 
 Tu membresía en Naginattaz sigue activa y queremos asegurarnos de que no pierdas tu lugar en la comunidad💥
 
+No olvides sumarte al grupo de WhatsApp especial para miembros https://chat.whatsapp.com/BUcAiWCkFiaEAhTmm8e4nk?mode=r_t
+
 Para mantener tu cupo, tu progreso y el acceso completo a nuestras clases, solo tenés que abonar tu suscripción mensual desde este link:
 
 👉 https://naginattaz.com/api/payment/suscription
