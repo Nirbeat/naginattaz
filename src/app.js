@@ -54,7 +54,5 @@ app.use(viewsRouter);
 
 
 app.listen(environment.serverPort, async () => {
-    (await DBConnection).connect()
-        .then(() => console.log("database connected"))
-        .catch((e) => console.log(e.message))
+    console.log('servidor levantado')
 });
