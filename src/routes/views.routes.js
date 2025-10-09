@@ -1,113 +1,443 @@
 import { Router } from "express";
-import { UserDao } from "../database/DAO/UserDAO.js";
+import { UsersDAO } from "../database/DAO/UsersDAO.js";
 import { customVerification, ensureAuthenticated } from "../middlewares/authToken.js";
 import { CoursesDAO } from "../database/DAO/CoursesDAO.js";
+import { ProgramDAO } from "../database/DAO/ProgramDAO.js";
+import { viewsRoutesErrorHandler } from "../middlewares/routes.js";
+import { ProgramDTO } from "../database/DTO/ProgramDTO.js";
 
 const router = Router();
 
-router.get('/login', async (req, res) => {
+const images = {
+    banners: {
+        first: '/images/banners/banner1.png',
+        second: '/images/banners/banner2.png',
+        store: '/images/banners/store.jpg'
+    },
+    tecnicas: {
+        afro: '/images/tecnicas/afro.png',
+        afro_soon: '/images/tecnicas/afro_soon.png',
+        dance_hall: '/images/tecnicas/dance_hall.png',
+        floorwork: '/images/tecnicas/floorwork.png',
+        heels: '/images/tecnicas/heels.png',
+        herramientas: '/images/tecnicas/herramientas.png',
+        hiphop: '/images/tecnicas/hiphop.png',
+        house_dance: '/images/tecnicas/house_dance.png',
+        lite_feet: '/images/tecnicas/lite_feet.png',
+        lite_feet_soon: '/images/tecnicas/lite_feet_soon.png',
+        popping_soon: '/images/tecnicas/popping_soon.png',
+        popping: '/images/tecnicas/popping.png',
+        vogue_soon: '/images/tecnicas/vogue_soon.png',
+        vogue: '/images/tecnicas/vogue.png',
+        waacking: '/images/tecnicas/waacking.png'
+    }
+};
 
-    res.render('login.handlebars', {
-        style: '/styles/naginattaz.min.css',
-        loginStyles: '/styles/login.css'
-    });
+// test programdao getProgramWithPhasesAndModules(programId)
+
+router.get('/testProgramDao/:programId', async (req, res, next) => {
+
+    try {
+        const programDAO = new ProgramDAO();
+        const programId = req.params.programId;
+        const program = await programDAO.getProgramWithPhasesAndModules(programId);
+
+        res.json(program);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
+router.get('/login', async (req, res, next) => {
+
+    try {
+
+        res.render('login.handlebars', {
+            style: '/styles/main.css',
+            loginStyles: '/styles/login.css'
+        });
+    } catch (error) {
+        next(error)
+    }
 });
 
 router.use(customVerification);
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
 
-    const {user} = req;
-    res.render('index.handlebars', {
-        style: '/styles/naginattaz.min.css',
-        indexStyle: '/styles/index.css',
-        images: {
-            cart: '/images/cart.png',
-            mainLogo: '/images/main-logo.png',
-            banners: {
-                mobile: { first: '/images/banners/BANNERPRINCIPAL_1_mob.png', second: '/images/banners/BANNERPRINCIPAL_2_mob.png' },
-                web: { first: '/images/banners/BANNERPRINCIPAL_1.png', second: '/images/banners/BANNERPRINCIPAL_2.png' }
-            }
-        },
-        user
-    });
-});
-
-router.get('/terms', async (req, res) => {
-
-    res.render('condition-terms.handlebars', {
-        style: '/styles/naginattaz.min.css',
-        legalStyle: '/styles/legals.css'
-    });
-});
-
-router.get('/policies', async (req, res) => {
-    res.render('policy.handlebars', {
-        style: '/styles/naginattaz.min.css',
-        legalStyle: '/styles/legals.css'
-    });
-});
-
-router.get('/team', async (req, res) => {
-
-    let [teamMembers] = await new UserDao().getTeamMembers();
-
-    // PASAR LUEGO A UN DTO
-    teamMembers = teamMembers.map(({ name, skills, instagramURL, tiktokURL, profile_image }) => {
-        return {
-            name, skills, instagramURL, tiktokURL, profile_image
-        }
-    })
-    res.render('TEAM.handlebars', {
-        style: '/styles/naginattaz.min.css',
-        teamMembers,
-        teamStyles: '/styles/team.css'
-    });
-});
-
-router.use(ensureAuthenticated)
-
-router.get('/entrenamiento', async (req, res) => {
-
-    const [courses] = await new CoursesDAO().getAllCourses();
-
-    // console.log(courses)
-    const { user } = req;
-    res.render('training.handlebars', {
-        style: '/styles/naginattaz.min.css',
-        trainingStyle: '/styles/training.css',
-        userData: {
-            name: user.name,
-            profileImg: user.profile_image
-        },
-        courses
-    })
-})
-
-router.get('/clases/:courseID/:lessonID?', async (req, res) => {
-    // console.log('Request received for courseID:', req.params.courseID);
-
-    const {user}= req;
-    let { courseID, lessonID } = req.params;
-    const [lessons] = await new CoursesDAO().getCourseLessonsById(courseID);
-
-    // console.log(lessons.find(lesson=> lesson.id== lessonID))
-    if (!lessonID) {
-        lessonID = lessons[0].id;
-        res.status().redirect(`/clases/${courseID}/${lessonID}`)
+    try {
+        const { user } = req;
+        res.render('index.handlebars', {
+            style: '/styles/main.css',
+            indexStyle: '/styles/index.css',
+            profileStyle: '/styles/profile.css',
+            userData: user ? {
+                name: user.name,
+                profileImg: user.profile_image,
+                role: user.role
+            } : null,
+            images: images,
+            user
+        });
+    } catch (error) {
+        next(error)
     }
-    else {
-        res.render('lessons.handlebars', {
-            style: '/styles/naginattaz.min.css',
-            lessonsStyle: '/styles/lessons.css',
-            lessons,
-            profileImg: user.profile_image,
-            currentLesson :function (){
-                const current = lessons.find(lesson=>lesson.id == lessonID);
-                return current.lesson_url;
+
+});
+
+router.get('/terms', async (req, res, next) => {
+
+    try {
+
+        res.render('condition-terms.handlebars', {
+            style: '/styles/main.css',
+            legalStyle: '/styles/legals.css'
+        });
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.get('/policies', async (req, res, next) => {
+    try {
+
+        res.render('policy.handlebars', {
+            style: '/styles/main.css',
+            legalStyle: '/styles/policy.css'
+        });
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.get('/team', async (req, res, next) => {
+
+    try {
+        const { user } = req;
+        let [teamMembers] = await new UsersDAO().getTeamMembers();
+
+        // PASAR LUEGO A UN DTO
+        teamMembers = teamMembers.map(({ name, skills, instagramURL, tiktokURL, profile_image }) => {
+            return {
+                name, skills, instagramURL, tiktokURL, profile_image
             }
         })
-    };
+        res.render('team.handlebars', {
+            style: '/styles/main.css',
+            teamStyles: '/styles/team.css',
+            profileStyle: '/styles/profile.css',
+            userData: user ? {
+                name: user.name,
+                profileImg: user.profile_image,
+                role: user.role
+            } : null,
+            teamMembers
+        });
+    } catch (error) {
+        next(error)
+    }
+
 });
 
+router.use(ensureAuthenticated);
+
+router.get('/entrenamiento/:section?', async (req, res, next) => {
+
+    try {
+        let courses, programs;
+        let [users] = await new UsersDAO().getTeamMembers();
+
+        const teacherMap = users.reduce((map, user) => {
+            map[user.id] = user.name;
+            return map;
+        }, {});
+
+        let userPremium = null;
+        const { section = 'todas-las-clases' } = req.params;
+        const { user } = req;
+
+        if (section == 'todas-las-clases') {
+            if (user.role == 'premium') {
+                [courses] = await new CoursesDAO().getAllClasses();
+            }
+            else {
+                courses = await new CoursesDAO().getUserAvailableClasses(user.email);
+            }
+        }
+
+        if (section == 'clases-individuales') {
+            if (user.role == 'premium') {
+                [courses] = await new CoursesDAO().getAllClasses();
+                courses = courses.filter(course => course.program_module_id == null)
+            } else {
+                courses = await new CoursesDAO().getUserAvailableClasses(user.email);
+            }
+        }
+
+        if (section == 'programas') {
+            if (user.role == 'premium') {
+                [programs] = await new CoursesDAO().getAllPrograms();
+                const programDTO = new ProgramDTO();
+
+                await Promise.all(programs.map(async program=>{
+                    const programLink = await programDTO.setProgramCardLink(program.id)
+                    program.link = programLink
+                }));
+                userPremium = true;
+            } else {
+                courses = null;
+            }
+        }
+
+        if (['estilos', 'playlists', 'calendario', 'comunidad'].includes(section)) {
+            res.redirect('/construccion')
+        }
+
+        if (courses) {
+            courses = courses.map(course => {
+                let teacherIds = [];
+                try {
+                    teacherIds = Array.isArray(course.teachers_id)
+                        ? course.teachers_id
+                        : JSON.parse(course.teachers_id || '[]');
+                } catch (error) {
+                    console.error(`Error parsing teachers_id for course ${course.id}:`, error);
+                }
+                teacherIds = Array.isArray(teacherIds) ? teacherIds : [];
+                course.teacherNames = teacherIds.map(id => teacherMap[id] || 'Desconocido');
+                return course;
+            });
+        }
+
+        res.render('training.handlebars', {
+            style: '/styles/main.css',
+            trainingStyle: '/styles/training.css',
+            userData: {
+                name: user.name,
+                profileImg: user.profile_image
+            },
+            userPremium,
+            courses,
+            programs,
+            users
+        })
+
+    } catch (error) {
+        next(error)
+    }
+});
+
+// RUTA PARA LOS PROGRAMAS, BÁSICAMENTE UN CLON DE LAS CLASES CON
+// PASOS EXTRA
+router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', async (req, res, next) => {
+
+    try {
+
+        const { user } = req;
+        let { courseID, lessonID, programID, phaseID, moduleID } = req.params;
+        const coursesDao = new CoursesDAO()
+
+        const program = await new ProgramDAO().getProgramWithPhasesAndModules(parseInt(programID))
+        const warmingLesson = await coursesDao.getWarmingClass();
+        const finalLesson = await coursesDao.getFinalLesson();
+
+        // if (!phaseID) {
+        //     phaseID = program.phases[0]?.phase_id;
+        // }
+        // if (!moduleID) {
+        //     const currentPhase = program.phases.find(phase => phase.phase_id == phaseID)
+        //     moduleID = currentPhase.modules[0]?.module_id
+        // }
+        // if (!courseID) {
+        //     let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
+        //     currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
+        //     courseID = currentCourse.classes[0]?.class_id
+        // }
+        // if (!lessonID) {
+        //     let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
+        //     currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
+        //     currentCourse = currentCourse.classes.find(course => course.class_id == courseID)
+        //     courseID = currentCourse.lessons[0]?.lessons_id
+        // }
+
+        const phaseIndex = program.phases.findIndex(phase => phase.phase_id == phaseID);
+        const moduleIndex = program.phases[phaseIndex].modules.findIndex(module => module.module_id == moduleID)
+        const classIndex = program.phases[phaseIndex].modules[moduleIndex].classes.findIndex(course => course.class_id == courseID)
+        const currentLesson = program.phases[phaseIndex].modules[moduleIndex].classes[classIndex].lessons.find(lesson => lesson.lesson_id == lessonID)
+        
+        await coursesDao.setClassViews(courseID);
+
+        res.render('program.handlebars', {
+            style: '/styles/main.css',
+            lessonsStyle: '/styles/lessons.css',
+            program,
+            userData: {
+                profileImg: user.profile_image
+            },
+            currentLesson
+        });
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
+    try {
+        const coursesDao = new CoursesDAO();
+        const { user } = req;
+        let { courseID, lessonID } = req.params;
+
+        const [lessons] = await coursesDao.getClassLessonsById(courseID);
+        const warmingLesson = await coursesDao.getWarmingClass();
+        const finalLesson = await coursesDao.getFinalLesson();
+
+        warmingLesson.class_id = courseID;
+        finalLesson.class_id = courseID;
+
+        const fullLessons = [warmingLesson, ...lessons, finalLesson];
+
+        const courseOwned = user.ownedCoursesAndLessons.includes(parseInt(courseID));
+        if (user.role !== "premium" && !courseOwned) {
+            return res.redirect('/store');
+        }
+
+        if (!lessonID) {
+            lessonID = fullLessons[0]?.id;
+        }
+
+        const currentLesson = fullLessons.find(lesson => lesson.id == lessonID);
+
+        if (!currentLesson) {
+            res.redirect(`/clases/${courseID}`)
+        }
+
+        const [[course]] = await coursesDao.getClassById(courseID);
+
+        const teacher = JSON.parse(course.teachers_id)
+
+        const { name: teacherName } = await coursesDao.getTeachersNameById(teacher)
+        // ANALIZAR PONER ESTO EN MIDDLEWARE
+        await coursesDao.setClassViews(courseID);
+
+        res.render('lessons.handlebars', {
+            style: '/styles/main.css',
+            lessonsStyle: '/styles/lessons.css',
+            fullLessons,
+            teacherName,
+            courseName: course.class_name,
+            userData: {
+                profileImg: user.profile_image
+            },
+            currentLesson
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get('/store', async (req, res, next) => {
+
+    let [users] = await new UsersDAO().getTeamMembers();
+
+    const teacherMap = users.reduce((map, user) => {
+        map[user.id] = user.name;
+        return map;
+    }, {});
+
+    try {
+        const { user } = req;
+        let [courses] = await new CoursesDAO().getAllClasses();
+        if (courses) {
+            courses = courses.filter(course => course.program_module_id == null)
+            courses = courses.map(course => {
+                let teacherIds = [];
+                try {
+                    teacherIds = Array.isArray(course.teachers_id)
+                        ? course.teachers_id
+                        : JSON.parse(course.teachers_id || '[]');
+                } catch (error) {
+                    console.error(`Error parsing teachers_id for course ${course.id}:`, error);
+                }
+                teacherIds = Array.isArray(teacherIds) ? teacherIds : [];
+                course.teacherNames = teacherIds.map(id => teacherMap[id] || 'Desconocido');
+                return course;
+            });
+        }
+
+        res.render('store.handlebars', {
+            style: '/styles/main.css',
+            storeStyle: '/styles/store.css',
+            profileStyle: '/styles/profile.css',
+            courses,
+            userData: user ? {
+                name: user.name,
+                profileImg: user.profile_image,
+                role:user.role
+            } : null,
+            images: images,
+        })
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.get('/suscribete/:preferenceID', async (req, res, next) => {
+    try {
+
+        res.render('payment.handlebars', {
+            style: "/styles/main.css"
+        });
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get('/payment/:preferenceID', async (req, res, next) => {
+    try {
+
+        res.render('payment.handlebars', {
+            style: "/styles/main.css"
+        });
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.get('/construccion', (req, res, next) => {
+
+    try {
+        res.render('construction.handlebars', {
+            style: '/styles/main.css',
+            constructionStyle: '/styles/construction.css',
+            workerSvg: '/images/worker.svg'
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get('*', (req, res, next) => {
+    try {
+
+        res.render('construction.handlebars', {
+            style: '/styles/main.css',
+            constructionStyle: '/styles/construction.css',
+            workerSvg: '/images/worker.svg'
+        })
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.get('/server-error', async (err, req, res, next) => {
+    try {
+        res.render('server-error.handlebars', {
+            error: err.message
+        })
+    } catch (error) {
+        next(error)
+    }
+})
+router.use(viewsRoutesErrorHandler);
 export default router;

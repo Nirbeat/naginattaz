@@ -1,561 +1,228 @@
 <link rel="stylesheet" href={{indexStyle}}>
 <script src="/scripts/index.temporary.js" defer></script>
-{{!--
-<script src="/scripts/rotatingText.js" defer></script>
-<script src="/scripts/scrollingText.js" defer></script> --}}
 
-<div data-animation="default" class="navbar10_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav"
-  data-easing="ease" data-collapse="medium" data-w-id="22b31b6e-0227-378d-eaf5-deaab988bbcf" role="banner"
-  data-duration="400">
-  <div class="navbar10_container">
-    <a href="/" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
-      <img src={{images.mainLogo}} alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge" />
-    </a>
+{{>main-nav}}
 
-    <nav role="navigation" class="navbar10_menu w-nav-menu">
-      <div class="navbar10_menu-left">
-        <a href="/team"
-          class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">TEAM</a>
-        <a href="/entrenamiento"
-          class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">ENTRENAMIENTO</a>
-        <a href="/blog"
-          class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont  w-nav-link">NAGIBLOG</a>
-        <a id="store" href="/store"
-          class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">STORE
-          <img class="cart-button-image" src={{images.cart}} alt="Carrito"
-            style="width:20px; border-radius: 0%; margin-left: 20px;">
-        </a>
-        <div data-hover="true" data-delay="300" data-w-id="22b31b6e-0227-378d-eaf5-deaab988bbdd"
-          class="navbar10_menu-dropdown w-dropdown">
-          <div
-            class="navbar10_dropdown-toggle text-size-tiny text-weight-semibold text-style-allcaps w-dropdown-toggle">
-          </div>
+<main>
+    {{!-- Slideshow --}}
+    <section>
+        <div class="slideshow-container">
+            <div class="fade mySlides">
+                <img src={{images.banners.first}}>
+            </div>
+            <div class="fade mySlides">
+                <img src={{images.banners.second}}>
+            </div>
+            <div class="dot-container">
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
 
-          <nav class="navbar10_dropdown-list w-dropdown-list">
-            <div class="navbar10_container">
-              <div class="navbar10_dropdown-content">
-                <div class="navbar10_dropdown-content-left">
-                </div>
-                <div class="navbar10_dropdown-content-right">
-                  <div class="navbar10_blog-list-wrapper">
-                    <div class="w-dyn-list">
-                      <div role="list" class="navbar10_blog-list w-dyn-items">
+    {{!-- VIMEO --}}
 
-                      </div>
+    <section>
+        <div class="video-section">
+            <div class="video-container">
+                <iframe src="https://player.vimeo.com/video/1067852286?badge=0&amp;autoplay=1&amp;muted=1&amp;player_id=0&amp;app_id=58479"
+                    frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                    title="nagi video">
+                </iframe>
+            </div>
+            <div class="video-text">
+                <header>
+                    <div class="titles-container">
+                        <h2>METAVERSO</h2>
+                        <h1>STREET DANCE</h1>
                     </div>
-                  </div>
+                </header>
+                <div class="text-container">
+                    <p>Nuevas clases y desafíos cada mes</p>
+                    <p>Profesores de primer nivel listos para inspirarte SIEMPRE</p>
+                    <p>¡Descubrí nuestras clases y unite a nuestra comunidad!</p>
                 </div>
-              </div>
+                <a class="btn-primary">
+                    Ver mas
+                </a>
             </div>
-          </nav>
         </div>
-      </div>
+    </section>
 
-
-
-
-
-
-      {{!-- ACA HAY QUE GESTIONAR SI HAY USER PARA MOSTRAR EL BOTON DE LOGIN O NO --}}
-      <div class="navbar10_menu-right">
-        <a href="/login" class="button is-secondary is-small titlefont w-button">Inicia</a>
-        <a href="/subscribe" class="button is-cta is-small titlefont w-button">Sumate</a>
-      </div>
-
-
-
-
-
-      
-    </nav>
-    <div class="navbar10_menu-button w-nav-button">
-      <div class="menu-icon">
-        <div class="menu-icon_line-top">
-        </div>
-        <div class="menu-icon_line-middle">
-          <div class="menu-icon_line-middle-inner">
-          </div>
-        </div>
-        <div class="menu-icon_line-bottom"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<main class="main-wrapper">
-  <div class="hero-v2 w-clearfix">
-
-    <body>
-
-
-      <div class="slideshow-container">
-
-        <div class="mySlides fade">
-          <img class="main-img" src={{images.banners.web.first}} style="width:100%">
-        </div>
-
-        <div class="mySlides fade">
-          <img src={{images.banners.web.second}} style="width:100%">
-        </div>
-
-        <div class="mySlides fade">
-          <img src={{images.banners.web.first}} style="width:100%">
-        </div>
-      </div>
-      <div style="text-align:center; display: none;">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-      <br>
-      <div class="slideshow-container-mobile">
-
-        <div class="mobileS fade">
-          <img src={{images.banners.mobile.first}} style="width:100%">
-        </div>
-
-        <div class="mobileS fade">
-          <img src={{images.banners.mobile.second}} style="width:100%">
-        </div>
-
-        <div class="mobileS fade">
-          <img src={{images.banners.mobile.first}} style="width:100%">
-        </div>
-
-      </div>
-      <br>
-      <div style="text-align:center; display: none;">
-        <span class="mobd"></span>
-        <span class="mobd"></span>
-        <span class="mobd"></span>
-      </div>
-
-  </div>
-
-  <div class="hero-v2 w-clearfix vimeo-bg">
-    <div class="hero_image_mobile">
-
-      <div class="hero_image_full">
-      </div>
-      <div class="hero-image-transparent"></div>
-    </div>
-    <div data-w-id="73b23224-2d8c-0b57-2683-19eb9907f188" class="hero_text_container _2022_updated">
-      <h1 class="h1_v2 hero_text_block bigger titlefont" style="font-size: 40px; color: black;">METAVERSO</h1>
-      <h1 class="h1_v2 hero_text_block bigger titlefont">STREET DANCE</h1>
-      <div class="subhead_v2 herooo customfont">Nuevas clases y desafíos cada mes.<br>
-        Profesores de primer nivel listos para inspirarte SIEMPRE.<br>
-        ¡Descubrí nuestras clases y unite a nuestra comunidad!</div>
-      <a id="hero-cta" href="./pages/subscription.html" class="hero-get-started-cta w-button customfont">VER
-        MAS</a>
-      <link rel="prerender" href="./pages/subscription.html" />
-    </div>
-
-
-    <!-- VIMEO SCRIPT -->
-    <div class="hero_cro5 rounder">
-      <div class="background-video updated">
-        <div class="w-embed w-iframe w-script">
-          <div style="padding:85% 0 0 0;position:inherit;">
-            <iframe src="https://player.vimeo.com/video/1019631883?&player_&controls=0&autoplay=1&muted=1&loop=1"
-              frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-              style="position:absolute;top:-40px;left:0;width:100%;height:100%;" title="nagi video"></iframe>
-          </div>
-
-
-
-
-
-          {{!--
-          <script src="https://player.vimeo.com/api/player.js"></script> --}}
-
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div id="levels" class="white-section stepbystep">
-    <br>
-
-    <div class="section_header_container">
-      <div class="words-wrapper">
-        <h3 id="h3" class="text-style-allcaps customfont">Explora una variedad de clases diseñadas para un
-          aprendizaje</h3>
-        <br>
-        <h3 id="h3" class="text-style-allcaps customfont">progresivo y motivador, con la mejor guía.</h3>
-        <hr style="border-style: none;">
-        <span class="words">
-          <span class="current" data-color="#4ac97d">Aprende</span>
-          <span class="next" data-color="#b18cfe">Aplica</span>
-          <span data-color="#ffaf2e">Avanza</span>
-          <span data-color="#2e9dcc">Crece</span>
-          <span data-color="#ff00ff">Mejora</span>
-        </span>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-  <div class="div-block-110 scrolling-container">
-    <div class="div-block-111">
-      <div class="scrolling-text">
-        CONOCE NUESTRAS CLASES DISPONIBLES RECORDA QUE MES A MES SUMAMOS NUEVAS
-      </div>
-    </div>
-
-  </div>
-  <br><br>
-  <div id="styles" class="white-section">
-    <div class="section_header_container styless">
-      <h2 class="section_header_v2">Aprende una gran variedad de técnicas!</h2>
-    </div>
-
-    {{!-- ESTO YA DEBERÍA SALIR DE DB --}}
-    <div class="styles-container">
-      <div class="w-layout-grid grid">
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Hip Hop ">
-          <div class="style_thumb_container"><img src="./src/hiphop.webp" loading="lazy" alt="Hip Hop Dance Style"
-              class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Hip Hop</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Dancehall">
-          <div class="style_thumb_container"><img src="./src/contemporary.webp" loading="lazy"
-              alt="Contemporary Dance Style" class="image-21 blur"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Dancehall</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="House Dance">
-          <div class="style_thumb_container"><img src="./src/workout.webp" loading="lazy"
-              sizes="(max-width: 479px) 90vw, (max-width: 767px) 88vw, (max-width: 991px) 89vw, (max-width: 2042px) 94vw, 1920px"
-              srcset="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/61cb62b743a7564c79d61be4_PRODUCT_THUMBNAIL-min-p-500.jpeg 500w, https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/61cb62b743a7564c79d61be4_PRODUCT_THUMBNAIL-min.jpg 1920w"
-              alt="Dance Workout Style" class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Housedance</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Waacking">
-          <div class="style_thumb_container"><img src="https://picsum.photos/400/200" loading="lazy"
-              alt="K-Pop Dance Style" class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Waacking</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Heels">
-          <div class="style_thumb_container"><img src="https://picsum.photos/400/200" loading="lazy"
-              alt="Ballet Dance Style" class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Heels</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Floorwork">
-          <div class="style_thumb_container"><img src="https://picsum.photos/400/200" loading="lazy"
-              alt="Salsa Dance Style" class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Floorwork</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Danza Contemporánea">
-          <div class="style_thumb_container"><img src="https://picsum.photos/400/200" loading="lazy"
-              alt="Popping Dance Style" class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Danza Contemporánea</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Popping">
-          <div class="style_thumb_container"><img src="https://picsum.photos/400/200" loading="lazy"
-              alt="Jazz Dance Style" style="filter: blur(6px);" class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Popping (comming soon)</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Afro">
-          <div class="style_thumb_container"><img src="https://picsum.photos/400/200" loading="lazy"
-              alt="Lite Feet Dance Style" style="filter: blur(4px);" class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Afro (comming soon)</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Vogue">
-          <div class="style_thumb_container"><img src="https://picsum.photos/400/200" loading="lazy"
-              alt="Heels Dance Style" style="filter: blur(6px);" class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Vogue (comming soon)</div>
-          </div>
-        </a>
-        <a href="./pages/clases.html" class="style-single w-inline-block" title="Lite Feet">
-          <div class="style_thumb_container"><img src="https://picsum.photos/400/200" loading="lazy"
-              alt="House Dance Style" style="filter: blur(6px);" class="image-21"></div>
-          <div class="div-block-102 light">
-            <div class="text-block-39 dark-centered">Lite Feet (comming soon)</div>
-          </div>
-        </a>
-      </div>
-    </div>
-    <br><br><br>
-
-    <div id="pricing" class="white-section">
-      <div class="section_header_container titlefont text-style-allcaps">
-        <h2 class="section_header_v2">Hacete PREMIUM</h2>
-        <div class="subhead_v2 dark deviices titlefont text-style-allcaps">Subscribete y consigue tu Naginatta de
-          diamante</div>
-      </div>
-      <div class="div-block-172">
-        <div class="w-row">
-          <!--<div class="split-column w-col w-col-6 w-col-stack">
-				<div class="monthly-block monthly" style="background-color: #c695c5;">
-					<div class="plan-header titlefont">BAMBOO</div>
-          <div class="text-block-51">
-            <ul class="text-size-small">
-              <li>ACCESSO A 4 CLASES INDIVIDUALES POR MES</li>
-              <li>NOVEDADES EXCLUSIVAS A TRAVES DE <BR>MEJORES AMIGOS EN INSTAGRAM</li>
-              <li>ACCESSO A CANAL PRIVADO DE TELEGRAM</li>
-              <li>ACCESO A PLAYLIST DE ENTRENAMIENTO</li>
-            </ul>
-          </div>
-          <br>
-					<div class="section_header_container half">
-            <div class="text-block-51">US$1.90<span class="text-span-3">/mes</span></div>
-						<a href="" class="pricing_cta white w-button">COMIENZA&nbsp;TU&nbsp;AVENTURA&nbsp;YA</a>
-						  <link rel="prerender" href="./pages/subscription.html"></div>
-            </div>
-          </div>
-            <div class="split-column w-col w-col-6 w-col-stack">
-              <div class="monthly-block monthly">
-                <div class="plan-header titlefont">TITANIO</div>
-                <div class="text-block-51">
-                  <ul class="text-size-small">
-                    <li>ACCESO A 1 PROGRAMA Y A TODAS LAS CLASES INDIVIDUALES</li>
-                    <li>ACCESO A DATABASE "NAGIDATTA"</li>
-                    <li>CALENDARIO DE ENTRENAMIENTO MENSUAL ENVIADO A TU CORREO</li>
-                    <li>PLAYLIST EXCLUSIVAS PARA ENTRENAR</li>
-                  </ul>
+    {{!-- Aprende Section --}}
+    <section class="aprende-section">
+        <header>
+            <div class="aprende-content">
+                <h3>Explora una variedad de clases diseñadas para un aprendizaje progresivo y motivador, con la mejor
+                    guía.
+                </h3>
+                <div class="words">
+                    <span>Aprende</span>
+                    <span>Aplica</span>
+                    <span>Avanza</span>
+                    <span>Crece</span>
+                    <span>Mejora</span>
                 </div>
-                <br>
-                <div class="section_header_container half">
-                  <div class="text-block-51">US$9.90<span class="text-span-3">/mes</span></div>
-                  <a href="https://google.com.ar" class="pricing_cta white w-button">EXPLORA&nbsp;TUS&nbsp;LIMITES!</a>
-                  <link rel="prerender" href="./pages/subscription.html"></div></div></div>-->
-          <div class="split-column w-col w-col-6 w-col-stack">
-            <div class="monthly-block annual">
-              <div class="plan-header">NAGINATTA DE DIAMANTE</div>
-              <ul class="text-block-51 text-size-small">
-                <li>ACCESO ILIMITADO A TODOS LOS CONTENIDOS "ON DEMAND" DE LA PLATAFORMA</li>
-                <li>CLASES EN VIVO MENSUALES EN TIEMPO REAL</li>
-                <li>FEEDBACK PERSONAL PARA AJUSTAR Y MEJORAR TU PROGRESO</li>
-                <li>SE PARTE DE LA COMUNIDAD NGTZ Y ACCEDÉ A BENEFICIOS EXCLUSIVOS!</li>
-                <li>ACCESO A PLAYLISTS PERSONALIZADAS</li>
-                <li>ACCESO A LOS MEJORES AMIGOS DE NGTZ EN INSTAGRAM PARA RECIBIR INFORMACIÓN DE MÚSICA, NOTICIAS,
-                  EDUCACIÓN Y CULTURA DE MANERA DIARIA</li>
-                <li>ACCESO A TODA LA BASE DE DATOS TEÓRCA Y AUDIOVISUAL (incluyendo recursos avanzados).</li>
-              </ul>
-              <br>
-              <div class="div-block-170"></div>
-              <div class="div-block-171">
-                <div class="pricing-value-text">FULL&nbsp;ACCESS</div>
-              </div>
-              <div class="section_header_container half">
-                <div class="text-block-51">VALOR EN PESOS ARG A DEFINIR<span class="text-span-3">/mes</span></div>
-                <a href="https://google.com.ar" class="pricing_cta w-button">MEJORA&nbsp;TUS&nbsp;HABILIDADES&nbsp;</a>
-                <link rel="prerender" href="./pages/subscription.html">
-              </div>
-            </div>
-          </div>
+        </header>
         </div>
-        <br><br>
+    </section>
 
+    {{!-- Scrolling Text Section --}}
+    <section>
+        <div class="scrolling-text">
+            <span>CONOCE NUESTRAS CLASES DISPONIBLES RECORDA QUE MES A MES SUMAMOS NUEVAS</span>
+        </div>
+    </section>
 
+    {{!-- Tecnicas --}}
+    <section>
+        <div class="tecnicas-section">
+            <header>
+                <h4>Aprende una gran variedad de técnicas!</h4>
+            </header>
+            {{!-- Grid --}}
+            <div class="grid-auto-fill">
+                <a title="Hip Hop" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.hiphop}}" loading="lazy" alt="Hip Hop">
+                        </div>
+                        <div class="grid-text">
+                            <p>Hip Hop</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="Dancehall" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.dance_hall}}" loading="lazy" alt="Dancehall">
+                        </div>
+                        <div class="grid-text">
+                            <p>Dancehall</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="House Dance" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.house_dance}}" loading="lazy" alt="House">
+                        </div>
+                        <div class="grid-text">
+                            <p>House Dance</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="Waacking" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.waacking}}" loading="lazy" alt="Waacking">
+                        </div>
+                        <div class="grid-text">
+                            <p>Waacking</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="Heels" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.heels}}" loading="lazy" alt="Heels">
+                        </div>
+                        <div class="grid-text">
+                            <p>Heels</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="Floorwork" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.floorwork}}" loading="lazy" alt="Floorwork">
+                        </div>
+                        <div class="grid-text">
+                            <p>Floorwork</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="Herramientas de la danza contemporánea" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.herramientas}}" loading="lazy"
+                                alt="Herramientas de la danza contemporánea">
+                        </div>
+                        <div class="grid-text">
+                            <p>Herramientas de la danza contemporánea</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="Popping" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.popping_soon}}" loading="lazy" alt="Popping">
+                        </div>
+                        <div class="grid-text">
+                            <p>Popping (Coming Soon)</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="Afro" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.afro_soon}}" loading="lazy" alt="Afro">
+                        </div>
+                        <div class="grid-text">
+                            <p>Afro (Coming Soon)</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="Vogue" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.vogue_soon}}" loading="lazy" alt="Vogue">
+                        </div>
+                        <div class="grid-text">
+                            <p>Vogue (Coming Soon)</p>
+                        </div>
+                    </div>
+                </a>
+                <a title="Lite Feet" class="grid-item">
+                    <div class="card">
+                        <div class="grid-img-container">
+                            <img src="{{images.tecnicas.lite_feet}}" loading="lazy" alt="Lite Feet">
+                        </div>
+                        <div class="grid-text">
+                            <p>Lite Feet (Coming Soon)</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="premium-section">
+            <header>
+                <h5>Sumate a la membresia</h5>
+                <p>Subscribete y consigue tu Naginatta de diamante</p>
+            </header>
+            <div class="premium-card">
+                <p class="subtitle">Full access</p>
+                <h6>NAGINATTA DE DIAMANTE</h6>
+                <div class="content">
+                    <ul>
+                        <li>Acceso ilimitado a todos los contenidos "on demand" de la plataforma</li>
+                        <li>Clases en vivo exclusivas</li>
+                        <li>Feedback personal para ajustar y mejorar tu progreso</li>
+                        <li>Acceso a playlists personalizadas</li>
+                        <li>Acceso a los mejores amigos de NGTZ en Instagram para recibir información de música,
+                            noticias, educación y cultura de manera diaria</li>
+                        <li>Acceso a toda la base de datos teórica y audiovisual (incluyendo recursos avanzados)</li>
+                        <li>Envío del calendario de entrenamiento mensual</li>
+                        <li>Acceso al canal de Telegram exclusivo miembros #comunidadngtz</li>
+                    </ul>
+                </div>
+                <p><s>$50,000</s> <br> $39,000 <span>/mes</span></p>
+                <a href="/api/payment/suscription" class="btn-primary">
+                    Mejora tus habilidades
+                </a>
+            </div>
+        </div>
+    </section>
 </main>
-
-
-{{!-- ESTO YA SERIA EL FOOTER, IRÍA EN EL MAIN --}}
-{{!-- <div class="global-footer vibe_footer">
-  <div class="footer-container">
-    <div class="footer3-links-wrapper">
-      <div class="_3-col">
-        <a href="/" aria-current="page" class="link-block-3 w-inline-block w-clearfix w--current">
-          <img src="./src/logos/ISOLOGOparafooter_1.png" alt="" class="image-7" />
-        </a>
-        <a href="#" class="link-dark">COPYRIGHT © 2025 NAGINATTAZ.<br />ALL RIGHTS RESERVED.</a>
-      </div>
-      <div class="_3-col">
-        <div class="form-block-5 w-form">
-
-        </div>
-      </div>
-      <div class="_3-col empty"></div>
-      <div class="_3-col">
-        <a href="./pages/CondicionesdelServicio.html" class="nav-link footer">Terminos y condiciones<br /></a>
-        <a href="./pages/politicasDePrivacidad.html" class="nav-link footer">Privacidad<br /></a>
-      </div>
-      <div class="_3-col _3-col-last">
-        <a href="https://www.youtube.com" target="_blank" class="footer-social-link w-inline-block">
-          <img src="./static/608c99b9f2757a9437491625_YOUTUBE.svg" loading="lazy" alt="" class="image-17" />
-          <div class="footer-nav-link">YOUTUBE</div>
-        </a>
-        <a href="https://www.instagram.com" target="_blank" class="footer-social-link w-inline-block">
-          <img src="./static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="image-17" />
-          <div class="footer-nav-link">INSTAGRAM</div>
-        </a>
-        <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
-          <img src="./static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="image-17" />
-          <div class="footer-nav-link">TIKTOK</div>
-        </a>
-        <a href="https://twitter.com" target="_blank" class="footer-social-link w-inline-block">
-          <img src="./static/608c99b9589f377a066c84fe_TWITTER.svg" loading="lazy" alt="" class="image-17" />
-          <div class="footer-nav-link">TWITTER</div>
-        </a>
-        <a href="https://www.facebook.com" target="_blank" class="footer-social-link w-inline-block">
-          <img src="./static/608c99b9af19db6d4d75de32_FACEBOOK.svg" loading="lazy" alt="" class="image-17" />
-          <div class="footer-nav-link">FACEBOOK</div>
-        </a>
-      </div>
-    </div>
-    <div class="footer-content-mobile">
-      <a href="#" class="link-block-3 w-inline-block w-clearfix">
-        <img src="./src/logos/ISOLOGOparafooter_1.png" alt="" class="image-7" />
-      </a>
-      <div class="form-block-4 w-form">
-
-      </div>
-      <div class="columns-6 w-row">
-        <div class="column-12 w-col w-col-6 w-col-small-6 w-col-tiny-6">
-          <a href="/blog" class="nav-link footer">NagiBlog</a>
-          <a href="https://google.com.ar/" target="_blank" class="nav-link footer">CAREERS</a>
-          <a href="https://google.com.ar" target="_blank" class="nav-link footer">SUPPORT</a>
-        </div>
-        <div class="column-13 w-col w-col-6 w-col-small-6 w-col-tiny-6">
-          <a href="/terms" class="nav-link footer">Terms<br /></a>
-          <a href="/privacy" class="nav-link footer">Privacy<br /></a>
-        </div>
-      </div>
-      <div class="footer-social-link-mobile-wrapper">
-        <a href="https://www.instagram.com/" target="_blank" class="footer-social-link-mobile w-inline-block"></a>
-        <a href="https://twitter.com" target="_blank" class="footer-social-link-mobile tw w-inline-block"></a>
-        <a href="https://www.youtube.com" target="_blank" class="footer-social-link-mobile yt w-inline-block"></a>
-        <a href="#" target="_blank" class="footer-social-link-mobile tt w-inline-block"></a>
-        <a href="#" class="footer-social-link-mobile fb w-inline-block"></a>
-      </div>
-      <a href="#" class="link-dark">COPYRIGHT © 2025 NAGINATTAZ. ALL RIGHTS RESERVED.</a>
-    </div>
-  </div>
-</div>
-</div> --}}
-
-
-{{!--
-<script src="./static/jquery-3.5.1.min.dc5e7f18c8.js?site=5dbb40d6d8c97447e9450447" type="text/javascript"
-  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="./static/webflow.9725831d8.js" type="text/javascript"></script>
-<!---->
-<script>
-  function getAllUrlParams(url) {
-    // get query string from url (optional) or window
-    let queryString = url ? url.split("?")[1] : window.location.search.slice(1);
-    // we'll store the parameters here
-    const obj = {};
-    // if query string exists
-    if (queryString) {
-      // stuff after # is not part of query string, so get rid of it
-      queryString = queryString.split("#")[0];
-      // split our query string into its component parts
-      const arr = queryString.split("&");
-      for (let i = 0; i < arr.length; i++) {
-        // separate the keys and the values
-        const a = arr[i].split("=");
-        // set parameter name and value (use 'true' if empty)
-        let paramName = a[0];
-        let paramValue = typeof a[1] === "undefined" ? true : a[1];
-        // (optional) keep case consistent
-        paramName = paramName.toLowerCase();
-        if (typeof paramValue === "string") {
-          paramValue = paramValue.toLowerCase();
-        }
-        // if the paramName ends with square brackets, e.g. colors[] or colors[2]
-        if (paramName.match(/\[(\d+)?\]$/)) {
-          // create key if it doesn't exist
-          const key = paramName.replace(/\[(\d+)?\]/, "");
-          if (!obj[key]) {
-            obj[key] = [];
-          }
-          // if it's an indexed array e.g. colors[2]
-          if (paramName.match(/\[\d+\]$/)) {
-            // get the index value and add the entry at the appropriate position
-            const index = /\[(\d+)\]/.exec(paramName)[1];
-            obj[key][index] = paramValue;
-          } else {
-            // otherwise add the value to the end of the array
-            obj[key].push(paramValue);
-          }
-        } else {
-          // we're dealing with a string
-          if (!obj[paramName]) {
-            // if it doesn't exist, create property
-            obj[paramName] = paramValue;
-          } else if (obj[paramName] && typeof obj[paramName] === "string") {
-            // if property does exist and it's a string, convert it to an array
-            obj[paramName] = [obj[paramName]];
-            obj[paramName].push(paramValue);
-          } else {
-            // otherwise add the property
-            obj[paramName].push(paramValue);
-          }
-        }
-      }
-    }
-    return obj;
-  }
-
-  const urlParams = getAllUrlParams();
-  const changeTargets = [
-    document.querySelector("a#get-started-1"),
-    document.querySelector("a#get-started-2"),
-  ];
-  const { irclickid } = urlParams || {};
-  if (irclickid) {
-    changeTargets.forEach(el => (el.href += `?irclickid=${irclickid}`));
-  }
-
-</script><!-- Auto Rotate Tabs (Original code from @irishbuckley www.flowbase.co --> --}}
-
-{{!--
-<script>
-  var Webflow = Webflow || [];
-  Webflow.push(function () {
-    // DOMready has fired
-    // May now use jQuery and Webflow api
-
-    // start everything
-    var tabTimeout;
-    clearTimeout(tabTimeout);
-    tabLoop();
-
-    // Cycle through all tabs. Match class names
-    function tabLoop() {
-      tabTimeout = setTimeout(function () {
-        var $next = $('.tabs-menu').children('.w--current:first').next();
-
-        if ($next.length) {
-          $next.removeAttr("href").click();  // user click resets timeout
-        } else {
-          $('.standard-tab:first').removeAttr("href").click();
-
-        }
-      }, 6000);  // 6 second tab loop (change this)
-    }
-
-    // Reset loop if a tab is clicked
-    $('.standard-tab').click(function () {
-      clearTimeout(tabTimeout);
-      tabLoop();
-    });
-  });
-
-
-
-</script> --}}

@@ -1,0 +1,46 @@
+<nav class="nav">
+    <div class="nav-left">
+        <div class="nav-logo">
+            <a href="/">
+                <img src="/images/main-logo.png" alt="NAGINATTAZ" height="150px" width="300px" />
+            </a>
+        </div>
+        <div class="nav-links">
+            <ul>
+                <li>
+                    <a href="/team">Team</a>
+                </li>
+                <li>
+                    <a href="/entrenamiento">Entrenamiento</a>
+                </li>
+                <li>
+                    <a href="/blog">Nagiblog</a>
+                </li>
+                <li>
+                    <a href="/store">Store
+                        {{> cartIcon }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{#if userData}}
+    {{>profile}}
+    {{else}}
+    <div class="nav-buttons">
+        <button type="button" class="btn-secondary">
+            <a href="/login">Inicia</a>
+        </button>
+        <button type="button" class="btn-primary">
+            <a href="/api/payment/suscription">Suscríbete</a>
+        </button>
+    </div>
+    {{/if}}
+    <div class="nav-hamburger">
+        <button type="button" class="hamburger">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+    </div>
+</nav>

@@ -1,0 +1,172 @@
+{{>main-nav}}
+{{>admin-menu}}
+
+<div class="admin-card">
+    <form method="get" action="/admin/class-views">
+        <label for="month">Mes</label>
+        <select id="month" name="month">
+            <option value="1" {{#if (eq date.month 1)}} selected{{/if}}>Enero</option>
+            <option value="2" {{#if (eq date.month 2)}} selected{{/if}}>Febrero</option>
+            <option value="3" {{#if (eq date.month 3)}} selected{{/if}}>Marzo</option>
+            <option value="4" {{#if (eq date.month 4)}} selected{{/if}}>Abril</option>
+            <option value="5" {{#if (eq date.month 5)}} selected{{/if}}>Mayo</option>
+            <option value="6" {{#if (eq date.month 6)}} selected{{/if}}>Junio</option>
+            <option value="7" {{#if (eq date.month 7)}} selected{{/if}}>Julio</option>
+            <option value="8" {{#if (eq date.month 8)}} selected{{/if}}>Agosto</option>
+            <option value="9" {{#if (eq date.month 9)}} selected{{/if}}>Septiembre</option>
+            <option value="10" {{#if (eq date.month 10)}} selected{{/if}}>Octubre</option>
+            <option value="11" {{#if (eq date.month 11)}} selected{{/if}}>Noviembre</option>
+            <option value="12" {{#if (eq date.month 1)}} selected{{/if}}>Diciembre</option>
+        </select>
+        <label for="year">Año</label>
+        <select id="year" name="year">
+            <option value="2025">2025</option>
+        </select>
+        <button>Consultar</button>
+    </form>
+    <table>
+        <tr>
+            <td>Clase</td>
+            <td>Vistas</td>
+            <td>Profesor</td>
+        </tr>
+        {{#each classesData}}
+        <tr>
+            <td>{{this.class_name}}</td>
+            <td>{{this.views}}</td>
+            <td>{{this.teachers}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
+
+<style>
+body {
+    color: #232323;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.admin-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    background: #F3F3F3;
+    padding: 32px;
+    border-radius: 0;
+    margin: 110px auto 40px auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    width: 90%;
+    max-width: 900px;
+    justify-content: center;
+}
+
+form {
+    margin: 0;
+    background: #FFFFFF;
+    padding: 24px 32px;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+form label {
+    margin-right: 6px;
+    font-weight: 500;
+    color: #232323;
+}
+
+form select {
+    background: #fff;
+    color: #232323;
+    border: 1px solid #F3F3F3;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 15px;
+    margin-right: 12px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+form select:focus {
+    border: 1.5px solid #BDBDBD;
+}
+
+form button {
+    background: #BDBDBD;
+    color: #232323;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+form button:hover {
+    background: #232323;
+    color: #fff;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #FFFFFF;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+table tr:first-child {
+    background: #BDBDBD;
+}
+
+table td {
+    padding: 14px 18px;
+    color: #232323;
+    font-size: 15px;
+    border-bottom: 1px solid #F3F3F3;
+}
+
+table tr:first-child td {
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    border-bottom: 2px solid #F3F3F3;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+@media (max-width: 700px) {
+    .admin-card {
+        width: 98%;
+        padding: 10px;
+    }
+    form {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        padding: 14px 6px;
+    }
+    table {
+        font-size: 14px;
+    }
+    table td {
+        padding: 10px 8px;
+    }
+}
+</style>
+

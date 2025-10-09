@@ -1,0 +1,211 @@
+{{>main-nav}}
+{{>admin-menu}}
+
+
+<div class="admin-card">
+<form action="">
+    <input type="text" name="email" id="" placeholder="Busque un usuario por email">
+    <input type="submit" name="" id="" value="Buscar">
+</form>
+    <div class="search-container"></div>
+<table>
+    <tr>
+        <td>Email</td>
+        <td>Nombre</td>
+        <td>Instagram</td>
+        <td>Rol</td>
+    </tr>
+    {{#each users}}
+    <tr>
+        <td>{{this.email}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.instagramURL}}</td>
+        <td>{{this.role}}</td>
+    </tr>
+    {{/each}}
+</table>
+</div>
+<script>
+
+    const searchContainer = document.querySelector('.search-container');
+    document.querySelector('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const [{ email, name, instagramURL, role }] = await fetch(`https://naginattaz.com/api/admin/users/find?email=${e.target.email.value}`)
+            .then(user => user.json());
+
+        console.log(email, name, instagramURL, role)
+
+        searchContainer.innerHTML=`
+
+    <table>
+    <tr>
+        <td>Email</td>
+        <td>Nombre</td>
+        <td>Instagram</td>
+        <td>Rol</td>
+    </tr>
+    <tr>
+        <td>${email}</td>
+        <td>${name}</td>
+        <td>${instagramURL}</td>
+        <td><select name="role" id="" value= >
+    <option value="free" ${(()=>{if(role == "free") return "selected"})()}>Free</option>
+    <option value="profesor" ${(()=>{if(role == "profesor") return "selected"})()}>Profesor</option>
+    <option value="premium" ${(()=>{if(role == "premium") return "selected"})()}>Premium</option>
+    <option value="admin" ${(()=>{if(role == "admin") return "selected"})()}>Admin</option>
+</select></td>
+<td><button id="roleSetter">Confirmar</button></td>
+    </tr>
+    </table>
+    `
+    
+    roleSetter.addEventListener('click', async (e) => {
+    const newRole = document.querySelector('select').value;
+        console.log(newRole);
+        fetch('https://naginattaz.com/api/admin/users/set-role', {
+            body: JSON.stringify({newRole, email}),
+            method: 'POST',
+            headers:{
+                "Content-Type": "application/json"
+            }
+        })
+        .then(data=> data.json())
+        .then(data=> {
+            alert(JSON.stringify(data.success));
+            window.location.reload()
+            })
+        .catch(e=> console.log(e))
+    })
+    })
+</script>
+
+<style>
+body {
+    color: #232323;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.admin-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    background: #F3F3F3;
+    padding: 32px;
+    border-radius: 0;
+    margin: 110px auto 40px auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    width: 90%;
+    max-width: 900px;
+    justify-content: center;
+}
+
+form {
+    margin: 0;
+    background: #FFFFFF;
+    padding: 24px 32px;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+form label {
+    margin-right: 6px;
+    font-weight: 500;
+    color: #232323;
+}
+
+form select {
+    background: #fff;
+    color: #232323;
+    border: 1px solid #F3F3F3;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 15px;
+    margin-right: 12px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+form select:focus {
+    border: 1.5px solid #BDBDBD;
+}
+
+form button {
+    background: #BDBDBD;
+    color: #232323;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+form button:hover {
+    background: #232323;
+    color: #fff;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #FFFFFF;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+table tr:first-child {
+    background: #BDBDBD;
+}
+
+table td {
+    padding: 14px 18px;
+    color: #232323;
+    font-size: 15px;
+    border-bottom: 1px solid #F3F3F3;
+}
+
+table tr:first-child td {
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    border-bottom: 2px solid #F3F3F3;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+@media (max-width: 700px) {
+    .admin-card {
+        width: 98%;
+        padding: 10px;
+    }
+    form {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        padding: 14px 6px;
+    }
+    table {
+        font-size: 14px;
+    }
+    table td {
+        padding: 10px 8px;
+    }
+}
+</style>

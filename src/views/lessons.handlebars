@@ -1,212 +1,49 @@
-{{!-- <!DOCTYPE html> --}}
-{{!-- <html lang="ES"> --}}
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clases</title>
     <link rel="stylesheet" href={{lessonsStyle}}>
-    {{!-- <script src="userPic.js" defer></script> --}}
-    {{!-- <script src="https://player.vimeo.com/api/player.js"></script> --}}
+
 </head>
 
-{{!-- <body class="no-scrollbar"> --}}
-    <div class="header">
-        <div class="logo">
-            <a src="/">
-                <img src="/images/main-logo.png">
-            </a>
-        </div>
-        <div>
-            <H1 class="titlefont">
-                HIP-HOP
-            </H1>
-        </div>
-        <nav class="menu titlefont">
-            <a href="/">INICIO</a>
-            <a href="/entrenamiento">CLASES</a>
-            <a href="/nagidatta">NAGIDATTA</a>
-        </nav>
-        <div class="header-right">
-            <div id="user-info">
-                <img id="user-pic" src={{profileImg}} alt="User Picture" style="border-radius: 50%; width: 60px; height: 60px;">
-            </div>
-            <button class="titlefont" id="logout-button">Atrás</button>
-        </div>
-    </div>
-
-    <div class="main-section">
-
-        <img class="main-img" id="mainImage" src="" alt="Main Image" style="display: none;">
-        <iframe id="mainVideo" style="display: block;" frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write" src={{currentLesson}} title="Main Vimeo Video"></iframe>
-
-    </div>
+    {{>trainingNav}}
 
 
-    <div class="info-carousel-section">
-        <div class="video-info">
-            <div class="video-title">Clase Hip-Hop - Nivel Principiante</div>
+<div class="main-section">
+
+    <img class="main-img" id="mainImage" src="" alt="Main Image" style="display: none;">
+    <iframe id="mainVideo" class="main-video" style="display: block;" frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+        src="https://player.vimeo.com/video/{{currentLesson.lesson_url}}" title="Main Vimeo Video"></iframe>
+
+</div>
+
+
+<div class="info-carousel-section">
+    <div class="video-info">
+        <div class="video-title">{{courseName}}
             <br>
-            <div class="descripcion">
-                <h3>Programa:</h3>
-                {{#each lessons}}
-                <a href="/clases/{{this.course_id}}/{{this.id}}"><li>
+            {{teacherName}}
+        </div>
+        <br>
+        <div class="descripcion">
+            <h3>Programa:</h3>
+            {{#each fullLessons}}
+            <a href="/clases/{{this.class_id}}/{{this.id}}">
+                <li>
                     {{this.name}}
                     <br>
                 </li>
-                </a>
-                {{/each}}
+            </a>
+            {{/each}}
 
-            </div>
         </div>
-
-        {{!-- <div class="carousel-section">
-            <div class="carousel-container">
-                <div class="carousel" id="carousel">
-                    <div class="carousel-item">
-                        <div class="carousel-item">
-                            <img class="carousel-item-img" src="https://i.vimeocdn.com/video/1019631883.jpg"
-                                data-url="https://player.vimeo.com/video/1019631883"
-                                alt="Coreografía (Hip Hop / INT-AV) (PARTE 1)">
-                            <div class="carousel-label">Introducción al Hip Hop - Duración: 1 minuto</div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="carousel-item-img" src="https://i.vimeocdn.com/video/1019634948.jpg"
-                            data-url="https://player.vimeo.com/video/1019634948"
-                            alt="Coreografía (Hip Hop / INT-AV) (PARTE 2)">
-                        <div class="carousel-label">Explicación P.1 - Duración: 13 minutos</div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="carousel-item-img" src="https://i.vimeocdn.com/video/1019649357.jpg"
-                            data-url="https://player.vimeo.com/video/1019649357"
-                            alt="Coreografía (Hip Hop / INT-AV) (PARTE 3)">
-                        <div class="carousel-label">Primera Pasada - Duración: 42 segundos</div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="carousel-item-img" src="https://i.vimeocdn.com/video/1019857311.jpg"
-                            data-url="https://player.vimeo.com/video/1019857311"
-                            alt="Coreografía (Hip Hop / INT-AV) (PARTE 4)">
-                        <div class="carousel-label">Explicación P.2 - Duración: 13 minutos</div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="carousel-item-img" src="https://i.vimeocdn.com/video/1019957045.jpg"
-                            data-url="https://player.vimeo.com/video/1019957045"
-                            alt="Coreografía (Hip Hop / INT-AV) (PARTE 5)">
-                        <div class="carousel-label">Segunda Pasada - Duración: 42 segundos</div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="carousel-item-img" src="https://i.vimeocdn.com/video/1019958710.jpg"
-                            data-url="https://player.vimeo.com/video/1019958710"
-                            alt="Coreografía (Hip Hop / INT-AV) (PARTE 6)">
-                        <div class="carousel-label">Pasada Completa - Duración: 42 segundos</div>
-                    </div>
-                    <br>
-                    <!-- More carousel items here -->
-                </div>
-            </div>
-        </div> --}}
     </div>
+</div>
 
-    <script>
-        const mainImage = document.getElementById('mainImage');
-        const mainVideo = document.getElementById('mainVideo');
-        const carouselItems = document.querySelectorAll('.carousel-item-img');
-        const headerHeight = 120; // Fixed header height
-
-        // Disable scroll restoration
-        window.history.scrollRestoration = 'manual';
-
-        // Function to load the video and thumbnail for a specific carousel item
-        function loadVideo(item) {
-            const videoUrl = item.getAttribute('data-url');
-            const videoId = videoUrl.split('/').pop(); // Extract the video ID
-
-            // Set the thumbnail image source using the video ID
-            const thumbnailUrl = `https://i.vimeocdn.com/video/${videoId}.jpg`; // Thumbnail URL
-            mainImage.src = thumbnailUrl; // Set thumbnail URL
-            mainImage.style.display = 'block'; // Show the thumbnail
-
-            // Set the iframe source to the video and show it
-            mainVideo.style.display = 'block';
-            mainVideo.src = videoUrl + "?autoplay=1&muted=1"; // Ensure autoplay and mute are included
-
-            // Smooth scroll to the main section, accounting for the header height
-            window.scrollTo({
-                top: document.querySelector('.main-section').offsetTop - headerHeight,
-                behavior: 'smooth'
-            });
-        }
-
-        // Video Scripts for carousel items
-        document.querySelectorAll('.carousel-item-img').forEach(img => {
-            img.addEventListener('click', () => {
-                loadVideo(img); // Load video when carousel item is clicked
-            });
-        });
-
-        // Load the first video when the page loads and reset scroll position
-        window.onload = () => {
-            loadVideo(carouselItems[0]); // Load the first video
-            window.scrollTo(0, 0); // Reset scroll position to the top
-        };
-
-        // Scroll the carousel
-        function scrollCarousel(direction) {
-            const itemHeight = carouselItems[0].offsetHeight + parseInt(window.getComputedStyle(carouselItems[0]).marginBottom);
-            const visibleItems = Math.floor(carouselContainer.offsetHeight / itemHeight);
-
-            if (direction === 'up') {
-                scrollAmount -= itemHeight;
-                if (scrollAmount < 0) scrollAmount = 0;
-            } else {
-                scrollAmount += itemHeight;
-                if (scrollAmount > (carouselItems.length - visibleItems) * itemHeight) {
-                    scrollAmount = (carouselItems.length - visibleItems) * itemHeight;
-                }
-            }
-
-            carousel.style.transform = `translateY(-${scrollAmount}px)`;
-        }
-
-        // Optional JavaScript for carousel drag-to-scroll interaction
-        const carouselContainer = document.querySelector('.carousel-container');
-        let startY, scrollTop;
-        let isDragging = false; // Flag to track dragging state
-
-        carouselContainer.addEventListener('mousedown', (e) => {
-            startY = e.pageY - carouselContainer.offsetTop;
-            scrollTop = carousel.scrollTop;
-            isDragging = true; // Set dragging flag to true
-            carouselContainer.style.cursor = 'grabbing';
-            carouselContainer.style.transition = 'none';
-        });
-
-        carouselContainer.addEventListener('mouseleave', () => {
-            if (isDragging) {
-                isDragging = false; // Reset dragging flag
-                carouselContainer.style.cursor = 'grab';
-                carouselContainer.style.transition = 'all 0.3s ease';
-            }
-        });
-
-        carouselContainer.addEventListener('mouseup', () => {
-            if (isDragging) {
-                isDragging = false; // Reset dragging flag
-                carouselContainer.style.cursor = 'grab';
-                carouselContainer.style.transition = 'all 0.3s ease';
-            }
-        });
-
-        carouselContainer.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                const y = e.pageY - carouselContainer.offsetTop;
-                const walk = (y - startY) * 2; // Scroll speed
-                carousel.scrollTop = scrollTop - walk;
-            }
-        });
-    </script>
-{{!-- </body> --}}
-
-{{!-- </html> --}}
+<script>
+    function toggleNav() {
+        const navLinks = document.querySelector('.nav_links');
+        navLinks.classList.toggle('active');
+    }
+</script>

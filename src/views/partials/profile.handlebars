@@ -1,0 +1,12 @@
+<link rel="stylesheet" href={{profileStyle}}>
+<div class="botonera">
+    <div class="profile_pic">
+        <img src={{userData.profileImg}} alt="Profile picture">
+    </div>
+    {{#if (eq userData.role "admin")}}
+    <a href="/admin/class-views"><button type="button">Admin panel</button></a>
+    {{else}}
+    <a href="/api/payment/suscription"><button type="button" class="btn-primary">Suscríbete</button></a>
+    {{/if}}
+    <a href="/api/sessions/logout"><button type="button">Logout</button></a>
+</div>

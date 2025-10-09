@@ -1,0 +1,363 @@
+:root {
+    /* 
+    --off-white: #f8f9fa;
+
+     */
+    --gradient-body: linear-gradient(0.25turn, #111111, #26152e, #524257, #382142, #0f0f0f);
+    --black: #000;
+    --white: #fff;
+    --light-gray: #D9D9D9;
+    --blue: #4B59ED;
+    --pastel-pink: #FAC8F8;
+    --magenta: #AF14AF;
+    --peach: #FFB9B9;
+    --soft-purple: #B18CFe;
+    --footer-purple: #250F55;
+
+}
+
+/* Custom Scrollbar */
+
+
+@font-face {
+    font-family: 'GothamMedium';
+    src: url('/fonts/Gotham-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MonumentExtended';
+    src: url('/fonts/MonumentExtended-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--soft-purple) #333;
+}
+
+body {
+    /* background: var(--gradient-body); */
+    background-image: linear-gradient(0.25turn, #222222, #3a203d, #6b5b75, #4c305a, #1a1a1a);
+    font-family: 'GothamMedium', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: var(--black);
+}
+
+/* NAVBAR */
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: transparent;
+    min-height: 4.5rem;
+    font-family: 'MonumentExtended', sans-serif;
+    position: relative;
+}
+
+.nav .btn-primary {
+    background-color: var(--soft-purple);
+}
+
+.nav .btn-primary a {
+    color: var(--white);
+}
+
+.nav .btn-secondary {
+    background-color: var(--light-gray);
+}
+
+.nav .btn-secondary a {
+    color: var(--black);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.nav-logo {
+    display: flex;
+    margin-right: 2rem;
+    padding: 0.75rem;
+}
+
+.nav-logo img {
+    height: auto;
+}
+
+.nav-links ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-right: 1.5rem;
+    font-size: clamp(0.75rem, 0.75vw, 1rem);
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+}
+
+.nav-links li a {
+    color: var(--light-gray);
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li a:hover {
+    color: var(--soft-purple); /* Slightly change color */
+    text-decoration: underline; /* Add underline */
+}
+
+.nav-links li:last-child a {
+    color: var(--peach);
+}
+
+/* Active Link */
+.nav-links li.active {
+    background-color: var(--light-gray);
+    border-radius: 0.25rem;
+    padding: 0.4rem;
+}
+
+.nav-links li.active a {
+    color: var(--black);
+    font-weight: bold;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+    font-weight: 800;
+    font-size: clamp(0.75rem, 0.75vw, 1rem);
+    letter-spacing: 0.15rem;
+}
+
+
+.carrito {
+    margin-left: 0.5rem;
+    height: 20px;
+    width: 20px;
+}
+
+.nav-hamburger {
+    display: none;
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 24px;
+    width: 30px;
+    padding: 0;
+}
+
+.line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--white);
+}
+
+
+@media (max-width: 1169px) {
+    .nav-hamburger {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block;
+    }
+
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 3%;
+        z-index: 10;
+    }
+
+    .nav-links ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--gradient-body);
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        display: none;
+        padding: 1rem 0;
+    }
+
+    .nav-links ul li {
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .nav-links ul li a {
+        color: var(--black);
+    }
+
+    .nav-buttons {
+        position: absolute;
+        top: calc(100% + 200px);
+        left: 0;
+        width: 100%;
+        background-color: var(--gradient-body);
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        display: none;
+        padding: 1rem 0;
+        margin: 20px 0;
+    }
+
+    .nav-links ul.show {
+        display: flex;
+        background-color: var(--white);
+    }
+
+    .nav-buttons.show {
+        display: flex;
+        background-color: var(--white);
+    }
+}
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--footer-purple);
+}
+
+.main-div + footer {
+    margin-top: 1rem;
+}
+
+footer a {
+    all: unset;
+    color: var(--light-gray);
+    cursor: pointer;
+}
+
+footer a:hover {
+    color: #b0b0b0; /* Slightly more grey */
+}
+
+footer .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+footer .logo {
+    display: flex;
+}
+
+footer .logo img {
+    width: 50px;
+    height: auto;
+}
+
+footer .disclaimer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--light-gray);
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+footer .links {
+    display: flex;
+    gap: 1rem;
+    font-size: 14px;
+}
+
+footer .socials {
+    display: flex;
+    justify-content: center;
+    gap: 0.3rem;
+    font-size: 14px;
+
+}
+
+footer .socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+
+footer .socials img {
+    width: 30px;
+    height: auto;
+}
+
+/* Desktop */
+@media (max-width: 768px) {
+    /* Fix font sizes */
+    footer .disclaimer {
+        font-size: 0.65rem;
+    }
+
+    footer .links {
+        font-size: 12px;
+    }
+
+    footer .socials {
+        font-size: 12px;
+    }
+
+    footer .socials img {
+        width: 25px;
+    }
+
+    /* Add column layout for footer */
+    footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
