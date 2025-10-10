@@ -8,14 +8,14 @@
         <div class="nav-links">
             <ul>
                 <li>
-                    <a href="/team">Team</a>
+                    <a href="/team">Nuestro Staff</a>
                 </li>
                 <li>
-                    <a href="/entrenamiento">Entrenamiento</a>
+                    <a href="/entrenamiento">Tus Clases</a>
                 </li>
-                <li>
+                {{!-- <li>
                     <a href="/blog">Nagiblog</a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="/store">Store
                         {{> cartIcon }}
@@ -29,10 +29,10 @@
     {{else}}
     <div class="nav-buttons">
         <button type="button" class="btn-secondary">
-            <a href="/login">Inicia</a>
+            <a href="/login">Iniciar sesión</a>
         </button>
         <button type="button" class="btn-primary">
-            <a href="/api/payment/suscription">Suscríbete</a>
+            <a href="/api/payment/suscription">HAZTE DIAMANTE</a>
         </button>
     </div>
     {{/if}}

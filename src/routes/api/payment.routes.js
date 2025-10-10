@@ -22,13 +22,13 @@ router.get('/success', async (req, res) => {
 
     const { user } = req;
     const { purchaseData } = req.cookies;
-console.log(user)
+    console.log(user)
     const [[findUser]] = await new UsersDAO().getUserByEmail(user.email);
 
     if (purchaseData) {
         user.ownedCoursesAndLessons.push(purchaseData.courseId);
         await new PurchasesDAO().saveClassPurchase(findUser.id, parseInt(purchaseData.courseId));
-        res.cookie('jwt', createToken(user), {maxAge: 1000*60*60*24}).redirect(`/clases/${courseId}`);
+        res.cookie('jwt', createToken(user), { maxAge: 1000 * 60 * 60 * 24 }).redirect(`/clases/${courseId}`);
     } else {
         await new PurchasesDAO().saveSubscription(await new UserDTO().extractUserId(user));
         await new UsersDAO().setRoleByUserEmail('premium', user.email);
@@ -43,11 +43,14 @@ router.get('/suscription', async (req, res) => {
 
         const { user } = req;
         if (!user) res.redirect('/login')
-        if (user.role == 'premium') res.redirect('/entrenamiento')
         else {
-            const { id } = await suscriptionPayment();
-            res.redirect('/suscribete/' + id)
+            if (user.role == 'premium') res.redirect('/entrenamiento')
+            else {
+                const { id } = await suscriptionPayment();
+                res.redirect('/suscribete/' + id)
+            }
         }
+
     } catch (error) {
         console.log(error.message)
     }

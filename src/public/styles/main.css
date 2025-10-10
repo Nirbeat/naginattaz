@@ -109,7 +109,7 @@ a {
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    margin-right: 1.5rem;
+    margin-right: 4.5rem;
     font-size: clamp(0.75rem, 0.75vw, 1rem);
     letter-spacing: 0.15rem;
     text-transform: uppercase;

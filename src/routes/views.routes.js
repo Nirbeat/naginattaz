@@ -140,6 +140,53 @@ router.get('/team', async (req, res, next) => {
 
 });
 
+router.get('/store', async (req, res, next) => {
+
+    let [users] = await new UsersDAO().getTeamMembers();
+
+    const teacherMap = users.reduce((map, user) => {
+        map[user.id] = user.name;
+        return map;
+    }, {});
+
+    try {
+        const { user } = req;
+        let [courses] = await new CoursesDAO().getAllClasses();
+        if (courses) {
+            courses = courses.filter(course => course.program_module_id == null)
+            courses = courses.map(course => {
+                let teacherIds = [];
+                try {
+                    teacherIds = Array.isArray(course.teachers_id)
+                        ? course.teachers_id
+                        : JSON.parse(course.teachers_id || '[]');
+                } catch (error) {
+                    console.error(`Error parsing teachers_id for course ${course.id}:`, error);
+                }
+                teacherIds = Array.isArray(teacherIds) ? teacherIds : [];
+                course.teacherNames = teacherIds.map(id => teacherMap[id] || 'Desconocido');
+                return course;
+            });
+        }
+
+        res.render('store.handlebars', {
+            style: '/styles/main.css',
+            storeStyle: '/styles/store.css',
+            profileStyle: '/styles/profile.css',
+            courses,
+            userData: user ? {
+                name: user.name,
+                profileImg: user.profile_image,
+                role:user.role
+            } : null,
+            images: images,
+        })
+    } catch (error) {
+        next(error)
+    }
+});
+
+
 router.use(ensureAuthenticated);
 
 router.get('/entrenamiento/:section?', async (req, res, next) => {
@@ -333,52 +380,6 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
         });
     } catch (error) {
         next(error);
-    }
-});
-
-router.get('/store', async (req, res, next) => {
-
-    let [users] = await new UsersDAO().getTeamMembers();
-
-    const teacherMap = users.reduce((map, user) => {
-        map[user.id] = user.name;
-        return map;
-    }, {});
-
-    try {
-        const { user } = req;
-        let [courses] = await new CoursesDAO().getAllClasses();
-        if (courses) {
-            courses = courses.filter(course => course.program_module_id == null)
-            courses = courses.map(course => {
-                let teacherIds = [];
-                try {
-                    teacherIds = Array.isArray(course.teachers_id)
-                        ? course.teachers_id
-                        : JSON.parse(course.teachers_id || '[]');
-                } catch (error) {
-                    console.error(`Error parsing teachers_id for course ${course.id}:`, error);
-                }
-                teacherIds = Array.isArray(teacherIds) ? teacherIds : [];
-                course.teacherNames = teacherIds.map(id => teacherMap[id] || 'Desconocido');
-                return course;
-            });
-        }
-
-        res.render('store.handlebars', {
-            style: '/styles/main.css',
-            storeStyle: '/styles/store.css',
-            profileStyle: '/styles/profile.css',
-            courses,
-            userData: user ? {
-                name: user.name,
-                profileImg: user.profile_image,
-                role:user.role
-            } : null,
-            images: images,
-        })
-    } catch (error) {
-        next(error)
     }
 });
 
