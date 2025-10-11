@@ -62,6 +62,7 @@ router.get('/:courseID', async (req, res) => {
     const { user } = req;
     const { courseID } = req.params
 
+    if(!user) res.redirect('/login');
     try {
         if (user.ownedCoursesAndLessons.includes(courseID)) {
             res.redirect(`/clases/${courseID}`)
