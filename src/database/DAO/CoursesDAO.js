@@ -115,7 +115,6 @@ and lessons.class_id = classes.id;`, [programId]
             }
         }));
 
-        console.log(classesData)
         return classesData;
     }
 
