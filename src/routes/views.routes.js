@@ -33,8 +33,6 @@ const images = {
     }
 };
 
-// test programdao getProgramWithPhasesAndModules(programId)
-
 router.get('/testProgramDao/:programId', async (req, res, next) => {
 
     try {
@@ -117,7 +115,6 @@ router.get('/team', async (req, res, next) => {
         const { user } = req;
         let [teamMembers] = await new UsersDAO().getTeamMembers();
 
-        // PASAR LUEGO A UN DTO
         teamMembers = teamMembers.map(({ name, skills, instagramURL, tiktokURL, profile_image }) => {
             return {
                 name, skills, instagramURL, tiktokURL, profile_image
@@ -275,8 +272,6 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
     }
 });
 
-// RUTA PARA LOS PROGRAMAS, BÁSICAMENTE UN CLON DE LAS CLASES CON
-// PASOS EXTRA
 router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', async (req, res, next) => {
 
     try {
@@ -286,27 +281,6 @@ router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', a
         const coursesDao = new CoursesDAO()
 
         const program = await new ProgramDAO().getProgramWithPhasesAndModules(parseInt(programID))
-        const warmingLesson = await coursesDao.getWarmingClass();
-        const finalLesson = await coursesDao.getFinalLesson();
-
-        // if (!phaseID) {
-        //     phaseID = program.phases[0]?.phase_id;
-        // }
-        // if (!moduleID) {
-        //     const currentPhase = program.phases.find(phase => phase.phase_id == phaseID)
-        //     moduleID = currentPhase.modules[0]?.module_id
-        // }
-        // if (!courseID) {
-        //     let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
-        //     currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
-        //     courseID = currentCourse.classes[0]?.class_id
-        // }
-        // if (!lessonID) {
-        //     let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
-        //     currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
-        //     currentCourse = currentCourse.classes.find(course => course.class_id == courseID)
-        //     courseID = currentCourse.lessons[0]?.lessons_id
-        // }
 
         const phaseIndex = program.phases.findIndex(phase => phase.phase_id == phaseID);
         const moduleIndex = program.phases[phaseIndex].modules.findIndex(module => module.module_id == moduleID)
@@ -364,7 +338,6 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
         const teacher = JSON.parse(course.teachers_id)
 
         const { name: teacherName } = await coursesDao.getTeachersNameById(teacher)
-        // ANALIZAR PONER ESTO EN MIDDLEWARE
         await coursesDao.setClassViews(courseID, user.name, user.role);
 
         res.render('lessons.handlebars', {

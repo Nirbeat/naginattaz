@@ -6,7 +6,6 @@ export class CoursesDAO {
 
     async getTeachersNameById(teachersId) {
 
-        // const query = teachersId.toLocaleString()
         const [[teacher]] = await DBConnection.query(
             'SELECT name FROM users WHERE id IN (?)',
             [teachersId]
@@ -106,8 +105,8 @@ and lessons.class_id = classes.id;`, [programId]
 
         await Promise.all(classesData.map(async (course) => {
             course.teachers = [];
-            // esto devuelve cantidad de usuarios activos por clase
-            course.students = JSON.parse(course.students).length;
+
+            course.students = course.students.length;
             const teacherIds = JSON.parse(course.teachers_id);
 
             for (const teacherId of teacherIds) {
@@ -162,5 +161,3 @@ and lessons.class_id = classes.id;`, [programId]
         )
     }
 }
-
-new CoursesDAO().getClassViewsByPeriod(10, 2025).then(data=>console.log(data))

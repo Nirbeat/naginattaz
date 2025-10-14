@@ -22,7 +22,6 @@ router.get('/success', async (req, res) => {
 
     const { user } = req;
     const { purchaseData } = req.cookies;
-    console.log(user)
     const [[findUser]] = await new UsersDAO().getUserByEmail(user.email);
 
     if (purchaseData) {

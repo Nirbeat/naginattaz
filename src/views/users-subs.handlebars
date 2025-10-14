@@ -34,8 +34,6 @@
         const [{ email, name, instagramURL, role }] = await fetch(`https://naginattaz.com/api/admin/users/find?email=${e.target.email.value}`)
             .then(user => user.json());
 
-        console.log(email, name, instagramURL, role)
-
         searchContainer.innerHTML=`
 
     <table>
@@ -62,7 +60,6 @@
     
     roleSetter.addEventListener('click', async (e) => {
     const newRole = document.querySelector('select').value;
-        console.log(newRole);
         fetch('https://naginattaz.com/api/admin/users/set-role', {
             body: JSON.stringify({newRole, email}),
             method: 'POST',
@@ -75,7 +72,7 @@
             alert(JSON.stringify(data.success));
             window.location.reload()
             })
-        .catch(e=> console.log(e))
+        .catch(e=> console.log("error"))
     })
     })
 </script>

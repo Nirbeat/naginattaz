@@ -7,10 +7,8 @@ function slashImage() {
     const body = document.body;
     const gifBackground = document.getElementById('gifBackground');
 
-    // Change the clip-path for a diagonal reveal
     image.style.clipPath = 'polygon(0 0, 100% 0, 0 100%)';
 
-    // Flash background color
     body.style.background = 'white';
     setTimeout(() => {
 
@@ -18,22 +16,20 @@ function slashImage() {
         body.style.backgroundImage = 'linear-gradient(0.25turn, #111111, #26152e, #430e53, #382142, #0f0f0f);';
 
         
-    }, 300); // Flash duration
+    }, 300);
 
-    // Show the GIF background
     gifBackground.style.opacity = 1;
 
     setTimeout(() => {
         gifBackground.style.opacity = 0;
-    }, 200); // Duration to keep the GIF visible
+    }, 200);
 
-    // Add shake animation
     container.style.animation = 'shake 0.5s ease';
     container.style.background = 'black';
 
     setTimeout(() => {
-        container.style.animation = 'none'; // Reset the animation
-    }, 500); // Match duration of shake animation
+        container.style.animation = 'none';
+    }, 500);
 };
 
 loginButton.addEventListener('click', slashImage);

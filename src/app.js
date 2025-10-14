@@ -1,7 +1,6 @@
 import { serverRoot } from './config/utils.js';
 import express, { json } from 'express';
 import { environment } from './config/env.js';
-// import { DBConnection } from './database/database.js';
 import passport from 'passport';
 import handlebars from 'express-handlebars';
 import viewsRouter from './routes/views.routes.js';

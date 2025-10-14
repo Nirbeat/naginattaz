@@ -15,13 +15,6 @@ export const transport = nodemailer.createTransport({
     }
 });
 
-// service: "gmail",
-// port: 587,
-// auth: {
-//     user: "maximilianomartindev@gmail.com",
-//     pass: "hczx owcr xlyd vscx"
-// }
-
 export async function welcomeMessage(userMail) {
 
     const mail = await transport.sendMail({
