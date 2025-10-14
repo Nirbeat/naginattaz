@@ -106,7 +106,7 @@ and lessons.class_id = classes.id;`, [programId]
         await Promise.all(classesData.map(async (course) => {
             course.teachers = [];
 
-            course.students = JSON.parse(course.students).length;
+            course.students = course.students.length;
             const teacherIds = JSON.parse(course.teachers_id);
 
             for (const teacherId of teacherIds) {
@@ -115,6 +115,7 @@ and lessons.class_id = classes.id;`, [programId]
             }
         }));
 
+        console.log(classesData)
         return classesData;
     }
 
@@ -161,3 +162,5 @@ and lessons.class_id = classes.id;`, [programId]
         )
     }
 }
+
+new CoursesDAO().getClassViewsByPeriod(10, 2025)
