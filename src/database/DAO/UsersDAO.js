@@ -46,5 +46,3 @@ export class UsersDAO{
         )
     }
 }
-
-// new UsersDAO().getUserByEmail("maxinirbeat@gmail.com").then(([data])=> console.log(data));

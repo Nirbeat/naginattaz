@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(() => {
         plusSlides(1);
-    }, 6000); // Change image every 6 seconds
-
+    }, 6000);
 
 });

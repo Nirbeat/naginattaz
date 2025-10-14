@@ -90,7 +90,6 @@
             section.style.display = 'none';
         }
 
-        // Toggle the active class on the clicked li
         element.classList.toggle('active');
     }
 
@@ -105,26 +104,4 @@
                 el.textContent = "";
             }
         });
-
-
-    /* Filtro por nivel
-
-    const classLevelFilter = document.getElementById("classLevelFilter");
-    const courses = document.querySelectorAll(".course-link");
-
-    classLevelFilter.addEventListener("change", function () {
-        const selectedLevel = this.value;
-
-        courses.forEach(course => {
-            const courseLevel = course.querySelector(".course-level").textContent.toLowerCase();
-            if (selectedLevel === "all" || courseLevel === selectedLevel) {
-                course.style.display = "block";
-            } else {
-                course.style.display = "none";
-            }
-        });
-    });
-});
-
-*/
 </script>

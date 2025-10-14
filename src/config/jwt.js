@@ -3,7 +3,7 @@ import { environment } from "./env.js";
 
 export function createToken(userData){
 
-    return jwt.sign(userData, environment.JWTSecret, {expiresIn: 60*60*24}); //un dia
+    return jwt.sign(userData, environment.JWTSecret, {expiresIn: 60*60*24});
 }
 
 export function extractJWTFromCookies(req){
