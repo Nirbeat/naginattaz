@@ -162,5 +162,3 @@ and lessons.class_id = classes.id;`, [programId]
         )
     }
 }
-
-new CoursesDAO().getClassViewsByPeriod(10, 2025)
