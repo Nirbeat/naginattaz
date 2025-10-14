@@ -140,10 +140,9 @@ and lessons.class_id = classes.id;`, [programId]
 
         if (!data) {
             data = {
-                students: '[]'
+                students: []
             }
         }
-        data.students = JSON.parse(data.students)
 
         if (!data.students.includes(user.id) && userRole == 'premium') data.students.push(user.id)
         return JSON.stringify(data.students)
