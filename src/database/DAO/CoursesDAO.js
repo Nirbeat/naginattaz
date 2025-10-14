@@ -93,40 +93,74 @@ and lessons.class_id = classes.id;`, [programId]
         }
         return result;
     }
+
     async getClassViewsByPeriod(month, year) {
         const [classesData] = await DBConnection.query(
-            `SELECT class_name, teachers_id, views FROM classes
+            `SELECT class_name, teachers_id, views, students FROM classes
             JOIN class_views
             WHERE classes.id = class_views.class_id
             AND class_views.month = ?
             AND class_views.year = ?`,
             [month, year]
         );
-    
+
         await Promise.all(classesData.map(async (course) => {
             course.teachers = [];
+            // esto devuelve cantidad de usuarios activos por clase
+            course.students = JSON.parse(course.students).length;
             const teacherIds = JSON.parse(course.teachers_id);
-    
+
             for (const teacherId of teacherIds) {
                 const teacherData = await this.getTeachersNameById(teacherId);
                 course.teachers.push(teacherData.name);
             }
         }));
-    
+
         return classesData;
     }
 
-    async setClassViews(classId) {
+    async setClassViewers(classId, userName, userRole) {
 
-        // console.log(month, year)
+        // ALTER TABLE `class_views` ADD `students` JSON NOT NULL DEFAULT '[]' AFTER `month`;
+        const [[user]] = await DBConnection.query(
+            `SELECT u.id FROM users as u 
+            JOIN purchases as p ON p.user_id = u.id
+            WHERE u.name = ?
+            AND p.purchase_type = "suscription"`,
+            [userName]
+        )
+
+        if(!user) return
+
+        let [[data]] = await DBConnection.query(
+            `SELECT students FROM class_views as c
+            WHERE c.class_id = ?
+            AND c.year = YEAR(NOW())
+            AND c.month = MONTH(NOW())`,
+            [classId])
+
+        if (!data) {
+            data = {
+                students: '[]'
+            }
+        }
+        data.students = JSON.parse(data.students)
+
+        if (!data.students.includes(user.id) && userRole == 'premium') data.students.push(user.id)
+        return JSON.stringify(data.students)
+    }
+
+    async setClassViews(classId, userName, userRole) {
+
+        const students = await this.setClassViewers(classId, userName, userRole);
+
         await DBConnection.query(
-            `INSERT INTO class_views (class_id, year, month, views) 
-            VALUES (?, YEAR(NOW()), MONTH(NOW()), 1)
-            ON DUPLICATE KEY UPDATE views = views + 1;`,
-            [classId]
+            `INSERT INTO class_views (class_id, year, month, views, students) 
+            VALUES (?, YEAR(NOW()), MONTH(NOW()), 1, ?)
+            ON DUPLICATE KEY UPDATE views = views + 1, students = ?;`,
+            [classId, students, students]
         )
     }
 }
 
-// await new CoursesDAO().getClassViewsByPeriod(5,2025).then(data => console.log(data))
-// await new CoursesDAO().getTeachersNameById(2).then(data => console.log(data))
+new CoursesDAO().getClassViewsByPeriod(10, 2025).then(data=>console.log(data))

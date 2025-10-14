@@ -21,6 +21,7 @@
         <label for="year">Año</label>
         <select id="year" name="year">
             <option value="2025">2025</option>
+            <option value="2026">2026</option>
         </select>
         <button>Consultar</button>
     </form>
@@ -29,12 +30,14 @@
             <td>Clase</td>
             <td>Vistas</td>
             <td>Profesor</td>
+            <td>Usuarios</td>
         </tr>
         {{#each classesData}}
         <tr>
             <td>{{this.class_name}}</td>
             <td>{{this.views}}</td>
             <td>{{this.teachers}}</td>
+            <td>{{this.students}}</td>
         </tr>
         {{/each}}
     </table>

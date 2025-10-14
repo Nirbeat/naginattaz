@@ -1,7 +1,7 @@
 <nav class="admin-navbar">
     <ul>
         <li><a href="/admin/users/subs">Usuarios</a></li>
-        <li><a href="/admin/class-views" class="active">Clases</a></li>
+        <li><a href="/admin/class-views">Clases</a></li>
         {{!-- <li><a href="/admin/blog">Blog</a></li> --}}
     </ul>
 </nav>
@@ -47,3 +47,17 @@
     border-radius: 10px;
 }
 </style>
+
+<script>
+    const bar = document.querySelectorAll('.admin-navbar ul li a');
+    const path = location.pathname.split('/').pop();
+
+    switch(path){
+        case "subs":
+        bar[0].className = "active"
+        break;
+        case "class-views":
+            bar[1].className = "active";
+        break;
+    }
+</script>
