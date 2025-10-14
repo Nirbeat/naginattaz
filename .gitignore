@@ -3,5 +3,4 @@ node_modules
 contraseñas cloud.txt
 payment.js
 # plantillas inutilizadas o para modificar
-premium.handlebars
 techniques.handlebars

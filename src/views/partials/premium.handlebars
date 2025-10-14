@@ -1,0 +1,89 @@
+<section class="premium-section">
+  <header>
+    <h5>¡Empezá a entrenar hoy!</h5>
+  </header>
+  <div class="premium-card">
+    <div class="content">
+
+      <!-- Producto 1 -->
+      <div class="product-block">
+        <h6>Clases y packs sueltos</h6>
+        <p>Ideal si querés elegir exactamente qué entrenar y a tu ritmo.</p>
+        <ul>
+          <li>Acceso a clases y packs coreográficos o técnicos.</li>
+          <li>Vigencia de 30 días desde tu compra.</li>
+          <li>Perfecto para probar estilos nuevos o sumar entrenamientos específicos.</li>
+          <li>Sin compromiso mensual: pagás solo lo que usás.</li>
+        </ul>
+        <a href="/store" class="btn-primary">Explorar el store</a>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="product-block">
+        <h6>Membresía Naginattaz</h6>
+        <p>Para quienes quieren entrenar sin límites. La opción más completa y flexible para progresar de forma continua.</p>
+        <ul>
+          <li>Acceso ilimitado a todo el contenido de la plataforma (clases técnicas, coreográficas, packs y programas).</li>
+          <li>Vigencia de 30 días desde tu compra.</li>
+        </ul>
+        <p>Además incluye:</p>
+        <ul>
+          <li>Clases en vivo sin costo adicional.</li>
+          <li>Calendario de entrenamiento sugerido (plantilla descargable).</li>
+          <li>Descuentos especiales en eventos, merch y workshops.</li>
+        </ul>
+        <p><strong>${{suscription}}</strong></p>
+        {{!-- <p>Se abona en moneda local del comprador a valor oficial al momento de la compra.</p> --}}
+        <a href="/api/payment/suscription" class="btn-primary">Unirse a la membresía</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+    .premium-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.content {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.product-block {
+  flex: 1;
+  min-width: 300px;
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.product-block h6 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.product-block ul {
+  margin: 0.5rem 0 1rem 1.2rem;
+  padding: 0;
+}
+
+.product-block p {
+  margin: 0.5rem 0;
+}
+
+.btn-primary {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
+</style>
