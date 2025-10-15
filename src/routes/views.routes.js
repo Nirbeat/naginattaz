@@ -69,7 +69,6 @@ router.get('/', async (req, res, next) => {
 
     try {
         const [[{suscription}]] = await new PurchasesDAO().getSuscriptionPrice();
-        console.log(suscription)
         const { user } = req;
         res.render('index.handlebars', {
             style: '/styles/main.css',
