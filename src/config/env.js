@@ -24,5 +24,8 @@ export const environment = {
     mailing:{
         nagimail: process.env.NAGIMAIL,
         nagipass: process.env.NAGIPASS
+    },
+        dlocal:{
+        subscription: process.env.DLOCAL_SUB_LINK
     }
 }

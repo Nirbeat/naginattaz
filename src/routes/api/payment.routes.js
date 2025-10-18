@@ -1,6 +1,6 @@
-import { Router } from "express";
+import { json, Router } from "express";
 import { CoursesDAO } from "../../database/DAO/CoursesDAO.js";
-import { paymentProcessing, suscriptionPayment } from "../../config/mercadopago.js";
+import { paymentProcessing } from "../../config/mercadopago.js";
 import { PurchasesDAO } from "../../database/DAO/PurchasesDAO.js";
 import { customVerification } from "../../middlewares/authToken.js";
 import { createToken } from "../../config/jwt.js";
@@ -19,43 +19,36 @@ router.get('/public-key', async (req, res) => {
 })
 
 router.get('/success', async (req, res) => {
-
-    const { user } = req;
-    const { purchaseData } = req.cookies;
-    const [[findUser]] = await new UsersDAO().getUserByEmail(user.email);
-
-    if (purchaseData) {
-        user.ownedCoursesAndLessons.push(purchaseData.courseId);
-        await new PurchasesDAO().saveClassPurchase(findUser.id, parseInt(purchaseData.courseId));
-        res.cookie('jwt', createToken(user), { maxAge: 1000 * 60 * 60 * 24 }).redirect(`/clases/${courseId}`);
-    } else {
-        await new PurchasesDAO().saveSubscription(await new UserDTO().extractUserId(user));
-        await new UsersDAO().setRoleByUserEmail('premium', user.email);
-        await suscriptionMessage(user);
-        res.cookie('jwt', createToken(user)).redirect(`/entrenamiento`);
-    }
-
+    console.log(req.cookies)
+    res.redirect('/login');
 });
+
 router.get('/suscription', async (req, res) => {
 
     try {
 
         const { user } = req;
         if (!user) res.redirect('/login')
+        if (user.role == 'premium') res.redirect('/entrenamiento')
         else {
-            if (user.role == 'premium') res.redirect('/entrenamiento')
-            else {
-                const { id } = await suscriptionPayment();
-                res.redirect('/suscribete/' + id)
-            }
+            const userId = await new UserDTO().extractUserId(user)
+            await new PurchasesDAO().saveSubscription(userId)
+            res.redirect(environment.dlocal.subscription)
         }
-
     } catch (error) {
         console.log(error.message)
     }
 
 })
+router.use(json());
+router.post('/suscription-notification', async (req, res)=> {
+    console.log("cuerpo de la notificacion", req.body)
+    const {subscriptionId} = req.body;
+    console.log(subscriptionId)
+    await new PurchasesDAO().confirmSubscription(subscriptionId);
+})
 
+// esto de momento dejarlo
 router.get('/:courseID', async (req, res) => {
 
     const { user } = req;

@@ -26,27 +26,3 @@ export async function paymentProcessing(course) {
         }
     });
 }
-
-export async function suscriptionPayment() {
-    const [[{suscription}]] = await new PurchasesDAO().getSuscriptionPrice()
-    return await preference.create({
-        body: {
-            items: [
-                {
-                    id:0,
-                    title: 'Naginatta de Diamante',
-                    quantity: 1,
-                    currency_id: 'ARS',
-                    unit_price: suscription,
-                    description: 'membresia mensual'
-                }
-            ],
-            back_urls:{
-                failure: environment.googleAuth.redirectURL + '/api/payment/failure',
-                pending: environment.googleAuth.redirectURL + '/api/payment/pending',
-                success: environment.googleAuth.redirectURL + '/api/payment/success'
-            },
-            auto_return: 'approved'
-        }
-    })
-}

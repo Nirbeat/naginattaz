@@ -32,24 +32,21 @@ export class PurchasesDAO {
 
     async saveSubscription(userId) {
 
-        const [[previousSub]] = await DBConnection.query(
-            'SELECT id FROM purchases WHERE user_id = ?', [userId]
+        const newPurchase = await DBConnection.query(
+            'INSERT INTO purchases(user_id, purchase_type) VALUES (?,?)',
+            [userId, 'suscription']
         );
-        let newPurchase;
-        if (!previousSub) {
-            newPurchase = await DBConnection.query(
-                'INSERT INTO purchases(user_id, purchase_type) VALUES (?,?)',
-                [userId, 'suscription']
-            );
-        } else {
-            newPurchase = await DBConnection.query(
-                'UPDATE purchases SET user_id = ?, purchase_type = ? WHERE id = ?',
-                [userId, 'suscription', previousSub.id]
-            );
-        }
         return newPurchase;
     }
 
+    async confirmSubscription(subscriptionId) {
+        await DBConnection.query(
+            `UPDATE purchases JOIN users 
+            SET purchases.subscription_id = ?, users.role = 'premium'
+            WHERE purchases.subscription_id = 0 AND users.id = purchases.user_id;`,
+            [subscriptionId]
+        )
+    }
     async getSuscriptionPrice() {
         return await DBConnection.query(
             'SELECT suscription FROM prices'
