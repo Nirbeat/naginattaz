@@ -1,5 +1,4 @@
 import { json, Router, urlencoded } from "express";
-import { customVerification, ensureAdmin, ensureAuthenticated } from "../../middlewares/authToken.js";
 import { UsersDAO } from "../../database/DAO/UsersDAO.js";
 
 const router = Router();

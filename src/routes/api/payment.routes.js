@@ -3,8 +3,6 @@ import { CoursesDAO } from "../../database/DAO/CoursesDAO.js";
 import { paymentProcessing } from "../../config/mercadopago.js";
 import { PurchasesDAO } from "../../database/DAO/PurchasesDAO.js";
 import { customVerification } from "../../middlewares/authToken.js";
-import { createToken } from "../../config/jwt.js";
-import { UsersDAO } from "../../database/DAO/UsersDAO.js";
 import { UserDTO } from "../../database/DTO/UserDTO.js";
 import { environment } from "../../config/env.js";
 import { suscriptionMessage } from "../../config/mailing/mailing.js";
@@ -19,14 +17,14 @@ router.get('/public-key', async (req, res) => {
 })
 
 router.get('/success', async (req, res) => {
-    console.log(req.cookies)
+    const {user} = req;
+    await suscriptionMessage(user);
     res.redirect('/login');
 });
 
 router.get('/suscription', async (req, res) => {
 
     try {
-
         const { user } = req;
         if (!user) res.redirect('/login')
         if (user.role == 'premium') res.redirect('/entrenamiento')
@@ -44,7 +42,6 @@ router.use(json());
 router.post('/suscription-notification', async (req, res)=> {
     console.log("cuerpo de la notificacion", req.body)
     const {subscriptionId} = req.body;
-    console.log(subscriptionId)
     await new PurchasesDAO().confirmSubscription(subscriptionId);
 })
 

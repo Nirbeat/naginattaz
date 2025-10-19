@@ -1,5 +1,5 @@
 import { serverRoot } from './config/utils.js';
-import express, { json } from 'express';
+import express from 'express';
 import { environment } from './config/env.js';
 import passport from 'passport';
 import handlebars from 'express-handlebars';

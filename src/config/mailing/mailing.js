@@ -17,7 +17,7 @@ export const transport = nodemailer.createTransport({
 
 export async function welcomeMessage(userMail) {
 
-    const mail = await transport.sendMail({
+    transport.sendMail({
         from: environment.mailing.nagimail,
         to: userMail,
         subject: "¡Bienvenido a Naginattaz!",
@@ -30,10 +30,6 @@ export async function welcomeMessage(userMail) {
 
 export async function suscriptionMessage(user) {
 
-    const date = {
-        day: new Date().getDate(),
-        month: new Date().getMonth() +2
-    }
     transport.sendMail({
         from: environment.mailing.nagimail,
         to: user.email,
