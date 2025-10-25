@@ -32,11 +32,35 @@ export class PurchasesDAO {
 
     async saveSubscription(userId) {
 
-        const newPurchase = await DBConnection.query(
-            'INSERT INTO purchases(user_id, purchase_type) VALUES (?,?)',
-            [userId, 'suscription']
-        );
-        return newPurchase;
+        let [newPurchase] = await DBConnection.query(
+            `UPDATE purchases SET user_id = ?
+            WHERE purchase_date <= NOW() - INTERVAL 5 MINUTE
+            AND purchase_type = 'suscription'
+            AND subscription_id = 0`,
+            [userId]
+        )
+
+        if (newPurchase.affectedRows == 1) return 1
+
+        const inProcess = await this.#isSubscriptionInProcess(userId);
+
+        if (!inProcess) {
+            await DBConnection.query(
+                'INSERT INTO purchases(user_id, purchase_type) VALUES (?,?)',
+                [userId, 'suscription']
+            );
+            return 1
+        }
+        else if (inProcess.user_id == userId) {
+            DBConnection.query(
+                `UPDATE purchases SET user_id = ?
+                WHERE subscription_id = 0`,
+                [userId]
+            )
+            return 1
+        }
+
+        return 0;
     }
 
     async confirmSubscription(subscriptionId) {
@@ -47,9 +71,19 @@ export class PurchasesDAO {
             [subscriptionId]
         )
     }
+
+    async #isSubscriptionInProcess(userId) {
+        const [[data]] = await DBConnection.query(
+            "SELECT user_id FROM purchases WHERE subscription_id = 0 AND purchase_type = 'suscription'"
+        )
+        return data;
+    }
+
     async getSuscriptionPrice() {
         return await DBConnection.query(
             'SELECT suscription FROM prices'
         )
     }
 }
+
+// new PurchasesDAO().isSubscriptionInProcess().then(data=> console.log(data));

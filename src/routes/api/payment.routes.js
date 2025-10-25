@@ -30,15 +30,21 @@ router.get('/suscription', async (req, res) => {
         if (user.role == 'premium') res.redirect('/entrenamiento')
         else {
             const userId = await new UserDTO().extractUserId(user)
-            await new PurchasesDAO().saveSubscription(userId)
-            res.redirect(environment.dlocal.subscription)
+            const transaction = await new PurchasesDAO().saveSubscription(userId)
+            if(transaction == 0){
+                res.redirect('/transaccion-pendiente')
+            }else{
+                res.redirect(environment.dlocal.subscription)
+            }
         }
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
     }
 
 })
+
 router.use(json());
+
 router.post('/suscription-notification', async (req, res)=> {
     console.log("cuerpo de la notificacion", req.body)
     const {subscriptionId} = req.body;

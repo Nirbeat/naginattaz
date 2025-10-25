@@ -288,28 +288,7 @@ router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', a
         let { courseID, lessonID, programID, phaseID, moduleID } = req.params;
         const coursesDao = new CoursesDAO()
 
-        const program = await new ProgramDAO().getProgramWithPhasesAndModules(parseInt(programID))
-        const warmingLesson = await coursesDao.getWarmingClass();
-        const finalLesson = await coursesDao.getFinalLesson();
-
-        // if (!phaseID) {
-        //     phaseID = program.phases[0]?.phase_id;
-        // }
-        // if (!moduleID) {
-        //     const currentPhase = program.phases.find(phase => phase.phase_id == phaseID)
-        //     moduleID = currentPhase.modules[0]?.module_id
-        // }
-        // if (!courseID) {
-        //     let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
-        //     currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
-        //     courseID = currentCourse.classes[0]?.class_id
-        // }
-        // if (!lessonID) {
-        //     let currentCourse = program.phases.find(phase => phase.phase_id == phaseID)
-        //     currentCourse = currentCourse.modules.find(module => module.module_id == moduleID)
-        //     currentCourse = currentCourse.classes.find(course => course.class_id == courseID)
-        //     courseID = currentCourse.lessons[0]?.lessons_id
-        // }
+        const program = await new ProgramDAO().getProgramWithPhasesAndModules(parseInt(programID));
 
         const phaseIndex = program.phases.findIndex(phase => phase.phase_id == phaseID);
         const moduleIndex = program.phases[phaseIndex].modules.findIndex(module => module.module_id == moduleID)
@@ -414,12 +393,24 @@ router.get('/construccion', (req, res, next) => {
         res.render('construction.handlebars', {
             style: '/styles/main.css',
             constructionStyle: '/styles/construction.css',
-            workerSvg: '/images/worker.svg'
+            workerSvg: '/images/worker.svg',
+            title: 'Página bajo construcción',
+            message: 'Estamos trabajando duro para brindarles el mejor contenido. Por favor vuelva más tarde.'
         });
     } catch (error) {
         next(error);
     }
 });
+
+router.get('/transaccion-pendiente', async (req, res) => {
+    res.render('construction.handlebars', {
+            style: '/styles/main.css',
+            constructionStyle: '/styles/construction.css',
+            workerSvg: '/images/worker.svg',
+            title: 'Servidor ocupado',
+            message: 'Estamos procesando muchas solicitudes, reintente en unos minutos.'
+        });
+})
 
 router.get('*', (req, res, next) => {
     try {
@@ -427,7 +418,9 @@ router.get('*', (req, res, next) => {
         res.render('construction.handlebars', {
             style: '/styles/main.css',
             constructionStyle: '/styles/construction.css',
-            workerSvg: '/images/worker.svg'
+            workerSvg: '/images/worker.svg',
+            title: 'Página bajo construcción',
+            message: 'Estamos trabajando duro para brindarles el mejor contenido. Por favor vuelva más tarde.'
         })
     } catch (error) {
         next(error)

@@ -34,28 +34,28 @@ export async function suscriptionMessage(user) {
         from: environment.mailing.nagimail,
         to: user.email,
         subject: "Suscripción a Naginattaz",
-        html: `🔁 No pierdas tu lugar en Naginattaz
+        html: `<h3>🔁 No pierdas tu lugar en Naginattaz</h3>
 
 
-Hola ${user.name}, 
+<p>Hola ${user.name},</p><br> 
 
-Tu membresía en Naginattaz sigue activa y queremos asegurarnos de que no pierdas tu lugar en la comunidad💥
+<p>Tu membresía en Naginattaz sigue activa y queremos asegurarnos de que no pierdas tu lugar en la comunidad💥</p><br>
 
-No olvides sumarte al grupo de WhatsApp especial para miembros https://chat.whatsapp.com/BUcAiWCkFiaEAhTmm8e4nk?mode=r_t
+<p>No olvides sumarte al grupo de WhatsApp especial para miembros https://chat.whatsapp.com/BUcAiWCkFiaEAhTmm8e4nk?mode=r_t</p><br>
 
-Para mantener tu cupo, tu progreso y el acceso completo a nuestras clases, solo tenés que abonar tu suscripción mensual desde este link:
+<p>Para mantener tu cupo, tu progreso y el acceso completo a nuestras clases, solo tenés que abonar tu suscripción mensual desde este link:<p><br>
 
-👉 https://naginattaz.com/api/payment/suscription
+<p>👉 https://naginattaz.com/api/payment/suscription</p><br>
 
-📅 Fecha límite de pago: ${new Date().getDate()}/${new Date().getMonth() +2}/${new Date().getFullYear()}
+<p>📅 Fecha límite de pago: ${new Date().getDate()}/${new Date().getMonth() +2}/${new Date().getFullYear()}</p><br>
 
-Si ya realizaste el pago, podés ignorar este mensaje.
-Pero si todavía no lo hiciste, ¡no te duermas! Que queremos seguir bailando con vos.
+<p>Si ya realizaste el pago, podés ignorar este mensaje.<p/>
+Pero si todavía no lo hiciste, ¡no te duermas! Que queremos seguir bailando con vos.</p><br>
 
-Gracias por ser parte de esta comunidad que crece con ritmo y pasión 💜
+<p>Gracias por ser parte de esta comunidad que crece con ritmo y pasión 💜</p><br>
 
-Nos vemos en clase,
-Equipo Naginattaz
+<p>Nos vemos en clase,</p>
+<p>Equipo Naginattaz</p>
 `
     })
 }
