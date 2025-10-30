@@ -26,6 +26,9 @@ export const environment = {
         nagipass: process.env.NAGIPASS
     },
         dlocal:{
-        subscription: process.env.DLOCAL_SUB_LINK
+        subscription: process.env.DLOCAL_SUB_LINK,
+        key : process.env.DLOCAL_API_KEY,
+        secret: process.env.DLOCAL_SECRET_KEY,
+        paymentURL: process.env.DLOCAL_PAYMENT_URL
     }
 }

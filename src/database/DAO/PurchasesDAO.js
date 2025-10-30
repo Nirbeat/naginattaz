@@ -85,5 +85,3 @@ export class PurchasesDAO {
         )
     }
 }
-
-// new PurchasesDAO().isSubscriptionInProcess().then(data=> console.log(data));
