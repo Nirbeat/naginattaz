@@ -265,7 +265,8 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
             trainingStyle: '/styles/training.css',
             userData: {
                 name: user.name,
-                profileImg: user.profile_image
+                profileImg: user.profile_image,
+                role: user.role
             },
             userPremium,
             courses,
