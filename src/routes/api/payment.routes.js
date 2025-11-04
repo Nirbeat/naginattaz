@@ -1,7 +1,6 @@
 import { json, Router } from "express";
 import { CoursesDAO } from "../../database/DAO/CoursesDAO.js";
 import { UserDTO } from "../../database/DTO/UserDTO.js";
-import { paymentProcessing } from "../../config/mercadopago.js";
 import { PurchasesDAO } from "../../database/DAO/PurchasesDAO.js";
 import { customVerification } from "../../middlewares/authToken.js";
 import { environment } from "../../config/env.js";
@@ -43,23 +42,48 @@ router.get('/suscription', async (req, res) => {
 
 })
 
+router.get('/cancel-suscription', async (req, res) => {
+    const { user } = req;
+    const userID = await new UserDTO().extractUserId(user)
+    const purchasesDao = new PurchasesDAO()
+    const { subscriptionPlanId, subscriptionCancelAPI, key, secret } = environment.dlocal;
+
+    const activeSubscription = await purchasesDao.getSubscriptionIdByUserId(userID);
+
+    fetch(`${subscriptionCancelAPI}/${subscriptionPlanId}/subscription/${activeSubscription}/deactivate`,
+        {
+            method: "PATCH",
+            headers: {
+                "Authorization": `Bearer ${key}:${secret}`,
+                "Content-Type": "application/json"
+            }
+        }
+    )
+    .then(data=> {
+        if (data.status == 200){
+            purchasesDao.cancelSubscription(userID);
+            res.redirect('/login');
+        }
+    })
+    .catch(error=>{
+        console.log(error)
+    })
+});
+
 router.use(json());
 
-// esto de momento dejarlo
 router.get('/:courseID', async (req, res) => {
     try {
         const userID = await new UserDTO().extractUserId(req.user);
         const { courseID } = req.params;
         const { key, secret, paymentURL } = environment.dlocal;
-        const {redirectURL : myDomain} = environment.googleAuth;
+        const { redirectURL: myDomain } = environment.googleAuth;
 
         let [[course]] = await new CoursesDAO().getClassById(courseID);
 
-        console.log(course)
-        console.log(course.class_price)
         const notificationURL = `${myDomain}/api/payment/courses-notification/${userID}/${courseID}`
 
-        const {redirect_url} = await fetch(paymentURL,
+        const { redirect_url } = await fetch(paymentURL,
             {
                 method: "POST",
                 body: JSON.stringify({
@@ -75,7 +99,7 @@ router.get('/:courseID', async (req, res) => {
             })
             .then(data => data.json())
 
-            res.redirect(redirect_url);
+        res.redirect(redirect_url);
 
     } catch (error) {
         console.log(error)
@@ -83,16 +107,13 @@ router.get('/:courseID', async (req, res) => {
 });
 
 router.post('/suscription-notification', async (req, res) => {
-    console.log("cuerpo de la notificacion", req.body)
     const { subscriptionId } = req.body;
     await new PurchasesDAO().confirmSubscription(subscriptionId);
 })
 
 router.post('/courses-notification/:userID/:courseID', async (req, res) => {
-    const {userID, courseID} = req.params;
+    const { userID, courseID } = req.params;
     new PurchasesDAO().saveClassPurchase(userID, courseID, "class");
-    console.log(`el usuario ${userID} compro el curso ${courseID}`)
-    console.log(req.body)
 })
 
 

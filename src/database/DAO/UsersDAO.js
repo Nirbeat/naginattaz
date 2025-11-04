@@ -45,4 +45,11 @@ export class UsersDAO{
             'SELECT name, email, instagramURL, role FROM users WHERE role = "premium"'
         )
     }
+
+    async cancelSubscriptionByEmail(email){
+        DBConnection.query(
+            'UPDATE users SET role = "free" WHERE email = ?',
+            [email]
+        )
+    }
 }

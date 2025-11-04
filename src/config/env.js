@@ -29,6 +29,8 @@ export const environment = {
         subscription: process.env.DLOCAL_SUB_LINK,
         key : process.env.DLOCAL_API_KEY,
         secret: process.env.DLOCAL_SECRET_KEY,
-        paymentURL: process.env.DLOCAL_PAYMENT_URL
+        paymentURL: process.env.DLOCAL_PAYMENT_URL,
+        subscriptionPlanId: process.env.DLOCAL_SUB_PLAN_ID,
+        subscriptionCancelAPI: process.env.DLOCAL_CANCEL_SUB_API
     }
 }

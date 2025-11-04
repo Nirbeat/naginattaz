@@ -20,16 +20,6 @@ export class PurchasesDAO {
         return newPurchase;
     }
 
-    async saveSpecialLessonPurchase(userId, lessonId) {
-
-        const newPurchase = await DBConnection.query(
-            'INSERT INTO purchases(user_id, special_lesson_id) VALUES (?,?,?)',
-            [userId, lessonId || null, purchaseType || 'course']
-        );
-
-        return newPurchase;
-    }
-
     async saveSubscription(userId) {
 
         let [newPurchase] = await DBConnection.query(
@@ -42,7 +32,7 @@ export class PurchasesDAO {
 
         if (newPurchase.affectedRows == 1) return 1
 
-        const inProcess = await this.#isSubscriptionInProcess(userId);
+        const inProcess = await this.#isSubscriptionInProcess();
 
         if (!inProcess) {
             await DBConnection.query(
@@ -67,12 +57,14 @@ export class PurchasesDAO {
         await DBConnection.query(
             `UPDATE purchases JOIN users 
             SET purchases.subscription_id = ?, users.role = 'premium'
-            WHERE purchases.subscription_id = 0 AND users.id = purchases.user_id;`,
+            WHERE purchases.subscription_id = 0 
+            AND users.id = purchases.user_id
+            AND purchases.purchase_type = "suscription";`,
             [subscriptionId]
         )
     }
 
-    async #isSubscriptionInProcess(userId) {
+    async #isSubscriptionInProcess() {
         const [[data]] = await DBConnection.query(
             "SELECT user_id FROM purchases WHERE subscription_id = 0 AND purchase_type = 'suscription'"
         )
@@ -83,5 +75,26 @@ export class PurchasesDAO {
         return await DBConnection.query(
             'SELECT suscription FROM prices'
         )
+    }
+
+    async getSubscriptionIdByUserId(userID) {
+        const [[{ subscription_id }]] = await DBConnection.query(
+            'SELECT subscription_id FROM purchases WHERE user_id = ? AND purchase_type = "suscription"',
+            [userID]
+        )
+
+        return subscription_id
+    }
+
+    async cancelSubscription(userID) {
+        DBConnection.query(
+            'UPDATE users SET role = "free" WHERE id = ?',
+            [userID]
+        )
+        DBConnection.query(
+            'DELETE FROM purchases WHERE user_id = ? AND purchase_type = "suscription"',
+            [userID]
+        )
+
     }
 }

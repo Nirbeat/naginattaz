@@ -5,10 +5,25 @@
     </div>
     {{#if (eq userData.role "admin")}}
     <a href="/admin/class-views"><button type="button">Admin panel</button></a>
+    <a href="/api/sessions/logout"><button type="button">Logout</button></a>
     {{else}}
     {{#if (eq userData.role "free")}}
     <a href="/api/payment/suscription"><button type="button" class="btn-primary">HAZTE DIAMANTE</button></a>   
-    {{/if}}
-    {{/if}}
     <a href="/api/sessions/logout"><button type="button">Logout</button></a>
+    {{else}}
+    {{#if (eq userData.role "premium")}}
+    <a href="/api/sessions/logout"><button type="button">Logout</button></a>
+    <a href="/api/payment/cancel-suscription"><button type="button" class="btn-primary-cancel">CANCELAR SUSCRIPCIÓN</button></a> 
+    <script>
+        document.querySelector('.btn-primary-cancel').addEventListener('click',(e)=>{
+            if(confirm("Está seguro que quiere eliminar su membresia de forma permanente?")){
+
+            }else{
+            e.preventDefault();
+            }
+        })
+    </script>
+    {{/if}}
+    {{/if}}
+    {{/if}}
 </div>

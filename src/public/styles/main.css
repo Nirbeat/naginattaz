@@ -81,6 +81,10 @@ a {
     color: var(--black);
 }
 
+.nav .btn-primary-cancel{
+    background-color: var(--magenta);
+}
+
 .nav-left {
     display: flex;
     align-items: center;
