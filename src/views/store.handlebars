@@ -45,9 +45,9 @@
             let price = el.getAttribute("data-price");
             if (price !== null && price !== "") {
                 let formattedPrice = Number(price).toLocaleString("es-ES", { minimumFractionDigits: 0 });
-                el.textContent = `$${formattedPrice}`;
+                el.textContent = `USD ${formattedPrice}`;
             } else {
-                el.textContent = "$0";
+                el.textContent = "USD 0";
             }
         });
     });
