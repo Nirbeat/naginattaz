@@ -8,12 +8,7 @@ import { suscriptionMessage } from "../../config/mailing/mailing.js";
 
 const router = Router();
 
-router.use(customVerification)
-
-router.get('/public-key', async (req, res) => {
-
-    res.json({ MPPublicKey: environment.mercadopago.publicKey })
-})
+router.use(customVerification);
 
 router.get('/success', async (req, res) => {
     const { user } = req;
@@ -106,11 +101,13 @@ router.get('/:courseID', async (req, res) => {
     }
 });
 
+// ACA LLEGAN TODOS LOS UPDATES DE LAS SUSCRIPCIONES
 router.post('/suscription-notification', async (req, res) => {
     const { subscriptionId } = req.body;
     await new PurchasesDAO().confirmSubscription(subscriptionId);
 })
 
+// ACA LLEGAN LAS NOTIFICACIONES DE LAS COMPRAS INDIVIDUALES
 router.post('/courses-notification/:userID/:courseID', async (req, res) => {
     const { userID, courseID } = req.params;
     new PurchasesDAO().saveClassPurchase(userID, courseID, "class");

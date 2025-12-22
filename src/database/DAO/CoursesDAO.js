@@ -4,6 +4,7 @@ import { UsersDAO } from "./UsersDAO.js";
 
 export class CoursesDAO {
 
+    // OBTIENE NOMBRE DE PROFESORES POR ID DE TABLA USERS
     async getTeachersNameById(teachersId) {
 
         const [[teacher]] = await DBConnection.query(
@@ -14,6 +15,7 @@ export class CoursesDAO {
         return teacher;
     }
 
+    // OBTIENE LOS PROGRAMAS (DEPRECADO)
     async getAllPrograms() {
         const programs = await DBConnection.query(
             'SELECT * FROM programs'
@@ -22,6 +24,7 @@ export class CoursesDAO {
         return programs;
     }
 
+    // OBTIENE PROGRAMAS POR ID (DEPRECADO)
     async getProgramById(programId) {
 
         const [program] = await DBConnection.query(
@@ -44,6 +47,7 @@ and lessons.class_id = classes.id;`, [programId]
         return program
     }
 
+    // TOMA UNA CLASE DE CALENTAMIENTO DE MANERA ALEATORIA
     async getWarmingClass() {
         const [warmings] = await DBConnection.query(
             'SELECT * FROM  lessons WHERE name = "Calentamiento"'
@@ -53,6 +57,7 @@ and lessons.class_id = classes.id;`, [programId]
         return warmings[index];
     }
 
+    // TOMA CLASE DE FINALIZACION GENERICA PARA CIERRRE DE BLOQUE
     async getFinalLesson() {
         const [[final]] = await DBConnection.query(
             'SELECT * FROM lessons WHERE name = "Final de clase"'
@@ -60,6 +65,7 @@ and lessons.class_id = classes.id;`, [programId]
 
         return final;
     }
+    // RECUPERA TODAS LAS CLASES
     async getAllClasses() {
 
         const classes = await DBConnection.query(
@@ -69,6 +75,7 @@ and lessons.class_id = classes.id;`, [programId]
         return classes;
     }
 
+    // RECUPERA TODOS LOS VIDEOS DE CADA CLASE POR ID DE CLASE
     async getClassLessonsById(id) {
         const lessons = await DBConnection.query(
             'SELECT * FROM lessons WHERE class_id = ?', [id]
@@ -76,6 +83,7 @@ and lessons.class_id = classes.id;`, [programId]
         return lessons;
     }
 
+    // RECUPERA UNA CLASE POR ID
     async getClassById(id) {
         const course = await DBConnection.query(
             'SELECT * FROM classes WHERE id = ?', [id]
@@ -83,6 +91,7 @@ and lessons.class_id = classes.id;`, [programId]
         return course;
     }
 
+    // RECUPERA TODAS LAS CLASES INDIVIDUALES DISPONIBLES POR MAIL DE USUARIO
     async getUserAvailableClasses(email) {
         const [classes] = await new UsersDAO().getOwnedCourses(email);
         const result = [];
@@ -93,6 +102,7 @@ and lessons.class_id = classes.id;`, [programId]
         return result;
     }
 
+    // RECUPERA VISTAS DE CLASE POR PERIODO
     async getClassViewsByPeriod(month, year) {
         const [classesData] = await DBConnection.query(
             `SELECT class_name, teachers_id, views, students FROM classes
@@ -118,9 +128,9 @@ and lessons.class_id = classes.id;`, [programId]
         return classesData;
     }
 
+    // DETECTA Y ASIGNA VISUALIZACIONES SOLO DE MIEMBROS
     async setClassViewers(classId, userName, userRole) {
 
-        // ALTER TABLE `class_views` ADD `students` JSON NOT NULL DEFAULT '[]' AFTER `month`;
         const [[user]] = await DBConnection.query(
             `SELECT u.id FROM users as u 
             JOIN purchases as p ON p.user_id = u.id
@@ -148,6 +158,7 @@ and lessons.class_id = classes.id;`, [programId]
         return JSON.stringify(data.students)
     }
 
+    // COMPLETA LA TABLA DE VISUALIZACIONES DEL PANEL DE CONTROL
     async setClassViews(classId, userName, userRole) {
 
         const students = await this.setClassViewers(classId, userName, userRole);

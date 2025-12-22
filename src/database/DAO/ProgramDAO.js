@@ -1,6 +1,7 @@
 import { DBConnection } from "../database.js";
 
 export class ProgramDAO {
+    // OBTIENE LOS PROGRAMAS DE LA DB (DEPRECADO)
     async getAllPrograms() {
         const programs = await DBConnection.query(
             'SELECT * FROM programs'
@@ -9,6 +10,7 @@ export class ProgramDAO {
         return programs;
     }
 
+    // OBTIENE FASES DE UN PROGRAMA (DEPRECADO)
     async getAllPhasesByProgramId(programId) {
         const [phases] = await DBConnection.query(
             `SELECT * FROM program_phases WHERE program_id = ${programId}`
@@ -17,6 +19,7 @@ export class ProgramDAO {
         return phases;
     }
 
+    // OBTIENE MODULOS DE UNA FASE DE PROGRAMA (DEPRECADO)
     async getAllModulesByPhaseId(phaseId) {
         const [modules] = await DBConnection.query(
             `SELECT * FROM program_modules WHERE phase_id = ${phaseId}`
@@ -24,6 +27,8 @@ export class ProgramDAO {
 
         return modules;
     }
+
+    // CREA EL OBJETO COMPLETO CON LA DATA DEL PROGRAMA
     async getProgramWithPhasesAndModules(programId) {
         const [rows] = await DBConnection.query(
             `SELECT 

@@ -34,22 +34,6 @@ const images = {
     }
 };
 
-// test programdao getProgramWithPhasesAndModules(programId)
-
-router.get('/testProgramDao/:programId', async (req, res, next) => {
-
-    try {
-        const programDAO = new ProgramDAO();
-        const programId = req.params.programId;
-        const program = await programDAO.getProgramWithPhasesAndModules(programId);
-
-        res.json(program);
-    } catch (error) {
-        next(error);
-    }
-});
-
-
 router.get('/login', async (req, res, next) => {
 
     try {
@@ -120,7 +104,6 @@ router.get('/team', async (req, res, next) => {
         const { user } = req;
         let [teamMembers] = await new UsersDAO().getTeamMembers();
 
-        // PASAR LUEGO A UN DTO
         teamMembers = teamMembers.map(({ name, skills, instagramURL, tiktokURL, profile_image }) => {
             return {
                 name, skills, instagramURL, tiktokURL, profile_image
@@ -280,7 +263,7 @@ router.get('/entrenamiento/:section?', async (req, res, next) => {
 });
 
 // RUTA PARA LOS PROGRAMAS, BÁSICAMENTE UN CLON DE LAS CLASES CON
-// PASOS EXTRA
+// PASOS EXTRA (DEPRECADO)
 router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', async (req, res, next) => {
 
     try {
@@ -312,6 +295,7 @@ router.get('/programas/:programID/:phaseID?/:moduleID?/:courseID?/:lessonID?', a
     }
 });
 
+// RUTA QUE RENDERIZA LAS CLASES INDIVIDUALES
 router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
     try {
         const coursesDao = new CoursesDAO();
@@ -347,7 +331,7 @@ router.get('/clases/:courseID/:lessonID?', async (req, res, next) => {
         const teacher = JSON.parse(course.teachers_id)
 
         const { name: teacherName } = await coursesDao.getTeachersNameById(teacher)
-        // ANALIZAR PONER ESTO EN MIDDLEWARE
+
         await coursesDao.setClassViews(courseID, user.name, user.role);
 
         res.render('lessons.handlebars', {
